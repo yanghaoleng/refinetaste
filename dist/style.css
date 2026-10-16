@@ -20,3 +20,4 @@ body.theme-dark .reason{color:var(--accent)}body.theme-light .option.correct{bor
 /* 默认浅色页面，深棕主按钮，叫叫黄作强调。 */
 body.theme-light{--bg:#f8f6f0;--text:#302b25;--muted:#71614d;--line:#ddd4c4;--surface:#eee8dc;--panel:#fffaf0;--button:#260f00;--button-text:#ffdc00}
 .nav-start{background:var(--button);border-color:var(--button);color:var(--button-text)}body.theme-light .lesson{color:var(--text)}body.theme-light .lesson-one{background:#eee1bb}body.theme-light .lesson-two{background:#eee7d5}body.theme-light .lesson-three{background:#f0ebdf}body.theme-light .reason{color:var(--text)}
+body.theme-light{--button-text:#ffffff}.primary,.nav-start{font-weight:700}
