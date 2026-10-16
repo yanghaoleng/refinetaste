@@ -76,4 +76,4 @@ git diff --check
 
 界面图标统一使用 [Iconoir](https://iconoir.com/) 7.12.1 官方 regular SVG，统一 2.5px 线宽；源码子集和 MIT 授权位于 `vendor/iconoir/`，通过 `python3 scripts/build-icons.py` 生成自托管 `dist/icons.svg`。不依赖外部 CDN。图表路径属于数据可视化，并非界面图标。
 
-色彩以叫叫官网 CSS 中的黄色 `#ffdc00` 和深棕 `#260f00` 为参考，默认深棕主题，保留可手动切换的暖浅色主题。课程、案例、按钮与统计图表使用同一套色彩变量。
+色彩以叫叫官网 CSS 中的黄色 `#ffdc00` 和深棕 `#260f00` 为参考，默认浅色背景，主要按钮使用深棕；保留手动切换主题。课程、案例、按钮与统计图表使用同一套色彩变量。
