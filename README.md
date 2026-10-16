@@ -54,7 +54,7 @@
 
 ## 部署
 
-`ops/refinetaste.service` 使用 systemd DynamicUser 与独立 StateDirectory。发布到 `/opt/refinetaste/releases/<release>`，`current` 软链接原子切换；数据库在 `/var/lib/refinetaste/`，环境配置在 `/etc/refinetaste.env`，均在发布目录之外。Nginx 在既有站点引入 `ops/nginx-refinetaste.conf`，只路由 `/refinetaste`，不修改其他应用路径。
+`ops/refinetaste.service` 使用 systemd DynamicUser 与独立 StateDirectory。发布到 `/opt/refinetaste/releases/<release>`，`current` 软链接原子切换；数据库在 `/var/lib/refinetaste/`，环境配置在 `/etc/refinetaste.env`，均在发布目录之外。Nginx 在既有站点引入 `ops/nginx-refinetaste.conf`，只路由 `/refinetaste`，不修改其他应用路径。核验 `nginx -T` 的实际启用入口；本次主站的 `/etc/nginx/sites-enabled/mikeywa.site` 为独立文件，并非指向 sites-available 的软链接，不能只编辑后者。
 
 更新时先测试、提交、推送，再上传版本，验证服务、Nginx 配置、授权/未授权接口与前端资源。回滚切换 `current` 至上一个目录并重启服务。本版 schema 向后兼容，勿删除数据目录。备份可使用 SQLite backup API，在服务器单独管理，不上传公开仓库。
 
