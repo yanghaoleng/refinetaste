@@ -21,3 +21,6 @@ html[data-theme="dark"] body .reason{color:var(--accent)}html[data-theme="light"
 html[data-theme="light"] body{--bg:#f8f6f0;--text:#302b25;--muted:#71614d;--line:#ddd4c4;--surface:#eee8dc;--panel:#fffaf0;--button:#260f00;--button-text:#ffdc00}
 .nav-start{background:var(--button);border-color:var(--button);color:var(--button-text)}html[data-theme="light"] body .lesson{color:var(--text)}html[data-theme="light"] body .lesson-one{background:#eee1bb}html[data-theme="light"] body .lesson-two{background:#eee7d5}html[data-theme="light"] body .lesson-three{background:#f0ebdf}html[data-theme="light"] body .reason{color:var(--text)}
 html[data-theme="light"] body{--button-text:#ffffff}.primary,.nav-start{font-weight:700}
+
+/* The landing page keeps a single, full-height introduction. */
+@media(min-width:768px){.hero-only .hero{min-height:calc(100svh - 94px);align-items:center}}
