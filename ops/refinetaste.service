@@ -1,0 +1,19 @@
+[Unit]
+Description=RefineTaste learning site and private aggregate analytics
+After=network.target
+[Service]
+Type=simple
+DynamicUser=yes
+StateDirectory=refinetaste
+WorkingDirectory=/opt/refinetaste/current
+EnvironmentFile=/etc/refinetaste.env
+ExecStart=/usr/bin/python3 /opt/refinetaste/current/server/app.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+UMask=0077
+[Install]
+WantedBy=multi-user.target
