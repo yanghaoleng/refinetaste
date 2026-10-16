@@ -63,6 +63,8 @@
 ```sh
 python3 -m unittest discover -s tests -v
 node --check dist/app.js
+node --test tests/motion.test.cjs tests/theme.test.cjs
+node --check dist/motion.js
 node --check dist/analytics.js
 node --check dist/data/admin.js
 git diff --check
@@ -76,4 +78,8 @@ git diff --check
 
 界面图标统一使用 [Iconoir](https://iconoir.com/) 7.12.1 官方 regular SVG，统一 2.5px 线宽；源码子集和 MIT 授权位于 `vendor/iconoir/`，通过 `python3 scripts/build-icons.py` 生成自托管 `dist/icons.svg`。不依赖外部 CDN。图表路径属于数据可视化，并非界面图标。
 
-色彩以叫叫官网 CSS 中的黄色 `#ffdc00` 和深棕 `#260f00` 为参考，默认浅色背景，主要按钮使用深棕、纯白加粗文字；保留手动切换主题。课程、案例、按钮与统计图表使用同一套色彩变量。
+色彩以叫叫官网 CSS 中的黄色 `#ffdc00` 和深棕 `#260f00` 为参考，跟随系统亮暗主题：浅色背景使用深棕按钮和纯白粗体字，暗色背景为纯黑；不提供手动主题开关。课程、案例、按钮与统计图表使用同一套色彩变量。
+
+## 动效
+
+基于 taste skill 的 8 / 8 / 3（设计变化 / 动效强度 / 信息密度），使用原生 Web Animations 与 IntersectionObserver。页面与卡片分批入场、题目先退后进、弹窗含退场、展开说明淡入淡出，按钮/导航/输入框/数字键盘提供即时反馈。动画仅使用透明度与变换，无无限循环或 scroll 监听。尊重系统减少动态效果，切换时会立即结束正在播放的动画。主题由 `theme.js` 在首屏绘制前读取系统偏好，`theme.css` 定义最终配色，`motion.js` / `motion.css` 定义共享动效。
