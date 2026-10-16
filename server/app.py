@@ -1,4 +1,4 @@
-"""RefineTaste: same-origin analytics, aggregate-only administration, stdlib runtime."""
+"""设计积累 / RefineTaste: same-origin analytics, aggregate-only administration, stdlib runtime."""
 import os, json, sqlite3, hashlib, hmac, secrets, time, re, threading, mimetypes
 from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
@@ -201,12 +201,16 @@ class Handler(BaseHTTPRequestHandler):
         if path==BASE or path==BASE+'/data':
             self.send_response(308);self.send_header('Location',path+'/');self.end_headers();return
         files={BASE+'/':'index.html',BASE+'/data/':'data/index.html',BASE+'/style.css':'style.css',BASE+'/app.js':'app.js',BASE+'/analytics.js':'analytics.js',BASE+'/data/admin.js':'data/admin.js',BASE+'/data/admin.css':'data/admin.css'}
+        files[BASE+'/icons.svg']='icons.svg'
+        for asset in ('chick-eyes-original.png','chick-eyes-128.webp','chick-eyes-512.webp','apple-touch-icon.png','favicon-32.png','favicon.ico'):
+            files[BASE+'/assets/'+asset]='assets/'+asset
         if path not in files:return self.reply(404,{'error':'not found'})
         file=ROOT/'dist'/files[path]
         try:raw=file.read_bytes()
         except OSError:return self.reply(404,{'error':'not found'})
         self.send_response(200)
-        self.send_header('Content-Type',mimetypes.guess_type(file)[0]+'; charset=utf-8')
+        mime=mimetypes.guess_type(file)[0] or 'application/octet-stream'
+        self.send_header('Content-Type',mime+('; charset=utf-8' if mime.startswith('text/') or mime in ('application/javascript','image/svg+xml') else ''))
         self.send_header('Content-Length',str(len(raw)))
         self.send_header('Cache-Control','no-cache')
         self.send_header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'")

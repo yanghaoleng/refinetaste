@@ -1,4 +1,4 @@
-# 目光 · RefineTaste
+# 设计积累 · RefineTaste
 
 把「感觉不对」变成说得清的设计判断。面向运营与设计协作的中文审美练习网站。
 
@@ -69,3 +69,9 @@ git diff --check
 ```
 
 测试使用隔离临时数据库，覆盖首次提交去重、完成校验、不同章节入口、时间窗口/上海日界线、隐私字段、空数据、来源限制、未授权访问、登录节流与退出失效。
+
+## 品牌与图标
+
+品牌头像为内置 imagegen 生成的叫叫小鸡金丝眼镜同人眼部特写，原图与 WebP/PNG/ICO 派生资源位于 `dist/assets/`，生成提示词见 `design/brand-icon-prompt.md`。
+
+界面图标统一使用 [Iconoir](https://iconoir.com/) 7.12.1 官方 regular SVG，统一 2.5px 线宽；源码子集和 MIT 授权位于 `vendor/iconoir/`，通过 `python3 scripts/build-icons.py` 生成自托管 `dist/icons.svg`。不依赖外部 CDN。图表路径属于数据可视化，并非界面图标。
