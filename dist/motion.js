@@ -18,7 +18,7 @@
     play(el,[{opacity:0,transform:`translate3d(0,${distance}px,0) scale(.965) ${rest}`},{opacity:1,transform:`translate3d(0,0,0) scale(1) ${rest}`}],{duration:el.matches('.good-card,.bad-card')?960:680,delay:Math.min(index*65,390)});
   }
   const dynamicSelector=[
-    '.exercise-heading >*','.options >.option','.feedback >h3','.feedback >p','.feedback >details','.feedback >.reflection','.feedback >.feedback-actions',
+    '.course-chapter','.course-footnote','.open-prompt >*','.open-actions','.reference','.open-bottom','.model-feedback >*','.specimen','.exercise-heading >*','.options >.option','.feedback >h3','.feedback >p','.feedback >details','.feedback >.reflection','.feedback >.feedback-actions',
     '.result >*','.note-item','.empty','.coach-answer','.save-status','.metric-value','.insight >*','.chart >*','#questions >tr','#chapters >tr','#daily-table tr','#question-insight',
     '#pin-error','#exercise-progress','#load-state'
   ].join(',');

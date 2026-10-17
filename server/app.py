@@ -6,6 +6,7 @@ from pathlib import Path
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from http.cookies import SimpleCookie
 from urllib.parse import urlparse, parse_qs
+import reviewer
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = '/refinetaste'
@@ -15,10 +16,13 @@ SECRET = os.environ.get('REFINETASTE_SECRET', '')
 PIN_HASH = os.environ.get('REFINETASTE_PIN_SHA256', '')
 ORIGINS = set(os.environ.get('REFINETASTE_ORIGINS', 'https://mikeywa.site,https://www.mikeywa.site').split(','))
 CORRECT = [1, 1, 1, 1, 0, 1, 1, 1]
+COURSE = json.loads((ROOT / 'dist/course.json').read_text())
+QUESTIONS = COURSE['questions']
 NAMES = ['对比', '重复', '亲密', '对齐', '场景与调性', '信息层级', '用户路径', '协作表达']
 UUID = re.compile(r'^[a-f0-9-]{36}$')
 lock = threading.Lock()
-sessions, attempts, collect_rates = {}, {}, {}
+sessions, attempts, collect_rates, review_rates = {}, {}, {}, {}
+review_slots = threading.BoundedSemaphore(4)
 
 @contextmanager
 def connect():
@@ -41,7 +45,10 @@ def init_db():
           CREATE INDEX IF NOT EXISTS events_day ON events(day);
           CREATE UNIQUE INDEX IF NOT EXISTS answer_once ON events(run,q) WHERE kind='answer';
           CREATE UNIQUE INDEX IF NOT EXISTS start_once ON events(run) WHERE kind='start';
-          CREATE UNIQUE INDEX IF NOT EXISTS complete_once ON events(run) WHERE kind='complete';''')
+          CREATE UNIQUE INDEX IF NOT EXISTS complete_once ON events(run) WHERE kind='complete';
+          CREATE TABLE IF NOT EXISTS review_usage(id TEXT PRIMARY KEY, day TEXT, client TEXT, q INTEGER);''')
+        if 'course' not in [r[1] for r in db.execute('PRAGMA table_info(events)')]:
+            db.execute('ALTER TABLE events ADD COLUMN course INTEGER NOT NULL DEFAULT 1')
 
 def digest(s):
     return hmac.new(SECRET.encode(), s.encode(), hashlib.sha256).hexdigest()
@@ -57,24 +64,30 @@ def collect(data, now=None):
     run = data.get('run')
     if kind != 'view' and (not isinstance(run,str) or not UUID.fullmatch(run)):
         raise ValueError('invalid run')
+    course = data.get('course',1)
+    if type(course) is not int or course not in (1,2):raise ValueError('invalid course')
     start = data.get('start')
-    if kind == 'start' and (type(start) is not int or start not in (0,4,6)):
+    if kind == 'start' and (type(start) is not int or start not in ((0,4,6) if course==1 else (0,8,16))):
         raise ValueError('invalid start')
     q, choice = data.get('q'), data.get('choice')
-    if kind == 'answer' and (type(q) is not int or q not in range(8) or type(choice) is not int or choice not in (0,1)):
+    if kind == 'answer' and (type(q) is not int or q not in range(8 if course==1 else 24) or type(choice) is not int or choice not in (0,1,-1)):
         raise ValueError('invalid answer')
+    if kind=='answer':
+        if course==1 and choice not in (0,1):raise ValueError('invalid answer')
+        if course==2 and ((QUESTIONS[q]['kind']=='open' and choice!=-1) or (QUESTIONS[q]['kind']=='choice' and choice not in (0,1))):raise ValueError('invalid answer')
     day = datetime.fromtimestamp(now, ZONE).date().isoformat()
     visitor, session = digest(data['visitor']), digest(data['session'])
     with connect() as db:
         if kind in ('answer','complete','note_saved'):
             begun=db.execute("SELECT * FROM events WHERE kind='start' AND run=? AND visitor=? AND session=?",(run,visitor,session)).fetchone()
             if not begun: raise ValueError('run not started')
-            if kind=='answer' and q < begun['start']: raise ValueError('invalid question')
+            if begun['course']!=course:raise ValueError('course mismatch')
+            if kind=='answer' and (q < begun['start'] or (course==2 and q>=begun['start']+8)):raise ValueError('invalid question')
             if kind=='complete':
                 count=db.execute("SELECT COUNT(*) FROM events WHERE run=? AND kind='answer'",(run,)).fetchone()[0]
-                if count!=8-begun['start']: raise ValueError('run incomplete')
-        db.execute('INSERT OR IGNORE INTO events VALUES(?,?,?,?,?,?,?,?,?,?)',
-          (data['id'],day,now,visitor,session,kind,run,start,q,choice))
+                if count!=(8-begun['start'] if course==1 else 8): raise ValueError('run incomplete')
+        db.execute('INSERT OR IGNORE INTO events(id,day,ts,visitor,session,kind,run,start,q,choice,course) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
+          (data['id'],day,now,visitor,session,kind,run,start,q,choice,course))
         # Store only a rolling 90 days; no raw IP, UA, prompt or note text enters this table.
         db.execute('DELETE FROM events WHERE ts < ?', (now-90*86400,))
 
@@ -99,14 +112,17 @@ def summary(days, now=None):
         ds=[r for r in starts if r['day']==day]
         daily.append({'day':day,'covered':bool(earliest is not None and day>=datetime.fromtimestamp(earliest,ZONE).date().isoformat()),'views':len(dv),'visitors':len({r['visitor'] for r in dv}),'starts':len(ds),'completed':sum(r['run'] in completions for r in ds)})
     questions=[]
-    for q in range(8):
-        a=[r for r in answers if r['q']==q]
-        entrants={r['run'] for r in starts if r['start']<=q}
-        questions.append({'index':q,'name':NAMES[q],'answers':len(a),'correct':sum(r['choice']==CORRECT[q] for r in a),'eligible':len(entrants)})
+    for version,catalog in ((1,[{'principle':name,'correct':CORRECT[i],'kind':'choice'} for i,name in enumerate(NAMES)]),(2,QUESTIONS)):
+        for q,item in enumerate(catalog):
+            a=[r for r in answers if r['q']==q and r['course']==version]
+            submitted=a
+            entrants={r['run'] for r in starts if r['course']==version and r['start']<=q and (version==1 or q<r['start']+8)}
+            questions.append({'index':q,'course':version,'kind':item['kind'],'name':item['principle'],'answers':len(submitted),'correct':sum(r['choice']==item['correct'] for r in submitted) if item['kind']=='choice' else None,'eligible':len(entrants)})
     chapters=[]
-    for ch in (0,4,6):
-        r=[r for r in starts if r['start']==ch]
-        chapters.append({'start':ch,'runs':len(r),'completed':sum(x['run'] in completions for x in r)})
+    for version,starts_at in ((1,(0,4,6)),(2,(0,8,16))):
+        for ch in starts_at:
+            r=[r for r in starts if r['start']==ch and r['course']==version]
+            chapters.append({'course':version,'start':ch,'runs':len(r),'completed':sum(x['run'] in completions for x in r)})
     return {'days':days,'from':first.isoformat(),'to':today.isoformat(),'timezone':'Asia/Shanghai',
       'generatedAt':datetime.fromtimestamp(now,ZONE).isoformat(),'collectedSince':datetime.fromtimestamp(earliest,ZONE).isoformat() if earliest else None,
       'metrics':{'views':len(views),'visitors':len(active),'sessions':len({r['session'] for r in rows}),'starts':len(starts),'completed':len(completions),'answers':len(answers),'notes':sum(r['kind']=='note_saved' for r in rows)},
@@ -133,7 +149,7 @@ class Handler(BaseHTTPRequestHandler):
     def body(self):
         try:
             size=int(self.headers.get('Content-Length','0'))
-            if size<2 or size>4096:raise ValueError()
+            if size<2 or size>16384:raise ValueError()
             data=json.loads(self.rfile.read(size))
             if not isinstance(data,dict):raise ValueError()
             return data
@@ -142,14 +158,16 @@ class Handler(BaseHTTPRequestHandler):
         path=urlparse(self.path).path
         if self.headers.get('Origin') not in ORIGINS:
             return self.reply(403,{'error':'origin rejected'})
-        if path not in (BASE+'/api/login',BASE+'/api/logout',BASE+'/api/collect'):
+        if path not in (BASE+'/api/login',BASE+'/api/logout',BASE+'/api/collect',BASE+'/api/review'):
             return self.reply(404,{'error':'not found'})
         key=digest(self.headers.get('X-Real-IP',self.client_address[0]))
         now=time.time()
         with lock:
-            for mapping in (attempts,collect_rates,sessions):
+            for mapping in (attempts,collect_rates,review_rates,sessions):
                 if len(mapping)>10000:
                     mapping.clear()
+        if path.endswith('/review'):
+            return self.review_request(key,now)
         if path.endswith('/login'):
             with lock:
                 count,until=attempts.get(key,(0,now+300))
@@ -182,6 +200,40 @@ class Handler(BaseHTTPRequestHandler):
         except ValueError as ex:return self.reply(400,{'error':str(ex)})
         except sqlite3.Error:return self.reply(503,{'error':'storage unavailable'})
         return self.reply(204)
+    def review_request(self,key,now):
+        try:
+            data=self.body()
+            q=data.get('q');answer=data.get('answer');request_id=data.get('id')
+            if type(q) is not int or q not in range(24) or QUESTIONS[q]['kind']!='open':raise ValueError()
+            if not isinstance(answer,str) or not 30<=len(answer.strip())<=2000:raise ValueError()
+            if not isinstance(request_id,str) or not UUID.fullmatch(request_id):raise ValueError()
+        except ValueError:return self.reply(400,{'error':'请针对本题写下 30—2000 字的思路。'})
+        if not reviewer.configured():return self.reply(503,{'error':'模型点评暂未就绪。你的思路已留在本机，可以先对照自查提示继续。'})
+        day=datetime.fromtimestamp(now,ZONE).date().isoformat()
+        with lock:
+            count,until=review_rates.get(key,(0,now+60))
+            if until<=now:count,until=0,now+60
+            review_rates[key]=(count+1,until)
+        if count>=4:return self.reply(429,{'error':'点评提交较快，请一分钟后再试。'})
+        if not review_slots.acquire(blocking=False):return self.reply(429,{'error':'点评正在排队，请稍后重试。'})
+        reserved=False
+        try:
+            with connect() as db:
+                db.execute('BEGIN IMMEDIATE')
+                db.execute('DELETE FROM review_usage WHERE day<?',(day,))
+                if db.execute('SELECT COUNT(*) FROM review_usage WHERE day=? AND client=?',(day,key)).fetchone()[0]>=32 or db.execute('SELECT COUNT(*) FROM review_usage WHERE day=?',(day,)).fetchone()[0]>=300:
+                    return self.reply(429,{'error':'今日模型点评额度已用完。可以先保存思路、对照提示，明天继续。'})
+                try:db.execute('INSERT INTO review_usage VALUES(?,?,?,?)',(request_id,day,key,q))
+                except sqlite3.IntegrityError:return self.reply(409,{'error':'这次请求已经提交，请等待结果或重新发起点评。'})
+                reserved=True
+            feedback=reviewer.review(QUESTIONS[q],answer.strip())
+            return self.reply(200,{'feedback':feedback,'modelLabel':os.environ.get('REFINETASTE_AI_LABEL','设计教练')})
+        except reviewer.ReviewUnavailable:
+            if reserved:
+                with connect() as db:db.execute('DELETE FROM review_usage WHERE id=?',(request_id,))
+            return self.reply(502,{'error':'模型暂时没有完成点评，请重试。你的回答已留在本机，也可以先自行复盘。'})
+        except sqlite3.Error:return self.reply(503,{'error':'点评服务暂时繁忙，请稍后重试。'})
+        finally:review_slots.release()
     def do_GET(self):
         parsed=urlparse(self.path)
         path=parsed.path
@@ -202,7 +254,7 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(308);self.send_header('Location',path+'/');self.end_headers();return
         files={BASE+'/':'index.html',BASE+'/data/':'data/index.html',BASE+'/style.css':'style.css',BASE+'/app.js':'app.js',BASE+'/analytics.js':'analytics.js',BASE+'/data/admin.js':'data/admin.js',BASE+'/data/admin.css':'data/admin.css'}
         files[BASE+'/icons.svg']='icons.svg'
-        for asset in ('theme.js','theme.css','motion.js','motion.css'):
+        for asset in ('theme.js','theme.css','motion.js','motion.css','course.json','course.css'):
             files[BASE+'/'+asset]=asset
         for asset in ('chick-eyes-original.png','chick-eyes-128.webp','chick-eyes-512.webp','apple-touch-icon.png','favicon-32.png','favicon.ico'):
             files[BASE+'/assets/'+asset]='assets/'+asset
