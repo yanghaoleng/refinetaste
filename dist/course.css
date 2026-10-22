@@ -138,3 +138,4 @@ button{border-radius:8px}.primary,.secondary,.chapter-action button{border-radiu
 @media(max-width:767px){.training-top #exercise-progress{width:60px;flex-basis:60px}.coach-header{top:3px}.coach-header .coach-avatar{width:40px;height:40px}#exercise:has(.lesson-stream){padding-top:20px}}
 @media(max-width:600px){.course-chapter{grid-template-columns:88px minmax(0,1fr) 40px;gap:12px}.chapter-illustration{width:88px;height:100px}.chapter-arrow{width:40px;height:40px}}
 @media(prefers-reduced-motion:reduce){.chapter-arrow{transition:none}}
+.chapter-catalog:has(.catalog-trigger[aria-expanded="true"]){z-index:9}
