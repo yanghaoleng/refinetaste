@@ -14,13 +14,14 @@
   messages.slice(1).forEach((message,index)=>{later(()=>{if(!message.isConnected)return;message.hidden=false;showMessage(message);onChange()},delay);delay+=duration(message)+(index===messages.length-2?300:1000)});
   later(()=>{if(!form.isConnected)return;form.hidden=false;form.inert=false;showMessage(form);finish=null;onChange()},delay);
  }
- function settlement({score,details,showDetails}){
-  cancel();const reveal=()=>{details.hidden=false;showDetails()};
+ function settlement({score,details,showDetails,updateScore,value}){
+  cancel();const reveal=()=>{updateScore?.(value);details.hidden=false;showDetails()};
   if(reduced.matches){reveal();return}
   details.hidden=true;finish=reveal;
-  const token=generation,animation=score.animate([{opacity:0,transform:'translateY(18px) scale(.94)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:540,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'});
+  if(updateScore){updateScore(0);for(let step=1;step<8;step++)later(()=>{if(score.isConnected)updateScore(Math.round(value*(1-Math.pow(1-step/8,2))*10)/10)},step*100)}
+  const token=generation,animation=score.animate([{opacity:0,transform:'translateY(18px) scale(.94)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:updateScore?800:540,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'});
   scoreAnimation=animation;
-  animation.finished.catch(()=>{}).then(()=>{if(token===generation)later(()=>{if(!details.isConnected)return;finish=null;reveal()},350)});
+  animation.finished.catch(()=>{}).then(()=>{if(token===generation){updateScore?.(value);later(()=>{if(!details.isConnected)return;finish=null;reveal()},350)}});
  }
  reduced.addEventListener('change',()=>{if(reduced.matches&&finish){const reveal=finish;cancel();reveal()}});
  window.RefineSequence={opening,settlement,cancel};

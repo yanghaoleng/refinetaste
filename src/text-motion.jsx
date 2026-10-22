@@ -26,7 +26,7 @@ function render(host, value, variant) {
     : <Calligraph variant={variant} initial={false} autoSize={false}
         animation={variant === 'slots' ? 'snappy' : 'default'}
         className={variant === 'text' ? 'calligraph-text' : 'calligraph-slots'}
-        style={variant === 'text' ? { display: 'inline', overflowWrap: 'anywhere' } : { display: 'inline-flex', height: '1em', lineHeight: '1em', overflow: 'hidden', verticalAlign: 'middle' }}>
+        style={variant === 'text' ? { display: 'inline', overflowWrap: 'break-word' } : { display: 'inline-flex', height: '1em', lineHeight: '1em', overflow: 'hidden', verticalAlign: 'middle' }}>
         {value}
       </Calligraph>));
 }
