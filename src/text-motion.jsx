@@ -35,7 +35,7 @@ function render(host, value, variant) {
           {value}
         </Calligraph>));
 }
-function text(host, { delay = 0, step: stepOverride = null } = {}) {
+function text(host, { delay = 0, step: stepOverride = null, value: replacement, exit = false } = {}) {
   if (!host) return [];
   if(host.querySelector('strong,.concept-term')){
     if(host.dataset.richMotionReady)return [];
@@ -47,17 +47,20 @@ function text(host, { delay = 0, step: stepOverride = null } = {}) {
     for(const node of nodes){const run=document.createElement('span'),value=node.textContent;run.textContent=value;node.replaceWith(run);animations.push(...text(run,{delay:cursor,step}));cursor+=count(value)*step}
     return animations;
   }
-  const value = entries.get(host)?.value ?? host.textContent;
-  render(host, value, 'text');
+  const value = replacement ?? entries.get(host)?.value ?? host.textContent;
+  if (!exit) render(host, value, 'text');
   if (preference.matches) return [];
   const glyphs = [...host.querySelectorAll('.calligraph-text > span')];
   const step = stepOverride ?? (glyphs.length > 1 ? Math.min(18, 550 / (glyphs.length - 1)) : 0);
   // Calligraph 1.4.1 Text reconciles graphemes; add a bounded initial stagger.
   return glyphs.map((glyph, index) => {
-    const animation = glyph.animate([
+    const animation = glyph.animate(exit ? [
+      { opacity: 1, transform: 'translateY(0)', filter: 'blur(0px)' },
+      { opacity: 0, transform: 'translateY(-6px)', filter: 'blur(3px)' }
+    ] : [
       { opacity: 0, transform: 'translateY(6px)', filter: 'blur(3px)' },
       { opacity: 1, transform: 'translateY(0)', filter: 'blur(0px)' }
-    ], { duration: 240, delay: delay + index * step, easing: 'cubic-bezier(.19,1,.22,1)', fill: 'backwards' });
+    ], { duration: exit ? 160 : 240, delay: delay + index * step, easing: 'cubic-bezier(.19,1,.22,1)', fill: exit ? 'forwards' : 'backwards' });
     active.add(animation);
     animation.finished.then(() => active.delete(animation), () => active.delete(animation));
     return animation;
