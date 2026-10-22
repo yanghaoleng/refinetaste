@@ -112,17 +112,19 @@
       cursor+=160+Math.max(0,parts.length-1)*step+220+110;
     }
     if(heading){
-      const title=heading.querySelector('h2'),brief=heading.querySelector('p'),bookmark=heading.querySelector('.bookmark');
-      for(const [element,delay] of [[title,cursor],[bookmark,cursor],[brief,cursor]]){
+      const title=heading.querySelector('h2'),brief=heading.querySelector('p'),bookmark=heading.querySelector('.bookmark'),task=heading.querySelector('.question-task');
+      const bubble=play(heading,[{opacity:0},{opacity:1}],{duration:220,delay:cursor});if(bubble)animations.push(bubble);
+      for(const [element,delay] of [[title,cursor],[bookmark,cursor],[brief,cursor],...(task?[[task,cursor]]:[])]){
         if(element!==bookmark&&window.RefineText){animations.push(...window.RefineText.text(element,{delay}));continue}
         const animation=play(element,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:220,delay});
         if(animation)animations.push(animation);
       }
     }
     builds.set(root,animations);
-    Promise.all(animations.map(done)).then(()=>root.removeAttribute('data-design-entering'));
+    const ready=Promise.all(animations.map(done)).then(()=>root.removeAttribute('data-design-entering'));
     // Interaction can always reveal the completed designs immediately.
     root.addEventListener('focusin',()=>finishDesignBuild(root),{once:true});
+    return ready;
   }
   function bookmarkFeedback(symbol,counter){
     play(symbol,[{transform:'scale(1)'},{transform:'scale(1.25)',offset:.38},{transform:'scale(.94)',offset:.72},{transform:'scale(1)'}],{duration:330});

@@ -38,7 +38,7 @@ class CourseTests(unittest.TestCase):
   from io import BytesIO
   def response(payload):return BytesIO(json.dumps({'choices':[{'message':{'content':json.dumps(payload)}}]}).encode())
   with patch.dict(os.environ,{'REFINETASTE_AI_KEY':'test','REFINETASTE_AI_MODEL':'test'}):
-   for emotion,expected in [('happy','happy'),('untrusted-css','neutral')]:
+   for emotion,expected in [('happy','happy'),('inspired','inspired'),('grateful','grateful'),('untrusted-css','neutral')]:
     with patch.object(reviewer,'urlopen',return_value=response({'reply':'用对比建立层级。','emotion':emotion})):
      self.assertEqual(reviewer.chat(app.QUESTIONS[0],[{'role':'user','content':'怎么做？'}]),{'reply':'用对比建立层级。','emotion':expected})
    with patch.object(reviewer,'urlopen',return_value=response({'emotion':'happy'})):

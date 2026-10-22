@@ -64,8 +64,23 @@ button{border-radius:8px}.primary,.secondary,.chapter-action button{border-radiu
 .chapter-illustration{color:var(--text)}.course-chapter{grid-template-columns:176px minmax(0,1fr) 56px}.chapter-action{justify-self:end;width:48px}.chapter-action button.primary,.chapter-action button.secondary{display:flex;align-items:center;justify-content:center;width:48px;min-width:48px;height:48px;padding:0;background:transparent;color:var(--text);border:1px solid var(--line);border-radius:50%;box-shadow:none}.chapter-action button .icon{width:20px;height:20px;margin:0}.chapter-action button:hover{background:var(--surface);border-color:var(--muted)}@media(max-width:900px){.course-chapter{grid-template-columns:130px minmax(0,1fr) 56px}}@media(max-width:600px){.course-chapter{grid-template-columns:64px minmax(0,1fr) 44px;gap:12px}.chapter-illustration{width:64px;height:96px;grid-row:1;grid-column:1}.chapter-copy{grid-column:2;grid-row:1}.chapter-copy h3{font-size:20px}.chapter-action{grid-column:3;grid-row:1;width:40px;align-self:center}.chapter-action button.primary,.chapter-action button.secondary{width:40px;min-width:40px;height:40px}.chapter-progress.catalog-trigger{width:150px}}
 
 /* Two sprite frames per emotion; keep only the latest coach avatar visible. */
-.coach-emotion{display:block;width:44px;height:44px;border-radius:50%;background-image:url('assets/chick-emotions.png');background-size:600% 300%;background-repeat:no-repeat;--face-x:0%;--face-y:0%;background-position:var(--face-x) var(--face-y);animation:coach-two-frames 600ms steps(1,end) 3;flex:0 0 44px}
+.coach-emotion{display:block;width:44px;height:44px;border-radius:50%;background-image:url('assets/chick-emotions.png');background-size:600% 300%;background-repeat:no-repeat;--face-x:0%;--face-y:0%;background-position:var(--face-x) var(--face-y);animation:coach-two-frames 1200ms steps(1,end) infinite;flex:0 0 44px}
 .emotion-happy{--face-x:40%}.emotion-thinking{--face-x:80%}.emotion-curious{--face-y:50%}.emotion-surprised{--face-x:40%;--face-y:50%}.emotion-encouraging{--face-x:80%;--face-y:50%}.emotion-empathetic{--face-y:100%}.emotion-confused{--face-x:40%;--face-y:100%}.emotion-playful{--face-x:80%;--face-y:100%}
 .chat-message.previous-assistant{padding-left:54px}.chat-message.assistant .chat-bubble{max-width:calc(100% - 54px)}
 @keyframes coach-two-frames{0%,100%{background-position:var(--face-x) var(--face-y)}50%{background-position:calc(var(--face-x) + 20%) var(--face-y)}}
 @media(prefers-reduced-motion:reduce){.coach-emotion{animation:none}}
+
+/* One centered conversation stream, including the coach's question. */
+.lesson-stream{width:100%;max-width:680px;margin-inline:auto}
+#exercise .question-heading{display:flex;gap:10px;align-items:flex-start;max-width:100%;padding:0;margin:30px 0 16px;text-align:left}
+#exercise .question-heading.previous-assistant{padding-left:54px}
+#exercise .question-bubble{position:relative;padding:20px 62px 20px 20px;max-width:calc(100% - 54px);border-radius:4px 20px 20px 20px}
+#exercise .question-heading.previous-assistant .question-bubble{max-width:100%}
+#exercise .question-heading h2{font-size:28px;line-height:1.4;margin:0 0 12px;letter-spacing:-.6px}
+#exercise .question-heading p{font-size:14px;line-height:1.8;margin:0;color:var(--muted)}
+#exercise .question-heading .question-task{margin-top:12px;color:var(--text)}
+#exercise .question-heading .bookmark{top:16px;right:12px;width:36px;height:36px;background:transparent}
+#exercise .discussion{max-width:100%;margin:16px 0 0}
+.positive-emotion{background-image:url('assets/chick-positive-emotions.png');background-size:600% 200%}
+.emotion-delighted{--face-x:0%;--face-y:0%}.emotion-approving{--face-x:40%;--face-y:0%}.emotion-inspired{--face-x:80%;--face-y:0%}.emotion-relieved{--face-x:0%;--face-y:100%}.emotion-grateful{--face-x:40%;--face-y:100%}.emotion-amused{--face-x:80%;--face-y:100%}
+@media(max-width:600px){#exercise .question-heading h2{font-size:23px}#exercise .question-bubble{padding:16px 50px 16px 16px}#exercise .question-heading .bookmark{top:12px;right:8px;width:32px;height:32px}}
