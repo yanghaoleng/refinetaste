@@ -106,7 +106,8 @@
     ].join(',');
     // Finish assembling each message before the next design enters.
     for(const card of cards){
-      const message=play(card,[{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}],{duration:260,delay:cursor});
+      const frames=card.matches('.option')?[{opacity:0},{opacity:1}]:[{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}];
+      const message=play(card,frames,{duration:260,delay:cursor});
       if(message)animations.push(message);
       const parts=[...card.querySelectorAll(partsSelector)],step=parts.length>8?50:75;
       parts.forEach((part,index)=>{
@@ -175,7 +176,7 @@
     }).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['open']});
     const press=event=>{
       const target=event.target.closest('button:not(:disabled),a,summary');
-      if(!target||target.closest('[aria-busy="true"]'))return;
+      if(!target||target.matches('.option')||target.closest('[aria-busy="true"]'))return;
       // Scale uses an independent transform, preserving the card's composed rotation.
       play(target,[{scale:'1'},{scale:'.955',offset:.35},{scale:'1'}],{duration:330});
     };
