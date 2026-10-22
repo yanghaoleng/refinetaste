@@ -86,39 +86,21 @@
     root.setAttribute('data-design-entering','');
     const cards=[...root.children].filter(el=>el.matches('.option,.specimen'));
     const animations=[];
-    let cursor=100;
-    const partsSelector=[
-      '.sample-card .studio','.sample-card .name','.sample-card .position','.sample-card .contact',
-      '.specimen-tag','.specimen-title','.specimen-content >p:not(.status-row)',
-      '.menu-row >span','.status-row >span','.mini-chart .bar','.chart-key',
-      '.app-bar >*','.resource-banner >*','.app-placeholder >i',
-      '.path-sample >div','.path-sample >span'
-    ].join(',');
-    for(const card of cards){
-      const shell=play(card,[{opacity:0},{opacity:1}],{duration:160,delay:cursor});
-      if(shell)animations.push(shell);
-      const parts=[...card.querySelectorAll(partsSelector)];
-      const step=parts.length>8?50:75;
-      parts.forEach((part,index)=>{
-        // Keep the existing design's rotations, offsets, alignment and typography.
-        const base=getComputedStyle(part).transform;
-        const rest=base==='none'?'':base;
-        const animation=play(part,[
-          {opacity:0,transform:`translate3d(0,9px,0) ${rest}`},
-          {opacity:1,transform:`translate3d(0,0,0) ${rest}`}
-        ],{duration:220,delay:cursor+160+index*step});
-        if(animation)animations.push(animation);
-      });
-      cursor+=160+Math.max(0,parts.length-1)*step+220+110;
-    }
+    let cursor=80;
     if(heading){
-      const title=heading.querySelector('h2'),brief=heading.querySelector('p'),bookmark=heading.querySelector('.bookmark'),task=heading.querySelector('.question-task');
-      const bubble=play(heading,[{opacity:0},{opacity:1}],{duration:220,delay:cursor});if(bubble)animations.push(bubble);
-      for(const [element,delay] of [[title,cursor],[bookmark,cursor],[brief,cursor],...(task?[[task,cursor]]:[])]){
-        if(element!==bookmark&&window.RefineText){animations.push(...window.RefineText.text(element,{delay}));continue}
-        const animation=play(element,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:220,delay});
-        if(animation)animations.push(animation);
+      const entrance=play(heading,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,delay:cursor});
+      if(entrance)animations.push(entrance);
+      let textDuration=240;
+      for(const element of [heading.querySelector('h2'),heading.querySelector('p'),heading.querySelector('.question-task')].filter(Boolean)){
+        if(window.RefineText){animations.push(...window.RefineText.text(element,{delay:cursor}));textDuration=Math.max(textDuration,window.RefineText.duration(element.textContent))}
       }
+      cursor+=textDuration+180;
+    }
+    // Each complete option is one coach message, after the opening question.
+    for(const card of cards){
+      const message=play(card,[{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}],{duration:260,delay:cursor});
+      if(message)animations.push(message);
+      cursor+=380;
     }
     builds.set(root,animations);
     const ready=Promise.all(animations.map(done)).then(()=>root.removeAttribute('data-design-entering'));
