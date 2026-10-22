@@ -1,7 +1,7 @@
 const test=require('node:test');const assert=require('node:assert/strict');const vm=require('node:vm');const fs=require('node:fs');const path=require('node:path');
-function setup(reduced){
+function setup(reduced,visualViewport=null){
   const media={matches:reduced,addEventListener(){}};
-  const context={matchMedia:()=>media,window:{},document:{readyState:'loading',addEventListener(){}},getComputedStyle:()=>({transform:'none'}),Set,WeakSet,WeakMap,Promise};
+  const context={matchMedia:()=>media,window:{visualViewport},document:{readyState:'loading',addEventListener(){}},getComputedStyle:()=>({transform:'none'}),Set,WeakSet,WeakMap,Promise};
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../dist/motion.js'),'utf8'),context);
   return context.window.RefineMotion;
 }
@@ -32,11 +32,14 @@ function designRoot(){
   root.children=['A','B'].map(name=>{const card=piece(name);card.matches=()=>true;const parts=[piece(name+'-title'),piece(name+'-body'),piece(name+'-contact')];card.querySelectorAll=()=>parts;return card});
   return {root,scheduled,piece};
 }
-test('complete option messages appear one at a time and focus can reveal both immediately',()=>{
+test('each option assembles its elements in order before the next option enters',()=>{
   const motion=setup(false),{root,scheduled}=designRoot();motion.assembleDesign(root);
-  assert.deepEqual(scheduled.map(job=>job.name),['A','B']);
-  assert.ok(scheduled[1].options.delay>scheduled[0].options.delay+scheduled[0].options.duration);
-  assert.equal(scheduled.every(job=>job.animation.completed),false);
+  const a=scheduled.filter(job=>job.name.startsWith('A')),b=scheduled.filter(job=>job.name.startsWith('B'));
+  assert.equal(a.length,4);assert.equal(b.length,4);
+  assert.ok(a[1].options.delay>a[0].options.delay);
+  assert.ok(a[2].options.delay>a[1].options.delay);
+  assert.ok(a[3].options.delay>a[2].options.delay);
+  assert.ok(b[0].options.delay>Math.max(...a.map(job=>job.options.delay+job.options.duration)));
   root.focus();assert.ok(scheduled.every(job=>job.animation.completed));
 });
 test('reduced motion shows both finished designs without delayed animations',()=>{
@@ -54,4 +57,22 @@ test('the coach question appears before both complete design messages',()=>{
   assert.ok(b.options.delay>a.options.delay+a.options.duration);
   assert.ok(heading.attributes.has('data-design-build'));
   root.focus();assert.ok(scheduled.every(job=>job.animation.completed));
+});
+
+test('feedback waits for the actual verdict animation and reduced motion skips the wait',async()=>{
+  const motion=setup(false),el=element();el.animate();el.animate();el.getAnimations=()=>el.jobs;
+  let complete=false;const waiting=motion.afterAnimations(el).then(()=>complete=true);
+  el.jobs[0].finish();await Promise.resolve();assert.equal(complete,false);
+  el.jobs[1].finish();await waiting;assert.equal(complete,true);
+  await setup(true).afterAnimations({getAnimations(){throw Error('should not query animations')}});
+});
+test('conversation scrolling keeps the composer above bottom controls and accounts for the keyboard viewport',()=>{
+  const calls=[],container={scrollTop:0,scrollHeight:2600,clientHeight:844,getBoundingClientRect:()=>({top:0,bottom:844}),scrollTo:options=>calls.push(options)};
+  const discussion={getBoundingClientRect:()=>({top:900,bottom:1200,height:300})},chrome={getBoundingClientRect:()=>({bottom:60})},controls={getBoundingClientRect:()=>({top:760})};
+  setup(false).scrollConversation(container,discussion,chrome,controls);
+  assert.equal(calls[0].top,460);assert.equal(calls[0].behavior,'smooth');
+  setup(true,{offsetTop:0,height:500}).scrollConversation(container,discussion,chrome,controls);
+  assert.equal(calls[1].top,720);assert.equal(calls[1].behavior,'auto');
+  discussion.getBoundingClientRect=()=>({top:100,bottom:400,height:300});
+  setup(false).scrollConversation(container,discussion,chrome,controls);assert.equal(calls.length,2);
 });

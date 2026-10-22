@@ -17,6 +17,12 @@
         if(ring===0)add(r*Math.cos(a)-.22,r*Math.sin(a),.13*Math.sin(b));
         else add(.13*Math.sin(b)+.22,r*Math.cos(a),r*Math.sin(a));
       }
+    }else if(kind===3){
+      // A fan of curved sheets: one visual metaphor for sequential story pages.
+      for(let sheet=-2;sheet<=2;sheet++)for(let u=0;u<=38;u++)for(let v=-16;v<=16;v++){
+        const t=u/38,angle=sheet*.23,x=(t-.5)*1.6,y=v/22,z=Math.sin(t*Math.PI)*.25;
+        add(x*Math.cos(angle)+z*Math.sin(angle),y,x*-Math.sin(angle)+z*Math.cos(angle));
+      }
     }else{
       for(let u=0;u<180;u++)for(let v=-8;v<=8;v++){
         const a=u/180*Math.PI*2,w=v*.042,r=.72+w*Math.cos(a/2);

@@ -139,3 +139,39 @@ button{border-radius:8px}.primary,.secondary,.chapter-action button{border-radiu
 @media(max-width:600px){.course-chapter{grid-template-columns:88px minmax(0,1fr) 40px;gap:12px}.chapter-illustration{width:88px;height:100px}.chapter-arrow{width:40px;height:40px}}
 @media(prefers-reduced-motion:reduce){.chapter-arrow{transition:none}}
 .chapter-catalog:has(.catalog-trigger[aria-expanded="true"]){z-index:9}
+
+/* Feedback starts after the verdict has finished, without a second waiting period. */
+.feedback-sequence #chat-messages>.chat-message>.chat-bubble{animation-delay:0ms}
+.coach-header{top:10px}.coach-header .coach-avatar{width:48px;height:48px}
+@media(max-width:767px){.coach-header{top:8px}.coach-header .coach-avatar{width:44px;height:44px}}
+/* Conversation and notebook form one centered workspace; designs may span wider. */
+body.notes-visible main{margin-right:0}
+body.notes-visible .training-chrome{padding-right:0}
+.training-workspace{width:min(100%,1200px);margin-inline:auto;padding-inline:24px;box-sizing:border-box;align-items:start}
+#training #exercise,body.notes-visible #training #exercise{width:100%;max-width:none;min-width:0;margin:0;padding-inline:0;container-name:exercise;container-type:inline-size}
+.lesson-stream{max-width:none}
+.lesson-stream>.question-heading,.lesson-stream>#feedback-slot{max-width:680px;margin-inline:auto}
+.lesson-stream .options{width:100%;max-width:1000px;margin:22px auto 28px;grid-template-columns:1fr}
+.lesson-stream .open-case{max-width:1000px;margin:22px auto 28px}
+@container exercise (min-width:700px){.lesson-stream .options{grid-template-columns:1fr 1fr}.lesson-stream .case-pair{grid-template-columns:1fr 1fr}}
+#training-workspace>#notebook{position:fixed;left:50%;right:auto;bottom:auto;transform:translateX(-50%);width:400px;max-height:calc(100dvh - var(--notes-top,84px) - 16px)}
+@media(min-width:1180px){
+ .training-workspace:has(>#notebook:not([hidden])){display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px}
+ #training-workspace>#notebook{position:sticky;top:84px;left:auto;right:auto;bottom:auto;transform:none;width:100%;max-width:none;max-height:calc(100dvh - 108px);margin-top:24px}
+}
+.lesson-next #bookmark{display:inline-flex;justify-content:center;gap:9px;width:auto;min-width:104px;flex:0 0 auto;height:50px;padding:13px 18px;border-radius:12px;font-size:14px;color:var(--text)}
+.lesson-next #bookmark .icon{width:18px;height:18px;margin:0}
+.lesson-next #bookmark .bookmark-label{margin:0;display:inline;font-weight:500}
+#coach-avatar{display:flex;padding:2px;border:1px solid var(--line);border-radius:50%;background:var(--bg);box-shadow:0 3px 12px #0002;width:max-content;box-sizing:content-box}
+#coach-avatar .coach-avatar{display:block;width:48px;height:48px;margin:0;flex:none}
+#chat-messages>.assistant{position:relative;padding-left:66px;min-height:54px}
+.coach-avatar-target{position:absolute;left:0;top:0;width:54px;height:54px}
+.coach-flight{position:fixed;z-index:12;pointer-events:none;width:54px;height:54px}
+@media(max-width:767px){.training-workspace{padding-inline:18px}.lesson-next #bookmark{height:44px;padding:10px 14px;min-width:94px}#coach-avatar .coach-avatar{width:44px;height:44px}#chat-messages>.assistant{padding-left:58px;min-height:50px}.coach-avatar-target,.coach-flight{width:50px;height:50px}}
+.specimen.illustration{padding:0;margin:0;min-height:0;height:auto;display:block;border:0;background:transparent;border-radius:12px;overflow:hidden}
+.illustration img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:inherit}
+.illustration figcaption{font-size:14px;line-height:1.6;padding:14px 16px;background:var(--panel);text-align:left}
+.open-case .illustration{border:1px solid var(--line)}
+#exercise .lesson-stream>.question-heading{max-width:680px;margin-inline:auto}
+.lesson-next .primary{height:50px;box-sizing:border-box}
+@media(max-width:767px){.lesson-next .primary{height:44px;padding-block:10px}}

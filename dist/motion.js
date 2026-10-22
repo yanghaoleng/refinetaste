@@ -96,11 +96,24 @@
       }
       cursor+=textDuration+180;
     }
-    // Each complete option is one coach message, after the opening question.
+    const partsSelector=[
+      '.illustration img,.illustration figcaption,.sample-card .studio','.sample-card .name','.sample-card .position','.sample-card .contact',
+      '.specimen-tag','.specimen-title','.specimen-content >p:not(.status-row)',
+      '.menu-row >span','.status-row >span','.mini-chart .bar','.chart-key',
+      '.app-bar >*','.resource-banner >*','.app-placeholder >i',
+      '.path-sample >div','.path-sample >span'
+    ].join(',');
+    // Finish assembling each message before the next design enters.
     for(const card of cards){
       const message=play(card,[{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}],{duration:260,delay:cursor});
       if(message)animations.push(message);
-      cursor+=380;
+      const parts=[...card.querySelectorAll(partsSelector)],step=parts.length>8?50:75;
+      parts.forEach((part,index)=>{
+        const base=getComputedStyle(part).transform,rest=base==='none'?'':base;
+        const entry=play(part,[{opacity:0,transform:`translate3d(0,8px,0) ${rest}`},{opacity:1,transform:`translate3d(0,0,0) ${rest}`}],{duration:220,delay:cursor+180+index*step});
+        if(entry)animations.push(entry);
+      });
+      cursor+=Math.max(260,180+Math.max(0,parts.length-1)*step+220)+120;
     }
     builds.set(root,animations);
     const ready=Promise.all(animations.map(done)).then(()=>root.removeAttribute('data-design-entering'));
@@ -108,11 +121,27 @@
     root.addEventListener('focusin',()=>finishDesignBuild(root),{once:true});
     return ready;
   }
+  function afterAnimations(element){
+    if(preference.matches)return Promise.resolve();
+    return Promise.all((element?.getAnimations?.()||[]).map(done));
+  }
+  function scrollConversation(container,discussion,chrome,controls){
+    if(!container||!discussion)return;
+    const viewport=container.getBoundingClientRect(),conversation=discussion.getBoundingClientRect();
+    const visual=window.visualViewport,visibleBottom=visual?visual.offsetTop+visual.height:viewport.bottom;
+    const top=Math.max(viewport.top,chrome?.getBoundingClientRect().bottom||viewport.top)+16;
+    const bottom=Math.min(viewport.bottom,visibleBottom,controls?.getBoundingClientRect().top||viewport.bottom)-20;
+    if(bottom<=top)return;
+    // Keep the composer above floating controls; long histories retain their latest turns.
+    const shift=Math.max(0,conversation.bottom-bottom);
+    const target=Math.max(0,Math.min(container.scrollHeight-container.clientHeight,container.scrollTop+shift));
+    if(Math.abs(target-container.scrollTop)>1)container.scrollTo({top:target,behavior:preference.matches?'auto':'smooth'});
+  }
   function bookmarkFeedback(symbol,counter){
     play(symbol,[{transform:'scale(1)'},{transform:'scale(1.25)',offset:.38},{transform:'scale(.94)',offset:.72},{transform:'scale(1)'}],{duration:330});
 
   }
-  window.RefineMotion={swap,closeDialog,toggleDetails,switchView,assembleDesign,finishDesignBuild,bookmarkFeedback};
+  window.RefineMotion={swap,closeDialog,toggleDetails,switchView,assembleDesign,finishDesignBuild,afterAnimations,scrollConversation,bookmarkFeedback};
   preference.addEventListener('change',()=>{if(preference.matches){for(const a of running){try{a.finish()}catch{a.cancel()}}running.clear()}});
   function boot(){
     const observer=new IntersectionObserver(entries=>{
