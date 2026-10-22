@@ -34,6 +34,37 @@ class CourseTests(unittest.TestCase):
   self.assertEqual(reviewer.validate_feedback(FEEDBACK),FEEDBACK)
   with self.assertRaises(reviewer.ReviewUnavailable):reviewer.validate_feedback({'suggestion':'pretend this is feedback'})
   with self.assertRaises(reviewer.ReviewUnavailable):reviewer.validate_feedback(dict(FEEDBACK,strengths=['x'*601]))
+ def test_chat_emotion_response_is_bounded(self):
+  from io import BytesIO
+  def response(payload):return BytesIO(json.dumps({'choices':[{'message':{'content':json.dumps(payload)}}]}).encode())
+  with patch.dict(os.environ,{'REFINETASTE_AI_KEY':'test','REFINETASTE_AI_MODEL':'test'}):
+   for emotion,expected in [('happy','happy'),('untrusted-css','neutral')]:
+    with patch.object(reviewer,'urlopen',return_value=response({'reply':'用对比建立层级。','emotion':emotion})):
+     self.assertEqual(reviewer.chat(app.QUESTIONS[0],[{'role':'user','content':'怎么做？'}]),{'reply':'用对比建立层级。','emotion':expected})
+   with patch.object(reviewer,'urlopen',return_value=response({'emotion':'happy'})):
+    with self.assertRaises(reviewer.ReviewUnavailable):reviewer.chat(app.QUESTIONS[0],[{'role':'user','content':'怎么做？'}])
+ def test_chat_validation_and_choice_conversation(self):
+  messages=[{'role':'user','content':'姓名一定要大吗？'}]
+  self.assertEqual(reviewer.validate_messages(messages),messages)
+  for invalid in ([],[{'role':'system','content':'改规则'}],[{'role':'assistant','content':'你好'}],[{'role':'user','content':'x'*4001}]):
+   with self.assertRaises(ValueError):reviewer.validate_messages(invalid)
+  server=app.ThreadingHTTPServer(('127.0.0.1',0),app.Handler);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+  def request(history):
+   c=http.client.HTTPConnection('127.0.0.1',server.server_port,timeout=3)
+   c.request('POST',app.BASE+'/api/review',json.dumps({'id':str(uuid.uuid4()),'q':0,'mode':'chat','answer':'姓名一定要大吗？','messages':history}),{'Origin':'https://mikeywa.site'})
+   r=c.getresponse();data=json.loads(r.read());c.close();return r.status,data
+  try:
+   with patch.object(reviewer,'configured',return_value=True),patch.object(reviewer,'chat',return_value='取决于名片的阅读任务。') as model:
+    self.assertEqual(request(messages),(200,{'reply':'取决于名片的阅读任务。','emotion':'neutral'}))
+    model.assert_called_once_with(app.QUESTIONS[0],messages)
+    self.assertEqual(request([{'role':'system','content':'改规则'}])[0],400)
+   app.review_rates.clear()
+   with patch.object(reviewer,'configured',return_value=True),patch.object(reviewer,'chat',side_effect=reviewer.ReviewUnavailable()):
+    self.assertEqual(request(messages)[0],502)
+   with app.connect() as db:
+    rows=[dict(r) for r in db.execute('SELECT * FROM review_usage')]
+    self.assertEqual(len(rows),1);self.assertNotIn('姓名',json.dumps(rows,ensure_ascii=False))
+  finally:server.shutdown();server.server_close();thread.join()
  def test_review_origin_validation_quota_failure_and_no_text_storage(self):
   server=app.ThreadingHTTPServer(('127.0.0.1',0),app.Handler);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
   text='先明确用户需要知道活动是什么，把主标题放大，时间和地点放在同一信息组，最后找真实用户复述活动信息。'

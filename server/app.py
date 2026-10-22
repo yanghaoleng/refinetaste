@@ -203,12 +203,14 @@ class Handler(BaseHTTPRequestHandler):
     def review_request(self,key,now):
         try:
             data=self.body()
-            q=data.get('q');answer=data.get('answer');request_id=data.get('id')
-            if type(q) is not int or q not in range(24) or QUESTIONS[q]['kind']!='open':raise ValueError()
-            if not isinstance(answer,str) or not 30<=len(answer.strip())<=2000:raise ValueError()
+            q=data.get('q');answer=data.get('answer');request_id=data.get('id');chat=data.get('mode')=='chat'
+            messages=data.get('messages')
+            if chat:messages=reviewer.validate_messages(messages)
+            if type(q) is not int or q not in range(24) or (not chat and QUESTIONS[q]['kind']!='open'):raise ValueError()
+            if not isinstance(answer,str) or not (1 if chat else 30)<=len(answer.strip())<=2000:raise ValueError()
             if not isinstance(request_id,str) or not UUID.fullmatch(request_id):raise ValueError()
         except ValueError:return self.reply(400,{'error':'请针对本题写下 30—2000 字的思路。'})
-        if not reviewer.configured():return self.reply(503,{'error':'模型点评暂未就绪。你的思路已留在本机，可以先对照自查提示继续。'})
+        if not reviewer.configured():return self.reply(503,{'error':'AI 暂未配置，暂时无法回复。你的想法已留在本机。'})
         day=datetime.fromtimestamp(now,ZONE).date().isoformat()
         with lock:
             count,until=review_rates.get(key,(0,now+60))
@@ -226,6 +228,9 @@ class Handler(BaseHTTPRequestHandler):
                 try:db.execute('INSERT INTO review_usage VALUES(?,?,?,?)',(request_id,day,key,q))
                 except sqlite3.IntegrityError:return self.reply(409,{'error':'这次请求已经提交，请等待结果或重新发起点评。'})
                 reserved=True
+            if chat:
+                reply=reviewer.chat(QUESTIONS[q],messages)
+                return self.reply(200,reply if isinstance(reply,dict) else {'reply':reply,'emotion':'neutral'})
             feedback=reviewer.review(QUESTIONS[q],answer.strip())
             return self.reply(200,{'feedback':feedback,'modelLabel':os.environ.get('REFINETASTE_AI_LABEL','设计教练')})
         except reviewer.ReviewUnavailable:
@@ -254,9 +259,9 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(308);self.send_header('Location',path+'/');self.end_headers();return
         files={BASE+'/':'index.html',BASE+'/data/':'data/index.html',BASE+'/style.css':'style.css',BASE+'/app.js':'app.js',BASE+'/analytics.js':'analytics.js',BASE+'/data/admin.js':'data/admin.js',BASE+'/data/admin.css':'data/admin.css'}
         files[BASE+'/icons.svg']='icons.svg'
-        for asset in ('theme.js','theme.css','motion.js','motion.css','course.json','course.css'):
+        for asset in ('theme.js','theme.css','motion.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
             files[BASE+'/'+asset]=asset
-        for asset in ('chick-eyes-original.png','chick-eyes-128.webp','chick-eyes-512.webp','apple-touch-icon.png','favicon-32.png','favicon.ico'):
+        for asset in ('chick-emotions.png','chick-eyes-original.png','chick-eyes-128.webp','chick-eyes-512.webp','apple-touch-icon.png','favicon-32.png','favicon.ico'):
             files[BASE+'/assets/'+asset]='assets/'+asset
         if path not in files:return self.reply(404,{'error':'not found'})
         file=ROOT/'dist'/files[path]

@@ -25,3 +25,37 @@ test('repeated close waits for exit and only closes the dialog once',async()=>{
   assert.equal(first,second);assert.equal(el.closed,0);el.jobs[0].finish();await first;
   assert.equal(el.closed,1);assert.equal(el.open,false);
 });
+function designRoot(){
+  const root=element(),focus={};root.addEventListener=(name,handler)=>focus[name]=handler;root.focus=()=>focus.focusin?.();
+  const scheduled=[];
+  function piece(name){const el=element();el.animate=(frames,options)=>{let done;const animation={finished:new Promise(r=>done=r),completed:false,finish(){this.completed=true;done()},cancel(){done()}};scheduled.push({name,frames,options,animation});return animation};return el}
+  root.children=['A','B'].map(name=>{const card=piece(name);card.matches=()=>true;const parts=[piece(name+'-title'),piece(name+'-body'),piece(name+'-contact')];card.querySelectorAll=()=>parts;return card});
+  return {root,scheduled,piece};
+}
+test('designs assemble A completely before B, and focus reveals the finished comparison',()=>{
+  const motion=setup(false),{root,scheduled}=designRoot();motion.assembleDesign(root);
+  const first=scheduled.filter(job=>job.name.startsWith('A'));
+  const second=scheduled.filter(job=>job.name.startsWith('B'));
+  assert.ok(second[0].options.delay>Math.max(...first.map(job=>job.options.delay+job.options.duration)));
+  assert.ok(first[1].options.delay>first[0].options.delay);
+  assert.ok(first[2].options.delay>first[1].options.delay);
+  assert.equal(scheduled.every(job=>job.animation.completed),false);
+  root.focus();assert.ok(scheduled.every(job=>job.animation.completed));
+});
+test('reduced motion shows both finished designs without delayed animations',()=>{
+  const motion=setup(true),{root,scheduled}=designRoot();motion.assembleDesign(root);
+  assert.equal(scheduled.length,0);assert.ok(root.attributes.has('data-design-build'));
+});
+
+test('question title and brief appear together after completed options',()=>{
+  const motion=setup(false),{root,scheduled,piece}=designRoot(),heading=element();
+  const title=piece('title'),brief=piece('brief'),bookmark=piece('bookmark');
+  heading.querySelector=selector=>({'h2':title,'p':brief,'.bookmark':bookmark}[selector]);
+  motion.assembleDesign(root,heading);
+  const designs=scheduled.filter(job=>/^[AB]/.test(job.name));
+  const titleJob=scheduled.find(job=>job.name==='title'),briefJob=scheduled.find(job=>job.name==='brief');
+  assert.ok(titleJob.options.delay>Math.max(...designs.map(job=>job.options.delay+job.options.duration)));
+  assert.equal(briefJob.options.delay,titleJob.options.delay);
+  assert.ok(heading.attributes.has('data-design-build'));
+  root.focus();assert.ok(scheduled.every(job=>job.animation.completed));
+});

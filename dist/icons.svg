@@ -29,6 +29,8 @@ SOFTWARE.
 </symbol><symbol id="asterisk" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M12 22L12 2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
 <path d="M20.5715 17.5498L3.42819 7.24904" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
 <path d="M3.42822 17.5498L20.5716 7.24904" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+</symbol><symbol id="bookmark" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 21V5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V21L13.0815 17.1953C12.4227 16.7717 11.5773 16.7717 10.9185 17.1953L5 21Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+</symbol><symbol id="check" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 13L9 17L19 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
 </symbol><symbol id="nav-arrow-down" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
 </symbol><symbol id="nav-arrow-right" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
 </symbol><symbol id="plus" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M6 12H12M18 12H12M12 12V6M12 12V18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />

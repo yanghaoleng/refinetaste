@@ -10,7 +10,7 @@
   }
   const done=a=>a?a.finished.catch(()=>{}):Promise.resolve();
   function reveal(el,index=0){
-    if(!el||seen.has(el)||el.closest('[hidden]')||el.closest('dialog:not([open])')||el.parentElement?.closest('details:not([open])'))return;
+    if(!el||seen.has(el)||el.closest('.catalog-popup')||el.closest('[data-design-build]')||el.closest('[hidden]')||el.closest('dialog:not([open])')||el.parentElement?.closest('details:not([open])'))return;
     seen.add(el);
     const base=getComputedStyle(el).transform;
     const rest=base==='none'?'':base;
@@ -20,7 +20,7 @@
   const dynamicSelector=[
     '.course-chapter','.course-footnote','.open-prompt >*','.open-actions','.reference','.open-bottom','.model-feedback >*','.specimen','.exercise-heading >*','.options >.option','.feedback >h3','.feedback >p','.feedback >details','.feedback >.reflection','.feedback >.feedback-actions',
     '.result >*','.note-item','.empty','.coach-answer','.save-status','.metric-value','.insight >*','.chart >*','#questions >tr','#chapters >tr','#daily-table tr','#question-insight',
-    '#pin-error','#exercise-progress','#load-state'
+    '#pin-error','#load-state'
   ].join(',');
   function enter(root){
     if(!root||preference.matches)return;
@@ -73,7 +73,62 @@
     from.hidden=true;to.hidden=false;
     play(to,[{opacity:0,translate:'0 24px'},{opacity:1,translate:'0 0'}],{duration:520});enter(to);
   }
-  window.RefineMotion={swap,closeDialog,toggleDetails,switchView};
+  const builds=new WeakMap();
+  function finishDesignBuild(root){
+    for(const animation of builds.get(root)||[]){try{animation.finish()}catch{animation.cancel()}}
+    builds.delete(root);
+  }
+  function assembleDesign(root,heading=null){
+    if(!root)return;
+    root.setAttribute('data-design-build','');
+    heading?.setAttribute('data-design-build','');
+    if(preference.matches)return;
+    root.setAttribute('data-design-entering','');
+    const cards=[...root.children].filter(el=>el.matches('.option,.specimen'));
+    const animations=[];
+    let cursor=100;
+    const partsSelector=[
+      '.sample-card .studio','.sample-card .name','.sample-card .position','.sample-card .contact',
+      '.specimen-tag','.specimen-title','.specimen-content >p:not(.status-row)',
+      '.menu-row >span','.status-row >span','.mini-chart .bar','.chart-key',
+      '.app-bar >*','.resource-banner >*','.app-placeholder >i',
+      '.path-sample >div','.path-sample >span'
+    ].join(',');
+    for(const card of cards){
+      const shell=play(card,[{opacity:0},{opacity:1}],{duration:160,delay:cursor});
+      if(shell)animations.push(shell);
+      const parts=[...card.querySelectorAll(partsSelector)];
+      const step=parts.length>8?50:75;
+      parts.forEach((part,index)=>{
+        // Keep the existing design's rotations, offsets, alignment and typography.
+        const base=getComputedStyle(part).transform;
+        const rest=base==='none'?'':base;
+        const animation=play(part,[
+          {opacity:0,transform:`translate3d(0,9px,0) ${rest}`},
+          {opacity:1,transform:`translate3d(0,0,0) ${rest}`}
+        ],{duration:220,delay:cursor+160+index*step});
+        if(animation)animations.push(animation);
+      });
+      cursor+=160+Math.max(0,parts.length-1)*step+220+110;
+    }
+    if(heading){
+      const title=heading.querySelector('h2'),brief=heading.querySelector('p'),bookmark=heading.querySelector('.bookmark');
+      for(const [element,delay] of [[title,cursor],[bookmark,cursor],[brief,cursor]]){
+        if(element!==bookmark&&window.RefineText){animations.push(...window.RefineText.text(element,{delay}));continue}
+        const animation=play(element,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:220,delay});
+        if(animation)animations.push(animation);
+      }
+    }
+    builds.set(root,animations);
+    Promise.all(animations.map(done)).then(()=>root.removeAttribute('data-design-entering'));
+    // Interaction can always reveal the completed designs immediately.
+    root.addEventListener('focusin',()=>finishDesignBuild(root),{once:true});
+  }
+  function bookmarkFeedback(symbol,counter){
+    play(symbol,[{transform:'scale(1)'},{transform:'scale(1.25)',offset:.38},{transform:'scale(.94)',offset:.72},{transform:'scale(1)'}],{duration:330});
+
+  }
+  window.RefineMotion={swap,closeDialog,toggleDetails,switchView,assembleDesign,finishDesignBuild,bookmarkFeedback};
   preference.addEventListener('change',()=>{if(preference.matches){for(const a of running){try{a.finish()}catch{a.cancel()}}running.clear()}});
   function boot(){
     const observer=new IntersectionObserver(entries=>{
@@ -91,12 +146,12 @@
         if(record.type==='attributes'&&record.target.open){
           const modal=record.target;
           play(modal,[{opacity:0,translate:modal.id==='training'?'0 40px':'0 28px',scale:modal.id==='training'?'1':'.94'},{opacity:1,translate:'0 0',scale:'1'}],{duration:560});
-          modal.querySelectorAll('.training-top >*,.notes-head, #notebook-title, #notebook >p,#export-notes').forEach((el,i)=>{seen.delete(el);reveal(el,i)});
+          modal.querySelectorAll('.training-top >button,.notes-head, #notebook-title, #notebook >p').forEach((el,i)=>{seen.delete(el);reveal(el,i)});
           enter(modal);
         }
         for(const node of record.addedNodes){
           if(node.nodeType===1)additions.add(node);
-          else if(node.nodeType===3&&record.target.matches?.('#pin-error,.save-status,.coach-answer,#exercise-progress,#load-state')){
+          else if(node.nodeType===3&&record.target.matches?.('#pin-error,.save-status,.coach-answer,#load-state')){
             const el=record.target;seen.delete(el);reveal(el);
             if(el.id==='pin-error'&&el.textContent.includes('不正确'))play(el,[{translate:'0 0'},{translate:'-7px 0'},{translate:'6px 0'},{translate:'-3px 0'},{translate:'0 0'}],{duration:340});
           }
