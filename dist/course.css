@@ -258,3 +258,8 @@ html,body{touch-action:pan-x pan-y;overscroll-behavior-x:none}
 .story-beats li:last-child{border-bottom:0}
 .story-beats li i{display:block;flex-shrink:0;width:6px;height:6px;border-radius:50%;background:#849c9a}
 @media(max-width:600px){.course-track-title{font-size:13px;margin-top:22px}.specimen.story-board,.specimen.story-plan{padding:18px;min-height:0}.story-frames{grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:14px}.story-board .specimen-title,.story-plan .specimen-title{font-size:17px}.story-beats li{font-size:12px}}
+/* Keep Chinese punctuation attached while each inner glyph still animates. */
+.calligraph-copy,.cjk-run{display:inline;line-break:strict;word-break:normal;overflow-wrap:normal}
+.cjk-keep{display:inline-block;white-space:nowrap;line-height:inherit;vertical-align:baseline}
+.cjk-punctuation,.cjk-punctuation .calligraph-text,.cjk-punctuation .calligraph-text>span{display:inline!important;white-space:normal!important}
+#exercise .question-heading h2,#exercise .question-heading .question-task{line-break:strict;word-break:normal;overflow-wrap:normal;hanging-punctuation:none}

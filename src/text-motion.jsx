@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
 import { Calligraph } from 'calligraph';
 import { Toaster, toast } from 'sonner';
+import { chineseTextRuns } from './chinese-line-break.mjs';
 
 // Small React islands: the course and model requests stay in the existing app.
 const entries = new Map();
@@ -21,14 +22,18 @@ function render(host, value, variant) {
   }
   entry.value = value;
   entry.variant = variant;
+  const textRun = (run, index) => <span key={index} className={run.keep ? 'cjk-keep' : run.punctuation ? 'cjk-punctuation' : 'cjk-run'}>
+    <Calligraph variant="text" initial={false} autoSize={false} animation="default"
+      className="calligraph-text" style={{display:'inline',overflowWrap:'normal'}}>{run.text}</Calligraph>
+  </span>;
   flushSync(() => entry.root.render(preference.matches
     ? <span>{value}</span>
-    : <Calligraph variant={variant} initial={false} autoSize={false}
-        animation={variant === 'slots' ? 'snappy' : 'default'}
-        className={variant === 'text' ? 'calligraph-text' : 'calligraph-slots'}
-        style={variant === 'text' ? { display: 'inline', overflowWrap: 'break-word' } : { display: 'inline-flex', height: '1em', lineHeight: '1em', overflow: 'hidden', verticalAlign: 'middle' }}>
-        {value}
-      </Calligraph>));
+    : variant === 'text'
+      ? <span className="calligraph-copy">{chineseTextRuns(value).map(textRun)}</span>
+      : <Calligraph variant="slots" initial={false} autoSize={false} animation="snappy"
+          className="calligraph-slots" style={{display:'inline-flex',height:'1em',lineHeight:'1em',overflow:'hidden',verticalAlign:'middle'}}>
+          {value}
+        </Calligraph>));
 }
 function text(host, { delay = 0, step: stepOverride = null } = {}) {
   if (!host) return [];
