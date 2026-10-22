@@ -16,3 +16,15 @@ with Image.open(assets/'chick-positive-emotions.png') as source:
     for size,name in [(32,'favicon-starry-32.png'),(180,'apple-touch-starry.png')]:
         face.resize((size,size),Image.Resampling.LANCZOS).save(assets/name,optimize=True)
     face.resize((64,64),Image.Resampling.LANCZOS).save(assets/'favicon-starry.ico',sizes=[(16,16),(32,32),(48,48),(64,64)])
+# A matched logo/favicon pair for every coach emotion, using one frame per mood.
+moods=['neutral','happy','thinking','curious','surprised','encouraging','empathetic','confused','playful','delighted','approving','inspired','relieved','grateful','amused']
+icons=assets/'icons';icons.mkdir(exist_ok=True)
+for index,mood in enumerate(moods):
+    atlas='chick-emotions.png' if index<9 else 'chick-positive-emotions.png'
+    offset=index if index<9 else index-9
+    with Image.open(assets/atlas) as source:
+        cell=source.width//6;x=offset%3*2*cell;y=offset//3*cell
+        face=source.crop((x,y,x+cell,y+cell)).convert('RGB')
+        face.resize((96,96),Image.Resampling.LANCZOS).save(icons/(mood+'-96.webp'),'WEBP',quality=82,method=6)
+        face.resize((32,32),Image.Resampling.LANCZOS).save(icons/(mood+'-32.png'),optimize=True)
+        face.resize((180,180),Image.Resampling.LANCZOS).save(icons/(mood+'-180.png'),optimize=True)

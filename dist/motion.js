@@ -97,7 +97,7 @@
       cursor+=textDuration+180;
     }
     const partsSelector=[
-      '.illustration img,.illustration figcaption,.sample-card .studio','.sample-card .name','.sample-card .position','.sample-card .contact',
+      '.ops-appbar,.ops-art,.ops-badges>span,.ops-title,.ops-subtitle,.ops-cta,.ops-terms,.ops-under>i,.illustration img,.illustration figcaption,.sample-card .studio','.sample-card .name','.sample-card .position','.sample-card .contact',
       '.specimen-tag','.specimen-title','.specimen-content >p:not(.status-row)',
       '.menu-row >span','.status-row >span','.mini-chart .bar','.chart-key',
       '.app-bar >*','.resource-banner >*','.app-placeholder >i',

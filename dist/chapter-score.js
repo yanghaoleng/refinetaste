@@ -1,0 +1,2 @@
+/* A chapter passes only after a complete run with every comparison correct. */
+(()=>{function calculate(questions,answers){const choices=questions.filter(q=>q.kind==='choice'),correct=choices.filter(q=>answers[q.id]===q.correct).length,complete=questions.every(q=>Object.hasOwn(answers,q.id));return {correct,total:choices.length,percent:choices.length?Math.round(correct/choices.length*1000)/10:0,complete,passed:complete&&choices.length>0&&correct===choices.length}}window.RefineScores={calculate}})();

@@ -12,6 +12,14 @@
     },
     {
       "id": 1,
+      "level": "运营",
+      "title": "运营资源基本原则",
+      "subtitle": "让资源位说清价值，融入产品，兑现点击前的承诺。",
+      "objective": "能按信息、风格、承诺和文案检查运营资源，说明修改依据。",
+      "minutes": "15—20 分钟"
+    },
+    {
+      "id": 2,
       "level": "中阶",
       "title": "考虑使用场景",
       "subtitle": "把资源位、状态与用户路径连成一次体验。",
@@ -19,7 +27,7 @@
       "minutes": "20—30 分钟"
     },
     {
-      "id": 2,
+      "id": 3,
       "level": "高阶",
       "title": "设计取舍与判断",
       "subtitle": "讨论经典案例，练习证据、约束与协作。",
@@ -27,7 +35,7 @@
       "minutes": "30—40 分钟"
     },
     {
-      "id": 3,
+      "id": 4,
       "level": "读图",
       "title": "读懂画面与故事",
       "subtitle": "从一张图到连续画面，观察构图、情绪和叙事线索。",
@@ -375,7 +383,7 @@
       "visuals": [],
       "sources": [],
       "id": 8,
-      "chapter": 1,
+      "chapter": 2,
       "format": "比较判断",
       "coachOpening": [
         "情境一致原则：局部设计要配合所在页面的任务和品牌调性。适度强调能引导注意；一味追求醒目，会打断浏览节奏，让内容显得突兀。",
@@ -400,7 +408,7 @@
       "visuals": [],
       "sources": [],
       "id": 9,
-      "chapter": 1,
+      "chapter": 2,
       "format": "比较判断",
       "coachOpening": [
         "信息透明原则：突出优惠利益时，也要清楚交代影响决策的条件。用户看懂门槛，才能做出合适选择；把限制藏起来，会造成误解和预期落差。",
@@ -425,7 +433,7 @@
       "visuals": [],
       "sources": [],
       "id": 10,
-      "chapter": 1,
+      "chapter": 2,
       "format": "比较判断",
       "coachOpening": [
         "预期一致原则：点击后的页面应承接入口承诺的内容和范围。直接得到预期结果，路径才连贯；跳到无关首页再让用户找，会增加操作成本和流失机会。",
@@ -474,7 +482,7 @@
         }
       ],
       "id": 11,
-      "chapter": 1,
+      "chapter": 2,
       "format": "比较判断",
       "coachOpening": [
         "错误恢复原则：报错要指出问题在哪里、怎样改、如何继续。提示贴近相关字段，用户才能纠正；只有笼统的“出错了”，会让人反复猜测和重试。",
@@ -510,7 +518,7 @@
       "sources": [],
       "correct": null,
       "id": 12,
-      "chapter": 1,
+      "chapter": 2,
       "format": "优先级排序",
       "coachOpening": [
         "注意力分配原则：按任务相关性、紧急程度和影响安排提示顺序。一次突出最需要处理的信息，用户才能行动；弹窗、横幅和红点同时争抢，会淹没真正重要的事。",
@@ -543,7 +551,7 @@
       "sources": [],
       "correct": null,
       "id": 13,
-      "chapter": 1,
+      "chapter": 2,
       "format": "文案改写",
       "coachOpening": [
         "空状态引导原则：说明当前为什么没有内容，并给出能兑现的下一步。用户知道去哪、能做什么，就容易开始；只说“暂无内容”，会把人留在死胡同。",
@@ -586,7 +594,7 @@
       "sources": [],
       "correct": null,
       "id": 14,
-      "chapter": 1,
+      "chapter": 2,
       "format": "双方案论证",
       "coachOpening": [
         "品牌一致原则：活动需要提高利益识别，也要保留可辨认的品牌线索。清楚的优惠配合一致风格，能兼顾促销和信任；只靠强刺激，可能带来误触和认知落差。",
@@ -621,7 +629,7 @@
       "sources": [],
       "correct": null,
       "id": 15,
-      "chapter": 1,
+      "chapter": 2,
       "format": "路径诊断",
       "coachOpening": [
         "跨页面一致原则：入口、操作过程和最终结果要兑现同一个承诺。承诺清楚、步骤必要，用户才愿意继续；中途增加未说明的门槛，会让人觉得被误导。",
@@ -665,7 +673,7 @@
       "rule": "先检查图形编码是否忠实，再考虑视觉冲击。",
       "sources": [],
       "id": 16,
-      "chapter": 2,
+      "chapter": 3,
       "format": "比较判断",
       "coachOpening": [
         "诚实编码原则：图形的长度和比例应忠实表达数据。柱图保留零基线，差异才不被夸大；截断基线，会让很小的差值看起来像成倍增长。",
@@ -707,7 +715,7 @@
       "rule": "设计判断要能被验证；指标需要匹配最初的用户任务和业务目标。",
       "sources": [],
       "id": 17,
-      "chapter": 2,
+      "chapter": 3,
       "format": "比较判断",
       "coachOpening": [
         "证据匹配原则：实验结论要建立在可比的人群和与目标相关的指标上。核对分流、样本及后续任务完成情况，才能判断效果；只看点击上涨，容易把干扰因素当成改进。",
@@ -747,7 +755,7 @@
       ],
       "correct": null,
       "id": 18,
-      "chapter": 2,
+      "chapter": 3,
       "format": "经典案例思辨",
       "coachOpening": [
         "信息抽象原则：为用户任务保留关键关系，舍去不必要的细节。线路示意突出站序和换乘，便于规划；把它当真实地理图使用，却可能误判距离和方向。",
@@ -787,7 +795,7 @@
       ],
       "correct": null,
       "id": 19,
-      "chapter": 2,
+      "chapter": 3,
       "format": "交互文案改写",
       "coachOpening": [
         "行动语义原则：按钮应清楚说明操作后果，视觉强调要与风险相称。用户理解删除与保留的差别，才能慎重选择；含糊措辞或过度突出删除，会增加误操作风险。",
@@ -822,7 +830,7 @@
       "sources": [],
       "correct": null,
       "id": 20,
-      "chapter": 2,
+      "chapter": 3,
       "format": "决策论证",
       "coachOpening": [
         "可信增长原则：吸引用户的承诺必须真实，并提前说明关键门槛。点击与实际利益一致，才有持续转化；用误解换点击，可能带来取消、投诉和信任损失。",
@@ -857,7 +865,7 @@
       "sources": [],
       "correct": null,
       "id": 21,
-      "chapter": 2,
+      "chapter": 3,
       "format": "评审模拟",
       "coachOpening": [
         "有效评审原则：把反馈落到共同目标、具体问题、可执行改法和验证方法上。这样分歧才能推进决策；只说“高级一点”或“更有冲击力”，会让人反复猜需求。",
@@ -896,7 +904,7 @@
       ],
       "correct": null,
       "id": 22,
-      "chapter": 2,
+      "chapter": 3,
       "format": "约束设计",
       "coachOpening": [
         "包容性原则：重要信息要在不同视觉和操作能力下都可获取。保证文字可读、状态可辨、操作可达，更多人才能完成任务；依赖小字或短暂动效，会把部分用户排除在外。",
@@ -932,7 +940,7 @@
       "sources": [],
       "correct": null,
       "id": 23,
-      "chapter": 2,
+      "chapter": 3,
       "format": "综合实战",
       "coachOpening": [
         "完整体验原则：从入口到最终结果持续兑现承诺，只收集完成任务所必需的信息。路径清楚、条件透明，用户才能放心完成；只优化单个页面，会留下误导、额外门槛或结果落空。",
@@ -984,7 +992,7 @@
         }
       ],
       "id": 24,
-      "chapter": 3
+      "chapter": 4
     },
     {
       "principle": "视线引导",
@@ -1030,7 +1038,7 @@
         }
       ],
       "id": 25,
-      "chapter": 3
+      "chapter": 4
     },
     {
       "principle": "色彩与气氛",
@@ -1076,7 +1084,7 @@
         }
       ],
       "id": 26,
-      "chapter": 3
+      "chapter": 4
     },
     {
       "principle": "图文互补",
@@ -1122,7 +1130,7 @@
         }
       ],
       "id": 27,
-      "chapter": 3
+      "chapter": 4
     },
     {
       "principle": "连续叙事",
@@ -1167,7 +1175,7 @@
         }
       ],
       "id": 28,
-      "chapter": 3
+      "chapter": 4
     },
     {
       "principle": "翻页悬念",
@@ -1212,7 +1220,7 @@
         }
       ],
       "id": 29,
-      "chapter": 3
+      "chapter": 4
     },
     {
       "principle": "视角与情感距离",
@@ -1257,7 +1265,7 @@
         }
       ],
       "id": 30,
-      "chapter": 3
+      "chapter": 4
     },
     {
       "principle": "细节与呼应",
@@ -1302,7 +1310,450 @@
         }
       ],
       "id": 31,
-      "chapter": 3
+      "chapter": 4
+    },
+    {
+      "id": 32,
+      "chapter": 1,
+      "kind": "choice",
+      "format": "比较判断",
+      "principle": "资源信息层级",
+      "title": "这一屏，先说清一件事。",
+      "brief": "日常学习首页要推荐「海洋探索」内容，用户只有几秒扫视。哪张资源图更容易让人记住它在推荐什么？",
+      "labels": [
+        "海洋探索、全新上线、热门推荐等信息同样醒目，多个标签竞争注意",
+        "突出海洋探索主题，说明学习内容，保留一个明确入口"
+      ],
+      "visuals": [
+        {
+          "kind": "ops",
+          "variant": "crowded",
+          "title": "海洋探索",
+          "subtitle": "全新上线 · 限时开放 · 热门推荐",
+          "cta": "去探索",
+          "tag": "",
+          "lines": [],
+          "badges": [
+            "全新上线",
+            "热门推荐",
+            "不容错过"
+          ],
+          "description": "海洋探索、全新上线、热门推荐等信息同样醒目，多个标签竞争注意"
+        },
+        {
+          "kind": "ops",
+          "variant": "clear",
+          "title": "海洋探索",
+          "subtitle": "跟着小船认识 3 种海洋动物",
+          "cta": "去探索",
+          "tag": "",
+          "lines": [],
+          "description": "突出海洋探索主题，说明学习内容，保留一个明确入口"
+        }
+      ],
+      "correct": 1,
+      "why": "B 先突出主题，再解释内容价值，最后给出入口；A 的多个标签都抢第一眼，用户需要自己整理信息。",
+      "rule": "主体清晰：先确定资源位唯一的主要信息，再用大小、颜色和留白安排主次。焦点明确，用户才能快速理解推荐内容；多处同时强调，反而会削弱信息传达。",
+      "tip": "如果去掉所有促销标签，这张图还剩下什么值得点开的理由？",
+      "coachOpening": [
+        "主体清晰：先确定资源位唯一的主要信息，再用大小、颜色和留白安排主次。焦点明确，用户才能快速理解推荐内容；多处同时强调，反而会削弱信息传达。",
+        "如果去掉所有促销标签，这张图还剩下什么值得点开的理由？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "App 运营资源审核规范",
+          "url": "https://alidocs.dingtalk.com/i/nodes/gwva2dxOW4KX7gmQCEKjveK48bkz3BRL?utm_scene=team_space"
+        },
+        {
+          "title": "WCAG 2.2：文字对比度",
+          "url": "https://www.w3.org/TR/WCAG22/#contrast-minimum"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "chapter": 1,
+      "kind": "choice",
+      "format": "比较判断",
+      "principle": "品牌风格一致",
+      "title": "新鲜，也要像同一个产品。",
+      "brief": "页面使用柔和配色、纸张纹理与圆润图形。本次只是日常内容上新，哪张资源图更容易融入所在页面？",
+      "labels": [
+        "沿用柔和配色、纸张肌理和圆润图形，在内容主题上做变化",
+        "柔和学习页面中插入黑紫霓虹、锐利形状和金属高光的资源图"
+      ],
+      "visuals": [
+        {
+          "kind": "ops",
+          "variant": "paper",
+          "title": "一起发现新星球",
+          "subtitle": "新的探索内容，今天开放",
+          "cta": "去看看",
+          "tag": "",
+          "lines": [],
+          "description": "沿用柔和配色、纸张肌理和圆润图形，在内容主题上做变化"
+        },
+        {
+          "kind": "ops",
+          "variant": "neon",
+          "title": "一起发现新星球",
+          "subtitle": "新的探索内容，今天开放",
+          "cta": "去看看",
+          "tag": "",
+          "lines": [],
+          "description": "柔和学习页面中插入黑紫霓虹、锐利形状和金属高光的资源图"
+        }
+      ],
+      "correct": 0,
+      "why": "A 在产品的形象与材质语言中表达新主题。B 的强烈风格突变会让日常推荐像外部广告，而不只是内容上新。",
+      "rule": "风格一致：可以更换主题和表现材料，但要保留可识别的形象、配色与纹理关系。资源融入产品，用户才容易形成连贯的品质预期；刻意制造风格断裂会增加陌生感。",
+      "tip": "你会保留哪一种品牌线索，同时让新内容有自己的特点？",
+      "coachOpening": [
+        "风格一致：可以更换主题和表现材料，但要保留可识别的形象、配色与纹理关系。资源融入产品，用户才容易形成连贯的品质预期；刻意制造风格断裂会增加陌生感。",
+        "你会保留哪一种品牌线索，同时让新内容有自己的特点？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "App 运营资源审核规范",
+          "url": "https://alidocs.dingtalk.com/i/nodes/gwva2dxOW4KX7gmQCEKjveK48bkz3BRL?utm_scene=team_space"
+        },
+        {
+          "title": "WCAG 2.2：文字对比度",
+          "url": "https://www.w3.org/TR/WCAG22/#contrast-minimum"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "chapter": 1,
+      "kind": "choice",
+      "format": "比较判断",
+      "principle": "真实的行为承诺",
+      "title": "点了以后，真的能立即拿到吗？",
+      "brief": "活动需要「邀请一位新朋友，朋友完成注册」之后才发放体验券。哪种入口表达与实际流程一致？",
+      "labels": [
+        "按钮写立即领取，但下方条件要求邀请朋友并完成注册",
+        "标题与条件清楚，按钮引导先查看邀请规则"
+      ],
+      "visuals": [
+        {
+          "kind": "ops",
+          "variant": "promise",
+          "title": "免费体验券",
+          "subtitle": "邀请新朋友注册后获得",
+          "cta": "立即领取",
+          "tag": "",
+          "lines": [],
+          "description": "按钮写立即领取，但下方条件要求邀请朋友并完成注册"
+        },
+        {
+          "kind": "ops",
+          "variant": "promise",
+          "title": "免费体验券",
+          "subtitle": "邀请新朋友注册后获得",
+          "cta": "查看邀请规则",
+          "tag": "",
+          "lines": [],
+          "description": "标题与条件清楚，按钮引导先查看邀请规则"
+        }
+      ],
+      "correct": 1,
+      "why": "B 让用户预期先了解邀请条件。A 把还需别人完成的步骤说成点一下就拿到，会制造落差。",
+      "rule": "承诺真实：按钮要描述点击后的下一步，领取条件要在行动前说清。预期与结果一致，用户才能自主决定；把多步条件包装成「立即」，会透支信任。",
+      "tip": "如果活动改成点击就直接入账，按钮文案可以怎样变？",
+      "coachOpening": [
+        "承诺真实：按钮要描述点击后的下一步，领取条件要在行动前说清。预期与结果一致，用户才能自主决定；把多步条件包装成「立即」，会透支信任。",
+        "如果活动改成点击就直接入账，按钮文案可以怎样变？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "App 运营资源审核规范",
+          "url": "https://alidocs.dingtalk.com/i/nodes/gwva2dxOW4KX7gmQCEKjveK48bkz3BRL?utm_scene=team_space"
+        },
+        {
+          "title": "WCAG 2.2：文字对比度",
+          "url": "https://www.w3.org/TR/WCAG22/#contrast-minimum"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "chapter": 1,
+      "kind": "choice",
+      "format": "比较判断",
+      "principle": "避免诱导点击",
+      "title": "让按钮解释行动。",
+      "brief": "面向孩子的内容入口，哪种方式更符合这份规范对点击引导的要求？",
+      "labels": [
+        "没有指向按钮的手势，用内容介绍和明确按钮说明下一步",
+        "按钮上方有反复指向它的手势，催促点击"
+      ],
+      "visuals": [
+        {
+          "kind": "ops",
+          "variant": "clear",
+          "title": "认识身边的小动物",
+          "subtitle": "一段适合亲子共看的观察故事",
+          "cta": "打开故事",
+          "tag": "",
+          "lines": [],
+          "description": "没有指向按钮的手势，用内容介绍和明确按钮说明下一步"
+        },
+        {
+          "kind": "ops",
+          "variant": "gesture",
+          "title": "认识身边的小动物",
+          "subtitle": "一段适合亲子共看的观察故事",
+          "cta": "打开故事",
+          "tag": "",
+          "lines": [],
+          "gesture": true,
+          "description": "按钮上方有反复指向它的手势，催促点击"
+        }
+      ],
+      "correct": 0,
+      "why": "A 通过内容价值和行动文字帮助理解。规范明确不允许按钮上的手势动画诱导行为，B 的指向性手势不符合要求。",
+      "rule": "自主选择：用清楚的内容价值与行动名称引导点击，避免手势催促用户操作。用户理解后再行动，路径更可预期；单靠反复催点，容易让注意力绕过内容本身。",
+      "tip": "除了去掉手势，你会怎样提高这个入口的可理解性？",
+      "coachOpening": [
+        "自主选择：用清楚的内容价值与行动名称引导点击，避免手势催促用户操作。用户理解后再行动，路径更可预期；单靠反复催点，容易让注意力绕过内容本身。",
+        "除了去掉手势，你会怎样提高这个入口的可理解性？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "App 运营资源审核规范",
+          "url": "https://alidocs.dingtalk.com/i/nodes/gwva2dxOW4KX7gmQCEKjveK48bkz3BRL?utm_scene=team_space"
+        },
+        {
+          "title": "WCAG 2.2：文字对比度",
+          "url": "https://www.w3.org/TR/WCAG22/#contrast-minimum"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "chapter": 1,
+      "kind": "choice",
+      "format": "比较判断",
+      "principle": "日常资源的营销边界",
+      "title": "学习首页，不必每次都大促。",
+      "brief": "这是普通工作日的学习首页，没有全站促销。按这份规范，哪张日常推荐更合适？",
+      "labels": [
+        "高饱和红黄背景、金色高光和叫卖式文案",
+        "柔和纸张画面，先解释内容价值，再给出学习入口"
+      ],
+      "visuals": [
+        {
+          "kind": "ops",
+          "variant": "sale",
+          "title": "最后机会！马上抢！",
+          "subtitle": "超值内容 · 错过再等一年",
+          "cta": "立即抢购",
+          "tag": "",
+          "lines": [],
+          "description": "高饱和红黄背景、金色高光和叫卖式文案"
+        },
+        {
+          "kind": "ops",
+          "variant": "paper",
+          "title": "今天，探索一片森林",
+          "subtitle": "从观察叶子开始，认识身边的自然",
+          "cta": "打开内容",
+          "tag": "",
+          "lines": [],
+          "description": "柔和纸张画面，先解释内容价值，再给出学习入口"
+        }
+      ],
+      "correct": 1,
+      "why": "B 先让用户理解内容能带来什么。A 在普通学习场景中制造强促销氛围，会打断用户对内容平台的预期。",
+      "rule": "场景匹配：日常学习资源优先表达内容价值，保持产品的体验氛围。资源与任务一致，用户才容易专注；持续用叫卖文案和高光促销抢眼，会让内容入口像广告。",
+      "tip": "如果仍想让推荐更醒目，你会改哪个层级，而不改变整个场景的气氛？",
+      "coachOpening": [
+        "场景匹配：日常学习资源优先表达内容价值，保持产品的体验氛围。资源与任务一致，用户才容易专注；持续用叫卖文案和高光促销抢眼，会让内容入口像广告。",
+        "如果仍想让推荐更醒目，你会改哪个层级，而不改变整个场景的气氛？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "App 运营资源审核规范",
+          "url": "https://alidocs.dingtalk.com/i/nodes/gwva2dxOW4KX7gmQCEKjveK48bkz3BRL?utm_scene=team_space"
+        },
+        {
+          "title": "WCAG 2.2：文字对比度",
+          "url": "https://www.w3.org/TR/WCAG22/#contrast-minimum"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "chapter": 1,
+      "kind": "choice",
+      "format": "比较判断",
+      "principle": "活动例外与整体一致",
+      "title": "全站大促时，规则怎样用？",
+      "brief": "公司级活动已在站外预热，App 首页、导航和活动页都统一换成促销主题。哪张活动入口更符合规范中描述的例外？",
+      "labels": [
+        "活动入口沿用全站统一的紫色内容节主题与标识，规则表达明确",
+        "全站处于统一的内容节主题，入口却沿用无活动标识的日常纸张样式"
+      ],
+      "visuals": [
+        {
+          "kind": "ops",
+          "variant": "festival",
+          "title": "年度内容节",
+          "subtitle": "活动规则与优惠在页面内说明",
+          "cta": "查看活动",
+          "tag": "",
+          "lines": [],
+          "appTheme": "festival",
+          "description": "活动入口沿用全站统一的紫色内容节主题与标识，规则表达明确"
+        },
+        {
+          "kind": "ops",
+          "variant": "paper",
+          "title": "年度内容节",
+          "subtitle": "活动规则与优惠在页面内说明",
+          "cta": "查看活动",
+          "tag": "",
+          "lines": [],
+          "appTheme": "festival",
+          "description": "全站处于统一的内容节主题，入口却沿用无活动标识的日常纸张样式"
+        }
+      ],
+      "correct": 0,
+      "why": "A 与已经建立的全站活动预期一致。规范允许公司级活动在整体同步的前提下改变营销氛围；并不是任何日常资源都可以单独套用促销风格。",
+      "rule": "例外需要上下文：公司级活动可以强化营销表达，但站外预期、App 页面与活动承接要保持一致。整体同步，变化才有理由；局部自行大促，会再次造成风格与预期断裂。",
+      "tip": "如果只有这个资源位换成大促风格，哪些前提就不再成立？",
+      "coachOpening": [
+        "例外需要上下文：公司级活动可以强化营销表达，但站外预期、App 页面与活动承接要保持一致。整体同步，变化才有理由；局部自行大促，会再次造成风格与预期断裂。",
+        "如果只有这个资源位换成大促风格，哪些前提就不再成立？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "App 运营资源审核规范",
+          "url": "https://alidocs.dingtalk.com/i/nodes/gwva2dxOW4KX7gmQCEKjveK48bkz3BRL?utm_scene=team_space"
+        },
+        {
+          "title": "WCAG 2.2：文字对比度",
+          "url": "https://www.w3.org/TR/WCAG22/#contrast-minimum"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "chapter": 1,
+      "kind": "choice",
+      "format": "比较判断",
+      "principle": "文案概念一致",
+      "title": "同一件事，不要换三个名字。",
+      "brief": "App 中这个功能统一叫「学习计划」，点击后也进入「学习计划」页。哪组资源标题和按钮能减少理解成本？",
+      "labels": [
+        "资源叫成长路线，按钮写进入打卡营，实际打开学习计划",
+        "资源和按钮都使用学习计划，与实际页面名称一致"
+      ],
+      "visuals": [
+        {
+          "kind": "ops",
+          "variant": "copy",
+          "title": "成长路线",
+          "subtitle": "安排你的学习节奏",
+          "cta": "进入打卡营",
+          "tag": "",
+          "lines": [],
+          "description": "资源叫成长路线，按钮写进入打卡营，实际打开学习计划"
+        },
+        {
+          "kind": "ops",
+          "variant": "copy",
+          "title": "学习计划",
+          "subtitle": "安排你的学习节奏",
+          "cta": "查看学习计划",
+          "tag": "",
+          "lines": [],
+          "description": "资源和按钮都使用学习计划，与实际页面名称一致"
+        }
+      ],
+      "correct": 1,
+      "why": "B 让入口与目标页使用同一个概念。A 的多个新名字会让用户怀疑自己是不是走错了功能。",
+      "rule": "概念一致：同一功能沿用统一名称和描述方式，让入口、按钮与承接页对应。名称稳定，用户更容易识别与复用经验；随意换词，会把理解负担转给用户。",
+      "tip": "如果营销标题想更生动，你会把功能的正式名称保留在哪里？",
+      "coachOpening": [
+        "概念一致：同一功能沿用统一名称和描述方式，让入口、按钮与承接页对应。名称稳定，用户更容易识别与复用经验；随意换词，会把理解负担转给用户。",
+        "如果营销标题想更生动，你会把功能的正式名称保留在哪里？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "App 运营资源审核规范",
+          "url": "https://alidocs.dingtalk.com/i/nodes/gwva2dxOW4KX7gmQCEKjveK48bkz3BRL?utm_scene=team_space"
+        },
+        {
+          "title": "WCAG 2.2：文字对比度",
+          "url": "https://www.w3.org/TR/WCAG22/#contrast-minimum"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "chapter": 1,
+      "kind": "choice",
+      "format": "比较判断",
+      "principle": "小字可读性",
+      "title": "条件写出来，还要看得清。",
+      "brief": "在 375 宽基准稿中，资源的普通说明文字需遵守文档里的最小 12px 要求。下面哪版更容易读清参与条件？",
+      "labels": [
+        "参与条件以 12px 和清楚的文字背景对比呈现",
+        "参与条件使用低对比度的 8px 普通说明文字，不符合本题的内部字号要求"
+      ],
+      "visuals": [
+        {
+          "kind": "ops",
+          "variant": "readable",
+          "title": "周末观察计划",
+          "subtitle": "参加 2 次观察后，可解锁新内容",
+          "cta": "查看计划",
+          "tag": "",
+          "lines": [],
+          "terms": "仅限本周加入的用户；完成两次观察后解锁。",
+          "description": "参与条件以 12px 和清楚的文字背景对比呈现"
+        },
+        {
+          "kind": "ops",
+          "variant": "tiny",
+          "title": "周末观察计划",
+          "subtitle": "参加 2 次观察后，可解锁新内容",
+          "cta": "查看计划",
+          "tag": "",
+          "lines": [],
+          "terms": "仅限本周加入的用户；完成两次观察后解锁。",
+          "tiny": true,
+          "description": "参与条件使用低对比度的 8px 普通说明文字，不符合本题的内部字号要求"
+        }
+      ],
+      "correct": 0,
+      "why": "A 的普通说明符合题设的内部最小字号，并保留可读对比。B 虽然写了条件，却把读清它的成本推给用户。这里的 12px 来自该文档的基准稿规范。",
+      "rule": "条件可读：普通说明要在实际显示尺寸下检查字号与对比，不能只在放大的设计稿中看。条件读得清，用户才能理解限制；过小、过淡，就会让信息在形式上存在、实际上难以获得。",
+      "tip": "把这个资源放回真实手机后，你会重点复查哪两件事？",
+      "coachOpening": [
+        "条件可读：普通说明要在实际显示尺寸下检查字号与对比，不能只在放大的设计稿中看。条件读得清，用户才能理解限制；过小、过淡，就会让信息在形式上存在、实际上难以获得。",
+        "把这个资源放回真实手机后，你会重点复查哪两件事？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "App 运营资源审核规范",
+          "url": "https://alidocs.dingtalk.com/i/nodes/gwva2dxOW4KX7gmQCEKjveK48bkz3BRL?utm_scene=team_space"
+        },
+        {
+          "title": "WCAG 2.2：文字对比度",
+          "url": "https://www.w3.org/TR/WCAG22/#contrast-minimum"
+        }
+      ]
     }
   ]
 }

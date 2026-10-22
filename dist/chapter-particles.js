@@ -11,17 +11,21 @@
         const x=i/22,y=j/22;if(Math.abs(x)>.62&&Math.abs(y)>.62&&Math.hypot(Math.abs(x)-.62,Math.abs(y)-.62)>.13)continue;
         add(x,y,layer*.36);
       }
-    }else if(kind===1){
+    }else if(kind===2){
       for(let ring=0;ring<2;ring++)for(let u=0;u<112;u++)for(let v=0;v<14;v++){
         const a=u/112*Math.PI*2,b=v/14*Math.PI*2,r=.65+.13*Math.cos(b);
         if(ring===0)add(r*Math.cos(a)-.22,r*Math.sin(a),.13*Math.sin(b));
         else add(.13*Math.sin(b)+.22,r*Math.cos(a),r*Math.sin(a));
       }
-    }else if(kind===3){
+    }else if(kind===4){
       // A fan of curved sheets: one visual metaphor for sequential story pages.
       for(let sheet=-2;sheet<=2;sheet++)for(let u=0;u<=38;u++)for(let v=-16;v<=16;v++){
         const t=u/38,angle=sheet*.23,x=(t-.5)*1.6,y=v/22,z=Math.sin(t*Math.PI)*.25;
         add(x*Math.cos(angle)+z*Math.sin(angle),y,x*-Math.sin(angle)+z*Math.cos(angle));
+      }
+    }else if(kind===1){
+      for(let panel=0;panel<3;panel++)for(let u=-16;u<=16;u++)for(let v=-12;v<=12;v++){
+        const x=u/23,y=v/22+Math.sin(u/12)*.04;add(x,y,panel*.25-.25);
       }
     }else{
       for(let u=0;u<180;u++)for(let v=-8;v<=8;v++){

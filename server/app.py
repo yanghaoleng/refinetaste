@@ -18,6 +18,7 @@ ORIGINS = set(os.environ.get('REFINETASTE_ORIGINS', 'https://mikeywa.site,https:
 CORRECT = [1, 1, 1, 1, 0, 1, 1, 1]
 COURSE = json.loads((ROOT / 'dist/course.json').read_text())
 QUESTIONS = COURSE['questions']
+CHAPTER_STARTS=tuple(next(q['id'] for q in QUESTIONS if q['chapter']==chapter['id']) for chapter in COURSE['chapters'])
 NAMES = ['对比', '重复', '亲密', '对齐', '场景与调性', '信息层级', '用户路径', '协作表达']
 UUID = re.compile(r'^[a-f0-9-]{36}$')
 lock = threading.Lock()
@@ -67,7 +68,7 @@ def collect(data, now=None):
     course = data.get('course',1)
     if type(course) is not int or course not in (1,2):raise ValueError('invalid course')
     start = data.get('start')
-    if kind == 'start' and (type(start) is not int or start not in ((0,4,6) if course==1 else (0,8,16,24))):
+    if kind == 'start' and (type(start) is not int or start not in ((0,4,6) if course==1 else CHAPTER_STARTS)):
         raise ValueError('invalid start')
     q, choice = data.get('q'), data.get('choice')
     if kind == 'answer' and (type(q) is not int or q not in range(8 if course==1 else len(QUESTIONS)) or type(choice) is not int or choice not in (0,1,-1)):
@@ -119,7 +120,7 @@ def summary(days, now=None):
             entrants={r['run'] for r in starts if r['course']==version and r['start']<=q and (version==1 or q<r['start']+8)}
             questions.append({'index':q,'course':version,'kind':item['kind'],'name':item['principle'],'answers':len(submitted),'correct':sum(r['choice']==item['correct'] for r in submitted) if item['kind']=='choice' else None,'eligible':len(entrants)})
     chapters=[]
-    for version,starts_at in ((1,(0,4,6)),(2,(0,8,16,24))):
+    for version,starts_at in ((1,(0,4,6)),(2,CHAPTER_STARTS)):
         for ch in starts_at:
             r=[r for r in starts if r['start']==ch and r['course']==version]
             chapters.append({'course':version,'start':ch,'runs':len(r),'completed':sum(x['run'] in completions for x in r)})
@@ -259,7 +260,7 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(308);self.send_header('Location',path+'/');self.end_headers();return
         files={BASE+'/':'index.html',BASE+'/data/':'data/index.html',BASE+'/style.css':'style.css',BASE+'/app.js':'app.js',BASE+'/analytics.js':'analytics.js',BASE+'/data/admin.js':'data/admin.js',BASE+'/data/admin.css':'data/admin.css'}
         files[BASE+'/icons.svg']='icons.svg'
-        for asset in ('theme.js','theme.css','motion.js','coach-guide.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
+        for asset in ('theme.js','theme.css','motion.js','coach-guide.js','site-icon.js','chapter-score.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
             files[BASE+'/'+asset]=asset
         for asset in ('chick-emotions.webp','chick-positive-emotions.webp','chick-starry-96.webp','chick-starry-192.webp','favicon-starry.ico','favicon-starry-32.png','apple-touch-starry.png','chick-positive-emotions.png','chick-emotions.png','chick-eyes-original.png','chick-eyes-128.webp','chick-eyes-512.webp','apple-touch-icon.png','favicon-32.png','favicon.ico'):
             files[BASE+'/assets/'+asset]='assets/'+asset
@@ -267,6 +268,9 @@ class Handler(BaseHTTPRequestHandler):
             for visual in question.get('visuals',[]):
                 asset=visual.get('image','')
                 if re.fullmatch(r'assets/picturebook/[a-z]+-[ab]\.webp',asset):files[BASE+'/'+asset]=asset
+        for mood in ('neutral','happy','thinking','curious','surprised','encouraging','empathetic','confused','playful','delighted','approving','inspired','relieved','grateful','amused'):
+            for suffix in ('96.webp','32.png','180.png'):
+                asset='assets/icons/'+mood+'-'+suffix;files[BASE+'/'+asset]=asset
         if path not in files:return self.reply(404,{'error':'not found'})
         file=ROOT/'dist'/files[path]
         try:raw=file.read_bytes()

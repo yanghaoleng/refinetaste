@@ -11,7 +11,7 @@ class CourseTests(unittest.TestCase):
   self.temp=tempfile.TemporaryDirectory();app.DB=str(Path(self.temp.name)/'test.sqlite3');app.SECRET='test-secret-with-at-least-thirty-two-chars';app.PIN_HASH=hashlib.sha256(b'123456').hexdigest();app.init_db();app.review_rates.clear()
  def tearDown(self):self.temp.cleanup()
  def test_catalog_and_versioned_completion(self):
-  self.assertEqual(len(app.QUESTIONS),32);self.assertEqual(sum(q['kind']=='open' for q in app.QUESTIONS),16)
+  self.assertEqual(len(app.QUESTIONS),40);self.assertEqual(sum(q['kind']=='open' for q in app.QUESTIONS),16)
   visitor,session,run=(str(uuid.uuid4()) for _ in range(3))
   def event(kind,**extra):app.collect(dict(id=str(uuid.uuid4()),visitor=visitor,session=session,run=run,course=2,kind=kind,**extra))
   event('start',start=8)
@@ -29,12 +29,21 @@ class CourseTests(unittest.TestCase):
   def event(kind,**extra):app.collect(dict(id=str(uuid.uuid4()),visitor=visitor,session=session,run=run,course=2,kind=kind,**extra))
   event('start',start=24)
   with self.assertRaises(ValueError):event('answer',q=23,choice=0)
-  for q in app.QUESTIONS[24:]:
-   self.assertEqual(q['chapter'],3)
+  for q in app.QUESTIONS[24:32]:
+   self.assertEqual(q['chapter'],4)
    for visual in q['visuals']:self.assertTrue((app.ROOT/'dist'/visual['image']).is_file())
    event('answer',q=q['id'],choice=q['correct'] if q['kind']=='choice' else -1)
   event('complete')
   self.assertEqual(next(c for c in app.summary(7)['chapters'] if c['course']==2 and c['start']==24)['completed'],1)
+ def test_operations_chapter_order_and_completion(self):
+  self.assertEqual(app.CHAPTER_STARTS,(0,32,8,16,24))
+  visitor,session,run=(str(uuid.uuid4()) for _ in range(3))
+  def event(kind,**extra):app.collect(dict(id=str(uuid.uuid4()),visitor=visitor,session=session,run=run,course=2,kind=kind,**extra))
+  event('start',start=32)
+  with self.assertRaises(ValueError):event('answer',q=8,choice=1)
+  for q in app.QUESTIONS[32:]:event('answer',q=q['id'],choice=q['correct'])
+  event('complete')
+  self.assertEqual(next(c for c in app.summary(7)['chapters'] if c['course']==2 and c['start']==32)['completed'],1)
  def test_legacy_database_migration_preserves_rows(self):
   with app.connect() as db:
    db.execute('ALTER TABLE events DROP COLUMN course')
