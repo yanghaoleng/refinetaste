@@ -263,3 +263,23 @@ html,body{touch-action:pan-x pan-y;overscroll-behavior-x:none}
 .cjk-keep{display:inline-block;white-space:nowrap;line-height:inherit;vertical-align:baseline}
 .cjk-punctuation,.cjk-punctuation .calligraph-text,.cjk-punctuation .calligraph-text>span{display:inline!important;white-space:normal!important}
 #exercise .question-heading h2,#exercise .question-heading .question-task{line-break:strict;word-break:normal;overflow-wrap:normal;hanging-punctuation:none}
+/* The title and one-character back icon share one compact notebook header. */
+#notebook .note-title-row{display:flex;align-items:baseline;gap:8px;margin:14px 0 8px}
+#notebook .note-title-row h2{margin:0;min-width:0;font-size:21px;line-height:1.5;line-break:strict;text-wrap:pretty}
+#notebook .notes-back{display:inline-flex;align-items:center;justify-content:center;flex:0 0 1em;width:1em;height:1.5em;margin:0;padding:0;border:0;background:none;color:var(--text);font-size:21px;align-self:baseline}
+#notebook .notes-back[hidden]{display:none}
+#notebook .notes-back .icon{width:1em;height:1em}
+#notebook[data-presentation="popover"] .notes-head{display:none}
+#notebook[data-presentation="popover"]{overscroll-behavior:contain;touch-action:pan-y}
+#notebook[data-presentation="popover"] .note-title-row{margin-top:0}
+.cool-emotion{background-image:url('assets/chick-cool-expressions.webp');background-size:300% 200%;animation-name:coach-cool-frames}
+.emotion-cool{--face-x:0%;--face-y:0%}.emotion-confident{--face-x:50%;--face-y:0%}.emotion-mischievous{--face-x:100%;--face-y:0%}
+@keyframes coach-cool-frames{0%,100%{background-position:var(--face-x) 0%}50%{background-position:var(--face-x) 100%}}
+.chapter-action:has(.chapter-mistakes){position:relative;z-index:2;pointer-events:auto}
+.chapter-action .chapter-mistakes{display:inline-flex;align-items:center;justify-content:center;width:auto;height:48px;min-width:104px;padding:0 14px;font-size:13px;white-space:nowrap}
+.course-chapter .chapter-mistakes:hover,.course-chapter .chapter-mistakes:active{transform:none}
+@media(max-width:600px){.chapter-action .chapter-mistakes{height:40px;font-size:12px}}
+.brand-icon{border-radius:50%}
+.story-frame-art img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.story-frame-art .frame-mirrored{transform:scaleX(-1)}
+.legacy-shot{display:grid;place-items:center;aspect-ratio:1;padding:16px;box-sizing:border-box;color:#5b665e;font-size:13px;line-height:1.6}
