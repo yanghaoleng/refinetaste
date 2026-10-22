@@ -16,7 +16,7 @@ class CourseTests(unittest.TestCase):
   def event(kind,**extra):app.collect(dict(id=str(uuid.uuid4()),visitor=visitor,session=session,run=run,course=2,kind=kind,**extra))
   event('start',start=8)
   with self.assertRaises(ValueError):event('answer',q=16,choice=1)
-  with self.assertRaises(ValueError):event('answer',q=12,choice=0)
+  with self.assertRaises(ValueError):event('answer',q=12,choice=2)
   for q in range(8,16):
    item=app.QUESTIONS[q];event('answer',q=q,choice=-1 if item['kind']=='open' else item['correct'])
   event('complete')
@@ -44,6 +44,15 @@ class CourseTests(unittest.TestCase):
   for q in app.QUESTIONS[32:]:event('answer',q=q['id'],choice=q['correct'])
   event('complete')
   self.assertEqual(next(c for c in app.summary(7)['chapters'] if c['course']==2 and c['start']==32)['completed'],1)
+ def test_question_variants_and_positions_are_resolved_before_model_context(self):
+  for q in app.QUESTIONS:
+   for variant in ('base','alternate'):
+    for order in ([0,1],[1,0]):
+     resolved=app.resolve_question(q['id'],variant,order)
+     self.assertEqual(resolved['id'],q['id'])
+     if q['kind']=='choice':self.assertEqual(order[resolved['correct']],q['correct'] if variant=='base' else 1-q['correct'])
+  for variant,order in [('invented',[0,1]),('base',[0,0]),('base',[True,0]),('base','01')]:
+   with self.assertRaises(ValueError):app.resolve_question(0,variant,order)
  def test_legacy_database_migration_preserves_rows(self):
   with app.connect() as db:
    db.execute('ALTER TABLE events DROP COLUMN course')
@@ -63,6 +72,16 @@ class CourseTests(unittest.TestCase):
      self.assertEqual(reviewer.chat(app.QUESTIONS[0],[{'role':'user','content':'怎么做？'}]),{'reply':'用对比建立层级。','emotion':expected})
    with patch.object(reviewer,'urlopen',return_value=response({'emotion':'happy'})):
     with self.assertRaises(reviewer.ReviewUnavailable):reviewer.chat(app.QUESTIONS[0],[{'role':'user','content':'怎么做？'}])
+ def test_short_answer_assessment_requires_boolean_verdict(self):
+  from io import BytesIO
+  def response(payload):return BytesIO(json.dumps({'choices':[{'message':{'content':json.dumps(payload)}}]}).encode())
+  with patch.dict(os.environ,{'REFINETASTE_AI_KEY':'test','REFINETASTE_AI_MODEL':'test'}):
+   for correct in (True,False):
+    with patch.object(reviewer,'urlopen',return_value=response({'reply':'你指出了分组关系。','emotion':'encouraging','correct':correct})):
+     self.assertEqual(reviewer.chat(app.QUESTIONS[6],[{'role':'user','content':'把相关信息放近并说明阅读顺序。'}],assess=True)['correct'],correct)
+   for invalid in (None,'true',1):
+    with patch.object(reviewer,'urlopen',return_value=response({'reply':'判断','correct':invalid})):
+     with self.assertRaises(reviewer.ReviewUnavailable):reviewer.chat(app.QUESTIONS[6],[{'role':'user','content':'给一个建议'}],assess=True)
  def test_chat_validation_and_choice_conversation(self):
   messages=[{'role':'user','content':'姓名一定要大吗？'}]
   self.assertEqual(reviewer.validate_messages(messages),messages)
@@ -84,6 +103,17 @@ class CourseTests(unittest.TestCase):
    with app.connect() as db:
     rows=[dict(r) for r in db.execute('SELECT * FROM review_usage')]
     self.assertEqual(len(rows),1);self.assertNotIn('姓名',json.dumps(rows,ensure_ascii=False))
+  finally:server.shutdown();server.server_close();thread.join()
+ def test_assessment_endpoint_resolves_variant_and_returns_verdict(self):
+  server=app.ThreadingHTTPServer(('127.0.0.1',0),app.Handler);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+  def request(q=6,variant='alternate'):
+   messages=[{'role':'user','content':'先突出活动名称，再把相关时间和地址成组。'}]
+   c=http.client.HTTPConnection('127.0.0.1',server.server_port,timeout=3);c.request('POST',app.BASE+'/api/review',json.dumps({'id':str(uuid.uuid4()),'q':q,'variant':variant,'optionOrder':[0,1],'mode':'assessment','answer':messages[-1]['content'],'messages':messages}),{'Origin':'https://mikeywa.site'});r=c.getresponse();data=json.loads(r.read());c.close();return r.status,data
+  try:
+   with patch.object(reviewer,'configured',return_value=True),patch.object(reviewer,'chat',return_value={'reply':'符合主次关系。','emotion':'encouraging','correct':True}) as model:
+    self.assertEqual(request(),(200,{'reply':'符合主次关系。','emotion':'encouraging','correct':True}))
+    self.assertEqual(model.call_args.args[0]['title'],app.QUESTIONS[6]['variants'][0]['title']);self.assertEqual(model.call_args.kwargs,{'assess':True})
+    self.assertEqual(request(q=0)[0],400);self.assertEqual(request(variant='invented')[0],400)
   finally:server.shutdown();server.server_close();thread.join()
  def test_review_origin_validation_quota_failure_and_no_text_storage(self):
   server=app.ThreadingHTTPServer(('127.0.0.1',0),app.Handler);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()

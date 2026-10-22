@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
 import { Calligraph } from 'calligraph';
+import { Toaster, toast } from 'sonner';
 
 // Small React islands: the course and model requests stay in the existing app.
 const entries = new Map();
@@ -25,17 +26,27 @@ function render(host, value, variant) {
     : <Calligraph variant={variant} initial={false} autoSize={false}
         animation={variant === 'slots' ? 'snappy' : 'default'}
         className={variant === 'text' ? 'calligraph-text' : 'calligraph-slots'}
-        style={variant === 'text' ? { display: 'inline', overflowWrap: 'anywhere' } : undefined}>
+        style={variant === 'text' ? { display: 'inline', overflowWrap: 'anywhere' } : { display: 'inline-flex', height: '1em', lineHeight: '1em', overflow: 'hidden', verticalAlign: 'middle' }}>
         {value}
       </Calligraph>));
 }
-function text(host, { delay = 0 } = {}) {
+function text(host, { delay = 0, step: stepOverride = null } = {}) {
   if (!host) return [];
+  if(host.querySelector('strong,.concept-term')){
+    if(host.dataset.richMotionReady)return [];
+    host.dataset.richMotionReady='true';
+    const walker=document.createTreeWalker(host,NodeFilter.SHOW_TEXT),nodes=[];
+    while(walker.nextNode())if(walker.currentNode.textContent)nodes.push(walker.currentNode);
+    let cursor=delay;const animations=[];
+    const total=count(host.textContent),step=total>1?Math.min(18,550/(total-1)):0;
+    for(const node of nodes){const run=document.createElement('span'),value=node.textContent;run.textContent=value;node.replaceWith(run);animations.push(...text(run,{delay:cursor,step}));cursor+=count(value)*step}
+    return animations;
+  }
   const value = entries.get(host)?.value ?? host.textContent;
   render(host, value, 'text');
   if (preference.matches) return [];
   const glyphs = [...host.querySelectorAll('.calligraph-text > span')];
-  const step = glyphs.length > 1 ? Math.min(18, 550 / (glyphs.length - 1)) : 0;
+  const step = stepOverride ?? (glyphs.length > 1 ? Math.min(18, 550 / (glyphs.length - 1)) : 0);
   // Calligraph 1.4.1 Text reconciles graphemes; add a bounded initial stagger.
   return glyphs.map((glyph, index) => {
     const animation = glyph.animate([
@@ -60,3 +71,9 @@ new MutationObserver(() => {
   }
 }).observe(document.body, { childList: true, subtree: true });
 window.RefineText = { text, slots, duration };
+
+const toastHost=document.createElement('div');toastHost.id='toast-host';document.body.append(toastHost);
+const toastRoot=createRoot(toastHost);
+flushSync(()=>toastRoot.render(<Toaster theme="system" position="top-center" offset={76} mobileOffset={72} visibleToasts={1} toastOptions={{duration:1800,style:{background:'var(--panel)',color:'var(--text)',border:'1px solid var(--line)',borderRadius:'12px',fontSize:'13px'}}} />));
+function notify(type,message){const parent=document.querySelector('#training[open]')||document.body;if(toastHost.parentElement!==parent)parent.append(toastHost);toast[type](message,{id:'copy-concept'});}
+window.RefineToast={success:message=>notify('success',message),error:message=>notify('error',message)};

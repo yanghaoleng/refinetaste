@@ -90,11 +90,12 @@
     if(heading){
       const entrance=play(heading,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,delay:cursor});
       if(entrance)animations.push(entrance);
-      let textDuration=240;
       for(const element of [heading.querySelector('h2'),heading.querySelector('p'),heading.querySelector('.question-task')].filter(Boolean)){
-        if(window.RefineText){animations.push(...window.RefineText.text(element,{delay:cursor}));textDuration=Math.max(textDuration,window.RefineText.duration(element.textContent))}
+        const paragraph=play(element,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,delay:cursor});if(paragraph)animations.push(paragraph);
+        let textDuration=240;
+        if(window.RefineText){animations.push(...window.RefineText.text(element,{delay:cursor}));textDuration=window.RefineText.duration(element.textContent)}
+        cursor+=textDuration+220;
       }
-      cursor+=textDuration+180;
     }
     const partsSelector=[
       '.ops-appbar,.ops-art,.ops-badges>span,.ops-title,.ops-subtitle,.ops-cta,.ops-terms,.ops-under>i,.illustration img,.illustration figcaption,.sample-card .studio','.sample-card .name','.sample-card .position','.sample-card .contact',

@@ -51,6 +51,25 @@ def init_db():
         if 'course' not in [r[1] for r in db.execute('PRAGMA table_info(events)')]:
             db.execute('ALTER TABLE events ADD COLUMN course INTEGER NOT NULL DEFAULT 1')
 
+def resolve_question(question_id,variant='base',order=None):
+    base=QUESTIONS[question_id]
+    if order is None:order=[0,1]
+    if not isinstance(order,list) or len(order)!=2 or any(type(v) is not int for v in order) or sorted(order)!=[0,1]:raise ValueError('invalid option order')
+    if not isinstance(variant,str):raise ValueError('invalid question variant')
+    override={} if variant=='base' else next((v for v in base.get('variants',[]) if v['id']==variant),None)
+    if override is None:raise ValueError('invalid question variant')
+    question={**base,**override,'id':base['id'],'variantId':variant,'optionOrder':order}
+    question.pop('variants',None)
+    if question['kind']=='choice':
+        question['correct']=order.index(question['correct']);question['labels']=[question['labels'][i] for i in order]
+        if question.get('visuals'):question['visuals']=[question['visuals'][i] for i in order]
+        if order[0]==1:
+            def swap(text):return re.sub(r'(?<![A-Za-z])[AB](?![A-Za-z])',lambda m:'B' if m[0]=='A' else 'A',text)
+            for key in ('why','rule','tip'):
+                if isinstance(question.get(key),str):question[key]=swap(question[key])
+            if 'coachOpening' in question:question['coachOpening']=[swap(text) for text in question['coachOpening']]
+    return question
+
 def digest(s):
     return hmac.new(SECRET.encode(), s.encode(), hashlib.sha256).hexdigest()
 
@@ -75,7 +94,7 @@ def collect(data, now=None):
         raise ValueError('invalid answer')
     if kind=='answer':
         if course==1 and choice not in (0,1):raise ValueError('invalid answer')
-        if course==2 and ((QUESTIONS[q]['kind']=='open' and choice!=-1) or (QUESTIONS[q]['kind']=='choice' and choice not in (0,1))):raise ValueError('invalid answer')
+        if course==2 and ((QUESTIONS[q]['kind']=='open' and choice not in (-1,0,1)) or (QUESTIONS[q]['kind']=='choice' and choice not in (0,1))):raise ValueError('invalid answer')
     day = datetime.fromtimestamp(now, ZONE).date().isoformat()
     visitor, session = digest(data['visitor']), digest(data['session'])
     with connect() as db:
@@ -118,7 +137,7 @@ def summary(days, now=None):
             a=[r for r in answers if r['q']==q and r['course']==version]
             submitted=a
             entrants={r['run'] for r in starts if r['course']==version and r['start']<=q and (version==1 or q<r['start']+8)}
-            questions.append({'index':q,'course':version,'kind':item['kind'],'name':item['principle'],'answers':len(submitted),'correct':sum(r['choice']==item['correct'] for r in submitted) if item['kind']=='choice' else None,'eligible':len(entrants)})
+            questions.append({'index':q,'course':version,'kind':item['kind'],'name':item['principle'],'answers':len(submitted),'correct':sum(r['choice']==item['correct'] for r in submitted) if item['kind']=='choice' else (sum(r['choice']==1 for r in submitted) if any(r['choice'] in (0,1) for r in submitted) else None),'gradedAnswers':sum(r['choice'] in (0,1) for r in submitted),'eligible':len(entrants)})
     chapters=[]
     for version,starts_at in ((1,(0,4,6)),(2,CHAPTER_STARTS)):
         for ch in starts_at:
@@ -204,10 +223,12 @@ class Handler(BaseHTTPRequestHandler):
     def review_request(self,key,now):
         try:
             data=self.body()
-            q=data.get('q');answer=data.get('answer');request_id=data.get('id');chat=data.get('mode')=='chat'
+            q=data.get('q');answer=data.get('answer');request_id=data.get('id');chat=data.get('mode') in ('chat','assessment');assess=data.get('mode')=='assessment'
             messages=data.get('messages')
             if chat:messages=reviewer.validate_messages(messages)
             if type(q) is not int or q not in range(len(QUESTIONS)) or (not chat and QUESTIONS[q]['kind']!='open'):raise ValueError()
+            if assess and QUESTIONS[q]['kind']!='open':raise ValueError()
+            question=resolve_question(q,data.get('variant','base'),data.get('optionOrder')) if 'variant' in data or 'optionOrder' in data else QUESTIONS[q]
             if not isinstance(answer,str) or not (1 if chat else 30)<=len(answer.strip())<=2000:raise ValueError()
             if not isinstance(request_id,str) or not UUID.fullmatch(request_id):raise ValueError()
         except ValueError:return self.reply(400,{'error':'请针对本题写下 30—2000 字的思路。'})
@@ -230,9 +251,9 @@ class Handler(BaseHTTPRequestHandler):
                 except sqlite3.IntegrityError:return self.reply(409,{'error':'这次请求已经提交，请等待结果或重新发起点评。'})
                 reserved=True
             if chat:
-                reply=reviewer.chat(QUESTIONS[q],messages)
+                reply=reviewer.chat(question,messages,assess=True) if assess else reviewer.chat(question,messages)
                 return self.reply(200,reply if isinstance(reply,dict) else {'reply':reply,'emotion':'neutral'})
-            feedback=reviewer.review(QUESTIONS[q],answer.strip())
+            feedback=reviewer.review(question,answer.strip())
             return self.reply(200,{'feedback':feedback,'modelLabel':os.environ.get('REFINETASTE_AI_LABEL','设计教练')})
         except reviewer.ReviewUnavailable:
             if reserved:
@@ -260,7 +281,7 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(308);self.send_header('Location',path+'/');self.end_headers();return
         files={BASE+'/':'index.html',BASE+'/data/':'data/index.html',BASE+'/style.css':'style.css',BASE+'/app.js':'app.js',BASE+'/analytics.js':'analytics.js',BASE+'/data/admin.js':'data/admin.js',BASE+'/data/admin.css':'data/admin.css'}
         files[BASE+'/icons.svg']='icons.svg'
-        for asset in ('theme.js','theme.css','motion.js','coach-guide.js','site-icon.js','chapter-score.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
+        for asset in ('theme.js','theme.css','motion.js','coach-guide.js','conversation-sequence.js','chat-format.js','question-run.js','sonner.css','sonner.LICENSE.txt','viewport.js','site-icon.js','chapter-score.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
             files[BASE+'/'+asset]=asset
         for asset in ('chick-emotions.webp','chick-positive-emotions.webp','chick-starry-96.webp','chick-starry-192.webp','favicon-starry.ico','favicon-starry-32.png','apple-touch-starry.png','chick-positive-emotions.png','chick-emotions.png','chick-eyes-original.png','chick-eyes-128.webp','chick-eyes-512.webp','apple-touch-icon.png','favicon-32.png','favicon.ico'):
             files[BASE+'/assets/'+asset]='assets/'+asset
@@ -271,6 +292,8 @@ class Handler(BaseHTTPRequestHandler):
         for mood in ('neutral','happy','thinking','curious','surprised','encouraging','empathetic','confused','playful','delighted','approving','inspired','relieved','grateful','amused'):
             for suffix in ('96.webp','32.png','180.png'):
                 asset='assets/icons/'+mood+'-'+suffix;files[BASE+'/'+asset]=asset
+        for asset in ('manrope-counter-700.ttf','Manrope-OFL.txt'):
+            files[BASE+'/assets/fonts/'+asset]='assets/fonts/'+asset
         if path not in files:return self.reply(404,{'error':'not found'})
         file=ROOT/'dist'/files[path]
         try:raw=file.read_bytes()

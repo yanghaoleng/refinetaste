@@ -6,7 +6,7 @@
  function stop(){cancelAnimationFrame(frame);frame=0;flight++}
  function home(){const node=avatar();stop();if(node)document.querySelector('.coach-identity')?.append(node);carrier?.remove();carrier=null;target=null;document.querySelectorAll('.coach-avatar-target').forEach(el=>el.remove())}
  function latest(){
-  const message=[...document.querySelectorAll('#chat-messages>.assistant:not(.typing-message)')].at(-1);
+  const message=[...document.querySelectorAll('#chat-messages>.assistant:not(.typing-message)')].filter(message=>!message.hidden).at(-1);
   if(!message)return;
   let anchor=message.querySelector('.coach-avatar-target');
   if(!anchor){anchor=document.createElement('span');anchor.className='coach-avatar-target';message.prepend(anchor)}

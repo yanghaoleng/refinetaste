@@ -200,3 +200,20 @@ body.notes-visible .training-chrome{padding-right:0}
 @media(max-width:600px){.chapter-arrow.chapter-retry{min-width:88px;font-size:12px;padding:0 9px}}
 .ops-demo{height:480px;min-height:480px;display:flex;flex-direction:column}.ops-banner{flex:1;min-height:0}.ops-under{margin-top:auto;flex:none}.ops-appbar{flex:none}
 .course-chapter:has(.chapter-entry:hover) .chapter-arrow.chapter-passed{background:#287e50;border-color:#287e50;color:#fff}
+
+/* Clip the Slot reel at one full line; neighboring digits cannot peek through. */
+@font-face{font-family:Manrope Counter;src:url(assets/fonts/manrope-counter-700.ttf) format('truetype');font-style:normal;font-weight:700;font-display:swap}
+.notes-count{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;height:20px;min-width:1ch;overflow:hidden;font-family:"Manrope Counter",ui-rounded,system-ui,sans-serif;font-size:16px;font-weight:700;line-height:1;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"tnum";letter-spacing:0}
+.calligraph-slots{overflow:hidden}
+.chat-message[hidden],#chat-form[hidden],#result-details[hidden]{display:none!important}
+.feedback-sequence #chat-messages>.chat-message>.chat-bubble,.feedback-sequence #chat-form{animation:none}
+.result-count{font-family:"Manrope Counter",ui-rounded,system-ui,sans-serif;font-weight:700;line-height:1.1;font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.055em;margin:0 0 30px;font-size:clamp(88px,15vw,128px)}
+.result-copy h3{font-size:28px;letter-spacing:-.8px;line-height:1.4;margin:12px 0 20px}.result-copy .result-actions{margin-top:30px}
+html,body{touch-action:pan-x pan-y;overscroll-behavior-x:none}
+.chat-bubble strong{font-weight:700;color:var(--text)}
+.chat-bubble .concept-term{display:inline;position:static;padding:0;margin:0;border:0;border-bottom:1px dashed currentColor;border-radius:0;background:transparent;color:inherit;font:inherit;font-weight:inherit;line-height:inherit;letter-spacing:inherit;text-align:inherit;cursor:copy;white-space:normal;touch-action:pan-y}
+.chat-bubble .concept-term:hover{color:var(--accent)}.chat-bubble .concept-term:focus-visible{outline:2px solid var(--muted);outline-offset:3px;border-radius:2px}
+#toast-host{position:relative;z-index:30}
+.message-verdict{display:grid;place-items:center;width:32px;height:32px;margin-bottom:10px;border-radius:50%;color:#fff;animation:answer-stamp 300ms cubic-bezier(.23,1,.32,1) both}.message-verdict.is-correct{background:#237b4b}.message-verdict.is-incorrect{background:#c53e38}.message-verdict .icon{width:21px;height:21px}
+#notebook .message-verdict{animation:none}
+@media(prefers-reduced-motion:reduce){.message-verdict{animation:none}}

@@ -76,3 +76,6 @@ test('conversation scrolling keeps the composer above bottom controls and accoun
   discussion.getBoundingClientRect=()=>({top:100,bottom:400,height:300});
   setup(false).scrollConversation(container,discussion,chrome,controls);assert.equal(calls.length,2);
 });
+test('question title, background, and task finish in sequence before the designs enter',()=>{
+ const motion=setup(false),{root,scheduled,piece}=designRoot(),heading=piece('question');const title=piece('title'),brief=piece('brief'),task=piece('task');heading.querySelector=s=>({'h2':title,'p':brief,'.question-task':task}[s]);motion.assembleDesign(root,heading);const a=scheduled.find(j=>j.name==='A'),t=scheduled.find(j=>j.name==='title'),b=scheduled.find(j=>j.name==='brief'),p=scheduled.find(j=>j.name==='task');assert.ok(b.options.delay>t.options.delay+t.options.duration);assert.ok(p.options.delay>b.options.delay+b.options.duration);assert.ok(a.options.delay>p.options.delay+p.options.duration);
+});
