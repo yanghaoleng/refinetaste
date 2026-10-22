@@ -11,7 +11,7 @@ class CourseTests(unittest.TestCase):
   self.temp=tempfile.TemporaryDirectory();app.DB=str(Path(self.temp.name)/'test.sqlite3');app.SECRET='test-secret-with-at-least-thirty-two-chars';app.PIN_HASH=hashlib.sha256(b'123456').hexdigest();app.init_db();app.review_rates.clear()
  def tearDown(self):self.temp.cleanup()
  def test_catalog_and_versioned_completion(self):
-  self.assertEqual(len(app.QUESTIONS),40);self.assertEqual(sum(q['kind']=='open' for q in app.QUESTIONS),16)
+  self.assertEqual(len(app.QUESTIONS),56);self.assertEqual(sum(q['kind']=='open' for q in app.QUESTIONS),24)
   visitor,session,run=(str(uuid.uuid4()) for _ in range(3))
   def event(kind,**extra):app.collect(dict(id=str(uuid.uuid4()),visitor=visitor,session=session,run=run,course=2,kind=kind,**extra))
   event('start',start=8)
@@ -36,14 +36,24 @@ class CourseTests(unittest.TestCase):
   event('complete')
   self.assertEqual(next(c for c in app.summary(7)['chapters'] if c['course']==2 and c['start']==24)['completed'],1)
  def test_operations_chapter_order_and_completion(self):
-  self.assertEqual(app.CHAPTER_STARTS,(0,32,8,16,24))
+  self.assertEqual(app.CHAPTER_STARTS,(0,32,8,16,24,40,48))
   visitor,session,run=(str(uuid.uuid4()) for _ in range(3))
   def event(kind,**extra):app.collect(dict(id=str(uuid.uuid4()),visitor=visitor,session=session,run=run,course=2,kind=kind,**extra))
   event('start',start=32)
   with self.assertRaises(ValueError):event('answer',q=8,choice=1)
-  for q in app.QUESTIONS[32:]:event('answer',q=q['id'],choice=q['correct'])
+  for q in app.QUESTIONS[32:40]:event('answer',q=q['id'],choice=q['correct'])
   event('complete')
   self.assertEqual(next(c for c in app.summary(7)['chapters'] if c['course']==2 and c['start']==32)['completed'],1)
+ def test_new_content_chapters_complete_without_crossing_chapter_boundaries(self):
+  for start in (40,48):
+   visitor,session,run=(str(uuid.uuid4()) for _ in range(3))
+   def event(kind,**extra):app.collect(dict(id=str(uuid.uuid4()),visitor=visitor,session=session,run=run,course=2,kind=kind,**extra))
+   event('start',start=start)
+   with self.assertRaises(ValueError):event('answer',q=start-1,choice=1)
+   for q in app.QUESTIONS[start:start+8]:event('answer',q=q['id'],choice=1 if q['kind']=='open' else q['correct'])
+   event('complete')
+   chapter=next(ch for ch in app.summary(7)['chapters'] if ch['course']==2 and ch['start']==start)
+   self.assertEqual(chapter['completed'],1)
  def test_question_variants_and_positions_are_resolved_before_model_context(self):
   for q in app.QUESTIONS:
    for variant in ('base','alternate'):

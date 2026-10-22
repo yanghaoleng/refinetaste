@@ -242,3 +242,19 @@ html,body{touch-action:pan-x pan-y;overscroll-behavior-x:none}
  .chapter-copy h3,.chapter-copy p{line-break:strict;text-wrap:pretty;word-break:normal}
 }
 .course-chapter:hover .chapter-arrow.chapter-retry,.course-chapter:has(.chapter-entry:hover) .chapter-arrow.chapter-retry{background:var(--accent);color:#151515;border-color:transparent}
+.course-track-title{margin:26px 0 8px;padding:0;font-size:14px;font-weight:600;line-height:1.5;letter-spacing:0;color:var(--muted)}
+.course-track-title:first-child{margin-top:0}
+.course-chapter:has(+.course-track-title){margin-bottom:20px}
+.specimen.story-board,.specimen.story-plan{padding:22px;min-height:290px;background:#f6f3eb;color:#34383c;box-sizing:border-box}
+.story-board .specimen-title,.story-plan .specimen-title{font-size:18px;line-height:1.5;letter-spacing:0;margin:0 0 20px}
+.story-frames{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:12px;width:100%;align-items:start}
+.story-frames figure{margin:0;min-width:0}
+.story-frame-art{border:1px solid #d9d4c9;border-radius:8px;overflow:hidden;background:#f1eee5}
+.story-frame-art svg{display:block;width:100%;height:auto}
+.story-frames figcaption{display:flex;align-items:baseline;gap:6px;font-size:11px;line-height:1.65;margin-top:8px;text-align:left;line-break:strict;text-wrap:pretty}
+.story-frames figcaption>span{font:700 10px 'Counter',sans-serif;color:#77796f;flex-shrink:0}
+.story-beats{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.story-beats li{display:flex;gap:12px;align-items:baseline;padding:13px 0;border-bottom:1px solid #ddd8cc;font-size:13px;line-height:1.65;text-align:left;line-break:strict;text-wrap:pretty}
+.story-beats li:last-child{border-bottom:0}
+.story-beats li i{display:block;flex-shrink:0;width:6px;height:6px;border-radius:50%;background:#849c9a}
+@media(max-width:600px){.course-track-title{font-size:13px;margin-top:22px}.specimen.story-board,.specimen.story-plan{padding:18px;min-height:0}.story-frames{grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:14px}.story-board .specimen-title,.story-plan .specimen-title{font-size:17px}.story-beats li{font-size:12px}}

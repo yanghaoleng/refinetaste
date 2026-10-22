@@ -8,6 +8,6 @@ test('passing requires every comparison correct and a complete chapter, includin
  assert.equal(calculate(questions,{32:1,33:0,34:1}).percent,66.7);
 });
 test('chapter display order keeps original question identities intact',()=>{
- const course=JSON.parse(fs.readFileSync('dist/course.json','utf8'));assert.deepEqual(course.chapters.map(ch=>course.questions.find(q=>q.chapter===ch.id).id),[0,32,8,16,24]);
- course.questions.forEach((q,index)=>assert.equal(q.id,index));assert.equal(course.chapters.length,5);
+ const course=JSON.parse(fs.readFileSync('dist/course.json','utf8'));assert.deepEqual(course.chapters.map(ch=>course.questions.find(q=>q.chapter===ch.id).id),[0,32,8,16,24,40,48]);
+ course.questions.forEach((q,index)=>assert.equal(q.id,index));assert.equal(course.chapters.length,7);
 });

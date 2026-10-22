@@ -102,7 +102,7 @@
       '.specimen-tag','.specimen-title','.specimen-content >p:not(.status-row)',
       '.menu-row >span','.status-row >span','.mini-chart .bar','.chart-key',
       '.app-bar >*','.resource-banner >*','.app-placeholder >i',
-      '.path-sample >div','.path-sample >span'
+      '.path-sample >div','.path-sample >span','.story-frames >figure','.story-beats >li'
     ].join(',');
     // Finish assembling each message before the next design enters.
     for(const card of cards){
