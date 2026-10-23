@@ -32,12 +32,12 @@ class CharacterCourseTests(unittest.TestCase):
   event('answer',q=73,choice=1);event('complete')
   result=app.summary(7);self.assertEqual(result['metrics']['completed'],1)
   for q in result['questions']:
-   if q['course']==2 and q['index']>=60:self.assertEqual(q['eligible'],1)
+   if q['course']==2 and 60<=q['index']<74:self.assertEqual(q['eligible'],1)
   dashboard=app.learning_report(7)
-  rows=[q for q in dashboard['questions'] if q['id']>=60]
+  rows=[q for q in dashboard['questions'] if 60<=q['id']<74]
   self.assertEqual(len(rows),14);self.assertTrue(all(q['chapterName']=='人物形象与动作设计' for q in rows))
  def test_original_chapter_question_ids_and_names_survive_display_reordering(self):
-  self.assertEqual(app.CHAPTER_STARTS,(0,32,8,16,24,60,40,48))
+  self.assertEqual(app.CHAPTER_STARTS[:8],(0,32,8,16,24,60,40,48))
   for start,name in [(40,'分镜与镜头设计'),(48,'长视频结构与叙事')]:
    q=app.QUESTIONS[start];self.assertEqual(app.CHAPTERS_BY_ID[q['chapter']]['title'],name)
    self.assertEqual(app.CHAPTER_QUESTIONS[start],tuple(range(start,start+8)))

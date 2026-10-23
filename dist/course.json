@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 7,
   "title": "从看见，到说清，再到判断",
   "chapters": [
     {
@@ -71,6 +71,69 @@
       "subtitle": "组织段落与因果，归纳素材，再把 AIGC 镜头剪成故事。",
       "objective": "能规划较长视频的结构、信息节奏、生成流程和粗剪验证。",
       "track": 1
+    },
+    {
+      "id": 8,
+      "title": "营销基础与市场定位",
+      "subtitle": "先说清为谁、解决什么，再确定这次推广要验证什么。",
+      "objective": "能把受众、价值、证据与目标组织成一份推广定位卡。",
+      "level": "营销",
+      "minutes": "25—40 分钟",
+      "track": 2
+    },
+    {
+      "id": 9,
+      "title": "私域服务、留存与产品迭代",
+      "subtitle": "服务首批用户，收集真实反馈，让改进带来持续使用。",
+      "objective": "能建立服务与反馈闭环，以产品改进和留存为先，再判断转介绍时机。",
+      "level": "服务",
+      "minutes": "25—40 分钟",
+      "track": 2
+    },
+    {
+      "id": 10,
+      "title": "品牌起号与内容增长",
+      "subtitle": "建立清楚的账号承诺，用持续内容找到合适的受众。",
+      "objective": "能规划账号与栏目，用有效受众反馈判断内容方向。",
+      "level": "营销",
+      "minutes": "25—40 分钟",
+      "track": 2
+    },
+    {
+      "id": 11,
+      "title": "国内渠道与转化链路",
+      "subtitle": "连接推荐、搜索、内容和服务，把合适的人带到下一步。",
+      "objective": "能依据用户行为选国内渠道，并检查内容到试用与成交的衔接。",
+      "level": "营销",
+      "minutes": "25—40 分钟",
+      "track": 2
+    },
+    {
+      "id": 12,
+      "title": "付费投放入门",
+      "subtitle": "匹配目标、素材和转化信号，用有限预算做可控验证。",
+      "objective": "能理解基础投放指标，设计素材测试并判断下一轮动作。",
+      "level": "营销",
+      "minutes": "25—40 分钟",
+      "track": 2
+    },
+    {
+      "id": 13,
+      "title": "出海营销与本地化",
+      "subtitle": "选择具体市场，调整表达、渠道与承接，而不只翻译。",
+      "objective": "能提出一个具体市场的推广方案，并安排本地化与验证。",
+      "level": "营销",
+      "minutes": "25—40 分钟",
+      "track": 2
+    },
+    {
+      "id": 14,
+      "title": "效果衡量与增长实验",
+      "subtitle": "看清漏斗、成本与增量，把推广结果变成下一轮判断。",
+      "objective": "能统一指标口径，区分归因与增量，并复盘成本和长期效果。",
+      "level": "营销",
+      "minutes": "25—40 分钟",
+      "track": 2
     }
   ],
   "questions": [
@@ -4242,6 +4305,4876 @@
           "prompt": "你从三个姿态读到了什么意图？指出最需要修改的一处姿态，并安排一段有理由的停顿。说明修改后怎样让别人看懂“想拿，但又收住”。"
         }
       ]
+    },
+    {
+      "id": 74,
+      "chapter": 8,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "推广前提与验证目标",
+      "title": "产品做完了，第一步就该买流量吗？",
+      "brief": "拾页会议助手完成首版。团队只能做一轮小测试，希望知道谁真正需要它。哪份首发计划更有助于验证推广方向？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "首发计划一",
+          "rows": [
+            {
+              "label": "受众",
+              "text": "每周要整理多次客户访谈的小团队"
+            },
+            {
+              "label": "价值假设",
+              "text": "减少从录音中整理待办的重复劳动"
+            },
+            {
+              "label": "测试",
+              "text": "展示一段真实功能演示，邀请完成一次试用"
+            },
+            {
+              "label": "观察",
+              "text": "合格试用与卡住的位置"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "首发计划二",
+          "rows": [
+            {
+              "label": "受众",
+              "text": "先覆盖尽可能多的人"
+            },
+            {
+              "label": "价值假设",
+              "text": "产品功能齐全，应当有人喜欢"
+            },
+            {
+              "label": "测试",
+              "text": "在三个平台同时扩大曝光"
+            },
+            {
+              "label": "观察",
+              "text": "先看总播放量，再决定怎么解释"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "推广验证先连接受众、情境、价值和下一步行为，再选择触达方式。",
+      "tip": "如果团队已掌握清楚的受众与需求证据，首发计划会怎样改变？",
+      "coachOpening": [
+        "推广验证先连接受众、情境、价值和下一步行为，再选择触达方式。",
+        "如果团队已掌握清楚的受众与需求证据，首发计划会怎样改变？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 受众与定位（概念参考，案例原创）",
+          "url": "https://mailchimp.com/resources/stp-marketing/"
+        },
+        {
+          "title": "Mailchimp · 营销计划",
+          "url": "https://mailchimp.com/resources/marketing-plan-template/"
+        }
+      ],
+      "labels": [
+        "先明确受众、价值与试用目标",
+        "先铺开曝光，再从播放量找方向"
+      ],
+      "why": "明确假设后的小规模投放也可以是验证方式。问题在于是否知道要向谁证明什么、怎样观察结果；播放量不能独自回答谁需要产品。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "产品做完了，第一步就该买流量吗？",
+          "brief": "换一个角度观察：拾页会议助手完成首版。团队只能做一轮小测试，希望知道谁真正需要它。哪份首发计划更有助于验证推广方向？",
+          "correct": 0,
+          "why": "明确假设后的小规模投放也可以是验证方式。问题在于是否知道要向谁证明什么、怎样观察结果；播放量不能独自回答谁需要产品。"
+        }
+      ]
+    },
+    {
+      "id": 75,
+      "chapter": 8,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "细分与定位",
+      "title": "“适合所有人”，真的更容易卖吗？",
+      "brief": "访谈显示，小型研究团队经常手工整理访谈待办。首版功能正好支持这一任务。选择更适合本轮验证的定位。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "定位方案二",
+          "rows": [
+            {
+              "label": "谁",
+              "text": "所有开会、学习和工作的人"
+            },
+            {
+              "label": "何时",
+              "text": "任何需要提升效率的时候"
+            },
+            {
+              "label": "替代方式",
+              "text": "各种办公工具都可以被替代"
+            },
+            {
+              "label": "边界",
+              "text": "首轮同时满足所有人"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "定位方案一",
+          "rows": [
+            {
+              "label": "谁",
+              "text": "每周开展多次访谈的两至五人研究团队"
+            },
+            {
+              "label": "何时",
+              "text": "访谈结束后整理待办并分配负责人"
+            },
+            {
+              "label": "替代方式",
+              "text": "反复听录音，再手工搬进任务表"
+            },
+            {
+              "label": "边界",
+              "text": "先验证这一类任务是否愿意持续使用"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "定位把特定受众、任务与差异化价值联系起来，并保留可验证的边界。",
+      "tip": "如果访谈样本只来自一个朋友团队，还缺什么证据？",
+      "coachOpening": [
+        "定位把特定受众、任务与差异化价值联系起来，并保留可验证的边界。",
+        "如果访谈样本只来自一个朋友团队，还缺什么证据？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 受众与定位（概念参考，案例原创）",
+          "url": "https://mailchimp.com/resources/stp-marketing/"
+        },
+        {
+          "title": "Mailchimp · 营销计划",
+          "url": "https://mailchimp.com/resources/marketing-plan-template/"
+        }
+      ],
+      "labels": [
+        "首轮覆盖所有可能的用户",
+        "围绕已发现的高频任务定位"
+      ],
+      "why": "题设已有具体需求证据，围绕它验证更容易判断价值是否成立。这不意味着市场越窄越好，后续仍需检验规模、触达与扩展空间。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "“适合所有人”，真的更容易卖吗？",
+          "brief": "换一个角度观察：访谈显示，小型研究团队经常手工整理访谈待办。首版功能正好支持这一任务。选择更适合本轮验证的定位。",
+          "correct": 1,
+          "why": "题设已有具体需求证据，围绕它验证更容易判断价值是否成立。这不意味着市场越窄越好，后续仍需检验规模、触达与扩展空间。"
+        }
+      ]
+    },
+    {
+      "id": 76,
+      "chapter": 8,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "功能、利益与证据",
+      "title": "十二种功能，还是解决一件麻烦？",
+      "brief": "面向急着分配客户访谈待办的团队，哪段介绍更清楚地表达首版产品的价值，且没有超出证据？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "推广文案",
+          "title": "产品介绍一",
+          "rows": [
+            {
+              "label": "标题",
+              "text": "把访谈里的待办整理成可分配清单"
+            },
+            {
+              "label": "演示",
+              "text": "上传一段录音，逐条核对提取结果"
+            },
+            {
+              "label": "依据",
+              "text": "展示实际生成的负责人和待办字段"
+            },
+            {
+              "label": "边界",
+              "text": "仍需人工确认，暂不承诺固定节省时长"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "推广文案",
+          "title": "产品介绍二",
+          "rows": [
+            {
+              "label": "标题",
+              "text": "新一代全场景 AI 效率平台"
+            },
+            {
+              "label": "演示",
+              "text": "支持识别、总结、分类、导出等十二项功能"
+            },
+            {
+              "label": "依据",
+              "text": "功能数多，因而适合所有工作场景"
+            },
+            {
+              "label": "边界",
+              "text": "号称可以彻底替代团队整理工作"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "价值表达要说明用户得到什么，并用真实证据支撑承诺。",
+      "tip": "如果受众换成采购负责人，哪些参数应当补上？",
+      "coachOpening": [
+        "价值表达要说明用户得到什么，并用真实证据支撑承诺。",
+        "如果受众换成采购负责人，哪些参数应当补上？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 受众与定位（概念参考，案例原创）",
+          "url": "https://mailchimp.com/resources/stp-marketing/"
+        },
+        {
+          "title": "Mailchimp · 营销计划",
+          "url": "https://mailchimp.com/resources/marketing-plan-template/"
+        }
+      ],
+      "labels": [
+        "围绕具体任务展示可核对的结果",
+        "用功能数量和宽泛承诺证明价值"
+      ],
+      "why": "场景、可观察结果和限制让价值更容易理解。功能清单可服务于详细选型，但不能仅由功能数量推出用户收益。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "十二种功能，还是解决一件麻烦？",
+          "brief": "换一个角度观察：面向急着分配客户访谈待办的团队，哪段介绍更清楚地表达首版产品的价值，且没有超出证据？",
+          "correct": 0,
+          "why": "场景、可观察结果和限制让价值更容易理解。功能清单可服务于详细选型，但不能仅由功能数量推出用户收益。"
+        }
+      ]
+    },
+    {
+      "id": 77,
+      "chapter": 8,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "营销目标与指标",
+      "title": "看过、记住、注册、购买，是同一个目标吗？",
+      "brief": "新一轮推广明确要验证“目标团队能否完成首次合格试用”。哪组主要指标更匹配？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "观察方案二",
+          "rows": [
+            {
+              "label": "主要结果",
+              "text": "全渠道曝光和点赞合计"
+            },
+            {
+              "label": "路径",
+              "text": "曝光高即可认为试用验证成功"
+            },
+            {
+              "label": "辅助观察",
+              "text": "所有互动视为同等意向"
+            },
+            {
+              "label": "口径",
+              "text": "不区分新老团队或是否实际使用"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "观察方案一",
+          "rows": [
+            {
+              "label": "主要结果",
+              "text": "符合目标团队条件，完成一次有效录音整理"
+            },
+            {
+              "label": "路径",
+              "text": "内容访问 → 注册 → 首次整理成功"
+            },
+            {
+              "label": "辅助观察",
+              "text": "播放与点击用于定位路径流失"
+            },
+            {
+              "label": "口径",
+              "text": "同一观察窗口，按新团队去重"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "先定义目标行为，再确定主要指标、辅助指标、时间窗和去重口径。",
+      "tip": "若本轮目标是让目标人群记住品牌，应怎样重新设计评估？",
+      "coachOpening": [
+        "先定义目标行为，再确定主要指标、辅助指标、时间窗和去重口径。",
+        "若本轮目标是让目标人群记住品牌，应怎样重新设计评估？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 受众与定位（概念参考，案例原创）",
+          "url": "https://mailchimp.com/resources/stp-marketing/"
+        },
+        {
+          "title": "Mailchimp · 营销计划",
+          "url": "https://mailchimp.com/resources/marketing-plan-template/"
+        }
+      ],
+      "labels": [
+        "以曝光点赞替代合格试用",
+        "以合格试用为主，曝光互动为辅助"
+      ],
+      "why": "曝光、互动和合格试用对应不同的问题。本轮应观察真正达到试用价值的人，同时用上游指标辅助排查，不把一种目标的指标替代另一种。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "看过、记住、注册、购买，是同一个目标吗？",
+          "brief": "换一个角度观察：新一轮推广明确要验证“目标团队能否完成首次合格试用”。哪组主要指标更匹配？",
+          "correct": 1,
+          "why": "曝光、互动和合格试用对应不同的问题。本轮应观察真正达到试用价值的人，同时用上游指标辅助排查，不把一种目标的指标替代另一种。"
+        }
+      ]
+    },
+    {
+      "id": 78,
+      "chapter": 8,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "推广定位卡",
+      "title": "给你的产品写一张推广定位卡",
+      "brief": "拾页会议助手只能先服务一种团队。你要给内容与推广同事一张能够共同使用的简报。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "现有材料",
+          "rows": [
+            {
+              "label": "功能",
+              "text": "把会议录音整理为待办，结果需要人工确认"
+            },
+            {
+              "label": "用户材料",
+              "text": "访谈团队和周会团队都提出过需求"
+            },
+            {
+              "label": "资源",
+              "text": "一段演示、一个试用入口、一名服务同事"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "定位卡让团队共享受众、任务、价值、证据与行动假设。",
+      "tip": "你会用什么信息判断这类受众值得优先验证？",
+      "coachOpening": [
+        "定位卡让团队共享受众、任务、价值、证据与行动假设。",
+        "你会用什么信息判断这类受众值得优先验证？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 受众与定位（概念参考，案例原创）",
+          "url": "https://mailchimp.com/resources/stp-marketing/"
+        },
+        {
+          "title": "Mailchimp · 营销计划",
+          "url": "https://mailchimp.com/resources/marketing-plan-template/"
+        }
+      ],
+      "prompt": "选择一类受众，写清何时需要、原来怎样解决、为什么选择你、用什么证据证明，以及希望对方采取什么行动。",
+      "rubric": [
+        "明确受众和使用情境，不凭空断言需求已被证实",
+        "把价值与可提供的证据连接起来",
+        "提出适合当前资源的下一步行为"
+      ],
+      "reference": "可先面向每周多次访谈的小团队，围绕录音转待办展示一次真实演示，邀请完成一次整理并反馈卡点；将稳定节省多少时间留待验证。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "给你的产品写一张推广定位卡",
+          "prompt": "请结合案例说明：选择一类受众，写清何时需要、原来怎样解决、为什么选择你、用什么证据证明，以及希望对方采取什么行动。"
+        }
+      ]
+    },
+    {
+      "id": 79,
+      "chapter": 8,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "分受众表达",
+      "title": "同一个产品，向两种人怎样介绍？",
+      "brief": "同一工具既可供独立研究者使用，也可能供团队负责人采购。当前证据仅表明它能生成可核对的待办清单。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "两位潜在使用者",
+          "rows": [
+            {
+              "label": "独立研究者",
+              "text": "自己听录音、整理与核对"
+            },
+            {
+              "label": "团队负责人",
+              "text": "关心清单交接、负责人和结果可信度"
+            },
+            {
+              "label": "共同事实",
+              "text": "均需人工核对，不保证自动结果完全正确"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "分受众表达调整的是相关性与证明方式，品牌和产品事实仍应一致。",
+      "tip": "如果两种受众愿意付费的理由不同，你会如何验证？",
+      "coachOpening": [
+        "分受众表达调整的是相关性与证明方式，品牌和产品事实仍应一致。",
+        "如果两种受众愿意付费的理由不同，你会如何验证？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 受众与定位（概念参考，案例原创）",
+          "url": "https://mailchimp.com/resources/stp-marketing/"
+        },
+        {
+          "title": "Mailchimp · 营销计划",
+          "url": "https://mailchimp.com/resources/marketing-plan-template/"
+        }
+      ],
+      "prompt": "分别写一句价值介绍，说明各自强调什么、需要哪些证据，以及哪些共同承诺应保持一致。",
+      "rubric": [
+        "围绕不同角色的任务调整重点",
+        "两段表达都不超出现有事实",
+        "说明共同承诺与差异化证据"
+      ],
+      "reference": "研究者可强调少在录音与清单之间重复搬运；负责人可强调可核对的待办交接。两者都要展示实际结果并保留人工确认，不把面向负责人改写成完全自动分派。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "同一个产品，向两种人怎样介绍？",
+          "prompt": "请结合案例说明：分别写一句价值介绍，说明各自强调什么、需要哪些证据，以及哪些共同承诺应保持一致。"
+        }
+      ]
+    },
+    {
+      "id": 80,
+      "chapter": 8,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "内容价值与品牌承诺",
+      "title": "产品、内容和品牌，各自承诺了什么？",
+      "brief": "团队准备发布一条“怎样整理客户访谈待办”的教程，同时介绍自己的工具。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "内容草稿",
+          "rows": [
+            {
+              "label": "开头",
+              "text": "访谈结束后，怎样避免漏掉下一步任务？"
+            },
+            {
+              "label": "中段",
+              "text": "展示整理步骤，再演示工具怎样辅助"
+            },
+            {
+              "label": "结尾",
+              "text": "邀请尝试，并说明人工确认的位置"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "内容应先兑现观看价值，再用事实连接产品与品牌。",
+      "tip": "如果观众只记得教程而记不得品牌，你会调整哪里？",
+      "coachOpening": [
+        "内容应先兑现观看价值，再用事实连接产品与品牌。",
+        "如果观众只记得教程而记不得品牌，你会调整哪里？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 受众与定位（概念参考，案例原创）",
+          "url": "https://mailchimp.com/resources/stp-marketing/"
+        },
+        {
+          "title": "Mailchimp · 营销计划",
+          "url": "https://mailchimp.com/resources/marketing-plan-template/"
+        }
+      ],
+      "prompt": "说明观众即使不购买也能得到什么、产品帮助完成什么，以及品牌希望被怎样记住；再写一个自然的下一步行动。",
+      "rubric": [
+        "区分内容价值、产品价值与品牌联想",
+        "用同一情境连接三者",
+        "下一步与内容承诺相符且可执行"
+      ],
+      "reference": "教程提供一套可直接使用的整理方法，产品减少其中一部分重复操作，品牌积累认真核对、清楚交接的印象；结尾可邀请用一段非敏感示例录音试做。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "产品、内容和品牌，各自承诺了什么？",
+          "prompt": "请结合案例说明：说明观众即使不购买也能得到什么、产品帮助完成什么，以及品牌希望被怎样记住；再写一个自然的下一步行动。"
+        }
+      ]
+    },
+    {
+      "id": 81,
+      "chapter": 8,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "推广验证计划",
+      "title": "第一轮推广，怎样证明方向值得继续？",
+      "brief": "团队有一周时间和一段产品演示，希望决定是否继续面向小型研究团队推广。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "测试约束",
+          "rows": [
+            {
+              "label": "目的",
+              "text": "确认目标团队是否能体验到整理价值"
+            },
+            {
+              "label": "可用资源",
+              "text": "一段演示、试用入口、反馈通道"
+            },
+            {
+              "label": "未知",
+              "text": "主要阻碍、持续需求与付费意愿"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "推广测试的结果应服务于下一步决策，并保留不确定性。",
+      "tip": "当播放高但合格试用少时，你会优先查哪一段？",
+      "coachOpening": [
+        "推广测试的结果应服务于下一步决策，并保留不确定性。",
+        "当播放高但合格试用少时，你会优先查哪一段？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 受众与定位（概念参考，案例原创）",
+          "url": "https://mailchimp.com/resources/stp-marketing/"
+        },
+        {
+          "title": "Mailchimp · 营销计划",
+          "url": "https://mailchimp.com/resources/marketing-plan-template/"
+        }
+      ],
+      "prompt": "写一个主要假设、验证动作、结果口径和继续或调整的条件，并说明一次测试仍不能回答什么。",
+      "rubric": [
+        "主要假设与目标人群和价值相关",
+        "动作与结果口径可对应",
+        "承认样本和观察窗口的限制，给出有条件的下一步"
+      ],
+      "reference": "可邀请一批符合条件的团队完成真实任务，记录成功试用、卡点和再次使用的意愿；先约定何种卡点需要修产品，再看是否扩大触达，不能只凭一周数据预测长期收入。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "第一轮推广，怎样证明方向值得继续？",
+          "prompt": "请结合案例说明：写一个主要假设、验证动作、结果口径和继续或调整的条件，并说明一次测试仍不能回答什么。"
+        }
+      ]
+    },
+    {
+      "id": 82,
+      "chapter": 9,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "私域的服务目标",
+      "title": "第一批用户进群后，先让他们做什么？",
+      "brief": "拾页招募了首批试用团队，大家同意进入服务群。首要目标是帮助他们用成产品，并找到需要迭代的卡点。哪份欢迎安排更合适？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "服务群安排",
+          "title": "欢迎安排一",
+          "rows": [
+            {
+              "label": "先做",
+              "text": "说明群用途与服务时间，提供一次任务的最短路径"
+            },
+            {
+              "label": "反馈",
+              "text": "询问卡在哪一步，允许私下反馈"
+            },
+            {
+              "label": "产品跟进",
+              "text": "记录问题、负责人和后续回访"
+            },
+            {
+              "label": "之后",
+              "text": "体验稳定后再讨论自愿分享"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "服务群安排",
+          "title": "欢迎安排二",
+          "rows": [
+            {
+              "label": "先做",
+              "text": "每天要求打卡、点赞与邀请好友"
+            },
+            {
+              "label": "反馈",
+              "text": "统一收集在聊天记录里，有空再看"
+            },
+            {
+              "label": "产品跟进",
+              "text": "先看拉新人数，使用问题暂缓"
+            },
+            {
+              "label": "之后",
+              "text": "把邀请数量作为主要服务成果"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "私域首先建立可持续的服务与反馈关系，留存来自持续获得价值，转介绍应在其后。",
+      "tip": "如果用户不想进群，你还可以怎样提供服务与反馈入口？",
+      "coachOpening": [
+        "私域首先建立可持续的服务与反馈关系，留存来自持续获得价值，转介绍应在其后。",
+        "如果用户不想进群，你还可以怎样提供服务与反馈入口？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Intercom · 用户反馈闭环",
+          "url": "https://www.intercom.com/blog/what-is-a-customer-feedback-loop"
+        },
+        {
+          "title": "Amplitude · 新用户留存",
+          "url": "https://amplitude.com/books/mastering-retention/new-user-retention"
+        }
+      ],
+      "labels": [
+        "先服务首次使用并收集产品卡点",
+        "先用打卡与邀请提高群活跃"
+      ],
+      "why": "本轮私域先服务产品成功使用和迭代。群消息与邀请量不能替代任务完成；有价值体验之后可以讨论自愿转介绍，但不应把它变成使用门槛。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "第一批用户进群后，先让他们做什么？",
+          "brief": "换一个角度观察：拾页招募了首批试用团队，大家同意进入服务群。首要目标是帮助他们用成产品，并找到需要迭代的卡点。哪份欢迎安排更合适？",
+          "correct": 0,
+          "why": "本轮私域先服务产品成功使用和迭代。群消息与邀请量不能替代任务完成；有价值体验之后可以讨论自愿转介绍，但不应把它变成使用门槛。"
+        }
+      ]
+    },
+    {
+      "id": 83,
+      "chapter": 9,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "反馈背后的问题与样本",
+      "title": "群里最响亮的建议，就该最先开发吗？",
+      "brief": "一位活跃用户反复要求加入复杂仪表盘，另有五个不同团队在首次导出时失败。下一轮只能优先调查一个问题，哪份判断更有依据？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "排查方案二",
+          "rows": [
+            {
+              "label": "先看",
+              "text": "谁提得最多、表达最强烈"
+            },
+            {
+              "label": "再问",
+              "text": "给这位用户承诺尽快做仪表盘"
+            },
+            {
+              "label": "补样本",
+              "text": "以活跃群员意见代替全部用户"
+            },
+            {
+              "label": "排序依据",
+              "text": "聊天热度与重复提问次数"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "排查方案一",
+          "rows": [
+            {
+              "label": "先看",
+              "text": "导出失败发生在哪些步骤、影响多少团队"
+            },
+            {
+              "label": "再问",
+              "text": "活跃用户的仪表盘请求想解决什么任务"
+            },
+            {
+              "label": "补样本",
+              "text": "联系沉默、失败和继续使用的人"
+            },
+            {
+              "label": "排序依据",
+              "text": "影响、频次、严重程度与实现代价"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "反馈要从诉求回到任务与证据，再结合影响和代价决定迭代。",
+      "tip": "导出失败修复后，怎样确认问题确实减少了？",
+      "coachOpening": [
+        "反馈要从诉求回到任务与证据，再结合影响和代价决定迭代。",
+        "导出失败修复后，怎样确认问题确实减少了？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Intercom · 用户反馈闭环",
+          "url": "https://www.intercom.com/blog/what-is-a-customer-feedback-loop"
+        },
+        {
+          "title": "Amplitude · 新用户留存",
+          "url": "https://amplitude.com/books/mastering-retention/new-user-retention"
+        }
+      ],
+      "labels": [
+        "按发言声量和重复次数决定优先级",
+        "按任务受阻证据调查，并补充样本"
+      ],
+      "why": "五个团队的导出阻碍值得优先核查，但仍要确认事实。活跃用户的建议也有价值，应追问任务；发言频繁不等于影响广泛，沉默不等于没有问题。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "群里最响亮的建议，就该最先开发吗？",
+          "brief": "换一个角度观察：一位活跃用户反复要求加入复杂仪表盘，另有五个不同团队在首次导出时失败。下一轮只能优先调查一个问题，哪份判断更有依据？",
+          "correct": 1,
+          "why": "五个团队的导出阻碍值得优先核查，但仍要确认事实。活跃用户的建议也有价值，应追问任务；发言频繁不等于影响广泛，沉默不等于没有问题。"
+        }
+      ]
+    },
+    {
+      "id": 84,
+      "chapter": 9,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "留存与持续价值",
+      "title": "群很热闹，用户真的留下来了吗？",
+      "brief": "两个服务群规模相近。团队想判断用户是否持续用工具完成工作，哪份周报更能回答问题？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "服务周报",
+          "title": "周报一",
+          "rows": [
+            {
+              "label": "同批用户",
+              "text": "记录首次成功整理的一批新团队"
+            },
+            {
+              "label": "后续价值",
+              "text": "观察下一周有多少再次完成有效整理"
+            },
+            {
+              "label": "原因",
+              "text": "回访未再使用者是否有任务、遇到什么阻碍"
+            },
+            {
+              "label": "辅助",
+              "text": "群内提问量用于安排服务"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "服务周报",
+          "title": "周报二",
+          "rows": [
+            {
+              "label": "同批用户",
+              "text": "混合所有历史群成员"
+            },
+            {
+              "label": "后续价值",
+              "text": "统计发言、表情和抽奖参与次数"
+            },
+            {
+              "label": "原因",
+              "text": "将沉默成员都判断为已流失"
+            },
+            {
+              "label": "辅助",
+              "text": "以群消息数替代产品使用"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "用明确起点、返回行为、观察窗口和同批用户定义留存，再解释原因。",
+      "tip": "如果工具每月才用一次，应该怎样调整观察窗口？",
+      "coachOpening": [
+        "用明确起点、返回行为、观察窗口和同批用户定义留存，再解释原因。",
+        "如果工具每月才用一次，应该怎样调整观察窗口？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Intercom · 用户反馈闭环",
+          "url": "https://www.intercom.com/blog/what-is-a-customer-feedback-loop"
+        },
+        {
+          "title": "Amplitude · 新用户留存",
+          "url": "https://amplitude.com/books/mastering-retention/new-user-retention"
+        }
+      ],
+      "labels": [
+        "看同批用户是否再次完成有价值的任务",
+        "用群消息量代表产品留存"
+      ],
+      "why": "留存应关联产品价值与使用节奏。群互动可以反映服务需求，但不能替代再次使用；低频工具没有每周任务时也不能机械判流失。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "群很热闹，用户真的留下来了吗？",
+          "brief": "换一个角度观察：两个服务群规模相近。团队想判断用户是否持续用工具完成工作，哪份周报更能回答问题？",
+          "correct": 0,
+          "why": "留存应关联产品价值与使用节奏。群互动可以反映服务需求，但不能替代再次使用；低频工具没有每周任务时也不能机械判流失。"
+        }
+      ]
+    },
+    {
+      "id": 85,
+      "chapter": 9,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "迭代反馈闭环",
+      "title": "问题修好了，反馈闭环就结束了吗？",
+      "brief": "试用用户上报导出乱码，团队已经修复。哪种后续处理更能把私域反馈用于产品改进？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "处理记录二",
+          "rows": [
+            {
+              "label": "确认",
+              "text": "只在内部表格标记收到"
+            },
+            {
+              "label": "修复",
+              "text": "代码上线即标记全部解决"
+            },
+            {
+              "label": "回访",
+              "text": "不再联系上报者，避免占用时间"
+            },
+            {
+              "label": "判断",
+              "text": "把没有新投诉视为所有人已成功"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "处理记录一",
+          "rows": [
+            {
+              "label": "确认",
+              "text": "告知问题已复现，并给出当前可用的临时办法"
+            },
+            {
+              "label": "修复",
+              "text": "记录版本、负责人和验证结果"
+            },
+            {
+              "label": "回访",
+              "text": "向受影响者说明改动，邀请重试"
+            },
+            {
+              "label": "判断",
+              "text": "核对原任务能否完成，继续收集异常"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "把服务记录连接到产品处理与回访验证，才能知道迭代是否兑现价值。",
+      "tip": "暂时无法排期的请求，应如何回复并保持后续可追踪？",
+      "coachOpening": [
+        "把服务记录连接到产品处理与回访验证，才能知道迭代是否兑现价值。",
+        "暂时无法排期的请求，应如何回复并保持后续可追踪？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Intercom · 用户反馈闭环",
+          "url": "https://www.intercom.com/blog/what-is-a-customer-feedback-loop"
+        },
+        {
+          "title": "Amplitude · 新用户留存",
+          "url": "https://amplitude.com/books/mastering-retention/new-user-retention"
+        }
+      ],
+      "labels": [
+        "上线后仅内部标记完成",
+        "修复后通知、重试并确认原任务"
+      ],
+      "why": "反馈闭环包括理解问题、处理、向用户说明并验证。通知不是群发邀功，重试也应尊重用户时间；没有新投诉不能证明原任务已恢复。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "问题修好了，反馈闭环就结束了吗？",
+          "brief": "换一个角度观察：试用用户上报导出乱码，团队已经修复。哪种后续处理更能把私域反馈用于产品改进？",
+          "correct": 1,
+          "why": "反馈闭环包括理解问题、处理、向用户说明并验证。通知不是群发邀功，重试也应尊重用户时间；没有新投诉不能证明原任务已恢复。"
+        }
+      ]
+    },
+    {
+      "id": 86,
+      "chapter": 9,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "首批用户的价值实现",
+      "title": "设计一次真正帮助上手的首周服务",
+      "brief": "十个小团队自愿加入拾页试用。只有一名服务同事，产品希望先发现上手卡点，而不是安排转介绍活动。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "首周材料",
+          "rows": [
+            {
+              "label": "常见任务",
+              "text": "上传录音、核对待办、导出给同事"
+            },
+            {
+              "label": "已知阻碍",
+              "text": "不知道从哪段录音开始，部分人不清楚怎样核对"
+            },
+            {
+              "label": "服务能力",
+              "text": "工作日两段固定答疑时间，可提供一份示例"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "首周服务围绕价值实现和学习卡点组织，触达应有明确用途与合理频率。",
+      "tip": "不愿公开提问的人，怎样安全地反馈问题？",
+      "coachOpening": [
+        "首周服务围绕价值实现和学习卡点组织，触达应有明确用途与合理频率。",
+        "不愿公开提问的人，怎样安全地反馈问题？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Intercom · 用户反馈闭环",
+          "url": "https://www.intercom.com/blog/what-is-a-customer-feedback-loop"
+        },
+        {
+          "title": "Amplitude · 新用户留存",
+          "url": "https://amplitude.com/books/mastering-retention/new-user-retention"
+        }
+      ],
+      "prompt": "安排欢迎说明、首次任务支持、反馈收集和一次回访；给出服务边界及两个结果指标。",
+      "rubric": [
+        "优先帮助用户完成首次有价值的任务",
+        "安排可执行的反馈与回访，匹配服务资源",
+        "结果指标包含使用或卡点改善，而不只看群活跃与邀请"
+      ],
+      "reference": "欢迎时说明服务用途和时间，给非敏感示例与最短步骤，在用户同意的时段答疑，记录失败步骤并回访原任务。可观察首次成功整理和未解决卡点的变化。无需以拉人或每日打卡作为完成条件。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "设计一次真正帮助上手的首周服务",
+          "prompt": "请结合案例说明：安排欢迎说明、首次任务支持、反馈收集和一次回访；给出服务边界及两个结果指标。"
+        }
+      ]
+    },
+    {
+      "id": 87,
+      "chapter": 9,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "反馈记录与优先级",
+      "title": "把一条抱怨变成可迭代的问题",
+      "brief": "用户在服务群说：“太麻烦了，为什么不能一键搞定？”团队还不知道具体发生在哪一步。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "反馈摘录",
+          "title": "现有记录",
+          "rows": [
+            {
+              "label": "原话",
+              "text": "太麻烦了，为什么不能一键搞定？"
+            },
+            {
+              "label": "已知",
+              "text": "用户昨天尝试过整理录音"
+            },
+            {
+              "label": "未知",
+              "text": "任务、步骤、结果、替代方式与影响范围"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "先理解问题与影响，再把候选方案放回真实任务验证。",
+      "tip": "如果只有一人遇到，但阻断了关键任务，应怎样考虑优先级？",
+      "coachOpening": [
+        "先理解问题与影响，再把候选方案放回真实任务验证。",
+        "如果只有一人遇到，但阻断了关键任务，应怎样考虑优先级？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Intercom · 用户反馈闭环",
+          "url": "https://www.intercom.com/blog/what-is-a-customer-feedback-loop"
+        },
+        {
+          "title": "Amplitude · 新用户留存",
+          "url": "https://amplitude.com/books/mastering-retention/new-user-retention"
+        }
+      ],
+      "prompt": "写两句澄清问题，再列出应记录的证据和进入迭代讨论前的核查步骤；不要直接把“一键”当作已确定方案。",
+      "rubric": [
+        "追问具体情境、受阻步骤或原本想完成的结果",
+        "区分用户原话、可观察事实与团队假设",
+        "说明怎样复现、补样本并评估影响"
+      ],
+      "reference": "可问“你当时想把录音整理给谁，在什么步骤停住了？”以及“原来怎样处理，哪一步比原来更费力？”保留原话、复现步骤和影响，必要时在同意后看脱敏示例，再讨论自动化或简化流程。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "把一条抱怨变成可迭代的问题",
+          "prompt": "请结合案例说明：写两句澄清问题，再列出应记录的证据和进入迭代讨论前的核查步骤；不要直接把“一键”当作已确定方案。"
+        }
+      ]
+    },
+    {
+      "id": 88,
+      "chapter": 9,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "留存诊断与合理触达",
+      "title": "哪些人没再回来，你准备怎样理解？",
+      "brief": "首周二十个团队完成整理，第二周八个再次使用。未返回者中，有的没有新访谈，有的导出失败，有的只需要一次整理。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "留存观察",
+          "title": "同批团队回访线索",
+          "rows": [
+            {
+              "label": "再次使用",
+              "text": "8 个团队完成新的整理"
+            },
+            {
+              "label": "未返回",
+              "text": "部分没有新任务，部分被导出问题阻断"
+            },
+            {
+              "label": "现有权限",
+              "text": "可以发一次服务回访，可让用户选择停止后续联系"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "首周成功团队",
+              "value": "20",
+              "note": ""
+            },
+            {
+              "label": "第二周再次使用",
+              "value": "8",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "留存诊断先看使用节奏与受阻原因，再选择服务、产品改进或停止打扰。",
+      "tip": "如果一次回访提高了打开率，却没有帮助完成任务，说明什么？",
+      "coachOpening": [
+        "留存诊断先看使用节奏与受阻原因，再选择服务、产品改进或停止打扰。",
+        "如果一次回访提高了打开率，却没有帮助完成任务，说明什么？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Intercom · 用户反馈闭环",
+          "url": "https://www.intercom.com/blog/what-is-a-customer-feedback-loop"
+        },
+        {
+          "title": "Amplitude · 新用户留存",
+          "url": "https://amplitude.com/books/mastering-retention/new-user-retention"
+        }
+      ],
+      "prompt": "区分至少两种未返回原因，分别提出服务或产品动作，并说明怎样验证；给出不会强迫用户互动的回访方式。",
+      "rubric": [
+        "区分需求频次、使用阻碍与产品不适合等原因",
+        "按原因提出可验证的服务或迭代动作",
+        "回访尊重用户选择，不把消息轰炸当留存"
+      ],
+      "reference": "导出失败者先提供恢复办法、修复后回访；暂无任务者按自然使用周期再观察，可由对方选择提醒；一次性需求者不应被强行定义为流失。核对再次完成任务与阻断是否解除，而不是只看回访回复率。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "哪些人没再回来，你准备怎样理解？",
+          "prompt": "请结合案例说明：区分至少两种未返回原因，分别提出服务或产品动作，并说明怎样验证；给出不会强迫用户互动的回访方式。"
+        }
+      ]
+    },
+    {
+      "id": 89,
+      "chapter": 9,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "服务优先与分享时机",
+      "title": "什么时候，再谈自愿转介绍？",
+      "brief": "团队希望首批用户帮助口碑传播，但部分导出问题仍未解决。另有几位用户已多次完成整理，并主动表示愿意分享经验。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "当前状态",
+          "rows": [
+            {
+              "label": "待解决",
+              "text": "三个团队的导出异常正在排查"
+            },
+            {
+              "label": "价值已验证",
+              "text": "几位用户持续使用，并主动认可效果"
+            },
+            {
+              "label": "资源",
+              "text": "可以提供准确的介绍材料和可选的分享入口"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "转介绍承接已获得的价值与信任，不替代产品改进和持续服务。",
+      "tip": "如果邀请人数增加，但新用户普遍不匹配，应先改变什么？",
+      "coachOpening": [
+        "转介绍承接已获得的价值与信任，不替代产品改进和持续服务。",
+        "如果邀请人数增加，但新用户普遍不匹配，应先改变什么？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Intercom · 用户反馈闭环",
+          "url": "https://www.intercom.com/blog/what-is-a-customer-feedback-loop"
+        },
+        {
+          "title": "Amplitude · 新用户留存",
+          "url": "https://amplitude.com/books/mastering-retention/new-user-retention"
+        }
+      ],
+      "prompt": "先说明服务与产品问题怎样继续处理，再为愿意分享者设计自愿、真实、不妨碍使用的转介绍方式，并给出一个质量指标。",
+      "rubric": [
+        "保持服务和迭代优先，不以分享换取问题修复",
+        "分享基于真实体验、明确关系与自愿选择",
+        "评价适合的新用户与体验，而不只统计邀请数量"
+      ],
+      "reference": "继续对受阻用户安排修复与回访；对主动愿意分享的人提供事实准确的介绍和可选入口，说明奖励或合作关系，随时可不参与。关注被推荐者是否有真实任务、能否成功试用，而不是要求所有群员拉人。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "什么时候，再谈自愿转介绍？",
+          "prompt": "请结合案例说明：先说明服务与产品问题怎样继续处理，再为愿意分享者设计自愿、真实、不妨碍使用的转介绍方式，并给出一个质量指标。"
+        }
+      ]
+    },
+    {
+      "id": 90,
+      "chapter": 10,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "账号承诺与主页表达",
+      "title": "看完主页，我知道为什么关注你吗？",
+      "brief": "拾页准备起一个面向研究团队的品牌账号。哪套主页更能让首次访问者理解账号会持续提供什么？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "profile",
+          "tag": "品牌主页",
+          "title": "拾页工作室",
+          "rows": [
+            {
+              "label": "简介",
+              "text": "给小团队的访谈整理方法与工具实践"
+            },
+            {
+              "label": "置顶",
+              "text": "从一段录音整理可核对的待办"
+            },
+            {
+              "label": "栏目",
+              "text": "整理方法 / 真实演示 / 用户问题答复"
+            },
+            {
+              "label": "下一步",
+              "text": "查看示例；有任务时再尝试"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "profile",
+          "tag": "品牌主页",
+          "title": "拾页工作室",
+          "rows": [
+            {
+              "label": "简介",
+              "text": "记录美好，发现无限可能"
+            },
+            {
+              "label": "置顶",
+              "text": "今日热门话题合集"
+            },
+            {
+              "label": "栏目",
+              "text": "节日祝福 / 随机热点 / 偶发工具介绍"
+            },
+            {
+              "label": "下一步",
+              "text": "关注我们，精彩不断"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "账号起步先建立清楚的身份、受众和内容承诺，再用持续内容检验。",
+      "tip": "如果观众觉得内容有用，却说不出你是谁，你会调整哪里？",
+      "coachOpening": [
+        "账号起步先建立清楚的身份、受众和内容承诺，再用持续内容检验。",
+        "如果观众觉得内容有用，却说不出你是谁，你会调整哪里？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 品牌策略",
+          "url": "https://mailchimp.com/resources/how-to-build-a-brand-strategy/"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "labels": [
+        "明确受众、内容价值与持续栏目",
+        "用宽泛简介和不相关热点吸引所有人"
+      ],
+      "why": "主页应让目标受众知道关注后会得到什么。热点可以参与，但需要与账号承诺关联；漂亮头像或一句热情口号不能独自说明内容价值。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "看完主页，我知道为什么关注你吗？",
+          "brief": "换一个角度观察：拾页准备起一个面向研究团队的品牌账号。哪套主页更能让首次访问者理解账号会持续提供什么？",
+          "correct": 0,
+          "why": "主页应让目标受众知道关注后会得到什么。热点可以参与，但需要与账号承诺关联；漂亮头像或一句热情口号不能独自说明内容价值。"
+        }
+      ]
+    },
+    {
+      "id": 91,
+      "chapter": 10,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "品牌识别与内容一致",
+      "title": "统一品牌，是每条都贴同一个 Logo 吗？",
+      "brief": "同一品牌希望被记住为“清楚、可靠地帮助团队整理信息”。哪套内容组合更符合这一目标？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "品牌内容",
+          "title": "内容组合二",
+          "rows": [
+            {
+              "label": "识别",
+              "text": "每条都放相同 Logo，其余随热点随意变化"
+            },
+            {
+              "label": "语气",
+              "text": "有时严谨，有时保证万能，有时只喊折扣"
+            },
+            {
+              "label": "栏目",
+              "text": "主要取决于当天什么最热"
+            },
+            {
+              "label": "承诺",
+              "text": "只要求 Logo 出现，不核对产品事实"
+            }
+          ],
+          "metrics": [],
+          "tone": "mixed",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "品牌内容",
+          "title": "内容组合一",
+          "rows": [
+            {
+              "label": "识别",
+              "text": "标题层级、标识与色彩保持可辨的共同关系"
+            },
+            {
+              "label": "语气",
+              "text": "清楚说明任务、证据与局限"
+            },
+            {
+              "label": "栏目",
+              "text": "每条解决一种整理问题"
+            },
+            {
+              "label": "承诺",
+              "text": "演示与实际产品相互对应"
+            }
+          ],
+          "metrics": [],
+          "tone": "coherent",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "品牌表达需要视觉、语气、观点与体验共同支持同一承诺。",
+      "tip": "怎样在保持识别的同时，为不同栏目留下变化？",
+      "coachOpening": [
+        "品牌表达需要视觉、语气、观点与体验共同支持同一承诺。",
+        "怎样在保持识别的同时，为不同栏目留下变化？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 品牌策略",
+          "url": "https://mailchimp.com/resources/how-to-build-a-brand-strategy/"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "labels": [
+        "只保证每条有同一个 Logo",
+        "让识别、语气与内容承诺相互支持"
+      ],
+      "why": "一致性来自可识别的表达关系与可信承诺，不要求每条画面完全相同。Logo 是识别线索之一，不能弥补互相冲突的价值表达。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "统一品牌，是每条都贴同一个 Logo 吗？",
+          "brief": "换一个角度观察：同一品牌希望被记住为“清楚、可靠地帮助团队整理信息”。哪套内容组合更符合这一目标？",
+          "correct": 1,
+          "why": "一致性来自可识别的表达关系与可信承诺，不要求每条画面完全相同。Logo 是识别线索之一，不能弥补互相冲突的价值表达。"
+        }
+      ]
+    },
+    {
+      "id": 92,
+      "chapter": 10,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "内容热度与受众匹配",
+      "title": "一条跑题内容爆了，账号就该转向吗？",
+      "brief": "账号目标是吸引有整理任务的小团队。一次随机萌宠内容播放很高，但后续关注者很少使用产品。哪份下一步判断更有依据？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "复盘方案一",
+          "rows": [
+            {
+              "label": "先看",
+              "text": "新关注者是否与目标任务匹配"
+            },
+            {
+              "label": "再查",
+              "text": "播放、主页访问、合格试用之间的关系"
+            },
+            {
+              "label": "下一步",
+              "text": "保留可借鉴的叙事方式，继续测试相关选题"
+            },
+            {
+              "label": "改变方向",
+              "text": "另设假设与验证，不凭单条内容决定"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "复盘方案二",
+          "rows": [
+            {
+              "label": "先看",
+              "text": "这条播放量远高于方法教程"
+            },
+            {
+              "label": "再查",
+              "text": "不必区分新关注者是谁"
+            },
+            {
+              "label": "下一步",
+              "text": "所有栏目马上改成同类萌宠内容"
+            },
+            {
+              "label": "改变方向",
+              "text": "用单条播放直接代表商业需求"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "内容增长同时看传播、受众匹配与后续价值，不以单条热度替代定位判断。",
+      "tip": "如果新方向也有明确需求证据，怎样做一次小规模比较？",
+      "coachOpening": [
+        "内容增长同时看传播、受众匹配与后续价值，不以单条热度替代定位判断。",
+        "如果新方向也有明确需求证据，怎样做一次小规模比较？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 品牌策略",
+          "url": "https://mailchimp.com/resources/how-to-build-a-brand-strategy/"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "labels": [
+        "核对受众与价值，再决定借鉴或转向",
+        "仅凭单条播放改变整个账号定位"
+      ],
+      "why": "高播放可能说明内容有传播力，却不自动证明适合当前品牌。可以研究它的开头或叙事，但转向应重新验证受众与价值。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "一条跑题内容爆了，账号就该转向吗？",
+          "brief": "换一个角度观察：账号目标是吸引有整理任务的小团队。一次随机萌宠内容播放很高，但后续关注者很少使用产品。哪份下一步判断更有依据？",
+          "correct": 0,
+          "why": "高播放可能说明内容有传播力，却不自动证明适合当前品牌。可以研究它的开头或叙事，但转向应重新验证受众与价值。"
+        }
+      ]
+    },
+    {
+      "id": 93,
+      "chapter": 10,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "内容钩子与价值兑现",
+      "title": "开头吸引人，为什么反而失去信任？",
+      "brief": "教程面向需要核对会议待办的团队。哪版短视频更能兼顾吸引注意、可信表达与下一步行动？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "story",
+          "tag": "短视频脚本",
+          "title": "短视频脚本二",
+          "rows": [
+            {
+              "label": "开头",
+              "text": "用了它，团队再也不需要整理会议！"
+            },
+            {
+              "label": "中段",
+              "text": "连续展示夸张反应和倒计时"
+            },
+            {
+              "label": "品牌",
+              "text": "只在最后出现，未展示实际结果"
+            },
+            {
+              "label": "结尾",
+              "text": "错过今天，你就永远落后"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "story",
+          "tag": "短视频脚本",
+          "title": "短视频脚本一",
+          "rows": [
+            {
+              "label": "开头",
+              "text": "录音里提到的任务，你会漏掉哪一条？"
+            },
+            {
+              "label": "中段",
+              "text": "展示两处容易漏掉的待办，再演示核对过程"
+            },
+            {
+              "label": "品牌",
+              "text": "工具出现时说明可辅助整理，仍需人工确认"
+            },
+            {
+              "label": "结尾",
+              "text": "用示例试一次，看看是否适合你的任务"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "开头引起相关问题，正文兑现价值，结尾连接适当行动。",
+      "tip": "如果展示产品会打断故事，你会怎样调整结构？",
+      "coachOpening": [
+        "开头引起相关问题，正文兑现价值，结尾连接适当行动。",
+        "如果展示产品会打断故事，你会怎样调整结构？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 品牌策略",
+          "url": "https://mailchimp.com/resources/how-to-build-a-brand-strategy/"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "labels": [
+        "用夸张承诺和倒计时推动点击",
+        "用实际示例兑现开头，再给自然行动"
+      ],
+      "why": "吸引注意后要交付与开头一致的价值。真实演示与限制有助于判断适用性；情绪、快剪与悬念也可使用，但不能替代证明或制造无依据的承诺。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "开头吸引人，为什么反而失去信任？",
+          "brief": "换一个角度观察：教程面向需要核对会议待办的团队。哪版短视频更能兼顾吸引注意、可信表达与下一步行动？",
+          "correct": 1,
+          "why": "吸引注意后要交付与开头一致的价值。真实演示与限制有助于判断适用性；情绪、快剪与悬念也可使用，但不能替代证明或制造无依据的承诺。"
+        }
+      ]
+    },
+    {
+      "id": 94,
+      "chapter": 10,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "内容栏目与冷启动验证",
+      "title": "给新品牌安排首批八条内容",
+      "brief": "拾页只有两人维护账号，既能演示产品，也能回答团队整理信息的问题。八条是本题练习范围，不是起号规则。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "可用素材",
+          "rows": [
+            {
+              "label": "方法",
+              "text": "三类常见待办整理问题"
+            },
+            {
+              "label": "演示",
+              "text": "两段可公开的虚构录音示例"
+            },
+            {
+              "label": "答疑",
+              "text": "首次使用与导出相关的问题"
+            },
+            {
+              "label": "目标",
+              "text": "找到愿意尝试并反馈的目标团队"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "内容计划连接持续供给、受众价值与验证，不只是填满发布日历。",
+      "tip": "哪类内容既值得重复制作，又最能带来有效学习？",
+      "coachOpening": [
+        "内容计划连接持续供给、受众价值与验证，不只是填满发布日历。",
+        "哪类内容既值得重复制作，又最能带来有效学习？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 品牌策略",
+          "url": "https://mailchimp.com/resources/how-to-build-a-brand-strategy/"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "prompt": "安排八条内容，至少包含两个可持续栏目，标明各自的受众、观看价值和想验证的问题，并说明如何复盘。",
+      "rubric": [
+        "内容围绕明确受众与可持续承诺组织",
+        "至少两个栏目有不同且相关的价值",
+        "用受众反馈与后续行为复盘，而不把条数当成功标准"
+      ],
+      "reference": "可用整理方法、产品示例与问题答复三类栏目，分别解决任务理解、使用判断和卡点；为每条记录相关评论、主页访问和合格试用，再决定继续哪些选题。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "给新品牌安排首批八条内容",
+          "prompt": "请结合案例说明：安排八条内容，至少包含两个可持续栏目，标明各自的受众、观看价值和想验证的问题，并说明如何复盘。"
+        }
+      ]
+    },
+    {
+      "id": 95,
+      "chapter": 10,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "内容结构与自然品牌表达",
+      "title": "把功能介绍改成值得看完的内容",
+      "brief": "原稿只列出“识别、总结、分类、导出”。团队希望观众知道工具能帮助什么任务。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "可证明的产品事实",
+          "rows": [
+            {
+              "label": "输入",
+              "text": "一段多人讨论的录音"
+            },
+            {
+              "label": "输出",
+              "text": "可核对的待办清单"
+            },
+            {
+              "label": "限制",
+              "text": "可能遗漏，用户需要确认"
+            },
+            {
+              "label": "行动",
+              "text": "可使用示例体验"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "内容结构应帮助观众理解价值并判断是否行动。",
+      "tip": "把这条内容从短视频改成搜索笔记，你会改变哪些信息顺序？",
+      "coachOpening": [
+        "内容结构应帮助观众理解价值并判断是否行动。",
+        "把这条内容从短视频改成搜索笔记，你会改变哪些信息顺序？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 品牌策略",
+          "url": "https://mailchimp.com/resources/how-to-build-a-brand-strategy/"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "prompt": "写出开头、核心证明和结尾行动，说明品牌在哪个时刻出现，以及怎样避免正文与标题承诺不一致。",
+      "rubric": [
+        "开头与受众真实任务相关",
+        "正文用已知事实兑现价值并保留限制",
+        "品牌与行动自然衔接，不靠无依据承诺"
+      ],
+      "reference": "可从“这次会议到底谁要做什么”开始，展示原录音与清单的对应，再说明核对步骤；结尾提供示例体验入口。品牌在展示解决过程时出现，不只最后贴标。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "把功能介绍改成值得看完的内容",
+          "prompt": "请结合案例说明：写出开头、核心证明和结尾行动，说明品牌在哪个时刻出现，以及怎样避免正文与标题承诺不一致。"
+        }
+      ]
+    },
+    {
+      "id": 96,
+      "chapter": 10,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "表达主体与持续供给",
+      "title": "品牌账号和创始人账号，谁来讲？",
+      "brief": "创始人懂研究方法，但每周只能出镜一次；团队可以持续录制屏幕演示和答疑。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "现有能力",
+          "rows": [
+            {
+              "label": "创始人",
+              "text": "有观点与实践，可少量出镜"
+            },
+            {
+              "label": "团队",
+              "text": "可持续制作方法、演示与服务答复"
+            },
+            {
+              "label": "受众",
+              "text": "希望了解方法，也关心工具是否可信"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "表达主体的选择要匹配可信证据、持续供给和团队资源。",
+      "tip": "如果创始人暂时不能出镜，哪些内容仍然成立？",
+      "coachOpening": [
+        "表达主体的选择要匹配可信证据、持续供给和团队资源。",
+        "如果创始人暂时不能出镜，哪些内容仍然成立？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 品牌策略",
+          "url": "https://mailchimp.com/resources/how-to-build-a-brand-strategy/"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "prompt": "提出品牌账号、创始人账号或组合方案，说明信任来自哪里、怎样持续供给，以及怎样降低对个人时间的依赖。",
+      "rubric": [
+        "选择与素材、可信度和资源匹配",
+        "说明持续内容分工与品牌承诺",
+        "允许不同主体组合，并提出验证方式"
+      ],
+      "reference": "可由品牌账号稳定承接演示与服务，创始人定期讲方法并整理成可复用素材。也可先做单账号验证，但不能假设创始人出镜必然带来信任或增长。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "品牌账号和创始人账号，谁来讲？",
+          "prompt": "请结合案例说明：提出品牌账号、创始人账号或组合方案，说明信任来自哪里、怎样持续供给，以及怎样降低对个人时间的依赖。"
+        }
+      ]
+    },
+    {
+      "id": 97,
+      "chapter": 10,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "创作者匹配与合作简报",
+      "title": "合作创作者，为什么不只看粉丝数？",
+      "brief": "两位创作者都可介绍拾页。一位粉丝多但内容与办公无关，另一位规模较小，常做团队工作流演示。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "合作材料",
+          "rows": [
+            {
+              "label": "创作者甲",
+              "text": "粉丝多，评论主要围绕娱乐话题"
+            },
+            {
+              "label": "创作者乙",
+              "text": "规模较小，有具体工作流讨论"
+            },
+            {
+              "label": "待核实",
+              "text": "受众关联、真实体验、内容能力、报价与合作方式"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "创作者合作需要受众关联、可信表达和目标一致的评价。",
+      "tip": "若小账号报价更高，你会补看什么证据？",
+      "coachOpening": [
+        "创作者合作需要受众关联、可信表达和目标一致的评价。",
+        "若小账号报价更高，你会补看什么证据？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Mailchimp · 品牌策略",
+          "url": "https://mailchimp.com/resources/how-to-build-a-brand-strategy/"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "prompt": "说明先核查哪些证据，再写一份简短合作要求，涵盖真实体验、产品限制、合作关系说明与评价方式。",
+      "rubric": [
+        "用受众、内容与目标匹配判断，而非粉丝数单项",
+        "合作内容基于真实体验和可证明事实",
+        "说明合作关系并评价有效结果，允许不同合理选择"
+      ],
+      "reference": "可先核查受众任务与评论质量，再看实际演示能力、费用和承接方式。合作前提供真实体验和限制，不要求虚构好评；按场景说明合作关系，观察合格访问与试用质量。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "合作创作者，为什么不只看粉丝数？",
+          "prompt": "请结合案例说明：说明先核查哪些证据，再写一份简短合作要求，涵盖真实体验、产品限制、合作关系说明与评价方式。"
+        }
+      ]
+    },
+    {
+      "id": 98,
+      "chapter": 11,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "搜索意图与推荐发现",
+      "title": "用户正在搜答案，你却只安排刷屏？",
+      "brief": "访谈发现，目标团队经常搜索“会议待办怎么整理”，也会看方法类短视频。首轮重点是承接已有任务，哪份计划更匹配？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "渠道计划一",
+          "rows": [
+            {
+              "label": "搜索内容",
+              "text": "用真实问题做标题，给出方法、示例与适用边界"
+            },
+            {
+              "label": "推荐内容",
+              "text": "用一段具体情境引导了解"
+            },
+            {
+              "label": "承接",
+              "text": "进入同一份清楚的示例与试用说明"
+            },
+            {
+              "label": "判断",
+              "text": "比较带任务访问与合格试用"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "渠道计划二",
+          "rows": [
+            {
+              "label": "搜索内容",
+              "text": "暂不回应用户已经在搜的问题"
+            },
+            {
+              "label": "推荐内容",
+              "text": "主要采购与任务无关的热门曝光"
+            },
+            {
+              "label": "承接",
+              "text": "统一跳到宽泛品牌首页"
+            },
+            {
+              "label": "判断",
+              "text": "只看总曝光是否扩大"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "按用户发现、搜索与决策的行为证据选择渠道组合。",
+      "tip": "如果新品类还没有明确搜索需求，应如何调整比重？",
+      "coachOpening": [
+        "按用户发现、搜索与决策的行为证据选择渠道组合。",
+        "如果新品类还没有明确搜索需求，应如何调整比重？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "小红书 · 官方种草学",
+          "url": "https://xue.xiaohongshu.com/"
+        },
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "腾讯广告 · 视频号与公私域协作（2024 概念资料）",
+          "url": "https://training.tencentads.com/uploads/202406/owOSZqwE_qFRhqg.pdf"
+        }
+      ],
+      "labels": [
+        "优先回答已知搜索问题，并组合推荐发现",
+        "忽略已有需求，只采购泛曝光"
+      ],
+      "why": "题设已有主动搜索证据，应让相关内容可被找到并兑现问题。推荐也有作用，但不能用泛曝光替代承接现有任务。平台都可能承担不止一种功能。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "用户正在搜答案，你却只安排刷屏？",
+          "brief": "换一个角度观察：访谈发现，目标团队经常搜索“会议待办怎么整理”，也会看方法类短视频。首轮重点是承接已有任务，哪份计划更匹配？",
+          "correct": 0,
+          "why": "题设已有主动搜索证据，应让相关内容可被找到并兑现问题。推荐也有作用，但不能用泛曝光替代承接现有任务。平台都可能承担不止一种功能。"
+        }
+      ]
+    },
+    {
+      "id": 99,
+      "chapter": 11,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "种草与意向承接",
+      "title": "收藏很多，为什么问的人很少？",
+      "brief": "一篇整理教程在小红书风格的案例页获得很多收藏，但主页没说工具适合谁。团队希望更多合适的人尝试产品，哪份改法更有依据？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "改进方案二",
+          "rows": [
+            {
+              "label": "保留",
+              "text": "全部现有承接信息不变"
+            },
+            {
+              "label": "补充",
+              "text": "更频繁要求点赞和收藏"
+            },
+            {
+              "label": "行动",
+              "text": "把所有收藏都计作购买意向"
+            },
+            {
+              "label": "检验",
+              "text": "收藏提高就认定商业目标完成"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "改进方案一",
+          "rows": [
+            {
+              "label": "保留",
+              "text": "教程本身的实用步骤"
+            },
+            {
+              "label": "补充",
+              "text": "主页说明适合的任务、演示与限制"
+            },
+            {
+              "label": "行动",
+              "text": "在允许的位置提供清楚的了解路径"
+            },
+            {
+              "label": "检验",
+              "text": "观察相关访问、问题与合格试用"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "区分内容价值信号、产品意向与真实转化，再寻找连接缺口。",
+      "tip": "如果收藏者确实没有产品需求，下一轮选题会怎样改变？",
+      "coachOpening": [
+        "区分内容价值信号、产品意向与真实转化，再寻找连接缺口。",
+        "如果收藏者确实没有产品需求，下一轮选题会怎样改变？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "小红书 · 官方种草学",
+          "url": "https://xue.xiaohongshu.com/"
+        },
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "腾讯广告 · 视频号与公私域协作（2024 概念资料）",
+          "url": "https://training.tencentads.com/uploads/202406/owOSZqwE_qFRhqg.pdf"
+        }
+      ],
+      "labels": [
+        "继续扩大收藏并将其视为成交意向",
+        "补齐产品适用信息和可行承接路径"
+      ],
+      "why": "收藏可以反映内容保存价值，不必然代表产品需求。应检查受众与承接，但也不能预设所有收藏者都应购买。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "收藏很多，为什么问的人很少？",
+          "brief": "换一个角度观察：一篇整理教程在小红书风格的案例页获得很多收藏，但主页没说工具适合谁。团队希望更多合适的人尝试产品，哪份改法更有依据？",
+          "correct": 1,
+          "why": "收藏可以反映内容保存价值，不必然代表产品需求。应检查受众与承接，但也不能预设所有收藏者都应购买。"
+        }
+      ]
+    },
+    {
+      "id": 100,
+      "chapter": 11,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "传播承诺与后续体验",
+      "title": "短视频很热闹，直播间为什么接不住？",
+      "brief": "短视频说“人工核对待办很轻松”，直播却只卖一套未经介绍的高价服务，进入后大量用户离开。哪份修复更接近核心问题？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "链路调整一",
+          "rows": [
+            {
+              "label": "内容",
+              "text": "保留真实待办核对演示"
+            },
+            {
+              "label": "直播",
+              "text": "先兑现演示，再清楚介绍可选服务"
+            },
+            {
+              "label": "价格",
+              "text": "提前说明服务范围与收费条件"
+            },
+            {
+              "label": "复盘",
+              "text": "按进入来源观察相关咨询和离开原因"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "链路调整二",
+          "rows": [
+            {
+              "label": "内容",
+              "text": "继续增加便宜工具的暗示"
+            },
+            {
+              "label": "直播",
+              "text": "继续只推高价服务"
+            },
+            {
+              "label": "价格",
+              "text": "到下单前才解释服务差异"
+            },
+            {
+              "label": "复盘",
+              "text": "认为离开都是流量质量差"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "从内容到咨询、交易的每一段，都应兑现前面建立的预期。",
+      "tip": "若用户明确想买的是服务而非工具，前端应如何介绍？",
+      "coachOpening": [
+        "从内容到咨询、交易的每一段，都应兑现前面建立的预期。",
+        "若用户明确想买的是服务而非工具，前端应如何介绍？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "小红书 · 官方种草学",
+          "url": "https://xue.xiaohongshu.com/"
+        },
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "腾讯广告 · 视频号与公私域协作（2024 概念资料）",
+          "url": "https://training.tencentads.com/uploads/202406/owOSZqwE_qFRhqg.pdf"
+        }
+      ],
+      "labels": [
+        "让短视频、直播与收费承诺对齐",
+        "继续扩大前端吸引力，后端保持原样"
+      ],
+      "why": "用户被一种承诺吸引后遇到另一种产品，可能造成预期落差。应核查来源与离开原因，并先修复内容和承接的不一致，而非一概归因流量。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "短视频很热闹，直播间为什么接不住？",
+          "brief": "换一个角度观察：短视频说“人工核对待办很轻松”，直播却只卖一套未经介绍的高价服务，进入后大量用户离开。哪份修复更接近核心问题？",
+          "correct": 0,
+          "why": "用户被一种承诺吸引后遇到另一种产品，可能造成预期落差。应核查来源与离开原因，并先修复内容和承接的不一致，而非一概归因流量。"
+        }
+      ]
+    },
+    {
+      "id": 101,
+      "chapter": 11,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "连接数量与持续服务",
+      "title": "加了微信，就完成了转化吗？",
+      "brief": "活动带来一批自愿添加服务联系人的试用者。目标是帮助合适团队完成使用，哪份后续安排更合理？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "承接方案二",
+          "rows": [
+            {
+              "label": "约定",
+              "text": "添加后默认接受所有营销通知"
+            },
+            {
+              "label": "分情况",
+              "text": "所有人统一进入促销群"
+            },
+            {
+              "label": "服务",
+              "text": "每天重复同一购买口号"
+            },
+            {
+              "label": "结果",
+              "text": "添加成功即全部计为使用成功"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "承接方案一",
+          "rows": [
+            {
+              "label": "约定",
+              "text": "说明会提供什么帮助与联系频率"
+            },
+            {
+              "label": "分情况",
+              "text": "区分未上手、受阻与已有稳定体验的人"
+            },
+            {
+              "label": "服务",
+              "text": "提供相应支持并记录产品问题"
+            },
+            {
+              "label": "结果",
+              "text": "看任务完成与后续使用，不只看添加数"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "渠道承接要延续用户任务与服务约定，并连接反馈和产品改进。",
+      "tip": "这批人中谁最需要产品支持，谁适合暂缓联系？",
+      "coachOpening": [
+        "渠道承接要延续用户任务与服务约定，并连接反馈和产品改进。",
+        "这批人中谁最需要产品支持，谁适合暂缓联系？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "小红书 · 官方种草学",
+          "url": "https://xue.xiaohongshu.com/"
+        },
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "腾讯广告 · 视频号与公私域协作（2024 概念资料）",
+          "url": "https://training.tencentads.com/uploads/202406/owOSZqwE_qFRhqg.pdf"
+        }
+      ],
+      "labels": [
+        "把添加联系人视为最终结果",
+        "按任务状态提供持续服务"
+      ],
+      "why": "添加联系人只建立了连接，后续仍要兑现服务、尊重选择和检查实际价值。它可以是某次活动的中间目标，但不等于产品成功使用。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "加了微信，就完成了转化吗？",
+          "brief": "换一个角度观察：活动带来一批自愿添加服务联系人的试用者。目标是帮助合适团队完成使用，哪份后续安排更合理？",
+          "correct": 1,
+          "why": "添加联系人只建立了连接，后续仍要兑现服务、尊重选择和检查实际价值。它可以是某次活动的中间目标，但不等于产品成功使用。"
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "chapter": 11,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "国内渠道选择",
+      "title": "选一个主渠道和一个承接渠道",
+      "brief": "材料显示目标团队会在小红书搜索整理方法，也会在 B 站看较长的工具演示；团队能持续做图文，但暂时无法直播。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "渠道材料",
+          "rows": [
+            {
+              "label": "用户行为",
+              "text": "搜索问题后，常进一步看完整演示"
+            },
+            {
+              "label": "制作能力",
+              "text": "每周两篇图文、一段屏幕演示"
+            },
+            {
+              "label": "服务能力",
+              "text": "可以在约定时间回答试用问题"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "渠道选择由受众行为、内容能力和承接条件共同决定。",
+      "tip": "如果第二周发现搜索访问少，但演示带来高质量试用，你会怎样调整？",
+      "coachOpening": [
+        "渠道选择由受众行为、内容能力和承接条件共同决定。",
+        "如果第二周发现搜索访问少，但演示带来高质量试用，你会怎样调整？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "小红书 · 官方种草学",
+          "url": "https://xue.xiaohongshu.com/"
+        },
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "腾讯广告 · 视频号与公私域协作（2024 概念资料）",
+          "url": "https://training.tencentads.com/uploads/202406/owOSZqwE_qFRhqg.pdf"
+        }
+      ],
+      "prompt": "提出主渠道和承接安排，说明先做什么、暂缓什么，以及要验证哪些受众与转化假设。",
+      "rubric": [
+        "根据题设用户行为与资源选择渠道",
+        "说明内容与承接分工和可行入口",
+        "提出有效结果的验证口径，允许不同有依据的组合"
+      ],
+      "reference": "可先围绕搜索图文建立方法入口，再用完整演示和清楚的试用说明承接；也可以优先验证深度演示，但要说明制作与触达成本。实际组件和导流路径须按平台与账号当期能力检查。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "选一个主渠道和一个承接渠道",
+          "prompt": "请结合案例说明：提出主渠道和承接安排，说明先做什么、暂缓什么，以及要验证哪些受众与转化假设。"
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "chapter": 11,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "转化链路与阻力",
+      "title": "从看见到试用，中间漏了哪一步？",
+      "brief": "一条短视频介绍了访谈整理，点击后进入只有品牌口号的首页，试用入口藏在多级菜单里。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "journey",
+          "tag": "案例记录",
+          "title": "当前路径",
+          "rows": [
+            {
+              "label": "看见",
+              "text": "视频展示访谈整理任务"
+            },
+            {
+              "label": "进入",
+              "text": "品牌首页没有示例与适用说明"
+            },
+            {
+              "label": "尝试",
+              "text": "用户先注册，再到菜单中找上传入口"
+            },
+            {
+              "label": "反馈",
+              "text": "试用失败者不知道向哪里求助"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "路径优化围绕预期、信息与行动阻力组织，并尊重渠道能力。",
+      "tip": "如果用户卡在试用结果而非入口，优化重点应怎样改变？",
+      "coachOpening": [
+        "路径优化围绕预期、信息与行动阻力组织，并尊重渠道能力。",
+        "如果用户卡在试用结果而非入口，优化重点应怎样改变？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "小红书 · 官方种草学",
+          "url": "https://xue.xiaohongshu.com/"
+        },
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "腾讯广告 · 视频号与公私域协作（2024 概念资料）",
+          "url": "https://training.tencentads.com/uploads/202406/owOSZqwE_qFRhqg.pdf"
+        }
+      ],
+      "prompt": "重排看见、了解、尝试与求助的路径，指出至少两处阻力，说明怎样验证改善，而不假设任何平台都允许同样的跳转。",
+      "rubric": [
+        "指出具体路径阻力并保留承诺一致",
+        "改法匹配实际入口和服务能力",
+        "用阶段行为与任务完成验证"
+      ],
+      "reference": "可先承接到相符的演示与限制说明，提供清楚的试用步骤和求助方式；检查是否需要提前注册，并在允许的组件与入口内实现。比较相关访问到成功试用的流失，辅以用户任务观察。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "从看见到试用，中间漏了哪一步？",
+          "prompt": "请结合案例说明：重排看见、了解、尝试与求助的路径，指出至少两处阻力，说明怎样验证改善，而不假设任何平台都允许同样的跳转。"
+        }
+      ]
+    },
+    {
+      "id": 104,
+      "chapter": 11,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "跨渠道改编",
+      "title": "一份演示，怎样变成三个渠道的内容？",
+      "brief": "同一段虚构访谈录音展示了待办提取与人工核对。你要分别用于搜索笔记、短视频和较长演示。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "共同事实",
+          "rows": [
+            {
+              "label": "产品",
+              "text": "可生成待办草稿，需要人工确认"
+            },
+            {
+              "label": "证明",
+              "text": "原句与待办逐条对应"
+            },
+            {
+              "label": "差异",
+              "text": "搜索者带着问题，刷视频的人未必已了解任务"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "跨渠道改编调整阅读与决策路径，而非机械复制同一段内容。",
+      "tip": "哪些信息适合短视频略去，但必须在试用前讲清？",
+      "coachOpening": [
+        "跨渠道改编调整阅读与决策路径，而非机械复制同一段内容。",
+        "哪些信息适合短视频略去，但必须在试用前讲清？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "小红书 · 官方种草学",
+          "url": "https://xue.xiaohongshu.com/"
+        },
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "腾讯广告 · 视频号与公私域协作（2024 概念资料）",
+          "url": "https://training.tencentads.com/uploads/202406/owOSZqwE_qFRhqg.pdf"
+        }
+      ],
+      "prompt": "分别写三种内容的开头与信息顺序，说明哪些事实和承诺保持一致，以及每种内容的下一步行动。",
+      "rubric": [
+        "按用户情境调整内容结构与密度",
+        "保持产品事实、限制与品牌承诺一致",
+        "为不同内容设计自然且可行的行动"
+      ],
+      "reference": "搜索笔记可直接回应问题并列核对步骤；短视频用具体易漏任务引入；长演示展示完整过程与边界。三者都不隐去人工确认，行动可分别是保存方法、查看完整示例或试做。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "一份演示，怎样变成三个渠道的内容？",
+          "prompt": "请结合案例说明：分别写三种内容的开头与信息顺序，说明哪些事实和承诺保持一致，以及每种内容的下一步行动。"
+        }
+      ]
+    },
+    {
+      "id": 105,
+      "chapter": 11,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "线索质量与服务衔接",
+      "title": "咨询来了，为什么还是没成交？",
+      "brief": "本周有二十条咨询：六条问与工具无关的岗位，八条想知道能否处理多人录音，六条反馈试用后导出失败。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "咨询记录",
+          "title": "虚构咨询分类",
+          "rows": [
+            {
+              "label": "6 条",
+              "text": "受众与任务不匹配"
+            },
+            {
+              "label": "8 条",
+              "text": "需要适用范围与演示"
+            },
+            {
+              "label": "6 条",
+              "text": "产品使用被导出阻断"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "获客、服务与产品共同影响结果，先按原因分类再行动。",
+      "tip": "如果咨询总数下降，但合格试用增加，如何评价？",
+      "coachOpening": [
+        "获客、服务与产品共同影响结果，先按原因分类再行动。",
+        "如果咨询总数下降，但合格试用增加，如何评价？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "小红书 · 官方种草学",
+          "url": "https://xue.xiaohongshu.com/"
+        },
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "腾讯广告 · 视频号与公私域协作（2024 概念资料）",
+          "url": "https://training.tencentads.com/uploads/202406/owOSZqwE_qFRhqg.pdf"
+        }
+      ],
+      "prompt": "区分至少两种原因，提出对应的内容、服务或产品动作，并说明怎样验证；不要把所有未成交都归给销售或素材。",
+      "rubric": [
+        "按具体证据区分受众、信息与使用阻碍",
+        "动作与原因对应并能执行",
+        "验证质量和任务结果，不只看咨询总量"
+      ],
+      "reference": "无关咨询先查前端选题与介绍是否引错人；多人录音需求提供边界与示例；导出失败进入产品修复和回访。分别观察合格咨询、成功试用和阻断解决情况，再讨论成交。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "咨询来了，为什么还是没成交？",
+          "prompt": "请结合案例说明：区分至少两种原因，提出对应的内容、服务或产品动作，并说明怎样验证；不要把所有未成交都归给销售或素材。"
+        }
+      ]
+    },
+    {
+      "id": 106,
+      "chapter": 12,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "业务目标与优化事件",
+      "title": "想要有效咨询，为什么只优化点击？",
+      "brief": "本轮目标是获得确有团队任务的有效咨询，团队已能记录该事件。哪份投放设置更接近目标？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "投放简报",
+          "title": "设置方案一",
+          "rows": [
+            {
+              "label": "主要目标",
+              "text": "有效咨询：有明确团队任务且可提供后续服务"
+            },
+            {
+              "label": "优化信号",
+              "text": "记录并核对有效咨询事件"
+            },
+            {
+              "label": "辅助指标",
+              "text": "点击与访问用于发现上游阻力"
+            },
+            {
+              "label": "检验",
+              "text": "同窗口比较咨询质量与成本"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "投放简报",
+          "title": "设置方案二",
+          "rows": [
+            {
+              "label": "主要目标",
+              "text": "仍希望获得有效咨询"
+            },
+            {
+              "label": "优化信号",
+              "text": "只寻找最便宜的点击"
+            },
+            {
+              "label": "辅助指标",
+              "text": "不记录咨询是否匹配"
+            },
+            {
+              "label": "检验",
+              "text": "点击便宜就认定业务效果好"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "把业务结果、可记录事件和投放优化连接起来，并验证信号质量。",
+      "tip": "如果每天几乎没有有效咨询，你会怎样处理数据与阶段目标？",
+      "coachOpening": [
+        "把业务结果、可记录事件和投放优化连接起来，并验证信号质量。",
+        "如果每天几乎没有有效咨询，你会怎样处理数据与阶段目标？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "labels": [
+        "用已明确、可记录的有效咨询对齐目标",
+        "只优化便宜点击，并代替咨询质量"
+      ],
+      "why": "优化目标与可用信号应服务业务目标。若有效咨询事件不可靠，需要先修追踪或采用可解释的阶段目标；不能仅凭便宜点击认定有效获客。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "想要有效咨询，为什么只优化点击？",
+          "brief": "换一个角度观察：本轮目标是获得确有团队任务的有效咨询，团队已能记录该事件。哪份投放设置更接近目标？",
+          "correct": 0,
+          "why": "优化目标与可用信号应服务业务目标。若有效咨询事件不可靠，需要先修追踪或采用可解释的阶段目标；不能仅凭便宜点击认定有效获客。"
+        }
+      ]
+    },
+    {
+      "id": 107,
+      "chapter": 12,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "CPC 与广告转化成本",
+      "title": "点击更便宜，获客一定更便宜吗？",
+      "brief": "两组推广处于同一观察窗口，新付费客户已去重，产品、退款和新客价值相同。若本轮目标为获得新付费客户，选择广告花费效率更高的一组。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "投放数据",
+          "title": "推广组甲",
+          "rows": [
+            {
+              "label": "统计口径",
+              "text": "相同观察窗口，仅统计新付费客户"
+            },
+            {
+              "label": "其他条件",
+              "text": "产品、退款与新客价值相同"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "广告花费",
+              "value": "100 元",
+              "note": ""
+            },
+            {
+              "label": "点击",
+              "value": "100 次",
+              "note": ""
+            },
+            {
+              "label": "新付费客户",
+              "value": "1 人",
+              "note": ""
+            },
+            {
+              "label": "后续价值",
+              "value": "相同",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "投放数据",
+          "title": "推广组乙",
+          "rows": [
+            {
+              "label": "统计口径",
+              "text": "相同观察窗口，仅统计新付费客户"
+            },
+            {
+              "label": "其他条件",
+              "text": "产品、退款与新客价值相同"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "广告花费",
+              "value": "80 元",
+              "note": ""
+            },
+            {
+              "label": "点击",
+              "value": "40 次",
+              "note": ""
+            },
+            {
+              "label": "新付费客户",
+              "value": "4 人",
+              "note": ""
+            },
+            {
+              "label": "后续价值",
+              "value": "相同",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "不要把上游单价当最终效率；先统一转化事件、时间与新客口径，再比较。",
+      "tip": "如果乙组的后续退款明显更多，应怎样重新评价？",
+      "coachOpening": [
+        "不要把上游单价当最终效率；先统一转化事件、时间与新客口径，再比较。",
+        "如果乙组的后续退款明显更多，应怎样重新评价？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "labels": [
+        "甲组：点击单价较低，所以获客更有效",
+        "乙组：点击单价较高，但每位新付费客户广告花费较低"
+      ],
+      "why": "甲组 CPC 为 1 元，每位新付费客户广告花费为 100 元；乙组分别为 2 元和 20 元。本题乙更符合目标，但这些数据尚不证明长期稳定或广告增量，也不等于包含全部销售营销费用的 CAC。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "点击更便宜，获客一定更便宜吗？",
+          "brief": "换一个角度观察：两组推广处于同一观察窗口，新付费客户已去重，产品、退款和新客价值相同。若本轮目标为获得新付费客户，选择广告花费效率更高的一组。",
+          "correct": 1,
+          "why": "甲组 CPC 为 1 元，每位新付费客户广告花费为 100 元；乙组分别为 2 元和 20 元。本题乙更符合目标，但这些数据尚不证明长期稳定或广告增量，也不等于包含全部销售营销费用的 CAC。"
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "chapter": 12,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "计费、加热与优化目标",
+      "title": "内容加热，就等于购买优化了吗？",
+      "brief": "同事说：“既然都花钱推广，给内容加热和优化购买应该一样。”哪份说明更准确？题设中的两类配置如下。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "目标说明",
+          "title": "说明一",
+          "rows": [
+            {
+              "label": "内容配置",
+              "text": "以更多相关曝光、互动为目标"
+            },
+            {
+              "label": "购买配置",
+              "text": "以已记录的购买事件作为优化信号"
+            },
+            {
+              "label": "计费",
+              "text": "花费怎样计费，不等于系统寻找什么结果"
+            },
+            {
+              "label": "使用",
+              "text": "根据本轮目标和追踪条件选择"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "目标说明",
+          "title": "说明二",
+          "rows": [
+            {
+              "label": "内容配置",
+              "text": "只要付费就等于寻找购买用户"
+            },
+            {
+              "label": "购买配置",
+              "text": "可以不用定义购买与追踪"
+            },
+            {
+              "label": "计费",
+              "text": "用计费名称直接证明业务目标"
+            },
+            {
+              "label": "使用",
+              "text": "所有推广工具都按同一目标理解"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "区分怎样花费、系统优化什么，以及业务真正需要什么。",
+      "tip": "一次品牌认知活动，可以怎样合理评价加热效果？",
+      "coachOpening": [
+        "区分怎样花费、系统优化什么，以及业务真正需要什么。",
+        "一次品牌认知活动，可以怎样合理评价加热效果？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "labels": [
+        "区分计费方式、优化信号与业务目标",
+        "把所有付费推广都理解为购买优化"
+      ],
+      "why": "加热和广告都可服务营销，但实际目标和追踪条件可能不同。应读具体配置，而不是只凭工具名称或付费与否判断。CPM、CPC 等计费或成本口径也不直接等于优化目标。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "内容加热，就等于购买优化了吗？",
+          "brief": "换一个角度观察：同事说：“既然都花钱推广，给内容加热和优化购买应该一样。”哪份说明更准确？题设中的两类配置如下。",
+          "correct": 0,
+          "why": "加热和广告都可服务营销，但实际目标和追踪条件可能不同。应读具体配置，而不是只凭工具名称或付费与否判断。CPM、CPC 等计费或成本口径也不直接等于优化目标。"
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "chapter": 12,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "样本、延迟与放量判断",
+      "title": "刚有两单，就该立刻加大预算吗？",
+      "brief": "新素材首日花费很少，出现两笔订单，但退款与后续付费还没回传。团队希望决定是否大幅增加预算，哪份判断更稳妥？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "决策方案二",
+          "rows": [
+            {
+              "label": "先核查",
+              "text": "两单已经足够说明稳定盈利"
+            },
+            {
+              "label": "补充",
+              "text": "后续质量和延迟不影响判断"
+            },
+            {
+              "label": "下一步",
+              "text": "马上把预算扩大十倍"
+            },
+            {
+              "label": "加量条件",
+              "text": "任何新素材出两单都这样做"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "决策方案一",
+          "rows": [
+            {
+              "label": "先核查",
+              "text": "转化追踪、观察窗口和订单延迟"
+            },
+            {
+              "label": "补充",
+              "text": "新客质量、退款及更多可比样本"
+            },
+            {
+              "label": "下一步",
+              "text": "在预算上限内继续小规模验证"
+            },
+            {
+              "label": "加量条件",
+              "text": "成本与质量证据更充分后再判断"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "放量需要对成本、转化质量与不确定性的判断，而不只是短时出现订单。",
+      "tip": "什么情况即使样本还少，也应该先停止测试？",
+      "coachOpening": [
+        "放量需要对成本、转化质量与不确定性的判断，而不只是短时出现订单。",
+        "什么情况即使样本还少，也应该先停止测试？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "labels": [
+        "把两笔订单当作稳定效果并大幅加量",
+        "先核对口径与质量，再做有边界的验证"
+      ],
+      "why": "少量订单容易受偶然性、回传延迟和退款影响。继续验证不等于无休止等待，应预先约定预算、窗口与停止条件，也不应教授固定“几单必加量”的规则。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "刚有两单，就该立刻加大预算吗？",
+          "brief": "换一个角度观察：新素材首日花费很少，出现两笔订单，但退款与后续付费还没回传。团队希望决定是否大幅增加预算，哪份判断更稳妥？",
+          "correct": 1,
+          "why": "少量订单容易受偶然性、回传延迟和退款影响。继续验证不等于无休止等待，应预先约定预算、窗口与停止条件，也不应教授固定“几单必加量”的规则。"
+        }
+      ]
+    },
+    {
+      "id": 110,
+      "chapter": 12,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "有限预算下的投放验证",
+      "title": "写一份最小投放简报",
+      "brief": "拾页希望测试面向小团队的产品演示。现有两份素材和一个可记录合格试用的入口。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "现有条件",
+          "rows": [
+            {
+              "label": "业务目标",
+              "text": "合适的新团队完成首次有效整理"
+            },
+            {
+              "label": "素材",
+              "text": "情境演示与方法讲解各一份"
+            },
+            {
+              "label": "限制",
+              "text": "一周内观察，先设总花费上限"
+            },
+            {
+              "label": "待补",
+              "text": "追踪核对、目标受众与停止条件"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "把投放写成可执行、可观察、可停止的验证计划。",
+      "tip": "如果转化事件记录错了，继续积累流量有何问题？",
+      "coachOpening": [
+        "把投放写成可执行、可观察、可停止的验证计划。",
+        "如果转化事件记录错了，继续积累流量有何问题？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "prompt": "写清受众、价值、目标事件、素材、预算上限、观察窗口和停止条件，说明先要核查哪项追踪信息。",
+      "rubric": [
+        "目标与事件一致，口径清楚",
+        "测试与预算、资源边界匹配",
+        "有追踪核查和有条件的继续或停止判断"
+      ],
+      "reference": "可先明确合格团队与成功整理事件，测试回传无重复或遗漏，再比较两种内容假设；限定总花费和窗口，记录试用质量与卡点，不凭曝光或两笔订单承诺回报。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "写一份最小投放简报",
+          "prompt": "请结合案例说明：写清受众、价值、目标事件、素材、预算上限、观察窗口和停止条件，说明先要核查哪项追踪信息。"
+        }
+      ]
+    },
+    {
+      "id": 111,
+      "chapter": 12,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "创意测试与控制变量",
+      "title": "只有两份素材，怎样测才知道差别？",
+      "brief": "一份素材先展示用户困扰，另一份先展示产品结果。团队想知道哪种开头更适合当前受众。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "测试草案",
+          "rows": [
+            {
+              "label": "素材差异",
+              "text": "主要比较开头表达"
+            },
+            {
+              "label": "待统一",
+              "text": "目标、受众、投放窗口和后续承接"
+            },
+            {
+              "label": "观察",
+              "text": "观看、相关点击与合格试用"
+            },
+            {
+              "label": "注意",
+              "text": "投放环境本身也可能产生差异"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "素材测试要能解释差异来自哪里，并与目标结果相连。",
+      "tip": "如果开头提高了点击却降低了合格试用，可能是什么原因？",
+      "coachOpening": [
+        "素材测试要能解释差异来自哪里，并与目标结果相连。",
+        "如果开头提高了点击却降低了合格试用，可能是什么原因？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "prompt": "安排一次主要比较开头的测试，说明哪些条件保持可比、观察什么，以及何时仍不足以下结论。",
+      "rubric": [
+        "明确主要创意假设并尽量保持其他条件可比",
+        "同时考虑上游反应与目标转化质量",
+        "承认样本、分流与投放环境的不确定性"
+      ],
+      "reference": "可用相同主体内容与承接，只改开头，在可用的合理分流条件下比较；观察相关访问和合格试用，不把所有波动归给开头。样本不足或流量条件不一致时保留结论。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "只有两份素材，怎样测才知道差别？",
+          "prompt": "请结合案例说明：安排一次主要比较开头的测试，说明哪些条件保持可比、观察什么，以及何时仍不足以下结论。"
+        }
+      ]
+    },
+    {
+      "id": 112,
+      "chapter": 12,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "投放链路排查",
+      "title": "广告有人点，落地页没人继续",
+      "brief": "广告能吸引点击，但很多人进入后没有完成试用。团队只知道页面在部分手机上加载慢，广告还强调了页面未解释的功能。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "已知线索",
+          "rows": [
+            {
+              "label": "前端",
+              "text": "广告强调可核对的访谈待办"
+            },
+            {
+              "label": "落地",
+              "text": "品牌口号较多，功能边界说明不足"
+            },
+            {
+              "label": "设备",
+              "text": "部分手机加载慢"
+            },
+            {
+              "label": "流程",
+              "text": "注册后还需自行寻找试用入口"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "点击后的结果由追踪、承诺、页面和产品共同影响。",
+      "tip": "如果页面到达正常但注册少，你会进一步看什么？",
+      "coachOpening": [
+        "点击后的结果由追踪、承诺、页面和产品共同影响。",
+        "如果页面到达正常但注册少，你会进一步看什么？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "prompt": "给出排查顺序，区分至少两种可能原因，并说明怎样用事件或用户观察验证，而不是直接更换全部素材。",
+      "rubric": [
+        "根据具体线索提出可区分的假设",
+        "动作对应加载、承诺或流程等具体环节",
+        "设计阶段数据或任务观察验证"
+      ],
+      "reference": "先核对事件与页面可用性，按设备看加载和到达，再检查广告承诺与落地说明，观察注册到成功整理的卡点。每次修最关键问题并保留可比较口径，避免同时改动所有环节后无法解释。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "广告有人点，落地页没人继续",
+          "prompt": "请结合案例说明：给出排查顺序，区分至少两种可能原因，并说明怎样用事件或用户观察验证，而不是直接更换全部素材。"
+        }
+      ]
+    },
+    {
+      "id": 113,
+      "chapter": 12,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "预算与边际效果",
+      "title": "下一轮继续、换素材，还是停下来？",
+      "brief": "同一素材前两天表现较好，后三天每次合格试用花费上升，重复看到广告的人变多，试用质量暂时相近。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "案例记录",
+          "title": "分时段记录",
+          "rows": [
+            {
+              "label": "前两天",
+              "text": "每次合格试用广告花费 30 元"
+            },
+            {
+              "label": "后三天",
+              "text": "每次合格试用广告花费 55 元"
+            },
+            {
+              "label": "补充",
+              "text": "重复触达增加，转化回传窗口相同"
+            },
+            {
+              "label": "边界",
+              "text": "仍需排查人群、素材与投放环境"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "较早成本",
+              "value": "30 元",
+              "note": ""
+            },
+            {
+              "label": "较晚成本",
+              "value": "55 元",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "预算判断结合边际效果、质量、容量与不确定性。",
+      "tip": "如果成本上升但新客后续价值也提高，应怎样比较？",
+      "coachOpening": [
+        "预算判断结合边际效果、质量、容量与不确定性。",
+        "如果成本上升但新客后续价值也提高，应怎样比较？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "巨量学 · 广告目标与投放",
+          "url": "https://school.oceanengine.com/product_help/content/668400000006/121544"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "prompt": "提出有条件的下一轮安排：要补看什么、怎样控制预算，以及怎样区分素材疲劳与其他原因。",
+      "rubric": [
+        "注意边际成本与质量，不只看历史平均",
+        "根据证据提出补查和有限测试",
+        "给出预算边界与继续或停止条件"
+      ],
+      "reference": "可补看触达频次、受众变化和素材分层结果，设定可承受的成本和花费边界；小规模测试新的相关表达，同时排查回传与市场变化。成本上升并不能单独证明素材疲劳，也不支持无限加量。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "下一轮继续、换素材，还是停下来？",
+          "prompt": "请结合案例说明：提出有条件的下一轮安排：要补看什么、怎样控制预算，以及怎样区分素材疲劳与其他原因。"
+        }
+      ]
+    },
+    {
+      "id": 114,
+      "chapter": 13,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "本地化与使用情境",
+      "title": "翻成英文，就完成本地化了吗？",
+      "brief": "拾页准备先测试英国的小型研究团队。用户访谈显示他们关心英文访谈识别、数据处理说明和按月试用。选择更符合这些材料的方案。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "本地化简报",
+          "title": "页面方案一",
+          "rows": [
+            {
+              "label": "情境",
+              "text": "用当地团队能理解的英文访谈示例"
+            },
+            {
+              "label": "说明",
+              "text": "清楚展示产品边界与数据处理信息"
+            },
+            {
+              "label": "价格",
+              "text": "说明所用币种、周期及可用支付方式"
+            },
+            {
+              "label": "验证",
+              "text": "请目标市场用户完成一次理解与试用任务"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "本地化简报",
+          "title": "页面方案二",
+          "rows": [
+            {
+              "label": "情境",
+              "text": "把中文页面逐字翻译，保留不相关案例"
+            },
+            {
+              "label": "说明",
+              "text": "省略新用户提出的数据问题"
+            },
+            {
+              "label": "价格",
+              "text": "币种和付款周期沿用含糊写法"
+            },
+            {
+              "label": "验证",
+              "text": "英文语法正确即可视为完成"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "针对具体市场验证理解、信任与使用条件，再组织本地化表达。",
+      "tip": "如果没有本地团队成员，怎样获得第一轮可靠反馈？",
+      "coachOpening": [
+        "针对具体市场验证理解、信任与使用条件，再组织本地化表达。",
+        "如果没有本地团队成员，怎样获得第一轮可靠反馈？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Search Central · SEO 入门",
+          "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "labels": [
+        "按本地任务、信任与承接条件调整",
+        "只做文字翻译并沿用原有假设"
+      ],
+      "why": "语言只是本地化的一部分。应依据题设材料调整情境、证明与行动路径；不能用“英国用户都怎样”的推断代替研究。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "翻成英文，就完成本地化了吗？",
+          "brief": "换一个角度观察：拾页准备先测试英国的小型研究团队。用户访谈显示他们关心英文访谈识别、数据处理说明和按月试用。选择更符合这些材料的方案。",
+          "correct": 0,
+          "why": "语言只是本地化的一部分。应依据题设材料调整情境、证明与行动路径；不能用“英国用户都怎样”的推断代替研究。"
+        }
+      ]
+    },
+    {
+      "id": 115,
+      "chapter": 13,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "主动意图与需求发现",
+      "title": "用户在主动搜索，还是先要理解新品类？",
+      "brief": "目标市场的访谈表明，一批用户已在 Google 搜索访谈整理工具的具体比较。首轮希望承接这类任务，哪份方案更有依据？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "渠道方案二",
+          "rows": [
+            {
+              "label": "起点",
+              "text": "不看已知搜索问题"
+            },
+            {
+              "label": "渠道",
+              "text": "只因某平台热门就投泛人群信息流"
+            },
+            {
+              "label": "证明",
+              "text": "沿用无法回应选型的问题素材"
+            },
+            {
+              "label": "扩展",
+              "text": "以便宜曝光代表目标需求被承接"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "渠道方案一",
+          "rows": [
+            {
+              "label": "起点",
+              "text": "回答已经存在的具体比较问题"
+            },
+            {
+              "label": "渠道",
+              "text": "测试相关搜索内容或搜索广告"
+            },
+            {
+              "label": "证明",
+              "text": "给可核对演示与适用边界"
+            },
+            {
+              "label": "扩展",
+              "text": "信息流发现作为后续或并行假设"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "按具体需求与证据比较渠道，不按平台名称给固定答案。",
+      "tip": "如果用户尚不知道这类工具存在，首轮内容和渠道会怎样改变？",
+      "coachOpening": [
+        "按具体需求与证据比较渠道，不按平台名称给固定答案。",
+        "如果用户尚不知道这类工具存在，首轮内容和渠道会怎样改变？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Search Central · SEO 入门",
+          "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "labels": [
+        "仅凭平台热度选择泛曝光",
+        "先承接题设已知的具体搜索意图"
+      ],
+      "why": "题设中的主动需求值得优先回应，但并不意味着搜索永远优于信息流。Meta、TikTok 等渠道也可承担转化任务，选择应结合需求阶段、素材、成本与承接。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "用户在主动搜索，还是先要理解新品类？",
+          "brief": "换一个角度观察：目标市场的访谈表明，一批用户已在 Google 搜索访谈整理工具的具体比较。首轮希望承接这类任务，哪份方案更有依据？",
+          "correct": 1,
+          "why": "题设中的主动需求值得优先回应，但并不意味着搜索永远优于信息流。Meta、TikTok 等渠道也可承担转化任务，选择应结合需求阶段、素材、成本与承接。"
+        }
+      ]
+    },
+    {
+      "id": 116,
+      "chapter": 13,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "本地承接与信任",
+      "title": "点击来自目标市场，为什么仍没人买？",
+      "brief": "广告访问来自目标地区，但页面只显示不熟悉的币种，付款方式不可用，客服时间也未说明。哪份排查更合理？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "排查方案一",
+          "rows": [
+            {
+              "label": "流量",
+              "text": "继续核对用户任务与来源"
+            },
+            {
+              "label": "承接",
+              "text": "确认币种、支付、注册和产品可用性"
+            },
+            {
+              "label": "信任",
+              "text": "解释数据处理、服务时间与限制"
+            },
+            {
+              "label": "验证",
+              "text": "请目标用户完成一遍真实路径"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "排查方案二",
+          "rows": [
+            {
+              "label": "流量",
+              "text": "地区匹配即证明受众完全正确"
+            },
+            {
+              "label": "承接",
+              "text": "认为支付和语言细节无关紧要"
+            },
+            {
+              "label": "信任",
+              "text": "没有交易就增加更强促销承诺"
+            },
+            {
+              "label": "验证",
+              "text": "只继续扩大同类点击"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "出海转化要把受众需求、表达、信任和可完成的行动路径一起验证。",
+      "tip": "如果支付可用但用户仍不敢上传录音，你会补什么信息？",
+      "coachOpening": [
+        "出海转化要把受众需求、表达、信任和可完成的行动路径一起验证。",
+        "如果支付可用但用户仍不敢上传录音，你会补什么信息？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Search Central · SEO 入门",
+          "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "labels": [
+        "同时核对任务、支付与信任路径",
+        "用地区匹配替代整个购买路径判断"
+      ],
+      "why": "地区只是一项条件，不足以证明需求、理解和支付都成立。应查实际路径，并依据用户任务决定修复优先级，而不是只加流量或猜测国家特征。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "点击来自目标市场，为什么仍没人买？",
+          "brief": "换一个角度观察：广告访问来自目标地区，但页面只显示不熟悉的币种，付款方式不可用，客服时间也未说明。哪份排查更合理？",
+          "correct": 0,
+          "why": "地区只是一项条件，不足以证明需求、理解和支付都成立。应查实际路径，并依据用户任务决定修复优先级，而不是只加流量或猜测国家特征。"
+        }
+      ]
+    },
+    {
+      "id": 117,
+      "chapter": 13,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "合作关系披露的市场语境",
+      "title": "免费送了产品，也能算独立推荐吗？",
+      "brief": "题设明确：创作者面向美国消费者介绍品牌赠送的免费产品。哪份发布安排更符合真实、清楚的合作关系表达？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "创作者合作",
+          "title": "发布安排二",
+          "rows": [
+            {
+              "label": "体验",
+              "text": "可不使用，只复述品牌保证"
+            },
+            {
+              "label": "关系",
+              "text": "认为没付现金就无需说明赠品"
+            },
+            {
+              "label": "表达",
+              "text": "宣称完全独立、自费购买"
+            },
+            {
+              "label": "核对",
+              "text": "把模糊缩写藏在大量标签中"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "创作者合作",
+          "title": "发布安排一",
+          "rows": [
+            {
+              "label": "体验",
+              "text": "创作者实际使用产品再讲经验"
+            },
+            {
+              "label": "关系",
+              "text": "在推荐内容附近清楚说明品牌赠送"
+            },
+            {
+              "label": "表达",
+              "text": "保留真实观点，不要求虚构优点"
+            },
+            {
+              "label": "核对",
+              "text": "按美国情境与当期要求检查披露"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "合作内容应说明足以影响判断的关系，并保持体验与产品事实真实。",
+      "tip": "为什么只在个人主页写一次合作说明，可能不足以解释某条推荐？",
+      "coachOpening": [
+        "合作内容应说明足以影响判断的关系，并保持体验与产品事实真实。",
+        "为什么只在个人主页写一次合作说明，可能不足以解释某条推荐？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "美国 FTC · 创作者合作关系披露（美国情境）",
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers"
+        }
+      ],
+      "labels": [
+        "因没有现金报酬而隐去品牌关系",
+        "真实体验并清楚说明赠送关系"
+      ],
+      "why": "在本题美国消费者情境下，免费或折扣产品也可能形成应披露的实质关系；应让人容易看见并理解，不能冒充自费独立体验。其他市场需要另查对应规则，不把美国要求泛化为全球统一规则。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "免费送了产品，也能算独立推荐吗？",
+          "brief": "换一个角度观察：题设明确：创作者面向美国消费者介绍品牌赠送的免费产品。哪份发布安排更符合真实、清楚的合作关系表达？",
+          "correct": 1,
+          "why": "在本题美国消费者情境下，免费或折扣产品也可能形成应披露的实质关系；应让人容易看见并理解，不能冒充自费独立体验。其他市场需要另查对应规则，不把美国要求泛化为全球统一规则。"
+        }
+      ]
+    },
+    {
+      "id": 118,
+      "chapter": 13,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "市场选择与资源边界",
+      "title": "只选一个市场，怎样做首轮验证？",
+      "brief": "团队只能支持中文和英文，客服按北京时间工作，还没有验证海外支付。有人提议直接面向“欧美所有人”推广。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "团队约束",
+          "rows": [
+            {
+              "label": "语言",
+              "text": "中文与英文"
+            },
+            {
+              "label": "支持",
+              "text": "北京时间工作日服务"
+            },
+            {
+              "label": "交付",
+              "text": "需先核对产品、支付与使用条件"
+            },
+            {
+              "label": "机会",
+              "text": "已有少量英文访谈整理咨询"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "出海先把市场和任务说具体，再检查团队是否能兑现承诺。",
+      "tip": "如果需求明确但客服时间不匹配，有哪些可验证的服务安排？",
+      "coachOpening": [
+        "出海先把市场和任务说具体，再检查团队是否能兑现承诺。",
+        "如果需求明确但客服时间不匹配，有哪些可验证的服务安排？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Search Central · SEO 入门",
+          "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "prompt": "提出一个具体市场与受众假设，说明选择依据、上线前核查项和一轮小规模验证；不必承诺某市场一定成功。",
+      "rubric": [
+        "明确具体市场、受众任务与选择依据",
+        "考虑语言、交付、支付和服务能力",
+        "提出有限验证与不确定性边界"
+      ],
+      "reference": "可从已有咨询对应的一个市场和团队任务开始，先核对英文体验、支付与服务约定，再邀请少量目标团队试用。选择要基于材料，不能仅由市场人口或“海外客单价高”推断可行。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "只选一个市场，怎样做首轮验证？",
+          "prompt": "请结合案例说明：提出一个具体市场与受众假设，说明选择依据、上线前核查项和一轮小规模验证；不必承诺某市场一定成功。"
+        }
+      ]
+    },
+    {
+      "id": 119,
+      "chapter": 13,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "本地化创意与证据",
+      "title": "把国内有效的内容改给当地用户看",
+      "brief": "国内演示使用中文周会、人民币价格和本地工具习惯。现在要面向一个已有访谈材料的英文市场。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "可沿用与待验证",
+          "rows": [
+            {
+              "label": "可沿用",
+              "text": "产品实际提取与核对过程"
+            },
+            {
+              "label": "待调整",
+              "text": "术语、情境、币种、例子与下一步"
+            },
+            {
+              "label": "需反馈",
+              "text": "目标用户怎样理解价值和限制"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "本地化改变相关性与理解条件，真实产品事实不能随翻译改变。",
+      "tip": "如果当地用户理解文案，却不认为任务重要，你会怎样继续研究？",
+      "coachOpening": [
+        "本地化改变相关性与理解条件，真实产品事实不能随翻译改变。",
+        "如果当地用户理解文案，却不认为任务重要，你会怎样继续研究？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Search Central · SEO 入门",
+          "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "prompt": "选择一个具体市场情境，改写开头与核心证明，说明保留哪些事实、调整哪些表达，以及怎样向本地受众验证。",
+      "rubric": [
+        "调整基于具体用户与情境，不假造地域偏好",
+        "产品价值和证据保持真实",
+        "安排本地理解或使用任务验证"
+      ],
+      "reference": "可将演示换成目标团队熟悉的英文访谈与交接任务，说明实际支持能力和核对边界；请当地目标用户复述它能做什么，再完成试用。不能假造当地客户评价或直接把人民币符号换成美元而不说明定价。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "把国内有效的内容改给当地用户看",
+          "prompt": "请结合案例说明：选择一个具体市场情境，改写开头与核心证明，说明保留哪些事实、调整哪些表达，以及怎样向本地受众验证。"
+        }
+      ]
+    },
+    {
+      "id": 120,
+      "chapter": 13,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "搜索内容、社区与合作",
+      "title": "除了买广告，还能怎样获得合适用户？",
+      "brief": "拾页没有持续大预算，但可以写高质量教程、展示工作流，并回答真实问题。团队希望在一个英文市场积累合适受众。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "可用投入",
+          "rows": [
+            {
+              "label": "内容",
+              "text": "方法教程与可核对演示"
+            },
+            {
+              "label": "社区",
+              "text": "可参与相关讨论并遵守当地社区规则"
+            },
+            {
+              "label": "合作",
+              "text": "可邀请适合的创作者真实试用"
+            },
+            {
+              "label": "边界",
+              "text": "自然增长也需要时间与制作成本"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "自然渠道也需要持续价值、匹配场景和可核对的早期信号。",
+      "tip": "如果社区明确不允许推广链接，你还能怎样有价值地参与？",
+      "coachOpening": [
+        "自然渠道也需要持续价值、匹配场景和可核对的早期信号。",
+        "如果社区明确不允许推广链接，你还能怎样有价值地参与？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Search Central · SEO 入门",
+          "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "prompt": "选两种互补方式，说明为谁提供什么价值、怎样连接产品，以及用什么早期证据判断值得继续。",
+      "rubric": [
+        "渠道组合与受众和资源匹配",
+        "说明持续提供的具体价值与诚实的产品关系",
+        "评价质量与投入，并承认积累时间和不确定性"
+      ],
+      "reference": "可用回应具体问题的搜索教程积累可发现性，再参与相关社区答疑或真实创作者演示。产品链接与身份应按社区情境清楚处理；观察相关访问、问题与试用，不承诺写几篇文章就能获得排名。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "除了买广告，还能怎样获得合适用户？",
+          "prompt": "请结合案例说明：选两种互补方式，说明为谁提供什么价值、怎样连接产品，以及用什么早期证据判断值得继续。"
+        }
+      ]
+    },
+    {
+      "id": 121,
+      "chapter": 13,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "跨市场诊断",
+      "title": "同一产品，两个市场结果相反",
+      "brief": "两个市场的广告都有访问，甲有合格试用，乙很少继续。两地的语言、受众任务、支付和客服安排并不完全相同。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "当前差异",
+          "rows": [
+            {
+              "label": "市场甲",
+              "text": "演示对应当地访谈任务，支付路径已走通"
+            },
+            {
+              "label": "市场乙",
+              "text": "沿用直译文案，部分用户反馈不理解价格周期"
+            },
+            {
+              "label": "共同限制",
+              "text": "样本不大，不能直接推断整个市场潜力"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "跨市场复盘应拆开需求、表达、渠道与承接，不用地域印象替代证据。",
+      "tip": "修正价格说明后仍无试用，下一步该验证什么？",
+      "coachOpening": [
+        "跨市场复盘应拆开需求、表达、渠道与承接，不用地域印象替代证据。",
+        "修正价格说明后仍无试用，下一步该验证什么？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Search Central · SEO 入门",
+          "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+        },
+        {
+          "title": "TikTok for Business · 创意结构",
+          "url": "https://ads.tiktok.com/business/en/creative-codes"
+        }
+      ],
+      "prompt": "写一个优先排查顺序，说明如何区分需求、表达与承接差异，以及下一轮哪些条件要保持可比。",
+      "rubric": [
+        "根据题设差异提出具体假设",
+        "设计能区分假设的核查或小测试",
+        "保留样本与市场外推的边界"
+      ],
+      "reference": "先核对数据口径与路径可用性，再检查乙的价格理解和用户任务匹配；可在统一主要目标后修正文案与说明，安排当地任务观察，再决定是否扩大。不能仅凭国家标签判断用户是否愿意付费。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "同一产品，两个市场结果相反",
+          "prompt": "请结合案例说明：写一个优先排查顺序，说明如何区分需求、表达与承接差异，以及下一轮哪些条件要保持可比。"
+        }
+      ]
+    },
+    {
+      "id": 122,
+      "chapter": 14,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "目标与有效结果",
+      "title": "播放量翻倍，这次推广就更成功了吗？",
+      "brief": "两轮都以新团队完成合格试用为目标，观察窗口和口径相同。哪份复盘更能回答目标是否实现？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "案例记录",
+          "title": "复盘方案一",
+          "rows": [
+            {
+              "label": "结果",
+              "text": "首轮 30 个、次轮 20 个新团队完成合格试用"
+            },
+            {
+              "label": "上游",
+              "text": "次轮播放翻倍，但有效试用减少"
+            },
+            {
+              "label": "下一步",
+              "text": "拆看受众、内容承诺与试用路径"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "首轮合格试用",
+              "value": "30",
+              "note": ""
+            },
+            {
+              "label": "次轮合格试用",
+              "value": "20",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "案例记录",
+          "title": "复盘方案二",
+          "rows": [
+            {
+              "label": "结果",
+              "text": "次轮播放翻倍，因此推广一定更成功"
+            },
+            {
+              "label": "上游",
+              "text": "不再看新团队是否实际完成任务"
+            },
+            {
+              "label": "下一步",
+              "text": "直接复制所有内容与预算安排"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "次轮播放",
+              "value": "2 倍",
+              "note": ""
+            },
+            {
+              "label": "成功判断",
+              "value": "已完成",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "指标是否有用，取决于它能否回答本轮目标与决策问题。",
+      "tip": "若主要目标是品牌认知，应补充哪些不同证据？",
+      "coachOpening": [
+        "指标是否有用，取决于它能否回答本轮目标与决策问题。",
+        "若主要目标是品牌认知，应补充哪些不同证据？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Ads · 归因模型",
+          "url": "https://support.google.com/google-ads/answer/6259715?hl=en"
+        },
+        {
+          "title": "Shopify · 客户获取成本口径",
+          "url": "https://www.shopify.com/blog/customer-acquisition-cost"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "labels": [
+        "回到合格试用目标，再诊断路径",
+        "用播放增长直接证明业务成功"
+      ],
+      "why": "本轮目标是合格试用；播放增长有助于了解触达，却不能替代有效结果。仍需结合成本、受众质量与后续表现判断，不仅按数量下最终结论。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "播放量翻倍，这次推广就更成功了吗？",
+          "brief": "换一个角度观察：两轮都以新团队完成合格试用为目标，观察窗口和口径相同。哪份复盘更能回答目标是否实现？",
+          "correct": 0,
+          "why": "本轮目标是合格试用；播放增长有助于了解触达，却不能替代有效结果。仍需结合成本、受众质量与后续表现判断，不仅按数量下最终结论。"
+        }
+      ]
+    },
+    {
+      "id": 123,
+      "chapter": 14,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "广告回报与利润",
+      "title": "ROAS 是 2，就一定赚了吗？",
+      "brief": "题设：同一窗口广告归因收入 10000 元、广告费 5000 元；收入已扣退款，投广告前的毛利率为 30%，暂不计其他成本。选择正确解读。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "案例记录",
+          "title": "解读方案二",
+          "rows": [
+            {
+              "label": "广告回报",
+              "text": "收入 ÷ 广告费 = 2"
+            },
+            {
+              "label": "利润判断",
+              "text": "收入大于广告费，所以已经盈利"
+            },
+            {
+              "label": "忽略项目",
+              "text": "产品交付成本与其他费用"
+            },
+            {
+              "label": "边界",
+              "text": "把归因收入都视为广告新增收入"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "ROAS",
+              "value": "2",
+              "note": ""
+            },
+            {
+              "label": "判断",
+              "value": "已经盈利",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "案例记录",
+          "title": "解读方案一",
+          "rows": [
+            {
+              "label": "广告回报",
+              "text": "收入 ÷ 广告费 = 2"
+            },
+            {
+              "label": "广告前毛利",
+              "text": "10000 × 30% = 3000 元"
+            },
+            {
+              "label": "扣广告费后",
+              "text": "3000 − 5000 = −2000 元"
+            },
+            {
+              "label": "边界",
+              "text": "这还没计其他成本，也不是增量利润"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "ROAS",
+              "value": "2",
+              "note": ""
+            },
+            {
+              "label": "毛利减广告费",
+              "value": "−2000 元",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "看广告回报时必须说明分子、毛利、其他成本与归因口径。",
+      "tip": "若收入回传是订单金额、尚未扣退款，会怎样影响判断？",
+      "coachOpening": [
+        "看广告回报时必须说明分子、毛利、其他成本与归因口径。",
+        "若收入回传是订单金额、尚未扣退款，会怎样影响判断？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Ads · 归因模型",
+          "url": "https://support.google.com/google-ads/answer/6259715?hl=en"
+        },
+        {
+          "title": "Shopify · 客户获取成本口径",
+          "url": "https://www.shopify.com/blog/customer-acquisition-cost"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "labels": [
+        "只凭 ROAS 大于 1 判断盈利",
+        "分清收入回报、毛利与利润"
+      ],
+      "why": "ROAS 的分子是约定口径的收入或转化价值，不是净利润。本题毛利为 3000 元，扣广告费后为负，且归因并不等于增量。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "ROAS 是 2，就一定赚了吗？",
+          "brief": "换一个角度观察：题设：同一窗口广告归因收入 10000 元、广告费 5000 元；收入已扣退款，投广告前的毛利率为 30%，暂不计其他成本。选择正确解读。",
+          "correct": 1,
+          "why": "ROAS 的分子是约定口径的收入或转化价值，不是净利润。本题毛利为 3000 元，扣广告费后为负，且归因并不等于增量。"
+        }
+      ]
+    },
+    {
+      "id": 124,
+      "chapter": 14,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "归因重叠与去重",
+      "title": "两个平台都说带来了订单，可以直接相加吗？",
+      "brief": "同一窗口，平台甲报告 60 单，乙报告 50 单；后台实际有 80 个去重订单。哪种复盘更可靠？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "案例记录",
+          "title": "复盘方案一",
+          "rows": [
+            {
+              "label": "报表",
+              "text": "保留甲 60、乙 50 各自的归因口径"
+            },
+            {
+              "label": "实际",
+              "text": "后台 80 个订单按统一规则去重"
+            },
+            {
+              "label": "解释",
+              "text": "检查窗口、触点和重复归因"
+            },
+            {
+              "label": "边界",
+              "text": "不能直接把 110 单当新增成交"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "平台合计归因",
+              "value": "110 单",
+              "note": ""
+            },
+            {
+              "label": "后台去重",
+              "value": "80 单",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "案例记录",
+          "title": "复盘方案二",
+          "rows": [
+            {
+              "label": "报表",
+              "text": "60 + 50 = 110 个真实新增订单"
+            },
+            {
+              "label": "实际",
+              "text": "认为后台数字偏小，可以忽略"
+            },
+            {
+              "label": "解释",
+              "text": "平台报表都正确，所以无需核对"
+            },
+            {
+              "label": "边界",
+              "text": "不说明窗口与归因方法"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "新增成交",
+              "value": "110 单",
+              "note": ""
+            },
+            {
+              "label": "核对",
+              "value": "不需要",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 0,
+      "rule": "平台归因回答触点如何记功，业务去重与增量回答其他问题。",
+      "tip": "统一窗口后仍有重复，你会怎样呈现各渠道结果？",
+      "coachOpening": [
+        "平台归因回答触点如何记功，业务去重与增量回答其他问题。",
+        "统一窗口后仍有重复，你会怎样呈现各渠道结果？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Ads · 归因模型",
+          "url": "https://support.google.com/google-ads/answer/6259715?hl=en"
+        },
+        {
+          "title": "Shopify · 客户获取成本口径",
+          "url": "https://www.shopify.com/blog/customer-acquisition-cost"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "labels": [
+        "保留各自口径，核对实际去重结果",
+        "把平台归因直接相加为新增订单"
+      ],
+      "why": "同一订单可能被多个平台的不同触点认领，窗口差异也影响报表。先统一定义和时间窗再核对；报表差异不自动证明任何一方造假，也无法据此得出增量。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "两个平台都说带来了订单，可以直接相加吗？",
+          "brief": "换一个角度观察：同一窗口，平台甲报告 60 单，乙报告 50 单；后台实际有 80 个去重订单。哪种复盘更可靠？",
+          "correct": 0,
+          "why": "同一订单可能被多个平台的不同触点认领，窗口差异也影响报表。先统一定义和时间窗再核对；报表差异不自动证明任何一方造假，也无法据此得出增量。"
+        }
+      ]
+    },
+    {
+      "id": 125,
+      "chapter": 14,
+      "kind": "choice",
+      "format": "营销情境比较",
+      "module": "marketing-v1",
+      "principle": "相关与因果",
+      "title": "改完封面后转化涨了，就能确认原因吗？",
+      "brief": "某轮改了封面，同时降价、换受众并遇上节日需求上涨。转化率提高，哪份结论更有依据？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "结论方案二",
+          "rows": [
+            {
+              "label": "观察",
+              "text": "转化率确实提高"
+            },
+            {
+              "label": "限制",
+              "text": "不需要考虑其他同期变化"
+            },
+            {
+              "label": "下一轮",
+              "text": "全面复制这张封面的形式"
+            },
+            {
+              "label": "判断",
+              "text": "已经证明封面是唯一增长原因"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "结论方案一",
+          "rows": [
+            {
+              "label": "观察",
+              "text": "转化率确实提高"
+            },
+            {
+              "label": "限制",
+              "text": "封面、价格、受众和环境同时变化"
+            },
+            {
+              "label": "下一轮",
+              "text": "在可比较人群和时间中测试封面"
+            },
+            {
+              "label": "判断",
+              "text": "目前不能把全部变化归因于封面"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": 1,
+      "rule": "观察到变化后，先查是否存在其他解释，再选择验证方法。",
+      "tip": "如果无法随机分组，有哪些较弱但有帮助的比较办法？",
+      "coachOpening": [
+        "观察到变化后，先查是否存在其他解释，再选择验证方法。",
+        "如果无法随机分组，有哪些较弱但有帮助的比较办法？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Ads · 归因模型",
+          "url": "https://support.google.com/google-ads/answer/6259715?hl=en"
+        },
+        {
+          "title": "Shopify · 客户获取成本口径",
+          "url": "https://www.shopify.com/blog/customer-acquisition-cost"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "labels": [
+        "把改版前后差异归结为单一原因",
+        "承认多变量限制，再设计可比较测试"
+      ],
+      "why": "前后差异可能来自多个因素。随机分组、保持主要条件一致的实验更有助于识别作用，但仍需关注样本、执行质量、主要指标和不确定性。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "改完封面后转化涨了，就能确认原因吗？",
+          "brief": "换一个角度观察：某轮改了封面，同时降价、换受众并遇上节日需求上涨。转化率提高，哪份结论更有依据？",
+          "correct": 1,
+          "why": "前后差异可能来自多个因素。随机分组、保持主要条件一致的实验更有助于识别作用，但仍需关注样本、执行质量、主要指标和不确定性。"
+        }
+      ]
+    },
+    {
+      "id": 126,
+      "chapter": 14,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "漏斗与分母",
+      "title": "给一轮推广画出指标漏斗",
+      "brief": "同一周同一来源记录：10000 次展示、500 次点击、50 个去重注册新团队、5 个付费新团队。展示与点击为次数，团队为去重人数。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "案例记录",
+          "title": "统一窗口记录",
+          "rows": [
+            {
+              "label": "窗口",
+              "text": "同一周、同一来源"
+            },
+            {
+              "label": "展示与点击",
+              "text": "10000 次展示，500 次点击"
+            },
+            {
+              "label": "新团队",
+              "text": "50 个注册，5 个付费"
+            },
+            {
+              "label": "限制",
+              "text": "点击次数与团队人数不是同一计数单位"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "展示",
+              "value": "10000 次",
+              "note": ""
+            },
+            {
+              "label": "点击",
+              "value": "500 次",
+              "note": ""
+            },
+            {
+              "label": "新注册",
+              "value": "50 个团队",
+              "note": ""
+            },
+            {
+              "label": "新付费",
+              "value": "5 个团队",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "先统一单位与窗口，再用漏斗定位值得追查的位置。",
+      "tip": "若付费发生在下周，按本周事件与按本周新客队列会有何区别？",
+      "coachOpening": [
+        "先统一单位与窗口，再用漏斗定位值得追查的位置。",
+        "若付费发生在下周，按本周事件与按本周新客队列会有何区别？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Ads · 归因模型",
+          "url": "https://support.google.com/google-ads/answer/6259715?hl=en"
+        },
+        {
+          "title": "Shopify · 客户获取成本口径",
+          "url": "https://www.shopify.com/blog/customer-acquisition-cost"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "prompt": "选择两个有助于诊断的比率，写出分子分母、计算结果和口径限制，再提出一个需要补查的环节。",
+      "rubric": [
+        "算式正确，并说明时间窗和分母",
+        "区分事件次数与去重团队口径",
+        "不只凭单一比率断言流失原因"
+      ],
+      "reference": "点击率为 500/10000=5%；注册团队到付费团队为 5/50=10%。50/500=10% 可作每次点击对应注册团队的参考比率，但不是严格的去重用户转化率。可补查点击到达、首次成功使用和付费延迟。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "给一轮推广画出指标漏斗",
+          "prompt": "请结合案例说明：选择两个有助于诊断的比率，写出分子分母、计算结果和口径限制，再提出一个需要补查的环节。"
+        }
+      ]
+    },
+    {
+      "id": 127,
+      "chapter": 14,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "CAC 与成本范围",
+      "title": "广告费不是唯一成本，怎样算获客？",
+      "brief": "本月为获客支出广告 3000 元、内容制作 1000 元、销售跟进 1000 元，费用互不重叠；同口径新增付费客户 50 个，另有老客复购 20 个。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "metrics",
+          "tag": "案例记录",
+          "title": "获客成本账",
+          "rows": [
+            {
+              "label": "广告",
+              "text": "3000 元"
+            },
+            {
+              "label": "内容与跟进",
+              "text": "1000 + 1000 元，均归属本次获客"
+            },
+            {
+              "label": "结果",
+              "text": "50 个新增付费客户；20 个老客复购"
+            },
+            {
+              "label": "边界",
+              "text": "未列其他获客成本，不能保证已覆盖全成本"
+            }
+          ],
+          "metrics": [
+            {
+              "label": "已列获客费用",
+              "value": "5000 元",
+              "note": ""
+            },
+            {
+              "label": "新增付费客户",
+              "value": "50 个",
+              "note": ""
+            }
+          ],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "每次说获客成本，都要带上成本范围、新客定义和观察窗口。",
+      "tip": "如果内容可以使用半年，怎样解释本月分摊的局限？",
+      "coachOpening": [
+        "每次说获客成本，都要带上成本范围、新客定义和观察窗口。",
+        "如果内容可以使用半年，怎样解释本月分摊的局限？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Ads · 归因模型",
+          "url": "https://support.google.com/google-ads/answer/6259715?hl=en"
+        },
+        {
+          "title": "Shopify · 客户获取成本口径",
+          "url": "https://www.shopify.com/blog/customer-acquisition-cost"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "prompt": "计算每个新增客户的广告花费与已列成本口径的 CAC，说明为什么不把老客复购放入分母，以及还要确认什么。",
+      "rubric": [
+        "广告花费每新客 60 元、已列成本 CAC 100 元",
+        "新增客户与复购分开，成本不重复计算",
+        "说明成本范围、窗口与获客周期限制"
+      ],
+      "reference": "广告花费每新增客户为 3000/50=60 元；已列获客成本 CAC=(3000+1000+1000)/50=100 元。老客复购不属于新获客分母，还需确认成本归属、其他费用与跨期转化。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "广告费不是唯一成本，怎样算获客？",
+          "prompt": "请结合案例说明：计算每个新增客户的广告花费与已列成本口径的 CAC，说明为什么不把老客复购放入分母，以及还要确认什么。"
+        }
+      ]
+    },
+    {
+      "id": 128,
+      "chapter": 14,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "留存、价值与回收期",
+      "title": "当月没回本，怎样判断值得继续？",
+      "brief": "订阅工具的新客当月毛利不足以覆盖获客成本，团队预计后续续费补足，但只有一个月真实数据。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "已知与假设",
+          "rows": [
+            {
+              "label": "已知",
+              "text": "本月新客成本、实际收入与交付毛利"
+            },
+            {
+              "label": "未知",
+              "text": "后续留存、退款与续费毛利"
+            },
+            {
+              "label": "约束",
+              "text": "现金预算有限，服务团队容量有限"
+            },
+            {
+              "label": "目标",
+              "text": "决定是否继续有限验证"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "长期价值应由队列和贡献逐步验证，预测需要边界。",
+      "tip": "若平均表现不错但某渠道留存很差，应怎样拆看？",
+      "coachOpening": [
+        "长期价值应由队列和贡献逐步验证，预测需要边界。",
+        "若平均表现不错但某渠道留存很差，应怎样拆看？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Ads · 归因模型",
+          "url": "https://support.google.com/google-ads/answer/6259715?hl=en"
+        },
+        {
+          "title": "Shopify · 客户获取成本口径",
+          "url": "https://www.shopify.com/blog/customer-acquisition-cost"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "prompt": "说明还需追踪哪些队列数据、怎样估计回收期，以及在长期价值未知时如何设置继续验证的边界。",
+      "rubric": [
+        "用毛利或贡献口径考虑长期价值，不把收入等于利润",
+        "按新客队列追踪留存、续费、退款与成本",
+        "明确预测不确定性、预算与停止或调整条件"
+      ],
+      "reference": "持续跟踪同一批新客的续费、退款与累计贡献，按假设情景估计何时覆盖 CAC；一个月数据不足以证明长期价值。可设预算上限与复盘节点，在服务容量和现金约束内继续观察，避免凭乐观 LTV 无限加投。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "当月没回本，怎样判断值得继续？",
+          "prompt": "请结合案例说明：说明还需追踪哪些队列数据、怎样估计回收期，以及在长期价值未知时如何设置继续验证的边界。"
+        }
+      ]
+    },
+    {
+      "id": 129,
+      "chapter": 14,
+      "kind": "open",
+      "format": "营销方案实作",
+      "module": "marketing-v1",
+      "principle": "增量与实验设计",
+      "title": "这次增长，有多少是推广真正新增的？",
+      "brief": "推广期间新客增加，平台归因报表也变好；同期自然需求上涨，团队想知道若不做推广会发生什么。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "案例记录",
+          "title": "当前证据",
+          "rows": [
+            {
+              "label": "观察",
+              "text": "推广期间新客与归因转化增加"
+            },
+            {
+              "label": "其他解释",
+              "text": "节日需求、自然搜索与其他渠道同期变化"
+            },
+            {
+              "label": "资源",
+              "text": "可保留有限对照，先做小规模测试"
+            },
+            {
+              "label": "边界",
+              "text": "平台归因不直接代表因果增量"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学案例 · 数据与品牌均为虚构"
+        }
+      ],
+      "correct": null,
+      "rule": "增量判断需要可信的“没有这次推广会怎样”的比较。",
+      "tip": "如果测试人群会互相转发广告，结果可能怎样受到影响？",
+      "coachOpening": [
+        "增量判断需要可信的“没有这次推广会怎样”的比较。",
+        "如果测试人群会互相转发广告，结果可能怎样受到影响？"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Google Ads · 归因模型",
+          "url": "https://support.google.com/google-ads/answer/6259715?hl=en"
+        },
+        {
+          "title": "Shopify · 客户获取成本口径",
+          "url": "https://www.shopify.com/blog/customer-acquisition-cost"
+        },
+        {
+          "title": "Google Ads · 转化价值与 ROAS",
+          "url": "https://support.google.com/google-ads/answer/6268637?hl=en"
+        }
+      ],
+      "prompt": "设计一轮能够改善增量判断的测试，说明分组、主要指标、干扰、成本和不能得出的结论。",
+      "rubric": [
+        "提出可比较对照或随机分配，并说明执行约束",
+        "观察统一口径结果与成本，注意跨组影响",
+        "区分增量与归因，保留样本和外推限制"
+      ],
+      "reference": "可在符合条件的人群中随机保留一组不触达，比较同窗口去重新客或贡献；检查串组、其他活动和样本量，预先定主要指标与预算边界。无法随机时可用更弱的分区或分阶段比较，但应说明差异和因果限制。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "这次增长，有多少是推广真正新增的？",
+          "prompt": "请结合案例说明：设计一轮能够改善增量判断的测试，说明分组、主要指标、干扰、成本和不能得出的结论。"
+        }
+      ]
     }
   ],
   "tracks": [
@@ -4254,6 +9187,11 @@
       "id": 1,
       "title": "内容创作",
       "goal": "从单张美术到分镜与长视频，把生成内容组织成有意图的作品。"
+    },
+    {
+      "id": 2,
+      "title": "营销推广",
+      "goal": "先服务与迭代，再建立品牌、触达受众并验证增长。"
     }
   ]
 }

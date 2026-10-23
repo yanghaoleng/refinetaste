@@ -14,9 +14,11 @@ test('an old eight-question pass keeps its answers but needs the four added prod
 });
 
 test('inserting a character chapter preserves stable IDs, old passes and the last studied chapter',()=>{
- const course=JSON.parse(fs.readFileSync('dist/course.json','utf8'));assert.deepEqual(course.chapters.map(c=>c.id),[0,1,2,3,4,7,5,6]);
+ const course=JSON.parse(fs.readFileSync('dist/course.json','utf8'));assert.deepEqual(course.chapters.map(c=>c.id),[0,1,2,3,4,7,5,6,8,9,10,11,12,13,14]);
  assert.equal(api.lastChapterIndex(course.chapters,{index:5}),6);assert.equal(api.lastChapterIndex(course.chapters,{index:6}),7);
  assert.equal(api.lastChapterIndex(course.chapters,{index:5,id:7}),5);
  assert.equal(api.continueChapter(course.chapters,course.questions,{40:{passed:true,total:8}},{},6),0);
  const plan=api.prepare(course.questions.filter(q=>q.chapter===5),{answers:Object.fromEntries(Array.from({length:8},(_,i)=>[40+i,1]))});assert.equal(plan.questions.length,0);
 });
+
+test("chapter numbers remain readable beyond the original eight",()=>{assert.deepEqual([0,7,8,9,10,14].map(api.chapterNumber),["一","八","九","十","十一","十五"])});
