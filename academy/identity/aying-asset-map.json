@@ -1,0 +1,175 @@
+{
+  "sourceSize": [
+    1774,
+    887
+  ],
+  "grid": [
+    6,
+    3
+  ],
+  "cells": [
+    {
+      "mood": "neutral",
+      "sourceBox": [
+        0,
+        0,
+        296,
+        296
+      ]
+    },
+    {
+      "mood": "happy",
+      "sourceBox": [
+        296,
+        0,
+        591,
+        296
+      ]
+    },
+    {
+      "mood": "thinking",
+      "sourceBox": [
+        591,
+        0,
+        887,
+        296
+      ]
+    },
+    {
+      "mood": "curious",
+      "sourceBox": [
+        887,
+        0,
+        1183,
+        296
+      ]
+    },
+    {
+      "mood": "surprised",
+      "sourceBox": [
+        1183,
+        0,
+        1478,
+        296
+      ]
+    },
+    {
+      "mood": "encouraging",
+      "sourceBox": [
+        1478,
+        0,
+        1774,
+        296
+      ]
+    },
+    {
+      "mood": "empathetic",
+      "sourceBox": [
+        0,
+        296,
+        296,
+        591
+      ]
+    },
+    {
+      "mood": "confused",
+      "sourceBox": [
+        296,
+        296,
+        591,
+        591
+      ]
+    },
+    {
+      "mood": "playful",
+      "sourceBox": [
+        591,
+        296,
+        887,
+        591
+      ]
+    },
+    {
+      "mood": "delighted",
+      "sourceBox": [
+        887,
+        296,
+        1183,
+        591
+      ]
+    },
+    {
+      "mood": "approving",
+      "sourceBox": [
+        1183,
+        296,
+        1478,
+        591
+      ]
+    },
+    {
+      "mood": "inspired",
+      "sourceBox": [
+        1478,
+        296,
+        1774,
+        591
+      ]
+    },
+    {
+      "mood": "relieved",
+      "sourceBox": [
+        0,
+        591,
+        296,
+        887
+      ]
+    },
+    {
+      "mood": "grateful",
+      "sourceBox": [
+        296,
+        591,
+        591,
+        887
+      ]
+    },
+    {
+      "mood": "amused",
+      "sourceBox": [
+        591,
+        591,
+        887,
+        887
+      ]
+    },
+    {
+      "mood": "cool",
+      "sourceBox": [
+        887,
+        591,
+        1183,
+        887
+      ]
+    },
+    {
+      "mood": "confident",
+      "sourceBox": [
+        1183,
+        591,
+        1478,
+        887
+      ]
+    },
+    {
+      "mood": "mischievous",
+      "sourceBox": [
+        1478,
+        591,
+        1774,
+        887
+      ]
+    }
+  ],
+  "packaged": "academy/identity/compiled/mediaclass"
+}

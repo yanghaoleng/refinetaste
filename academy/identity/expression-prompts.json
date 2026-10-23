@@ -1,0 +1,12 @@
+{
+  "mode": "built-in image_gen edit with original identity reference",
+  "prompt": "Use case: identity-preserve. The referenced image is the character identity reference. Create ONE production-ready transparent sprite atlas of this exact original character's head-and-shoulders, preserving species, proportions, palette, pixel size aesthetic and signature clothing. EXACTLY 18 distinct portrait heads arranged in a perfectly regular grid: SIX equal columns and THREE equal rows, full atlas wide 2:1 aspect ratio, ideally 3072 by 1536 pixels, each portrait inside its own square cell with generous transparent separation and safe padding. Every head uses the same frontal-to-slight-three-quarter viewing angle and same size; crop to head and a little collar, do not include hands, books, body, tail or other props. Read left to right and top to bottom, the expression order is: row 1 neutral attentive, happy smile, thoughtful, curious eyebrow, surprised, encouraging; row 2 empathetic, puzzled, playful, delighted, approving, inspired; row 3 relieved, grateful, amused, cool wearing small sunglasses, confident smile, mischievous wink. Keep expressions friendly and subtle with genuine visible differences in eyes, brows and mouth. No floating hearts, question marks or separate symbols; any sunglasses remain attached to the face. True crisp pixel art with square pixel clusters, stepped contours and limited palette, no vectors, no smooth painted edges. Each complete head must be fully contained in its cell, no touching adjacent cells, no clipping ears or hat. No grid lines, no borders, no labels, no typography, no letters, no numbers, no watermark, no background color: genuine alpha transparency. Do not redesign the mascot.",
+  "identities": {
+    "wenwen": "Wenwen, the warm oatmeal-brown capybara with a broad round muzzle, tiny round ears and moss green waistcoat collar",
+    "aying": "Aying, the slate-gray raccoon with charcoal eye mask, cream cheeks and the same apricot-orange knitted beanie"
+  },
+  "sources": [
+    "wenwen-v1.png",
+    "aying-v1.png"
+  ]
+}

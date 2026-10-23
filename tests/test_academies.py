@@ -43,7 +43,7 @@ class AcademyTests(unittest.TestCase):
   for slug,a in self.apps.items():
    server=a.ThreadingHTTPServer(('127.0.0.1',0),a.Handler);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
    try:
-    for path,status in [('/',404),(a.BASE+'/',200),(a.BASE+'/academy.css',200),(a.BASE+'/other-fields.css',200),(a.BASE+'/course.json',200),(a.BASE+'/api/health',200),(a.BASE+'/api/summary',401),('/refinetaste/course.json',404)]:
+    for path,status in [('/',404),(a.BASE+'/',200),(a.BASE+'/academy.css',200),(a.BASE+'/other-fields.css',200),(a.BASE+'/other-fields.js',200),(a.BASE+'/assets/mascot.png',200),(a.BASE+'/assets/icons/thinking-96.webp',200),(a.BASE+'/course.json',200),(a.BASE+'/api/health',200),(a.BASE+'/api/summary',401),('/refinetaste/course.json',404)]:
      con=http.client.HTTPConnection('127.0.0.1',server.server_port,timeout=3);con.request('GET',path);response=con.getresponse();body=response.read();con.close();self.assertEqual(response.status,status,(slug,path))
      if path.endswith('course.json') and status==200:self.assertEqual(len(json.loads(body)['questions']),len(a.QUESTIONS))
    finally:server.shutdown();server.server_close();thread.join()

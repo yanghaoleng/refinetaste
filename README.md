@@ -252,4 +252,4 @@ git diff --check
 
 ## 其他领域的独立学习站（2026-10-24）
 
-复用当前学习体验新增 [JOJO 哲学班](https://mikeywa.site/philosophy/)（8 章 64 题）与 [JOJO 自媒体班](https://mikeywa.site/mediaclass/)（12 章 96 题）。两个站有独立内容、浏览器存储、AI 教练、服务与数据库。设计、哲学、自媒体与[李老师的音乐班](https://m.mikeywa.site/pianoclass/)页脚在隐私协议左侧以“更多课程”小面板互相推荐。课程范围、来源、构建、运行与发布说明见 [独立学习站](academy/README.md)。
+复用当前学习体验新增 [问问哲学班](https://mikeywa.site/philosophy/)（8 章 64 题）与 [阿映自媒体班](https://mikeywa.site/mediaclass/)（12 章 96 题）。两个站有独立内容、浏览器存储、AI 教练、服务与数据库。设计、哲学、自媒体与[李老师的音乐班](https://m.mikeywa.site/pianoclass/)页脚在隐私协议左侧以“更多课程”小面板互相推荐。课程范围、来源、构建、运行与发布说明见 [独立学习站](academy/README.md)。

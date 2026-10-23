@@ -25,12 +25,12 @@ def build(slug,out):
  for directory in ('dist','server'):
   for p in (dst/directory).rglob('*'):
    if p.suffix in ('.js','.css','.html','.py','.json') and p.name!='course.json':
-    s=p.read_text().replace('REFINETASTE',cfg['env']).replace('refinetaste',slug).replace('JOJO 设计班',cfg['name']).replace('设计教练 JOJO',cfg['coach'])
+    s=p.read_text().replace('REFINETASTE',cfg['env']).replace('refinetaste',slug).replace('JOJO 设计班',cfg['name']).replace('设计教练 JOJO',cfg['coach']).replace('JOJO',cfg['character'])
     p.write_text(s)
  app=dst/'server/app.py';s=app.read_text().replace('CORRECT = [1, 1, 1, 1, 0, 1, 1, 1]','CORRECT = '+repr([q['correct'] for q in course['questions'][:8]])).replace("NAMES = ['对比', '重复', '亲密', '对齐', '场景与调性', '信息层级', '用户路径', '协作表达']","NAMES = [q['principle'] for q in QUESTIONS[:8]]").replace('COMPAT_CHAPTER_SYLLABI={60:(tuple(range(60,70)),)}','COMPAT_CHAPTER_SYLLABI={}')
  s=s.replace("        files[BASE+'/icons.svg']='icons.svg'", "        files[BASE+'/icons.svg']='icons.svg'\n        files[BASE+'/academy.css']='academy.css'")
  app.write_text(s)
- p=dst/'dist/app.js';s=p.read_text().replace('chapterArt(ch.id)','chapterArt(ch.art??ch.id)').replace('JOJO 发来的两个设计方案','JOJO 发来的两个案例').replace('JOJO 发来的设计案例','JOJO 发来的案例')
+ p=dst/'dist/app.js';s=p.read_text().replace('chapterArt(ch.id)','chapterArt(ch.art??ch.id)').replace('发来的两个设计方案','发来的两个案例').replace('发来的设计案例','发来的案例')
  s=s.replace('简答题按 AI 对核心原则的判断计分。','简答题只按论证与回应要求判断，不给世界观或人生立场打分。' if slug=='philosophy' else '简答题按当前任务、理由与制作方案判断，不预测流量或收入。')
  p.write_text(s)
  p=dst/'dist/index.html';s=p.read_text();s=re.sub(r'<meta name="description" content="[^"]*">','<meta name="description" content="'+re.sub('<[^>]+>',' ',cfg['intro'])+'">',s)
@@ -39,11 +39,14 @@ def build(slug,out):
  scenes=[]
  for (tag,title,body,word),scene in zip(HERO[slug],['principles','experience','aigc']):
   rows=''.join('<p>'+row+'</p>' for row in body.split('|'))
-  scenes.append(f'<section class="hero-scene" data-hero-scene="{scene}"><article class="hero-piece academy-paper" data-hero-piece><small>{tag}</small><strong>{title}</strong><div>{rows}</div></article><div class="hero-piece academy-word" data-hero-piece aria-hidden="true">{word}</div><div class="hero-piece academy-note" data-hero-piece>JOJO<br>{"思考练习" if slug=="philosophy" else "创作案头"}</div></section>')
+  scenes.append(f'<section class="hero-scene" data-hero-scene="{scene}"><article class="hero-piece academy-paper" data-hero-piece><small>{tag}</small><strong>{title}</strong><div>{rows}</div></article><div class="hero-piece academy-word" data-hero-piece aria-hidden="true">{word}</div><img class="hero-piece academy-mascot" data-hero-piece src="assets/mascot.png" alt="{cfg["character"]}" width="240" height="280"></section>')
  hero='<div class="hero-art hero-carousel academy-hero" role="button" tabindex="0" aria-label="切换首页装饰">'+''.join(scenes)+'</div>\n</section>'
  s,n=re.subn(r'<div class="hero-art hero-carousel".*?</div>\n</section>',lambda _:hero,s,flags=re.S);assert n==1
  s=s.replace('</head>','<link rel="stylesheet" href="academy.css"></head>');p.write_text(s)
- (dst/'dist/academy.css').write_text((ROOT/'academy/academy.css').read_text())
+ (dst/'dist/academy.css').write_text((ROOT/'academy/academy.css').read_text()+f"\nhtml[data-theme=dark] body{{--accent:{cfg['accent']};--button:{cfg['accent']};--button-text:#17201a;--focus:{cfg['accent']}}}\nhtml[data-theme=light] body{{--accent:{cfg['accent']};--button:{cfg['ink']};--button-text:#ffffff;--focus:{cfg['ink']}}}\n")
+ identity=ROOT/'academy/identity/compiled'/slug
+ if identity.exists():shutil.copytree(identity,dst/'dist/assets',dirs_exist_ok=True)
+ s=(dst/'server/app.py').read_text().replace("        files[BASE+'/icons.svg']='icons.svg'","        files[BASE+'/icons.svg']='icons.svg'\n        files[BASE+'/assets/mascot.png']='assets/mascot.png'");(dst/'server/app.py').write_text(s)
  links.install(dst/'dist',slug)
  # Preserve the light menu and chapter numbering helper without embedding the design syllabus.
  p=dst/'dist/chapter-practice.js';s=p.read_text().split('window.RefinePractice.menu=')[0]

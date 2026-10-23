@@ -1,4 +1,4 @@
-# JOJO 哲学班与自媒体班
+# 问问哲学班与阿映自媒体班
 
 这两个站复用 JOJO 设计班当前的静态前端与标准库服务端，内容、品牌、首页装饰、浏览器存储键、请求路径、Cookie、匿名身份、数据库、后台密钥和服务进程各自独立。不是在设计班课程中多加两个分类。构建输出位于忽略的 `.runtime/academies/`，生产使用从已提交 Git 快照生成的自包含发布包。
 
@@ -15,7 +15,7 @@
 
 自媒体：基础策略与受众；IP 塑造与定位；账号点子、发散与选题库；栏目、脚本与制作组织；拍摄基础；口播；访谈；教程、演示与测评；Vlog、纪实与人物故事；剪辑、字幕、声音与节奏；封面、标题与平台发布；复盘、协作与长期运营。每章分别给出具体制作任务、资源约束、参考思路与讨论要求。不保证流量、收入或算法效果，不把某个平台某阶段的技巧视为通用规则。
 
-首页装饰为原生文字、纸张与排版，案例为可读的思想实验、脚本和制作记录，未用 SVG 新绘人物或场景。教练复用既有的本地位图表情。当前不录制或上传声音和视频，不声称 AI 能看见未提交的成片；制作题依据文字与题设点评。
+首页装饰为原生文字、纸张与排版，案例为可读的思想实验、脚本和制作记录，未用 SVG 新绘人物或场景。两个站各使用独立生成的像素角色与十八种位图表情。当前不录制或上传声音和视频，不声称 AI 能看见未提交的成片；制作题依据文字与题设点评。
 
 ## 编写与运行
 
@@ -43,4 +43,4 @@
 
 制作参考 [BBC Academy：Self Shooting](https://downloads.bbc.co.uk/academy/collegeofproduction/docs/self_shooting_ts.pdf)、[BBC Academy：Interviewing](https://downloads.bbc.co.uk/academy/collegeofproduction/docs/interviewing_ts.pdf)、[YouTube 官方内容策略与品牌课程](https://news.youtube/get-started/)、[观众留存](https://support.google.com/youtube/answer/9314415?hl=zh-Hans)、[缩略图](https://support.google.com/youtube/answer/72431?hl=zh-Hans)、[字幕](https://support.google.com/youtube/answer/2734796?hl=zh-Hans)、[合作披露](https://support.google.com/youtube/answer/154235?hl=zh-Hans)、[TikTok Creative Codes](https://ads.tiktok.com/business/en/creative-codes) 与[小红书官方种草学](https://xue.xiaohongshu.com/)。不复刻平台素材；不同地区和平台的具体合规与发布设置需核对当期官方要求，课程不编造固定流量阈值。
 
-2026-10-24：新增课程的独立名字与像素角色第一稿见 [形象与命名](identity/README.md)。这轮先交付角色方案，未批量替换在线教练与表情。
+2026-10-24：新增课程的独立名字与像素角色第一稿见 [形象与命名](identity/README.md)。已按用户确认同步应用到在线名称、首页、教练表情与图标。

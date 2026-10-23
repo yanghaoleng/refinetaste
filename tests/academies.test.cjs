@@ -17,3 +17,21 @@ test('each subject case renders as native readable information, without new vect
  const ctx={window:{}};vm.runInNewContext(fs.readFileSync('dist/marketing-cases.js','utf8'),ctx);
  for(const slug of ['philosophy','mediaclass'])for(const q of JSON.parse(fs.readFileSync('academy/'+slug+'/course.json')).questions)for(const v of q.visuals){const html=ctx.window.RefineMarketing.render(v);assert.match(html,/<figcaption>/);assert.doesNotMatch(html,/<svg|<script/);for(const row of v.rows)assert.ok(html.includes(row.text))}
 });
+test('independent academy identities replace the coach, portraits and icons without changing lesson data',()=>{
+ const config=JSON.parse(fs.readFileSync('academy/sites.json','utf8'));
+ for(const slug of ['philosophy','mediaclass']){
+  const root=path.join(dir,slug),web=path.join(root,'dist'),cfg=config[slug];
+  const home=fs.readFileSync(path.join(web,'index.html'),'utf8');
+  assert.ok(home.includes('<title>'+cfg.name+'</title>'));
+  assert.ok(home.includes('alt="'+cfg.character+'"'));
+  assert.ok(home.includes('src="assets/mascot.png"'));
+  assert.ok(home.includes(cfg.coach));const app=fs.readFileSync(path.join(web,'app.js'),'utf8');assert.ok(app.includes(cfg.character));assert.doesNotMatch(app,/JOJO/);
+  const generated=JSON.parse(fs.readFileSync(path.join(web,'course.json'),'utf8'));
+  const source=JSON.parse(fs.readFileSync('academy/'+slug+'/course.json','utf8'));assert.deepEqual(generated.questions,source.questions);
+  for(const name of ['chick-emotions.webp','chick-positive-emotions.webp','chick-cool-expressions.webp','chick-gaze.webp','favicon-starry-32.png','apple-touch-starry.png']){
+   const image=fs.readFileSync(path.join(web,'assets',name));assert.ok(image.length>100);assert.notDeepEqual(image,fs.readFileSync(path.join('dist/assets',name)));
+  }
+  const icons=fs.readdirSync(path.join(web,'assets/icons')).filter(x=>x.endsWith('-96.webp'));assert.equal(icons.length,18);
+  assert.notDeepEqual(fs.readFileSync(path.join(web,'assets/icons/happy-96.webp')),fs.readFileSync(path.join(web,'assets/icons/thinking-96.webp')));
+ }
+});
