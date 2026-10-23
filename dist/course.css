@@ -418,3 +418,7 @@ body.privacy-open{overflow:hidden}
 .skip-question{min-height:44px;min-width:56px;padding:10px 12px;border:0;border-radius:8px;background:var(--bg);color:var(--muted);font-size:12px;line-height:1.4}
 @media(hover:hover) and (pointer:fine){.skip-question:hover{background:var(--panel);color:var(--text)}}
 @media(max-width:600px){.lesson-skip{right:16px;bottom:max(16px,env(safe-area-inset-bottom))}}
+
+/* Keep every chapter action on the same right edge, including wrapped mobile actions. */
+.course-chapter>.chapter-action{width:max-content;justify-self:end}
+@media(min-width:601px){.course-chapter>.chapter-action{grid-column:3;grid-row:1}}
