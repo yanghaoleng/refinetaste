@@ -8,3 +8,16 @@ __pycache__/
 .DS_Store
 
 node_modules/
+
+# Server credentials, operational logs and exported local databases
+/secrets/
+/credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.log
