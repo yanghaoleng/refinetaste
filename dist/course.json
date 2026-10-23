@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "title": "从看见，到说清，再到判断",
   "chapters": [
     {
@@ -45,6 +45,15 @@
       "subtitle": "从绘本读图入手，学会构图、情绪与图像生成的判断。",
       "objective": "能写出可执行的画面要求，并检查生成图的叙事与细节。",
       "minutes": "20—30 分钟",
+      "track": 1
+    },
+    {
+      "id": 7,
+      "level": "人物",
+      "title": "人物形象与动作设计",
+      "subtitle": "从轮廓、骨骼与姿态，到有重量、有意图、有分寸的角色动作。",
+      "objective": "能判断角色辨识度、结构与受力，解释动作节奏与表演意图，并提出有依据的审美改法。",
+      "minutes": "30—45 分钟",
       "track": 1
     },
     {
@@ -3329,6 +3338,647 @@
           "brief": "三组各 1000 人随机分组：无提醒、每天 1 次、每天 3 次分别有 360、430、438 人完成学习，10、25、110 人关闭通知。要同时考虑学习和后续触达，选择证据更充分的下一步。",
           "correct": 0,
           "why": "A 更符合目前证据。从无提醒到每天 1 次，完成学习增加 70 人、关闭通知增加 15 人；从 1 次到 3 次，仅多 8 人完成，关闭通知却多 85 人。新增提醒的额外收益变小、打扰代价增大，8 人的差异也还需要更多观察来判断是否稳定。当前不宜仅凭总完成人数最高就提高频次。"
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "chapter": 7,
+      "kind": "choice",
+      "format": "角色与动作比较",
+      "principle": "轮廓与角色辨识",
+      "title": "去掉细节，你还认得它吗？",
+      "brief": "为手机里的阅读伙伴设计“温柔、可靠、略带幽默”的角色。两版都将缩到约 64 像素，并需要经常挥手。切换剪影观察，哪版更便于辨认头、身体和正在挥动的手？",
+      "labels": [
+        "让头身比例与手臂留出清楚的轮廓间隙",
+        "用更多小配件与相近轮廓增加丰富感"
+      ],
+      "correct": 0,
+      "visuals": [
+        {
+          "kind": "character-study",
+          "scene": "silhouette",
+          "variant": "clear",
+          "title": "角色方案一",
+          "description": "圆头、宽外套和抬起的手形成独立的轮廓，配件集中。",
+          "notes": [
+            "相同角色需求",
+            "可切换剪影，观察缩小后的外形"
+          ]
+        },
+        {
+          "kind": "character-study",
+          "scene": "silhouette",
+          "variant": "busy",
+          "title": "角色方案二",
+          "description": "多个徽章、挂件与散开的配件挤在身体周围。",
+          "notes": [
+            "相同角色需求",
+            "可切换剪影，观察缩小后的外形"
+          ]
+        }
+      ],
+      "why": "A 的头、身体与手之间保留了可辨认的间隙，缩小、去掉颜色和细节后仍容易看清动作。B 的碎小配件与拥挤轮廓增加了识别负担。这是在手机小尺寸和挥手任务下的判断，不代表配件多的角色永远没有吸引力。",
+      "rule": "轮廓判断：先检查大形、比例与负形间隙能否表达角色和动作，再决定细节。剪影是诊断工具，最终还需放回实际尺寸与场景。",
+      "tip": "如果角色用于大幅海报，你会保留或增加哪些细节？",
+      "coachOpening": [
+        "轮廓判断：先检查大形、比例与负形间隙能否表达角色和动作，再决定细节。剪影是诊断工具，最终还需放回实际尺寸与场景。",
+        "如果角色用于大幅海报，你会保留或增加哪些细节？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "3dtotal · Fundamentals of Character Design（主题参考，练习角色为原创）",
+          "url": "https://store.3dtotal.com/products/fundamentals-of-character-design"
+        },
+        {
+          "title": "Thomas / Johnston · The Illusion of Life（主题参考）",
+          "url": "https://books.disney.com/book/the-illusion-of-life/"
+        }
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "去掉细节，你还认得它吗？",
+          "brief": "同一个阅读伙伴要以 64 像素显示并挥手。去掉颜色和表面细节后，选择头、身体与手更容易分清的方案。",
+          "correct": 0,
+          "why": "A 的头、身体与手之间保留了可辨认的间隙，缩小、去掉颜色和细节后仍容易看清动作。B 的碎小配件与拥挤轮廓增加了识别负担。这是在手机小尺寸和挥手任务下的判断，不代表配件多的角色永远没有吸引力。"
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "chapter": 7,
+      "kind": "choice",
+      "format": "角色与动作比较",
+      "principle": "体积与转面一致性",
+      "title": "转过身，还是同一个角色吗？",
+      "brief": "为同一位阅读伙伴检查正面、侧面和四分之三侧面的设定。两组都可以有透视变化，哪组更能保持头身体积、发型和背包的对应关系？",
+      "labels": [
+        "各角度维持同一套体积与识别特征",
+        "侧面大幅改变头部体积，背包与发型随角度改样"
+      ],
+      "correct": 0,
+      "visuals": [
+        {
+          "kind": "character-study",
+          "scene": "turnaround",
+          "variant": "consistent",
+          "title": "转面方案一",
+          "description": "三种角度保持头身比例与同一侧背包，五官随角度转过去。",
+          "notes": [
+            "正面 · 四分之三侧面 · 侧面",
+            "比较体积与特征之间的关系"
+          ]
+        },
+        {
+          "kind": "character-study",
+          "scene": "turnaround",
+          "variant": "drifting",
+          "title": "转面方案二",
+          "description": "侧面头部明显增大，背包体积与正面不同。",
+          "notes": [
+            "正面 · 四分之三侧面 · 侧面",
+            "比较体积与特征之间的关系"
+          ]
+        }
+      ],
+      "why": "A 把不同视角当成同一个立体角色的投影，透视变化后仍保留可解释的体积和特征。B 出现了缺少设定依据的体积与配件变化。转面一致性不要求各角度像素相同，而是要求变化能由结构、视角或明确的风格规则解释。",
+      "rule": "转面一致性：建立头身比例、体积与标志特征的关系，再检查不同角度的变化是否有结构依据。",
+      "tip": "AIGC 连续生成几张角色图时，你会优先锁定哪三项特征？",
+      "coachOpening": [
+        "转面一致性：建立头身比例、体积与标志特征的关系，再检查不同角度的变化是否有结构依据。",
+        "AIGC 连续生成几张角色图时，你会优先锁定哪三项特征？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "3dtotal · Fundamentals of Character Design（主题参考，练习角色为原创）",
+          "url": "https://store.3dtotal.com/products/fundamentals-of-character-design"
+        }
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "转过身，还是同一个角色吗？",
+          "brief": "同一角色转向镜头侧面时，五官位置会改变。哪组转面仍维持清楚的体积和配件对应关系？",
+          "correct": 0,
+          "why": "A 把不同视角当成同一个立体角色的投影，透视变化后仍保留可解释的体积和特征。B 出现了缺少设定依据的体积与配件变化。转面一致性不要求各角度像素相同，而是要求变化能由结构、视角或明确的风格规则解释。"
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "chapter": 7,
+      "kind": "choice",
+      "format": "角色与动作比较",
+      "principle": "骨骼支点与层级",
+      "title": "挥个手，为什么像纸片在转？",
+      "brief": "同一个角色用右手打招呼。打开骨架观察肩、肘、腕，选择更能让手臂围绕关节运动、并与身体保持连接的一版。",
+      "labels": [
+        "上臂绕肩部转，前臂绕肘部转，手跟随前臂",
+        "上臂绕图形中部转，转动时肩部连接发生偏移"
+      ],
+      "correct": 0,
+      "visuals": [
+        {
+          "kind": "character-study",
+          "scene": "wave",
+          "variant": "joint",
+          "title": "挥手方案一",
+          "description": "肩部是上臂支点，肘部是前臂支点，手随前臂运动。",
+          "notes": [
+            "同一段挥手动作",
+            "可显示骨架与关节支点"
+          ],
+          "rig": true
+        },
+        {
+          "kind": "character-study",
+          "scene": "wave",
+          "variant": "center",
+          "title": "挥手方案二",
+          "description": "上臂的旋转中心位于图形中部，挥动时肩部连接出现滑动。",
+          "notes": [
+            "同一段挥手动作",
+            "可显示骨架与关节支点"
+          ],
+          "rig": true
+        }
+      ],
+      "why": "A 的旋转支点与肩、肘的结构位置相符，手作为前臂的下级跟随运动。B 绕图形中部旋转，肩部会偏移，看起来像整片素材在转。卡通角色可以变形，但也需要稳定、可解释的连接规则。",
+      "rule": "骨骼设计：支点决定从哪里转，父子层级决定谁跟随谁。先验证大幅抬手、弯肘等极限姿态，再决定是否需要额外变形。",
+      "tip": "如果手臂连接正确，弯肘时轮廓仍突然变瘪，你会接着检查什么？",
+      "coachOpening": [
+        "骨骼设计：支点决定从哪里转，父子层级决定谁跟随谁。先验证大幅抬手、弯肘等极限姿态，再决定是否需要额外变形。",
+        "如果手臂连接正确，弯肘时轮廓仍突然变瘪，你会接着检查什么？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "Toon Boom · 关节支点与骨骼层级",
+          "url": "https://docs.toonboom.com/help/harmony-27/essentials/rigging/about-pivot.html"
+        },
+        {
+          "title": "Thomas / Johnston · The Illusion of Life（主题参考）",
+          "url": "https://books.disney.com/book/the-illusion-of-life/"
+        }
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "挥个手，为什么像纸片在转？",
+          "brief": "两版使用同一个角色和挥手目标。选择关节支点与父子跟随关系更合理、肩部连接更稳定的一版。",
+          "correct": 0,
+          "why": "A 的旋转支点与肩、肘的结构位置相符，手作为前臂的下级跟随运动。B 绕图形中部旋转，肩部会偏移，看起来像整片素材在转。卡通角色可以变形，但也需要稳定、可解释的连接规则。"
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "chapter": 7,
+      "kind": "choice",
+      "format": "角色与动作比较",
+      "principle": "重心与受力姿态",
+      "title": "箱子很重，身体表现出来了吗？",
+      "brief": "角色提着重箱子短暂停住，准备再往前走。两版箱子位置和大小相同。打开结构辅助线，哪版更能表达稳定支撑与承受重量？",
+      "labels": [
+        "调整站距、屈膝和躯干，让组合重心落在支撑范围内",
+        "双脚并拢、身体直立，只把双手伸到箱子下面"
+      ],
+      "correct": 0,
+      "visuals": [
+        {
+          "kind": "character-study",
+          "scene": "weight",
+          "variant": "grounded",
+          "title": "提箱姿态一",
+          "description": "双脚前后展开，膝部弯曲，躯干作出抵消重物偏移的调整。",
+          "notes": [
+            "重箱子 · 短暂停住",
+            "辅助线为简化受力示意，不是精确物理计算"
+          ]
+        },
+        {
+          "kind": "character-study",
+          "scene": "weight",
+          "variant": "unbalanced",
+          "title": "提箱姿态二",
+          "description": "双脚靠拢，躯干直立，重箱子悬在身体前方。",
+          "notes": [
+            "重箱子 · 短暂停住",
+            "辅助线为简化受力示意，不是精确物理计算"
+          ]
+        }
+      ],
+      "why": "A 用站距、屈膝和躯干调整共同表达承重，简化的组合重心位于支撑区间内。B 在短暂停住的题设下缺少平衡重物的身体反应。运动中可以暂时失衡，也可以有夸张表演；这里比较的是静止瞬间的支撑可信度。",
+      "rule": "受力姿态：把角色与所持物体一起看，检查支撑、重心、力量方向及肩胯关系。姿态要服务于当前动作阶段，不能用一张静止规则判断所有运动。",
+      "tip": "如果下一瞬间角色就要被箱子带着向前跌，哪种失衡又可能变得合理？",
+      "coachOpening": [
+        "受力姿态：把角色与所持物体一起看，检查支撑、重心、力量方向及肩胯关系。姿态要服务于当前动作阶段，不能用一张静止规则判断所有运动。",
+        "如果下一瞬间角色就要被箱子带着向前跌，哪种失衡又可能变得合理？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "Mike Mattesi · FORCE: Dynamic Life Drawing（主题参考）",
+          "url": "https://www.routledge.com/Force-Dynamic-Life-Drawing-10th-Anniversary-Edition/Mattesi/p/book/9781138919570"
+        },
+        {
+          "title": "Richard Williams · The Animator’s Survival Kit（主题参考）",
+          "url": "https://www.faber.co.uk/product/9780571238347-the-animators-survival-kit/"
+        }
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "箱子很重，身体表现出来了吗？",
+          "brief": "角色提着同样的重箱子并短暂停住。哪种站姿更能通过脚下支撑和身体调整，让观众相信重量？",
+          "correct": 0,
+          "why": "A 用站距、屈膝和躯干调整共同表达承重，简化的组合重心位于支撑区间内。B 在短暂停住的题设下缺少平衡重物的身体反应。运动中可以暂时失衡，也可以有夸张表演；这里比较的是静止瞬间的支撑可信度。"
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "chapter": 7,
+      "kind": "choice",
+      "format": "角色与动作比较",
+      "principle": "时间间隔与材质感",
+      "title": "同样的圆球，为什么质感不同？",
+      "brief": "两颗球从相同高度释放，第一段下落使用相同的重力加速。先正常播放，再慢放。哪段更接近会变形、反弹较明显的橡胶球？",
+      "labels": [
+        "触地压缩后恢复，反弹较高并逐次衰减",
+        "触地形变很小，反弹较低且很快停下"
+      ],
+      "correct": 0,
+      "visuals": [
+        {
+          "kind": "character-study",
+          "scene": "ball",
+          "variant": "elastic",
+          "title": "弹跳方案一",
+          "description": "圆球从相同高度下落，触地压缩、恢复并产生逐渐衰减的反弹。",
+          "notes": [
+            "相同高度 · 相同第一段下落",
+            "比较触地反应、形变与反弹"
+          ]
+        },
+        {
+          "kind": "character-study",
+          "scene": "ball",
+          "variant": "dense",
+          "title": "弹跳方案二",
+          "description": "圆球使用相同的第一段下落，触地后只有较低的反弹，形变很小。",
+          "notes": [
+            "相同高度 · 相同第一段下落",
+            "比较触地反应、形变与反弹"
+          ]
+        }
+      ],
+      "why": "A 的触地压缩、恢复和较高反弹共同表达了橡胶般的弹性。B 更接近硬、低弹性的物体。不能用“重物必然落得更快”解释两版差别；这里第一段自由下落相同，差别集中在接触与反弹的表现。这是风格化教学示意，不是材料实验。",
+      "rule": "动作质感：综合观察时间、相邻位置间隔、形变和接触反应。压缩拉伸应保持近似体积，并与想表达的材质一致。",
+      "tip": "如果把方案一改成装满水的气球，触地前后还需要哪些变化？",
+      "coachOpening": [
+        "动作质感：综合观察时间、相邻位置间隔、形变和接触反应。压缩拉伸应保持近似体积，并与想表达的材质一致。",
+        "如果把方案一改成装满水的气球，触地前后还需要哪些变化？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "Richard Williams · The Animator’s Survival Kit（主题参考）",
+          "url": "https://www.faber.co.uk/product/9780571238347-the-animators-survival-kit/"
+        },
+        {
+          "title": "Thomas / Johnston · The Illusion of Life（主题参考）",
+          "url": "https://books.disney.com/book/the-illusion-of-life/"
+        }
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "同样的圆球，为什么质感不同？",
+          "brief": "两颗球从相同高度下落，初次下落一致。哪段通过触地形变与反弹，更清楚地表达橡胶球的弹性？",
+          "correct": 0,
+          "why": "A 的触地压缩、恢复和较高反弹共同表达了橡胶般的弹性。B 更接近硬、低弹性的物体。不能用“重物必然落得更快”解释两版差别；这里第一段自由下落相同，差别集中在接触与反弹的表现。这是风格化教学示意，不是材料实验。"
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "chapter": 7,
+      "kind": "choice",
+      "format": "角色与动作比较",
+      "principle": "预备动作与用力方向",
+      "title": "跳起来之前，需要发生什么？",
+      "brief": "一位略显笨重的阅读伙伴，要用力跳过一小段距离。两版都到达相同位置。哪版更能让观众提前读懂用力方向，并相信它是主动跳过去的？",
+      "labels": [
+        "先下蹲、再蹬地，空中伸展并在落地时缓冲",
+        "身体保持原姿态，整体沿弧线平移过去"
+      ],
+      "correct": 0,
+      "visuals": [
+        {
+          "kind": "character-study",
+          "scene": "jump",
+          "variant": "prepared",
+          "title": "跳跃方案一",
+          "description": "角色先降低身体，再蹬地跃出，落地后有屈膝缓冲。",
+          "notes": [
+            "相同起点与终点",
+            "观察准备、离地、腾空和落地"
+          ]
+        },
+        {
+          "kind": "character-study",
+          "scene": "jump",
+          "variant": "translated",
+          "title": "跳跃方案二",
+          "description": "角色保持站立姿态，整体沿弧线到达相同终点。",
+          "notes": [
+            "相同起点与终点",
+            "观察准备、离地、腾空和落地"
+          ]
+        }
+      ],
+      "why": "A 把准备、发力、腾空和缓冲连接起来，方向与用力意图更容易读懂。B 更像整体位置补间，缺少这个角色主动发力的身体过程。预备动作的幅度应随角色、动作强度与叙事情境调整，不是所有动作都需要长时间下蹲。",
+      "rule": "预备动作：在主动作前提供方向、力量或意图的线索，再让发力、运动和落地反应相互呼应。",
+      "tip": "如果角色是在躲避突发危险，怎样缩短准备，同时保留动作的可读性？",
+      "coachOpening": [
+        "预备动作：在主动作前提供方向、力量或意图的线索，再让发力、运动和落地反应相互呼应。",
+        "如果角色是在躲避突发危险，怎样缩短准备，同时保留动作的可读性？"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "Thomas / Johnston · The Illusion of Life（主题参考）",
+          "url": "https://books.disney.com/book/the-illusion-of-life/"
+        },
+        {
+          "title": "Richard Williams · The Animator’s Survival Kit（主题参考）",
+          "url": "https://www.faber.co.uk/product/9780571238347-the-animators-survival-kit/"
+        }
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "跳起来之前，需要发生什么？",
+          "brief": "同样是让笨重角色跳到前方，哪版把准备、用力和落地反应组织得更清楚？",
+          "correct": 0,
+          "why": "A 把准备、发力、腾空和缓冲连接起来，方向与用力意图更容易读懂。B 更像整体位置补间，缺少这个角色主动发力的身体过程。预备动作的幅度应随角色、动作强度与叙事情境调整，不是所有动作都需要长时间下蹲。"
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "chapter": 7,
+      "kind": "open",
+      "format": "角色设计评审",
+      "principle": "跟随动作与次要动作",
+      "title": "人停下了，书包也该立刻停吗？",
+      "brief": "角色跑到指定位置急停。两段动作的身体主动作一致，但书包和围巾的停止方式不同。",
+      "prompt": "指出一版中最需要调整的地方；说明主体、书包和围巾应怎样先后停下，以及怎样避免配件抢走注意力。",
+      "visuals": [
+        {
+          "kind": "character-study",
+          "scene": "stop",
+          "variant": "locked",
+          "title": "停止方案一",
+          "description": "角色、书包与围巾在同一时刻停止，所有部件一起静止。",
+          "notes": [
+            "身体主动作相同",
+            "比较主体与配件的先后关系"
+          ]
+        },
+        {
+          "kind": "character-study",
+          "scene": "stop",
+          "variant": "follow",
+          "title": "停止方案二",
+          "description": "身体先停，书包与围巾继续小幅摆动，随后衰减并停下。",
+          "notes": [
+            "身体主动作相同",
+            "比较主体与配件的先后关系"
+          ]
+        }
+      ],
+      "correct": null,
+      "rubric": [
+        "指出具体部件、停止时刻或摆动幅度的证据",
+        "说明跟随动作与主体的速度、材质和连接方式有关",
+        "提出先后、幅度与衰减的具体改法，允许有依据的风格化处理"
+      ],
+      "reference": "例如保留身体先停的主动作，让书包因惯性短暂前摆再回落，围巾更轻、延迟略长；控制幅度并逐次衰减，最终回到稳定姿态。若追求机械或定格风格，也可以更同步，但应与整体设定一致。",
+      "rule": "跟随动作：主体停止后，连接部件可以因惯性继续运动；延迟、幅度和衰减应体现重量、材质和连接方式，并支持主动作。",
+      "tip": "如果把布围巾换成硬质护甲，哪些跟随关系需要改变？",
+      "coachOpening": [
+        "跟随动作：主体停止后，连接部件可以因惯性继续运动；延迟、幅度和衰减应体现重量、材质和连接方式，并支持主动作。",
+        "指出一版中最需要调整的地方；说明主体、书包和围巾应怎样先后停下，以及怎样避免配件抢走注意力。"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "Thomas / Johnston · The Illusion of Life（主题参考）",
+          "url": "https://books.disney.com/book/the-illusion-of-life/"
+        },
+        {
+          "title": "Richard Williams · The Animator’s Survival Kit（主题参考）",
+          "url": "https://www.faber.co.uk/product/9780571238347-the-animators-survival-kit/"
+        }
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "人停下了，书包也该立刻停吗？",
+          "prompt": "描述哪一处停止关系最影响质感，并提出一个包含先后、幅度和衰减的修改方案。"
+        }
+      ]
+    },
+    {
+      "id": 67,
+      "chapter": 7,
+      "kind": "open",
+      "format": "角色设计评审",
+      "principle": "身体表演与角色意图",
+      "title": "不改脸，怎样让他看起来更犹豫？",
+      "brief": "同一位角色正走向一位不熟悉的新朋友。现有动作里，它始终抬头、大步、均匀前进；你希望它“想靠近，但还有些迟疑”。",
+      "prompt": "不改角色造型与表情，提出至少两处身体或节奏调整，并说明观众会从哪里读到“想靠近”和“犹豫”这两种意图。",
+      "visuals": [
+        {
+          "kind": "character-study",
+          "scene": "walk",
+          "variant": "confident",
+          "title": "现有走路动作",
+          "description": "角色抬头、摆臂、大步均匀前进。",
+          "notes": [
+            "造型与表情保持不变",
+            "可暂停观察身体和步伐"
+          ]
+        }
+      ],
+      "correct": null,
+      "rubric": [
+        "把动作调整与想靠近又迟疑的情境相连",
+        "提出至少两项可观察的姿态、视线方向或时序改法",
+        "解释动作证据如何表达意图，不把性格只归因于面部表情"
+      ],
+      "reference": "可以让躯干和脚尖仍朝朋友方向，保留靠近的目标；缩小迈步幅度，在落脚前短暂停顿，手臂略收拢，再试探性迈出。可以有不同表演方式，但应让观众看到目标与阻碍共同影响行动。",
+      "rule": "角色表演：先确定角色想做什么、又在顾虑什么，再安排身体、视线和停顿。情绪通过具体行动与节奏被读到，不只是给角色贴上表情。",
+      "tip": "如果角色不是胆怯，而是担心打扰正在阅读的朋友，哪些动作应当不同？",
+      "coachOpening": [
+        "角色表演：先确定角色想做什么、又在顾虑什么，再安排身体、视线和停顿。情绪通过具体行动与节奏被读到，不只是给角色贴上表情。",
+        "不改角色造型与表情，提出至少两处身体或节奏调整，并说明观众会从哪里读到“想靠近”和“犹豫”这两种意图。"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "Ed Hooks · Acting for Animators（主题参考）",
+          "url": "https://www.routledge.com/Acting-for-Animators/Hooks/p/book/9781003289753"
+        },
+        {
+          "title": "Richard Williams · The Animator’s Survival Kit（主题参考）",
+          "url": "https://www.faber.co.uk/product/9780571238347-the-animators-survival-kit/"
+        }
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "不改脸，怎样让他看起来更犹豫？",
+          "prompt": "在保持脸部和服装不变的前提下，怎样用身体与停顿同时表现“靠近的愿望”和“迟疑”？请说明两处改法及其作用。"
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "chapter": 7,
+      "kind": "open",
+      "format": "角色设计评审",
+      "principle": "动效分寸与场景适配",
+      "title": "两段都很流畅，哪段更适合这里？",
+      "brief": "睡前阅读练习中，孩子刚答错一道题。品牌希望角色温柔、可靠、不制造额外刺激。两段都是流畅的鼓励反馈。",
+      "prompt": "选择更适合当前场景的一段，用动作证据说明理由；再说出另一段可能适用的场景，以及你会怎样调整它。",
+      "visuals": [
+        {
+          "kind": "character-study",
+          "scene": "feedback",
+          "variant": "energetic",
+          "title": "反馈方案一",
+          "description": "角色大幅跳跃、连续摆臂，并出现多颗彩色星点。",
+          "notes": [
+            "睡前阅读 · 答错后的鼓励",
+            "比较幅度、次数与信息重点"
+          ]
+        },
+        {
+          "kind": "character-study",
+          "scene": "feedback",
+          "variant": "gentle",
+          "title": "反馈方案二",
+          "description": "角色轻轻靠近、点头一次，抬手给出提示后稳定下来。",
+          "notes": [
+            "睡前阅读 · 答错后的鼓励",
+            "比较幅度、次数与信息重点"
+          ]
+        }
+      ],
+      "correct": null,
+      "rubric": [
+        "引用具体幅度、重复次数、节奏或姿态作为选择证据",
+        "把判断与睡前、答错、温柔可靠的情境对应",
+        "承认另一方案的适用条件，并给出具体调整，允许有充分依据的不同选择"
+      ],
+      "reference": "在题设下可选轻微靠近、点头与递提示，降低刺激并把重点放回下一步。大幅跳跃可能适合白天闯关成功；若用于此处，可以减少摆动次数、降低幅度、去掉星点，让提示更早出现。不同选择只要能说明情境依据和修改方法，也可成立。",
+      "rule": "动效分寸：流畅只是基础，还要检查动作幅度、时长、重复、情绪强度与任务是否相符。审美判断应落到可观察的动作证据和使用情境。",
+      "tip": "如果同一角色改成白天运动闯关的主持人，你会怎样重新安排反馈？",
+      "coachOpening": [
+        "动效分寸：流畅只是基础，还要检查动作幅度、时长、重复、情绪强度与任务是否相符。审美判断应落到可观察的动作证据和使用情境。",
+        "选择更适合当前场景的一段，用动作证据说明理由；再说出另一段可能适用的场景，以及你会怎样调整它。"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "Ed Hooks · Acting for Animators（主题参考）",
+          "url": "https://www.routledge.com/Acting-for-Animators/Hooks/p/book/9781003289753"
+        },
+        {
+          "title": "Thomas / Johnston · The Illusion of Life（主题参考）",
+          "url": "https://books.disney.com/book/the-illusion-of-life/"
+        }
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "两段都很流畅，哪段更适合这里？",
+          "prompt": "比较两段反馈的幅度、节奏和注意力重点。说明你在睡前答错场景中的选择，并给另一方案一个更合适的使用条件。"
+        }
+      ]
+    },
+    {
+      "id": 69,
+      "chapter": 7,
+      "kind": "open",
+      "format": "角色设计评审",
+      "principle": "角色整体审美评审",
+      "title": "哪个角色方案，更值得继续做？",
+      "brief": "为手机睡前阅读设计“温柔、可靠、略带幽默”的陪伴角色。它需要小尺寸可辨、能挥手，也能做出思考和鼓励。请把形象、关键姿态与短动作放在一起看。",
+      "prompt": "选择一套更值得继续发展的方案；指出一个值得保留的优点和一个最优先的改法，分别从形象、结构或动作中给出证据，并说怎样验证。",
+      "visuals": [
+        {
+          "kind": "character-study",
+          "scene": "review",
+          "variant": "calm",
+          "title": "角色方案一",
+          "description": "圆头与宽外套形成清楚的大形，挥手幅度适中，动作留有停顿。",
+          "notes": [
+            "同一角色需求",
+            "可切换剪影与骨架，暂停看关键姿态"
+          ]
+        },
+        {
+          "kind": "character-study",
+          "scene": "review",
+          "variant": "lively",
+          "title": "角色方案二",
+          "description": "配件更丰富，比例更紧凑，抬手和身体弹动更频繁。",
+          "notes": [
+            "同一角色需求",
+            "可切换剪影与骨架，暂停看关键姿态"
+          ]
+        }
+      ],
+      "correct": null,
+      "rubric": [
+        "根据目标人群、屏幕尺寸与睡前需求说明选择，任一方案都可有依据地成立",
+        "指出一项具体优点和一项可执行改法，涉及轮廓、比例、结构、姿态或动作",
+        "给出验证方法，如小尺寸识别、剪影检查、动作意图复述或场景内观察"
+      ],
+      "reference": "例如选一并保留头与外套的大形关系，优先调整挥手停顿，使鼓励之后更快回到阅读。可在 64 像素查看辨识度，暂停检查关节，再请使用者复述动作意图。也可选二，保留幽默配件，通过减少碎细节、收敛弹动与延长稳定段使其更符合睡前场景。",
+      "rule": "整体审美：把辨识度、表达准确、结构与运动的可信度、以及场景分寸放在一起评审。评价的是证据与改法，不把一种造型或个人偏好当作唯一答案。",
+      "tip": "如果只能改一个地方，怎样证明它比其他调整更值得优先？",
+      "coachOpening": [
+        "整体审美：把辨识度、表达准确、结构与运动的可信度、以及场景分寸放在一起评审。评价的是证据与改法，不把一种造型或个人偏好当作唯一答案。",
+        "选择一套更值得继续发展的方案；指出一个值得保留的优点和一个最优先的改法，分别从形象、结构或动作中给出证据，并说怎样验证。"
+      ],
+      "coachOpeningVersion": 3,
+      "sources": [
+        {
+          "title": "3dtotal · Fundamentals of Character Design（主题参考，练习角色为原创）",
+          "url": "https://store.3dtotal.com/products/fundamentals-of-character-design"
+        },
+        {
+          "title": "Ed Hooks · Acting for Animators（主题参考）",
+          "url": "https://www.routledge.com/Acting-for-Animators/Hooks/p/book/9781003289753"
+        },
+        {
+          "title": "Thomas / Johnston · The Illusion of Life（主题参考）",
+          "url": "https://books.disney.com/book/the-illusion-of-life/"
+        }
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "哪个角色方案，更值得继续做？",
+          "prompt": "给两套方案做一次有依据的审美评审：你的选择是什么，保留什么，先改哪里，以及用什么方式确认改动有效？"
         }
       ]
     }

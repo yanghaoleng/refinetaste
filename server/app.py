@@ -18,6 +18,7 @@ ORIGINS = set(os.environ.get('REFINETASTE_ORIGINS', 'https://mikeywa.site,https:
 CORRECT = [1, 1, 1, 1, 0, 1, 1, 1]
 COURSE = json.loads((ROOT / 'dist/course.json').read_text())
 QUESTIONS = COURSE['questions']
+CHAPTERS_BY_ID={chapter['id']:chapter for chapter in COURSE['chapters']}
 CHAPTER_STARTS=tuple(next(q['id'] for q in QUESTIONS if q['chapter']==chapter['id']) for chapter in COURSE['chapters'])
 CHAPTER_QUESTIONS={start:tuple(q['id'] for q in QUESTIONS if q['chapter']==QUESTIONS[start]['chapter']) for start in CHAPTER_STARTS}
 # Runs created before chapter expansion did not submit a syllabus; their IDs stop at 55.
@@ -320,7 +321,7 @@ def journey_text(rows):
         seconds=round(pending/1000,1);duration=str(int(seconds)) if seconds.is_integer() else str(seconds)
         action={'start':'点击开始答题','skip_question':'暂时跳过，稍后再做','bookmark':'收藏题目','remove_bookmark':'取消收藏','next_question':'点击下一题','back_to_chapters':'返回章节目录','back_home':'返回首页','answer_choice':f"选择{'A' if r['option']==0 else 'B'}"+(('，答对' if r['verdict'] else '，答错') if r['verdict'] is not None else ''),'submit_answer':'提交简答','send_message':'向 AI 发消息','view_result':'查看本章成绩','open_notes':'打开笔记','close_notes':'收起笔记','send_note_message':'在笔记中追问','background':'切到后台（暂停计时）','resume':'回到页面','leave':'离开页面','stay':'仍在浏览'}.get(r['action'])
         if r['action'] in ('choose_chapter','choose_mistakes'):
-            chapter=r['next_chapter'];name=COURSE['chapters'][chapter]['title'] if chapter is not None else '章节'
+            chapter=r['next_chapter'];name=CHAPTERS_BY_ID[chapter]['title'] if chapter is not None else '章节'
             action=f"选择「{name}」"+('消灭错题' if r['action']=='choose_mistakes' else '开始练习')
         parts.append(f'{page}停留{duration}s，{action}');pending=0
     return ' → '.join(parts)
@@ -339,7 +340,7 @@ def usage_paths(visitor,days,page,now):
             for r in events:
                 if r['session'] in tracked and r['ts']>=tracked[r['session']]:continue
                 if r['kind']=='view':text='访问首页'
-                elif r['kind']=='start':text='开始练习'+('「'+COURSE['chapters'][QUESTIONS[r['start']]['chapter']]['title']+'」' if r['course']==2 else '（旧版）')
+                elif r['kind']=='start':text='开始练习'+('「'+CHAPTERS_BY_ID[QUESTIONS[r['start']]['chapter']]['title']+'」' if r['course']==2 else '（旧版）')
                 elif r['kind']=='answer':text=f"第{r['q']+1}题提交"+('，未判定' if graded_value(r) is None else '，答对' if graded_value(r) else '，答错')
                 elif r['kind']=='complete':text='完成本章练习'
                 elif r['kind']=='note_saved':text='收藏题目'
@@ -357,7 +358,7 @@ def question_detail(question_id,days,now=None):
     graded=[graded_value(r) for r in answers if graded_value(r) is not None]
     with connect() as db:bookmarks=db.execute('SELECT COUNT(*) FROM bookmarks WHERE q=?',(question_id,)).fetchone()[0]
     codes=public_ids({r['visitor'] for r in answers[:50]})
-    return {'bookmarks':bookmarks,'question':q,'chapter':COURSE['chapters'][q['chapter']]['title'],'answers':len(answers),'graded':len(graded),'correct':sum(graded),'users':len({r['visitor'] for r in answers}),'recentAnswers':[{'visitor':r['visitor'],'label':'用户 '+codes[r['visitor']],'ts':r['ts'],'correct':graded_value(r)} for r in answers[:50]]}
+    return {'bookmarks':bookmarks,'question':q,'chapter':CHAPTERS_BY_ID[q['chapter']]['title'],'answers':len(answers),'graded':len(graded),'correct':sum(graded),'users':len({r['visitor'] for r in answers}),'recentAnswers':[{'visitor':r['visitor'],'label':'用户 '+codes[r['visitor']],'ts':r['ts'],'correct':graded_value(r)} for r in answers[:50]]}
 
 def save_bookmarks(data,now=None):
     now=time.time() if now is None else now
@@ -403,7 +404,7 @@ def recent_activity(days,now):
             begun=db.execute("SELECT * FROM events WHERE kind='start' AND run=? AND visitor=?",(event['run'],event['visitor'])).fetchone()
             if not begun:continue
             graded=[graded_value(r) for r in run_answers if graded_value(r) is not None]
-            chapter=COURSE['chapters'][QUESTIONS[begun['start']]['chapter']]['title'] if begun['course']==2 else '历史练习'
+            chapter=CHAPTERS_BY_ID[QUESTIONS[begun['start']]['chapter']]['title'] if begun['course']==2 else '历史练习'
             items.append({'id':'score:'+event['id'],'type':'score','visitor':event['visitor'],'label':'访客 '+event['visitor'][:10],'ts':event['ts'],'title':chapter,'score':round(100*sum(graded)/len(graded)) if graded and len(graded)==len(run_answers) else None,'accuracy':round(100*sum(graded)/len(graded),1) if graded else None,'correct':sum(graded),'graded':len(graded),'total':len(run_answers)})
     codes=public_ids({item['visitor'] for item in items})
     for item in items:item['label']='用户 '+codes[item['visitor']]
@@ -447,7 +448,7 @@ def learning_report(days,page=0,search='',now=None,sort=None,direction=None):
     for q in QUESTIONS:
         answers=[r for r in events if r['kind']=='answer' and r['course']==2 and r['q']==q['id']]
         graded=[graded_value(r) for r in answers if graded_value(r) is not None]
-        question_stats.append({'id':q['id'],'title':q['title'],'principle':q['principle'],'kind':q['kind'],'chapter':q['chapter'],'chapterName':COURSE['chapters'][q['chapter']]['title'],'answers':len(answers),'graded':len(graded),'correct':sum(graded),'users':len({r['visitor'] for r in answers}),'bookmarks':question_bookmarks.get(q['id'],0)})
+        question_stats.append({'id':q['id'],'title':q['title'],'principle':q['principle'],'kind':q['kind'],'chapter':q['chapter'],'chapterName':CHAPTERS_BY_ID[q['chapter']]['title'],'answers':len(answers),'graded':len(graded),'correct':sum(graded),'users':len({r['visitor'] for r in answers}),'bookmarks':question_bookmarks.get(q['id'],0)})
     return {'users':users[page*30:(page+1)*30],'total':len(users),'page':page,'pageSize':30,'totals':totals,'questions':question_stats,'chapters':COURSE['chapters'],'trend':daily_trends(days,now),'activity':recent_activity(days,now)}
 
 def learner_detail(visitor,days,page=0,now=None,journey_page=0):
@@ -645,7 +646,9 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(308);self.send_header('Location',path+'/');self.end_headers();return
         files={BASE+'/':'index.html',BASE+'/data/':'data/index.html',BASE+'/style.css':'style.css',BASE+'/app.js':'app.js',BASE+'/analytics.js':'analytics.js',BASE+'/data/admin.js':'data/admin.js',BASE+'/data/admin.css':'data/admin.css'}
         files[BASE+'/icons.svg']='icons.svg'
-        for asset in ('privacy-modal.js','privacy-id.js','feedback.js','privacy.html','privacy.css','hero-carousel.js','hero-carousel.css','theme.js','theme.css','motion.js','coach-guide.js','conversation-sequence.js','chat-format.js','question-run.js','sonner.css','sonner.LICENSE.txt','viewport.js','site-icon.js','chapter-score.js','chapter-practice.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
+        for asset in ('pixel-motion.webp','pixel-studies.webp','pixel-ball.webp'):
+            files[BASE+'/assets/characters/'+asset]='assets/characters/'+asset
+        for asset in ('character-studies.js','character-studies.css','privacy-modal.js','privacy-id.js','feedback.js','privacy.html','privacy.css','hero-carousel.js','hero-carousel.css','theme.js','theme.css','motion.js','coach-guide.js','conversation-sequence.js','chat-format.js','question-run.js','sonner.css','sonner.LICENSE.txt','viewport.js','site-icon.js','chapter-score.js','chapter-practice.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
             files[BASE+'/'+asset]=asset
         for asset in ('chick-emotions.webp','chick-positive-emotions.webp','chick-cool-expressions.webp','chick-gaze.webp','chick-starry-96.webp','chick-starry-192.webp','favicon-starry.ico','favicon-starry-32.png','apple-touch-starry.png','chick-positive-emotions.png','chick-emotions.png','chick-eyes-original.png','chick-eyes-128.webp','chick-eyes-512.webp','apple-touch-icon.png','favicon-32.png','favicon.ico'):
             files[BASE+'/assets/'+asset]='assets/'+asset

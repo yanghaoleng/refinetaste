@@ -1,0 +1,17 @@
+.character-toolbar{position:sticky;top:76px;z-index:3;background:var(--bg);padding:10px 8px;border-bottom:1px solid var(--line);border-radius:10px;display:flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:8px;width:fit-content;max-width:calc(100% - 24px);margin:22px auto 16px}
+.character-toolbar button{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px 12px;min-height:40px;font-size:12px;line-height:1.4}
+.character-toolbar button[aria-pressed="true"]{background:var(--accent);border-color:transparent;color:#302913}
+.character-toolbar>span{width:100%;text-align:center;color:var(--muted);font-size:11px;margin-top:4px}
+.specimen.character-study{display:block;margin:0;padding:22px;background:#f6f1dc;color:#2d4039;border:1px solid #d6d8be;border-radius:12px;min-height:0;text-align:left;overflow:hidden}
+.character-study-tag{font-size:10px;color:#607268;letter-spacing:.6px;margin-bottom:9px}
+.character-study figcaption{font-size:19px;font-weight:700;line-height:1.5;letter-spacing:0}
+.character-canvas{display:block;width:100%;height:auto;aspect-ratio:400/340;margin:8px auto 0;image-rendering:pixelated}
+.character-study-notes{padding-top:12px;border-top:1px solid #d5d6bd}
+.character-study-notes p{font-size:11px;line-height:1.7;margin:3px 0;color:#586b5e}
+.character-small{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:-2px 0 10px;color:#586b5e;font-size:10px}
+.character-small>div{width:64px;height:55px;flex:0 0 64px}.character-small canvas{display:block;width:64px;height:55px;image-rendering:pixelated}
+.open-case .character-study{width:100%}.open-case:not(.case-pair) .character-study{max-width:540px;margin-inline:auto}
+@media(max-width:600px){.specimen.character-study{padding:16px}.character-study figcaption{font-size:17px}.character-toolbar{gap:6px}.character-toolbar button{padding:8px 10px}.character-study-notes p{font-size:11px}}
+@media(hover:hover) and (pointer:fine){.character-toolbar button:hover{border-color:var(--muted)}}
+
+.character-reading{max-width:680px;margin:18px auto;color:var(--muted);font-size:12px}.character-reading>summary{cursor:pointer;padding:10px 0}.character-reading .case-source{margin-top:10px;line-height:1.8}

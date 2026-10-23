@@ -29,7 +29,7 @@ class ProductExpansionTests(unittest.TestCase):
   result=app.summary(7,now=intro+10)
   self.assertEqual(result['metrics']['completed'],2)
   for q in result['questions']:
-   if q['course']==2 and q['index']>=56:
+   if q['course']==2 and 56<=q['index']<60:
     self.assertEqual(q['eligible'],1);self.assertEqual(q['answers'],1);self.assertEqual(q['correct'],1)
   self.assertEqual(next(q for q in result['questions'] if q['course']==2 and q['index']==16)['eligible'],2)
  def test_sources_variants_and_stable_identity_for_new_questions(self):
