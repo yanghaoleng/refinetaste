@@ -50,8 +50,8 @@
    // A deliberate, slower stamp is reserved for a rare perfect-score celebration.
    const landing=trackEffect(stamp.animate([
     {opacity:0,transform:'translateY(-28px) scale(1.65) rotate(-18deg)'},
-    {opacity:1,transform:'translateY(0) scale(.94) rotate(-6deg)',offset:.8},
-    {opacity:1,transform:'translateY(0) scale(1) rotate(-6deg)'}
+    {opacity:1,transform:'translateY(0) scale(.94) rotate(2deg)',offset:.8},
+    {opacity:1,transform:'translateY(0) scale(1) rotate(0deg)'}
    ],{duration:680,easing:'cubic-bezier(.16,1,.3,1)',fill:'backwards'}));
    landing.finished.then(()=>{
     if(token!==generation||!stamp.isConnected||reduced.matches)return;
