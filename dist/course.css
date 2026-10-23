@@ -421,3 +421,6 @@ body.privacy-open{overflow:hidden}
 /* Keep every chapter action on the same right edge, including wrapped mobile actions. */
 .course-chapter>.chapter-action{width:max-content;justify-self:end}
 @media(min-width:601px){.course-chapter>.chapter-action{grid-column:3;grid-row:1}}
+
+/* Limit catalogue interaction to the progress control rather than the text column. */
+.chapter-copy .chapter-catalog{width:fit-content;max-width:100%}
