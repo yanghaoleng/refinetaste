@@ -14,5 +14,10 @@
   const variants={};for(const q of questions){const ids=['base',...(q.variants||[]).map(v=>v.id)],pool=ids.filter(id=>id!==previous.variants?.[q.id]?.variantId),variantId=pool[Math.floor(Math.random()*pool.length)]||ids[0],optionOrder=q.kind==='choice'?shuffle([0,1]):[0,1];variants[q.id]=resolve(q,variantId,optionOrder)}
   return {order,variants};
  }
- window.RefineRun={create,resolve};
+ // Move only the current unanswered question; completed positions and variants stay intact.
+ function defer(order,position,answers={}){
+  if(!Number.isInteger(position)||position<0||position>=order.length-1||Object.hasOwn(answers,order[position]))return null;
+  const next=[...order],question=next.splice(position,1)[0];next.push(question);return next;
+ }
+ window.RefineRun={create,resolve,defer};
 })();
