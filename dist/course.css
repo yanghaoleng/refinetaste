@@ -404,3 +404,17 @@ body.home-notes-open{overflow:hidden}
 #home-notes-dialog #notebook{position:static;inset:auto;transform:none;width:100%;max-width:none;max-height:calc(100dvh - 64px);min-height:260px;margin:0;padding:28px;overscroll-behavior:contain}
 #home-notes-dialog .note-designs{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:759px){#home-notes-dialog{width:calc(100vw - 28px);max-height:calc(100dvh - 40px)}#home-notes-dialog #notebook{padding:20px;max-height:calc(100dvh - 40px)}#home-notes-dialog .note-designs{grid-template-columns:minmax(0,1fr)}}
+
+body.privacy-open{overflow:hidden}
+#privacy-dialog{width:min(800px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 64px);padding:0;border:1px solid var(--line);border-radius:18px;background:var(--bg);color:var(--text);overflow:auto;overscroll-behavior:contain}
+#privacy-dialog::backdrop{background:#0008;backdrop-filter:blur(3px)}
+#privacy-dialog .privacy-document{padding:30px 28px 36px}
+#privacy-dialog .privacy-document>nav{display:none}
+@media(max-width:600px){#privacy-dialog{max-height:calc(100dvh - 32px)}#privacy-dialog .privacy-document{padding:24px 20px}}
+
+/* A quiet way to defer an unanswered question without removing it from the run. */
+.lesson-skip{position:fixed;right:max(24px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));z-index:4}
+.lesson-skip[hidden]{display:none}
+.skip-question{min-height:44px;min-width:56px;padding:10px 12px;border:0;border-radius:8px;background:var(--bg);color:var(--muted);font-size:12px;line-height:1.4}
+@media(hover:hover) and (pointer:fine){.skip-question:hover{background:var(--panel);color:var(--text)}}
+@media(max-width:600px){.lesson-skip{right:16px;bottom:max(16px,env(safe-area-inset-bottom))}}

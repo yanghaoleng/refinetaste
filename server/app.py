@@ -51,6 +51,7 @@ def init_db():
           CREATE UNIQUE INDEX IF NOT EXISTS start_once ON events(run) WHERE kind='start';
           CREATE UNIQUE INDEX IF NOT EXISTS complete_once ON events(run) WHERE kind='complete';
           CREATE TABLE IF NOT EXISTS run_syllabi(run TEXT PRIMARY KEY, questions TEXT NOT NULL);
+          CREATE TABLE IF NOT EXISTS public_identities(ordinal INTEGER PRIMARY KEY AUTOINCREMENT, visitor TEXT UNIQUE NOT NULL, code TEXT UNIQUE);
           CREATE TABLE IF NOT EXISTS review_usage(id TEXT PRIMARY KEY, day TEXT, client TEXT, q INTEGER);
           CREATE INDEX IF NOT EXISTS events_visitor_ts ON events(visitor,ts);
           CREATE TABLE IF NOT EXISTS conversation_messages(
@@ -87,6 +88,28 @@ def resolve_question(question_id,variant='base',order=None):
 
 def digest(s):
     return hmac.new(SECRET.encode(), s.encode(), hashlib.sha256).hexdigest()
+
+def support_code(ordinal):
+    """Exhaust a collision-free base-36 space before adding another character."""
+    alphabet='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    index=ordinal-1;width=3
+    if index<0:raise ValueError('invalid ordinal')
+    while index>=36**width:index-=36**width;width+=1
+    # A permutation spreads sequential allocations across the complete code space.
+    value=(index*7919+10463)%(36**width);text=''
+    for _ in range(width):value,remainder=divmod(value,36);text=alphabet[remainder]+text
+    return text
+
+def public_ids(visitors):
+    result={}
+    with connect() as db:
+        db.execute('BEGIN IMMEDIATE')
+        for visitor in visitors:
+            row=db.execute('SELECT code FROM public_identities WHERE visitor=?',(visitor,)).fetchone()
+            if row:result[visitor]=row['code'];continue
+            ordinal=db.execute('INSERT INTO public_identities(visitor) VALUES(?)',(visitor,)).lastrowid
+            code=support_code(ordinal);db.execute('UPDATE public_identities SET code=? WHERE ordinal=?',(code,ordinal));result[visitor]=code
+    return result
 
 def collect(data, now=None):
     now = time.time() if now is None else now
@@ -268,7 +291,8 @@ def learning_report(days,page=0,search='',now=None):
     people={}
     for kind,rows in (('events',events),('messages',messages)):
         for row in rows:people.setdefault(row['visitor'],{'events':[],'messages':[]})[kind].append(row)
-    users=[{'id':key,'label':'访客 '+key[:10],**learner_totals(v['events'],v['messages'])} for key,v in people.items() if search.lower() in key or search.lower() in ('访客 '+key[:10])]
+    codes=public_ids(people)
+    users=[{'id':key,'publicId':codes[key],'label':'用户 '+codes[key],**learner_totals(v['events'],v['messages'])} for key,v in people.items() if search.lower() in key or search.upper() in codes[key] or search.lower() in ('用户 '+codes[key]).lower() or search.lower() in ('访客 '+key[:10])]
     users.sort(key=lambda u:u['lastActive'] or 0,reverse=True)
     totals=learner_totals(events,messages)
     totals.update(users=len(people),recordingSince=since)
@@ -280,6 +304,10 @@ def learning_report(days,page=0,search='',now=None):
     return {'users':users[page*30:(page+1)*30],'total':len(users),'page':page,'pageSize':30,'totals':totals,'questions':question_stats,'chapters':COURSE['chapters'],'trend':daily_trends(days,now)}
 
 def learner_detail(visitor,days,page=0,now=None):
+    if isinstance(visitor,str) and re.fullmatch('[A-Z0-9]{3,12}',visitor.upper()):
+        with connect() as db:row=db.execute('SELECT visitor FROM public_identities WHERE code=?',(visitor.upper(),)).fetchone()
+        if not row:raise ValueError('invalid visitor')
+        visitor=row['visitor']
     if not isinstance(visitor,str) or not re.fullmatch('[a-f0-9]{64}',visitor):raise ValueError('invalid visitor')
     now=time.time() if now is None else now;start=report_start(days,now)
     with connect() as db:
@@ -295,7 +323,8 @@ def learner_detail(visitor,days,page=0,now=None):
     for r in messages[:50]:
         q=resolve_question(r['q'],r['variant'],json.loads(r['option_order']))
         records.append({'id':r['id'],'thread':r['thread'],'position':r['position'],'q':r['q'],'title':q['title'],'question':q['brief']+(' '+q.get('prompt','') if q['kind']=='open' else ''),'kind':q['kind'],'role':r['role'],'content':r['content'],'ts':r['ts'],'source':r['source'],'correct':None if r['correct'] is None else bool(r['correct'])})
-    return {'id':visitor,'label':'访客 '+visitor[:10],**learner_totals(events,message_meta),'answers':answers,'records':records,'page':page,'hasMore':len(messages)>50}
+    code=public_ids([visitor])[visitor]
+    return {'id':visitor,'publicId':code,'label':'用户 '+code,**learner_totals(events,message_meta),'answers':answers,'records':records,'page':page,'hasMore':len(messages)>50}
 
 class Handler(BaseHTTPRequestHandler):
     def log_message(self,*args): pass
@@ -340,7 +369,7 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 visitor=self.body().get('visitor')
                 if not isinstance(visitor,str) or not UUID.fullmatch(visitor):raise ValueError()
-                return self.reply(200,{'id':digest(visitor)})
+                return self.reply(200,{'id':public_ids([digest(visitor)])[digest(visitor)]})
             except ValueError:return self.reply(400,{'error':'invalid visitor'})
         if path.endswith('/review'):
             return self.review_request(key,now)
@@ -463,7 +492,7 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(308);self.send_header('Location',path+'/');self.end_headers();return
         files={BASE+'/':'index.html',BASE+'/data/':'data/index.html',BASE+'/style.css':'style.css',BASE+'/app.js':'app.js',BASE+'/analytics.js':'analytics.js',BASE+'/data/admin.js':'data/admin.js',BASE+'/data/admin.css':'data/admin.css'}
         files[BASE+'/icons.svg']='icons.svg'
-        for asset in ('privacy-id.js','feedback.js','privacy.html','privacy.css','hero-carousel.js','hero-carousel.css','theme.js','theme.css','motion.js','coach-guide.js','conversation-sequence.js','chat-format.js','question-run.js','sonner.css','sonner.LICENSE.txt','viewport.js','site-icon.js','chapter-score.js','chapter-practice.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
+        for asset in ('privacy-modal.js','privacy-id.js','feedback.js','privacy.html','privacy.css','hero-carousel.js','hero-carousel.css','theme.js','theme.css','motion.js','coach-guide.js','conversation-sequence.js','chat-format.js','question-run.js','sonner.css','sonner.LICENSE.txt','viewport.js','site-icon.js','chapter-score.js','chapter-practice.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
             files[BASE+'/'+asset]=asset
         for asset in ('chick-emotions.webp','chick-positive-emotions.webp','chick-cool-expressions.webp','chick-gaze.webp','chick-starry-96.webp','chick-starry-192.webp','favicon-starry.ico','favicon-starry-32.png','apple-touch-starry.png','chick-positive-emotions.png','chick-emotions.png','chick-eyes-original.png','chick-eyes-128.webp','chick-eyes-512.webp','apple-touch-icon.png','favicon-32.png','favicon.ico'):
             files[BASE+'/assets/'+asset]='assets/'+asset

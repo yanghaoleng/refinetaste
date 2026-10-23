@@ -20,7 +20,7 @@
  window.RefineMetrics={
   identity(){
    if(!enabled||!visitor)return Promise.resolve(null);
-   if(!identityRequest)identityRequest=fetch('/refinetaste/api/identity',{method:'POST',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({visitor})}).then(async response=>{if(!response.ok)throw Error('identity unavailable');const data=await response.json();if(!/^[a-f0-9]{64}$/.test(data.id))throw Error('invalid identity');return data.id}).catch(()=>{identityRequest=null;return null});
+   if(!identityRequest)identityRequest=fetch('/refinetaste/api/identity',{method:'POST',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({visitor})}).then(async response=>{if(!response.ok)throw Error('identity unavailable');const data=await response.json();if(!/^[A-Z0-9]{3,12}$/.test(data.id))throw Error('invalid identity');return data.id}).catch(()=>{identityRequest=null;return null});
    return identityRequest;
   },
   send(kind,extra={}){

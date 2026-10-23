@@ -246,7 +246,7 @@ async function copyNoteUserId(id){
 async function updateNoteUserId(){
  const button=$('#notes-user-id'),id=await window.RefineMetrics?.identity();
  if(!id){button.textContent='用户 ID 暂不可用';button.disabled=true;return}
- button.textContent=`ID ${id.slice(0,10)}`;button.disabled=false;button.title=`复制用户 ID：${id}`;
+ button.textContent=`ID ${id}`;button.disabled=false;button.title=`复制用户 ID：${id}`;
  button.onclick=async()=>{try{await copyNoteUserId(id);window.RefineToast?.success('用户 ID 已复制')}catch{window.RefineToast?.error('复制失败，请再试一次')}};
 }
 async function openNotes(event){const button=event?.currentTarget;if(!$('#notebook').hidden&&button?.matches('#notes-open,#notebook-in')){closeNotes();return}if(!course){try{await loadCourse()}catch{}}syncBookmark();notesOpener=$('#training').open?$('#notebook-in'):$('#notes-open');($('#training').open?$('#training-workspace'):$('#home-notes-host')).append($('#notebook'));renderNotesIndex();updateNoteUserId();$('#notebook').hidden=false;if($('#training').open)document.body.classList.add('notes-visible');else{document.body.classList.add('home-notes-open');$('#home-notes-dialog').showModal()}for(const id of ['notes-open','notebook-in']){$('#'+id).setAttribute('aria-controls','notebook');$('#'+id).setAttribute('aria-expanded','true')}positionNotes();$('#notebook').scrollTop=0;$('#notebook-title').focus({preventScroll:true});if(!matchMedia('(prefers-reduced-motion: reduce)').matches)$('#notebook').animate([{opacity:0,translate:'0 -6px'},{opacity:1,translate:'0 0'}],{duration:200,easing:'cubic-bezier(.23,1,.32,1)'})}

@@ -126,7 +126,7 @@ function renderQuestions(){
  $('#questions').innerHTML=rows.map(q=>`<tr><td><strong>${q.id+1}. ${esc(q.title)}</strong><small>${esc(q.chapterName)} · ${q.kind==='open'?'简答题 · AI 判定':'选择题'}</small></td><td>${q.users}</td><td>${q.answers}</td><td>${q.correct} / ${q.graded}</td><td>${pct(q.correct,q.graded)}</td></tr>`).join('');
 }
 async function openUser(id){
- selectedUser=id;recordPage=0;transcriptNodes.clear();$('#transcripts').replaceChildren();$('#answer-history').replaceChildren();$('#learner-summary').textContent='';$('#learner-title').textContent='访客 '+id.slice(0,10);$('#learner-detail').hidden=false;$('#records-more').hidden=true;
+ selectedUser=id;recordPage=0;transcriptNodes.clear();$('#transcripts').replaceChildren();$('#answer-history').replaceChildren();$('#learner-summary').textContent='';$('#learner-title').textContent=data?.users?.find(user=>user.id===id)?.label||'用户';$('#learner-detail').hidden=false;$('#records-more').hidden=true;
  $('#learner-title').focus({preventScroll:true});$('#learner-detail').scrollIntoView({behavior:'smooth',block:'start'});await loadRecords(true);
 }
 async function loadRecords(first=false){
@@ -135,6 +135,7 @@ async function loadRecords(first=false){
   const d=await api(`learner?id=${encodeURIComponent(id)}&days=${period}&page=${recordPage}`);
   if(token!==detailGeneration||selectedUser!==id)return;
   if(first){
+   $('#learner-title').textContent=d.label;
    $('#learner-summary').textContent=`答题深度 ${d.depth} / ${d.totalQuestions} · 涉及 ${d.chapters} 章 · 答题记录 ${d.answers.length} 次 · 正确率 ${pct(d.correct,d.graded)}（${d.correct} / ${d.graded} 次已判定）`;
    $('#answer-history').innerHTML=d.answers.length?`<table><thead><tr><th>题目</th><th>题型</th><th>判定</th><th>时间</th></tr></thead><tbody>${d.answers.map(a=>`<tr><td>${a.course===1?'旧版 · ':''}${a.q+1}. ${esc(a.title)}</td><td>${a.kind==='open'?'简答':'选择'}</td><td><span class="outcome ${a.correct===null?'ungraded':a.correct?'right':'wrong'}">${a.correct===null?'未判定':a.correct?'答对':'答错'}</span></td><td>${date(a.ts)}</td></tr>`).join('')}</tbody></table>`:'<p class="empty-cell">暂无答题判定记录。</p>';
   }
