@@ -60,7 +60,7 @@ class CourseTests(unittest.TestCase):
     for order in ([0,1],[1,0]):
      resolved=app.resolve_question(q['id'],variant,order)
      self.assertEqual(resolved['id'],q['id'])
-     if q['kind']=='choice':self.assertEqual(order[resolved['correct']],q['correct'] if variant=='base' else 1-q['correct'])
+     if q['kind']=='choice':self.assertEqual(order[resolved['correct']],q['correct'])
   for variant,order in [('invented',[0,1]),('base',[0,0]),('base',[True,0]),('base','01')]:
    with self.assertRaises(ValueError):app.resolve_question(0,variant,order)
  def test_legacy_database_migration_preserves_rows(self):
