@@ -37,25 +37,34 @@
  const subject=heading.querySelector('[data-headline-subject]'),reason=heading.querySelector('[data-headline-reason]');
  const phrases=[['好看','理由'],['好用','讲究'],['丝滑','节奏'],['清楚','层次'],['吸引','重点'],['动人','铺垫']];
  const preference=matchMedia('(prefers-reduced-motion: reduce)'),active=new Set();
- let current=0,timer=null,generation=0,hovered=false,focused=false;
+ let current=0,timer=null,hovered=false,focused=false;
  function allowed(){return !hovered&&!focused&&!document.hidden&&!preference.matches&&!document.querySelector('#training')?.open&&!document.body.classList.contains('notes-visible')}
- function clear(){clearTimeout(timer);timer=null;generation++;for(const animation of active)animation.cancel();active.clear()}
- function words(enter){
-  const animations=[subject,reason].flatMap((word,index)=>window.RefineText.text(word,{exit:!enter,delay:enter?index*60:0,step:35}));
-  animations.forEach(animation=>active.add(animation));
-  return Promise.all(animations.map(animation=>animation.finished.catch(()=>{}).then(()=>animation)));
+ function clear(){clearTimeout(timer);timer=null;for(const animation of active)animation.cancel();active.clear();render(false)}
+ function render(animate){
+  [subject,reason].forEach((word,wordIndex)=>{
+   const previous=[...word.textContent],next=[...phrases[current][wordIndex]];
+   word.replaceChildren(...next.map((character,index)=>{
+    const cell=document.createElement('span');cell.className='headline-slot';
+    const incoming=document.createElement('span');incoming.textContent=character;cell.append(incoming);
+    if(animate&&previous[index]!==character){
+     const outgoing=document.createElement('span');outgoing.textContent=previous[index]||'';outgoing.setAttribute('aria-hidden','true');outgoing.className='headline-slot-outgoing';cell.prepend(outgoing);
+     const options={duration:460,delay:index*55+wordIndex*45,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'};
+     const enter=incoming.animate([{transform:'translateY(105%)'},{transform:'translateY(0)'}],options);
+     const exit=outgoing.animate([{transform:'translateY(0)'},{transform:'translateY(-105%)'}],options);
+     [enter,exit].forEach(animation=>{active.add(animation);animation.finished.catch(()=>{}).then(()=>{animation.cancel();active.delete(animation);outgoing.remove()})});
+    }
+    return cell;
+   }));
+  });
  }
- function settle(animations){for(const animation of animations){animation.cancel();active.delete(animation)}}
  function schedule(){if(allowed()&&!timer)timer=setTimeout(()=>{timer=null;cycle()},4200)}
- async function cycle(manual=false){
-  if(manual){clear();if(document.hidden||document.querySelector('#training')?.open)return}else if(!allowed())return;
-  const token=++generation,exit=preference.matches?[]:await words(false);
-  if(token!==generation||(!manual&&!allowed()))return;
-  current=(current+1)%phrases.length;const [a,b]=phrases[current];window.RefineText.text(subject,{value:a,delay:0,step:35});window.RefineText.text(reason,{value:b,delay:60,step:35});heading.setAttribute('aria-label',`${a}，是有${b}的。`);
-  settle(exit);if(token===generation)schedule();
+ function cycle(manual=false){
+  if(manual){if(document.hidden||document.querySelector('#training')?.open)return}else if(!allowed())return;
+  clear();current=(current+1)%phrases.length;render(!preference.matches);
+  const [a,b]=phrases[current];heading.setAttribute('aria-label',`${a}，是有${b}的。`);schedule();
  }
  function sync(){if(!allowed())clear();else schedule()}
- window.RefineText.text(subject);window.RefineText.text(reason,{delay:60});
+ render(false);
  heading.addEventListener('click',()=>cycle(true));
  const observer=new MutationObserver(sync);observer.observe(document.querySelector('#training'),{attributes:true,attributeFilter:['open']});observer.observe(document.body,{attributes:true,attributeFilter:['class']});
  heading.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse'){hovered=true;sync()}});heading.addEventListener('pointerleave',()=>{hovered=false;sync()});
