@@ -429,3 +429,8 @@ body.privacy-open{overflow:hidden}
 .catalog-jump{flex:1;min-width:0;padding:11px 6px;border:0;border-radius:6px;background:transparent;color:inherit;text-align:left;font:inherit;font-weight:600;line-height:1.5;cursor:pointer}
 .catalog-jump:hover,.catalog-jump:focus-visible{background:var(--surface);outline:1px solid var(--line)}
 .catalog-jump[aria-current="step"]{color:var(--text);text-decoration:underline;text-underline-offset:4px}
+
+.ticket .ticket-code{display:block;width:112px;height:112px;flex:none;border-radius:8px}
+.ticket-scan{display:flex;align-items:center;gap:14px;margin:0 0 16px;font-size:14px}
+.ticket-scan-small{margin:22px 0 0;font-size:10px;color:#756a50}
+.ticket-scan-small .ticket-code{width:46px;height:46px}

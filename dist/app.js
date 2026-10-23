@@ -96,6 +96,15 @@ function specimen(v){
  let content=lines.map(t=>`<p${v.kind.includes('placeholder')&&/^请输入/.test(t)?' class="field-placeholder"':''}>${t}</p>`).join('');
  if(v.kind.startsWith('menu'))content=lines.map(t=>`<div class="menu-row">${t.split('｜').map((x,i)=>`<span class="menu-part-${i}">${x}</span>`).join('')}</div>`).join('');
  if(v.kind.startsWith('status'))content=lines.map(t=>{const [name,status]=t.split('｜');return `<p class="status-row"><span>${name}</span><span class="status-marker ${status.includes('失败')||status==='红'?'failed':''}">${v.kind.includes('color-only')?'●':status}</span></p>`}).join('');
+ if(v.kind.startsWith('ticket')){
+  const modules=[];for(let y=0;y<25;y++)for(let x=0;x<25;x++){
+   const finder=(ox,oy)=>{const dx=x-ox,dy=y-oy;return dx>=0&&dx<7&&dy>=0&&dy<7&&(dx===0||dx===6||dy===0||dy===6||(dx>=2&&dx<=4&&dy>=2&&dy<=4))};
+   const reserved=(x<8&&y<8)||(x>16&&y<8)||(x<8&&y>16);
+   if(finder(0,0)||finder(18,0)||finder(0,18)||(!reserved&&(x*13+y*7+x*y)%11<5))modules.push(`<rect x="${x+3}" y="${y+3}" width="1" height="1"/>`);
+  }
+  const code=`<svg class="ticket-code" viewBox="0 0 31 31" role="img" aria-label="示意检票二维码"><rect width="31" height="31" fill="#fff"/><g fill="#2e281b">${modules.join('')}</g></svg>`;
+  content=v.kind.includes('decorative')?`${content}<div class="ticket-scan ticket-scan-small">${code}<span>入场时出示</span></div>`:`<div class="ticket-scan">${code}<strong>检票二维码</strong></div>${content}`;
+ }
  if(v.kind.startsWith('chart'))content=`<div class="mini-chart ${v.kind.includes('truncated')?'axis-cut':''}"><div class="bar bar-a"><span>82</span></div><div class="bar bar-b"><span>84</span></div></div><div class="chart-key">活动 A　/　活动 B</div><p>${lines[2]}</p>`;
  return `<div class="specimen ${cls}"><div class="specimen-tag">${esc(v.tag)}</div><strong class="specimen-title">${esc(v.title)}</strong><div class="specimen-content">${content}</div></div>`
 }

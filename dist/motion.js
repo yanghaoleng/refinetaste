@@ -5,7 +5,7 @@
   const ease='cubic-bezier(.16,1,.3,1)';
   function play(el,frames,options={}){
     if(!el||preference.matches||!el.animate)return null;
-    const a=el.animate(frames,{duration:540,easing:ease,fill:'backwards',...options});
+    let a;try{a=el.animate(frames,{duration:540,easing:ease,fill:'backwards',...options})}catch{return null}
     running.add(a);a.finished.then(()=>running.delete(a),()=>running.delete(a));return a;
   }
   const done=a=>a?a.finished.catch(()=>{}):Promise.resolve();
@@ -74,9 +74,9 @@
     play(to,[{opacity:0,translate:'0 24px'},{opacity:1,translate:'0 0'}],{duration:520});enter(to);
   }
   const builds=new WeakMap();
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')document.querySelectorAll('[data-design-entering]').forEach(finishDesignBuild)});
   function finishDesignBuild(root){
-    for(const animation of builds.get(root)||[]){try{animation.finish()}catch{animation.cancel()}}
-    builds.delete(root);
+    builds.get(root)?.finish();
   }
   function assembleDesign(root,heading=null){
     if(!root)return;
@@ -120,10 +120,20 @@
       });
       cursor+=Math.max(260,180+Math.max(0,parts.length-1)*step+220)+120;
     }
-    builds.set(root,animations);
-    const ready=Promise.all(animations.map(done)).then(()=>root.removeAttribute('data-design-entering'));
-    // Interaction can always reveal the completed designs immediately.
-    root.addEventListener('focusin',()=>finishDesignBuild(root),{once:true});
+    // A browser can suspend a delayed animation without settling its finished promise.
+    // Keep the teaching content available even when that presentation gets interrupted.
+    let resolveReady,timer,finished=false;
+    const ready=new Promise(resolve=>resolveReady=resolve);
+    const finish=()=>{
+      if(finished)return;finished=true;clearTimeout(timer);
+      for(const animation of animations){try{animation.finish()}catch{}try{animation.cancel()}catch{}}
+      root.removeAttribute('data-design-entering');builds.delete(root);resolveReady();
+    };
+    builds.set(root,{finish});
+    timer=setTimeout(finish,Math.min(cursor+350,5000));
+    Promise.all(animations.map(done)).then(finish);
+    // Interaction and returning from a background tab must expose both full designs.
+    root.addEventListener('focusin',finish,{once:true});
     return ready;
   }
   function afterAnimations(element){

@@ -1,7 +1,7 @@
 const test=require('node:test');const assert=require('node:assert/strict');const vm=require('node:vm');const fs=require('node:fs');const path=require('node:path');
-function setup(reduced,visualViewport=null){
+function setup(reduced,visualViewport=null,extras={}){
   const media={matches:reduced,addEventListener(){}};
-  const context={matchMedia:()=>media,window:{visualViewport},document:{readyState:'loading',addEventListener(){}},getComputedStyle:()=>({transform:'none'}),Set,WeakSet,WeakMap,Promise};
+  const context={matchMedia:()=>media,window:{visualViewport},document:{readyState:'loading',addEventListener(){}},getComputedStyle:()=>({transform:'none'}),Set,WeakSet,WeakMap,Promise,setTimeout:()=>1,clearTimeout(){},...extras};
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../dist/motion.js'),'utf8'),context);
   return context.window.RefineMotion;
 }
@@ -89,4 +89,21 @@ test('an open-question summary stays hidden until the title finishes and enters 
  assert.ok(entries[0].options.delay>titleEntry.options.delay+titleEntry.options.duration);
  assert.equal(entries[0].options.fill,'backwards');
  assert.equal(entries[0].frames[0].opacity,0);
+});
+
+test('stalled design animations are released by a bounded watchdog, including the second option',async()=>{
+ const timers=new Map();let id=0;
+ const motion=setup(false,null,{setTimeout(fn,ms){timers.set(++id,{fn,ms});return id},clearTimeout(key){timers.delete(key)}}),{root,scheduled}=designRoot();
+ const ready=motion.assembleDesign(root);assert.equal(root.attributes.has('data-design-entering'),true);
+ const watchdog=[...timers.values()][0];assert.ok(watchdog.ms<=5000);watchdog.fn();await ready;
+ assert.ok(scheduled.every(job=>job.animation.completed));assert.equal(root.attributes.has('data-design-entering'),false);assert.equal(timers.size,0);
+});
+test('an unsupported element animation cannot stop the remaining option from rendering',async()=>{
+ const motion=setup(false),{root,scheduled}=designRoot();root.children[0].animate=()=>{throw Error('unsupported animation')};
+ const ready=motion.assembleDesign(root);assert.ok(scheduled.some(job=>job.name==='B'));root.focus();await ready;assert.equal(root.attributes.has('data-design-entering'),false);
+});
+test('returning to a foreground tab reveals any unfinished designs immediately',async()=>{
+ let resume;const {root,scheduled}=designRoot();
+ const motion=setup(false,null,{document:{readyState:'loading',visibilityState:'visible',addEventListener(name,fn){if(name==='visibilitychange')resume=fn},querySelectorAll:()=>[root]}});
+ const ready=motion.assembleDesign(root);resume();await ready;assert.ok(scheduled.every(job=>job.animation.completed));
 });
