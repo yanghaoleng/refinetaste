@@ -23,6 +23,8 @@ CHAPTER_STARTS=tuple(next(q['id'] for q in QUESTIONS if q['chapter']==chapter['i
 CHAPTER_QUESTIONS={start:tuple(q['id'] for q in QUESTIONS if q['chapter']==QUESTIONS[start]['chapter']) for start in CHAPTER_STARTS}
 # Runs created before chapter expansion did not submit a syllabus; their IDs stop at 55.
 LEGACY_CHAPTER_QUESTIONS={start:tuple(q for q in ids if q<56) for start,ids in CHAPTER_QUESTIONS.items()}
+# The first character chapter shipped with ten questions. Old tabs may still start it.
+COMPAT_CHAPTER_SYLLABI={60:(tuple(range(60,70)),)}
 NAMES = ['对比', '重复', '亲密', '对齐', '场景与调性', '信息层级', '用户路径', '协作表达']
 UUID = re.compile(r'^[a-f0-9-]{36}$')
 lock = threading.Lock()
@@ -136,7 +138,7 @@ def collect(data, now=None):
     syllabus=None
     if kind=='start' and course==2:
         syllabus=data.get('questions',list(LEGACY_CHAPTER_QUESTIONS[start]))
-        if not isinstance(syllabus,list) or any(type(q) is not int for q in syllabus) or tuple(syllabus) not in (CHAPTER_QUESTIONS[start],LEGACY_CHAPTER_QUESTIONS[start]) or not syllabus:raise ValueError('invalid syllabus')
+        if not isinstance(syllabus,list) or any(type(q) is not int for q in syllabus) or tuple(syllabus) not in (CHAPTER_QUESTIONS[start],LEGACY_CHAPTER_QUESTIONS[start],*COMPAT_CHAPTER_SYLLABI.get(start,())) or not syllabus:raise ValueError('invalid syllabus')
     q, choice = data.get('q'), data.get('choice')
     if kind == 'answer' and (type(q) is not int or q not in range(8 if course==1 else len(QUESTIONS)) or type(choice) is not int or choice not in (0,1,-1)):
         raise ValueError('invalid answer')
@@ -648,7 +650,7 @@ class Handler(BaseHTTPRequestHandler):
         files[BASE+'/icons.svg']='icons.svg'
         for asset in ('pixel-motion.webp','pixel-studies.webp','pixel-ball.webp'):
             files[BASE+'/assets/characters/'+asset]='assets/characters/'+asset
-        for asset in ('character-studies.js','character-studies.css','privacy-modal.js','privacy-id.js','feedback.js','privacy.html','privacy.css','hero-carousel.js','hero-carousel.css','theme.js','theme.css','motion.js','coach-guide.js','conversation-sequence.js','chat-format.js','question-run.js','sonner.css','sonner.LICENSE.txt','viewport.js','site-icon.js','chapter-score.js','chapter-practice.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
+        for asset in ('motion-models.js','character-studies.js','character-studies.css','privacy-modal.js','privacy-id.js','feedback.js','privacy.html','privacy.css','hero-carousel.js','hero-carousel.css','theme.js','theme.css','motion.js','coach-guide.js','conversation-sequence.js','chat-format.js','question-run.js','sonner.css','sonner.LICENSE.txt','viewport.js','site-icon.js','chapter-score.js','chapter-practice.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
             files[BASE+'/'+asset]=asset
         for asset in ('chick-emotions.webp','chick-positive-emotions.webp','chick-cool-expressions.webp','chick-gaze.webp','chick-starry-96.webp','chick-starry-192.webp','favicon-starry.ico','favicon-starry-32.png','apple-touch-starry.png','chick-positive-emotions.png','chick-emotions.png','chick-eyes-original.png','chick-eyes-128.webp','chick-eyes-512.webp','apple-touch-icon.png','favicon-32.png','favicon.ico'):
             files[BASE+'/assets/'+asset]='assets/'+asset
