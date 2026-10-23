@@ -1,4 +1,17 @@
 /* Decorative scenes: staggered native motion, random bag, no work behind the lesson. */
+/* Five quick clicks on a homepage title open the protected data dashboard. */
+(()=>{
+ for(const title of document.querySelectorAll('header .brand, #hero-headline')){
+  let clicks=0,lastClick=-Infinity;
+  title.addEventListener('click',event=>{
+   if(event.button>0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+   const now=performance.now();clicks=now-lastClick<=1500?clicks+1:1;lastClick=now;
+   if(title.matches('a'))event.preventDefault();
+   if(clicks===5){clicks=0;window.location.assign(new URL('data/',window.location.href))}
+  });
+ }
+})();
+
 (()=>{
  const root=document.querySelector('.hero-carousel');if(!root)return;
  const scenes=[...root.querySelectorAll('[data-hero-scene]')],preference=matchMedia('(prefers-reduced-motion: reduce)');
