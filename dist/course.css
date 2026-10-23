@@ -339,3 +339,11 @@ html[data-theme="dark"] .catalog-popup .catalog-point[data-outcome="incorrect"]:
 .loading-spinner{display:block;flex:none;width:16px;height:16px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:chapter-loading-spin 700ms linear infinite}
 @keyframes chapter-loading-spin{to{transform:rotate(1turn)}}
 @media(prefers-reduced-motion:reduce){.loading-spinner{animation:none;border-color:var(--accent)}}
+
+/* Light surfaces need a stronger progress ink and a clean lemon-colored input ring. */
+html[data-theme="light"] #exercise-progress,html[data-theme="light"] .chapter-progress-track{background:#e9e3d8}
+html[data-theme="light"] #exercise-progress>span,html[data-theme="light"] .chapter-progress-track>span{background:#9f7100}
+html[data-theme="light"] .chat-composer.awaiting-answer{border-color:#ffdc00;background:#ffe36b;box-shadow:0 0 0 3px #ffdc0017}
+html[data-theme="light"] .chat-composer.awaiting-answer::before{background:conic-gradient(from 0deg,#ffe36b 0deg,#ffeaa0 70deg,#ffcf00 125deg,#fff7c0 160deg,#ffdc00 185deg,#ffe36b 240deg)}
+html[data-theme="light"] .chat-composer.awaiting-answer:focus-within{border-color:#ffdc00;box-shadow:0 0 0 3px #ffdc0025}
+@media(prefers-reduced-motion:reduce){html[data-theme="light"] .chat-composer.awaiting-answer::before{background:#ffdc00}}
