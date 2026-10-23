@@ -183,6 +183,7 @@ def save_conversation(data,now=None,source='browser'):
         db.execute('DELETE FROM conversation_messages WHERE ts<?',(now-90*86400,))
 
 def report_start(days,now):
+    if days=='all':return 0
     first=datetime.fromtimestamp(now,ZONE).date()-timedelta(days=days-1)
     return datetime.combine(first,datetime.min.time(),ZONE).timestamp()
 
@@ -206,6 +207,44 @@ def learner_totals(events,messages):
       'openAnswers':sum(r['role']=='user' and QUESTIONS[r['q']]['kind']=='open' for r in messages),
       'lastActive':max([r['ts'] for r in events]+[r['ts'] for r in messages],default=None)}
 
+def daily_trends(days,now):
+    today=datetime.fromtimestamp(now,ZONE).date()
+    with connect() as db:
+        events=db.execute('SELECT ts,visitor,kind,q,choice,course FROM events WHERE ts<=?',(now,)).fetchall()
+        messages=db.execute('SELECT ts,visitor,role,q FROM conversation_messages WHERE ts<=?',(now,)).fetchall()
+    activity={};first_seen={};views={};graded={};submitted={}
+    earliest=None
+    for rows,is_message in ((events,False),(messages,True)):
+        for r in rows:
+            day=datetime.fromtimestamp(r['ts'],ZONE).date();visitor=r['visitor']
+            earliest=day if earliest is None else min(earliest,day)
+            first_seen[visitor]=min(first_seen.get(visitor,day),day)
+            activity.setdefault(day,set()).add(visitor)
+            if not is_message and r['kind']=='view':views[day]=views.get(day,0)+1
+            if not is_message and r['kind']=='answer':
+                value=graded_value(r)
+                if value is not None:graded.setdefault(day,[]).append(value)
+            if (is_message and r['role']=='user') or (not is_message and r['kind']=='answer' and r['course']==2):
+                submitted.setdefault(day,set()).add((visitor,r['q']))
+    cohorts={}
+    for visitor,day in first_seen.items():cohorts.setdefault(day,set()).add(visitor)
+    first=(earliest or today) if days=='all' else today-timedelta(days=days-1)
+    rows=[]
+    for n in range((today-first).days+1):
+        day=first+timedelta(days=n);covered=earliest is not None and day>=earliest
+        people=activity.get(day,set());answers=graded.get(day,[]);cohort=cohorts.get(day,set())
+        next_day=day+timedelta(days=1);mature=next_day<today
+        returned=len(cohort&activity.get(next_day,set())) if mature else None
+        rows.append({'day':day.isoformat(),'covered':covered,
+          'views':views.get(day,0) if covered else None,'users':len(people) if covered else None,
+          'accuracy':100*sum(answers)/len(answers) if answers else None,
+          'correct':sum(answers),'graded':len(answers),
+          'depth':len(submitted.get(day,set()))/len(people) if people else None,
+          'uniqueAnswers':len(submitted.get(day,set())),
+          'retention':100*returned/len(cohort) if mature and cohort else None,
+          'cohort':len(cohort),'returned':returned,'retentionMature':mature})
+    return {'from':first.isoformat(),'to':today.isoformat(),'availableFrom':earliest.isoformat() if earliest else None,'days':rows}
+
 def learning_report(days,page=0,search='',now=None):
     now=time.time() if now is None else now;start=report_start(days,now)
     if not isinstance(search,str) or len(search)>64:raise ValueError('invalid search')
@@ -225,7 +264,7 @@ def learning_report(days,page=0,search='',now=None):
         answers=[r for r in events if r['kind']=='answer' and r['course']==2 and r['q']==q['id']]
         graded=[graded_value(r) for r in answers if graded_value(r) is not None]
         question_stats.append({'id':q['id'],'title':q['title'],'principle':q['principle'],'kind':q['kind'],'chapter':q['chapter'],'chapterName':COURSE['chapters'][q['chapter']]['title'],'answers':len(answers),'graded':len(graded),'correct':sum(graded),'users':len({r['visitor'] for r in answers})})
-    return {'users':users[page*30:(page+1)*30],'total':len(users),'page':page,'pageSize':30,'totals':totals,'questions':question_stats,'chapters':COURSE['chapters']}
+    return {'users':users[page*30:(page+1)*30],'total':len(users),'page':page,'pageSize':30,'totals':totals,'questions':question_stats,'chapters':COURSE['chapters'],'trend':daily_trends(days,now)}
 
 def learner_detail(visitor,days,page=0,now=None):
     if not isinstance(visitor,str) or not re.fullmatch('[a-f0-9]{64}',visitor):raise ValueError('invalid visitor')
@@ -386,8 +425,8 @@ class Handler(BaseHTTPRequestHandler):
         if path in (BASE+'/api/learners',BASE+'/api/learner'):
             if not self.authorized():return self.reply(401,{'error':'authentication required'})
             try:
-                params=parse_qs(parsed.query);days=int(params.get('days',['7'])[0]);page=int(params.get('page',['0'])[0])
-                if days not in (7,30,90) or not 0<=page<=100000:raise ValueError()
+                params=parse_qs(parsed.query);period=params.get('days',['7'])[0];days='all' if period=='all' else int(period);page=int(params.get('page',['0'])[0])
+                if days not in (7,30,90,'all') or not 0<=page<=100000:raise ValueError()
                 if path.endswith('/learners'):result=learning_report(days,page,params.get('search',[''])[0])
                 else:result=learner_detail(params.get('id',[''])[0],days,page)
                 return self.reply(200,result)

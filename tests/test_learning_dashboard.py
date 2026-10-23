@@ -67,6 +67,9 @@ class LearningDashboardTests(unittest.TestCase):
    detail=app.learner_detail(app.digest(self.visitor),7);self.assertEqual(len(detail['records']),2);self.assertTrue(detail['records'][1]['correct']);self.assertEqual(detail['records'][1]['source'],'model')
    token='dashboard-unit-test';app.sessions[app.digest(token)]=time.time()+60
    self.assertEqual(request('learners',cookie='refinetaste_admin='+token)[0],200)
+   self.assertEqual(request('learners?days=all',cookie='refinetaste_admin='+token)[0],200)
+   self.assertEqual(request('learner?id='+app.digest(self.visitor)+'&days=all',cookie='refinetaste_admin='+token)[0],200)
+   self.assertEqual(request('learners?days=999',cookie='refinetaste_admin='+token)[0],400)
    self.assertEqual(request('learner?id='+app.digest(self.visitor),cookie='refinetaste_admin='+token)[1]['records'][0]['content'],m['content'])
    self.assertEqual(request('conversation',p,origin='https://evil.invalid')[0],403)
   finally:server.shutdown();server.server_close();thread.join()
