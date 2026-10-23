@@ -29,6 +29,7 @@
    queue=queue.then(()=>post('collect',body)).catch(()=>{});
   },
   start(index,questions){run=crypto.randomUUID();this.send('start',{start:index,...(questions?{questions}:{})})},
+  bookmarks(notes){if(!active())return;const questions=[...new Set((notes||[]).map(note=>note.questionId).filter(Number.isInteger))];queue=queue.then(()=>post('bookmarks',{visitor,session,questions})).catch(()=>{})},
   tracking(q){
    if(!active()||!q)return null;
    const key='refinetaste-thread-'+q.id+'-'+(q.contextKey||q.variantId+':'+(q.optionOrder||[0,1]).join(''));
@@ -46,5 +47,28 @@
    }
   }
  };
+ // Keep submitted navigation steps independent of the model and analytics queues.
+ const clock=()=>typeof performance!=='undefined'?performance.now():Date.now();
+ let journeyStage={page:'home',q:null,chapter:null,mode:null},journeyTick=clock(),journeyPaused=typeof document!=='undefined'&&document.hidden,journeyStep=0;
+ const visit=crypto.randomUUID();
+ function journeyFlush(action,extra={}){
+  if(!active())return;
+  const tick=clock(),durationMs=Math.max(0,Math.min(86400000,Math.round(journeyPaused?0:tick-journeyTick)));journeyTick=tick;
+  const next=extra.next||journeyStage;
+  post('journey',{id:crypto.randomUUID(),visitor,session,visit,step:journeyStep++,page:journeyStage.page,q:journeyStage.q,chapter:journeyStage.chapter,mode:journeyStage.mode,durationMs,action,nextPage:next.page,nextQ:next.q,nextChapter:next.chapter,nextMode:next.mode,...(extra.option===0||extra.option===1?{option:extra.option}:{}),...(typeof extra.correct==='boolean'?{correct:extra.correct}:{})});
+ }
+ window.RefineMetrics.stage=(page,context={})=>{
+  const next={page,q:context.q??null,chapter:context.chapter??null,mode:context.mode??null};
+  if(JSON.stringify(next)===JSON.stringify(journeyStage))return;
+  journeyFlush(context.action||'next_question',{next});journeyStage=next;journeyTick=clock();journeyFlush('arrive');
+ };
+ window.RefineMetrics.mark=(action,context={})=>journeyFlush(action,context);
+ journeyFlush('arrive');
+ if(typeof document!=='undefined'&&document.addEventListener){
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){journeyFlush('background');journeyPaused=true}else{journeyPaused=false;journeyTick=clock();journeyFlush('resume')}});
+  window.addEventListener('pagehide',()=>journeyFlush('leave'));
+  if(typeof setInterval==='function'&&active())setInterval(()=>{if(!journeyPaused)journeyFlush('stay')},15000);
+ }
+
  window.RefineMetrics.send('view');
 })();

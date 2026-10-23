@@ -60,6 +60,11 @@ def init_db():
             position INTEGER NOT NULL,role TEXT NOT NULL,content TEXT NOT NULL,ts REAL NOT NULL,
             source TEXT NOT NULL,correct INTEGER);
           CREATE INDEX IF NOT EXISTS conversation_visitor_ts ON conversation_messages(visitor,ts);
+          CREATE TABLE IF NOT EXISTS bookmarks(visitor TEXT NOT NULL,q INTEGER NOT NULL,ts REAL NOT NULL,PRIMARY KEY(visitor,q));
+          CREATE TABLE IF NOT EXISTS bookmark_state(visitor TEXT PRIMARY KEY,updated REAL NOT NULL);
+          CREATE TABLE IF NOT EXISTS journey_steps(id TEXT PRIMARY KEY,visitor TEXT NOT NULL,session TEXT NOT NULL,visit TEXT NOT NULL,step INTEGER NOT NULL,ts REAL NOT NULL,page TEXT NOT NULL,q INTEGER,chapter INTEGER,mode TEXT,duration INTEGER NOT NULL,action TEXT NOT NULL,next_page TEXT NOT NULL,next_q INTEGER,next_chapter INTEGER,next_mode TEXT,option INTEGER,verdict INTEGER);
+          CREATE UNIQUE INDEX IF NOT EXISTS journey_once ON journey_steps(visitor,visit,step);
+          CREATE INDEX IF NOT EXISTS journey_user ON journey_steps(visitor,visit,step);
           CREATE TABLE IF NOT EXISTS recording_meta(key TEXT PRIMARY KEY,value REAL NOT NULL);''')
         if 'course' not in [r[1] for r in db.execute('PRAGMA table_info(events)')]:
             db.execute('ALTER TABLE events ADD COLUMN course INTEGER NOT NULL DEFAULT 1')
@@ -281,7 +286,144 @@ def daily_trends(days,now):
           'cohort':len(cohort),'returned':returned,'retentionMature':mature})
     return {'from':first.isoformat(),'to':today.isoformat(),'availableFrom':earliest.isoformat() if earliest else None,'days':rows}
 
-def learning_report(days,page=0,search='',now=None):
+JOURNEY_PAGES=('home','chapters','question','result')
+JOURNEY_ACTIONS=('start','choose_chapter','choose_mistakes','next_question','back_to_chapters','back_home','answer_choice','submit_answer','send_message','view_result','open_notes','close_notes','send_note_message','background','resume','leave','stay','skip_question','bookmark','remove_bookmark','arrive')
+def save_journey(data,now=None):
+    now=time.time() if now is None else now
+    for key in ('id','visitor','session','visit'):
+        if not isinstance(data.get(key),str) or not UUID.fullmatch(data[key]):raise ValueError('invalid journey identity')
+    if data.get('page') not in JOURNEY_PAGES or data.get('nextPage') not in JOURNEY_PAGES or data.get('action') not in JOURNEY_ACTIONS:raise ValueError('invalid journey step')
+    for key,maximum in (('q',len(QUESTIONS)),('nextQ',len(QUESTIONS)),('chapter',len(COURSE['chapters'])),('nextChapter',len(COURSE['chapters']))):
+        if data.get(key) is not None and (type(data[key]) is not int or not 0<=data[key]<maximum):raise ValueError('invalid journey context')
+    for key in ('mode','nextMode'):
+        if data.get(key) not in (None,'full','mistakes'):raise ValueError('invalid practice mode')
+    step,duration=data.get('step'),data.get('durationMs')
+    if type(step) is not int or not 0<=step<=100000 or type(duration) is not int or not 0<=duration<=86400000:raise ValueError('invalid journey duration')
+    option=data.get('option');verdict=data.get('correct')
+    if option is not None and (type(option) is not int or option not in (0,1)):raise ValueError('invalid option')
+    if verdict is not None and type(verdict) is not bool:raise ValueError('invalid verdict')
+    with connect() as db:
+        db.execute('INSERT OR IGNORE INTO journey_steps VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(data['id'],digest(data['visitor']),digest(data['session']),digest(data['visitor']+':'+data['visit']),step,now,data['page'],data.get('q'),data.get('chapter'),data.get('mode'),duration,data['action'],data['nextPage'],data.get('nextQ'),data.get('nextChapter'),data.get('nextMode'),option,None if verdict is None else int(verdict)))
+        db.execute('DELETE FROM journey_steps WHERE ts<?',(now-90*86400,))
+
+def journey_text(rows):
+    parts=[];pending=0;pending_key=None
+    for r in rows:
+        key=(r['page'],r['q'],r['chapter'],r['mode'])
+        if key!=pending_key:pending=0
+        pending_key=key;pending+=r['duration']
+        if r['action']=='stay' and r is not rows[-1]:continue
+        page={'home':'首页','chapters':'章节目录','question':f"答题页「{QUESTIONS[r['q']]['title']}」" if r['q'] is not None else '答题页','result':'成绩页'}[r['page']]
+        if r['action']=='arrive':
+            if r is rows[-1]:parts.append(page+'（已进入，后续停留尚未上报）')
+            continue
+        seconds=round(pending/1000,1);duration=str(int(seconds)) if seconds.is_integer() else str(seconds)
+        action={'start':'点击开始答题','skip_question':'暂时跳过，稍后再做','bookmark':'收藏题目','remove_bookmark':'取消收藏','next_question':'点击下一题','back_to_chapters':'返回章节目录','back_home':'返回首页','answer_choice':f"选择{'A' if r['option']==0 else 'B'}"+(('，答对' if r['verdict'] else '，答错') if r['verdict'] is not None else ''),'submit_answer':'提交简答','send_message':'向 AI 发消息','view_result':'查看本章成绩','open_notes':'打开笔记','close_notes':'收起笔记','send_note_message':'在笔记中追问','background':'切到后台（暂停计时）','resume':'回到页面','leave':'离开页面','stay':'仍在浏览'}.get(r['action'])
+        if r['action'] in ('choose_chapter','choose_mistakes'):
+            chapter=r['next_chapter'];name=COURSE['chapters'][chapter]['title'] if chapter is not None else '章节'
+            action=f"选择「{name}」"+('消灭错题' if r['action']=='choose_mistakes' else '开始练习')
+        parts.append(f'{page}停留{duration}s，{action}');pending=0
+    return ' → '.join(parts)
+
+def usage_paths(visitor,days,page,now):
+    start=report_start(days,now)
+    with connect() as db:
+        visits=db.execute('SELECT visit,MIN(ts-duration/1000.0) AS first,MAX(ts) AS last FROM journey_steps WHERE visitor=? AND ts>=? AND ts<=? GROUP BY visit ORDER BY first DESC,visit LIMIT 11 OFFSET ?',(visitor,start,now,page*10)).fetchall()
+        items=[]
+        for visit in visits[:10]:
+            rows=db.execute('SELECT * FROM journey_steps WHERE visitor=? AND visit=? ORDER BY step,ts',(visitor,visit['visit'])).fetchall()
+            items.append({'id':visit['visit'],'ts':visit['first'],'last':visit['last'],'text':journey_text(rows),'precise':True,'steps':len(rows)})
+        if page==0:
+            tracked={r['session']:r['first'] for r in db.execute('SELECT session,MIN(ts-duration/1000.0) AS first FROM journey_steps WHERE visitor=? GROUP BY session',(visitor,))}
+            events=db.execute('SELECT * FROM events WHERE visitor=? AND ts>=? AND ts<=? ORDER BY ts',(visitor,start,now)).fetchall();legacy={}
+            for r in events:
+                if r['session'] in tracked and r['ts']>=tracked[r['session']]:continue
+                if r['kind']=='view':text='访问首页'
+                elif r['kind']=='start':text='开始练习'+('「'+COURSE['chapters'][QUESTIONS[r['start']]['chapter']]['title']+'」' if r['course']==2 else '（旧版）')
+                elif r['kind']=='answer':text=f"第{r['q']+1}题提交"+('，未判定' if graded_value(r) is None else '，答对' if graded_value(r) else '，答错')
+                elif r['kind']=='complete':text='完成本章练习'
+                elif r['kind']=='note_saved':text='收藏题目'
+                else:continue
+                legacy.setdefault(r['session'],{'ts':r['ts'],'parts':[]})['parts'].append(text)
+            for session,values in legacy.items():items.append({'id':'legacy:'+session,'ts':values['ts'],'text':' → '.join(values['parts']),'precise':False,'steps':len(values['parts'])})
+            items.sort(key=lambda item:item['ts'],reverse=True)
+    return {'journeys':items,'journeysHasMore':len(visits)>10,'journeyPage':page}
+
+def question_detail(question_id,days,now=None):
+    if type(question_id) is not int or question_id not in range(len(QUESTIONS)):raise ValueError('invalid question')
+    now=time.time() if now is None else now;start=report_start(days,now);q=QUESTIONS[question_id]
+    with connect() as db:
+        answers=db.execute("SELECT * FROM events WHERE kind='answer' AND course=2 AND q=? AND ts>=? AND ts<=? ORDER BY ts DESC",(question_id,start,now)).fetchall()
+    graded=[graded_value(r) for r in answers if graded_value(r) is not None]
+    with connect() as db:bookmarks=db.execute('SELECT COUNT(*) FROM bookmarks WHERE q=?',(question_id,)).fetchone()[0]
+    codes=public_ids({r['visitor'] for r in answers[:50]})
+    return {'bookmarks':bookmarks,'question':q,'chapter':COURSE['chapters'][q['chapter']]['title'],'answers':len(answers),'graded':len(graded),'correct':sum(graded),'users':len({r['visitor'] for r in answers}),'recentAnswers':[{'visitor':r['visitor'],'label':'用户 '+codes[r['visitor']],'ts':r['ts'],'correct':graded_value(r)} for r in answers[:50]]}
+
+def save_bookmarks(data,now=None):
+    now=time.time() if now is None else now
+    for key in ('visitor','session'):
+        if not isinstance(data.get(key),str) or not UUID.fullmatch(data[key]):raise ValueError('invalid identity')
+    questions=data.get('questions')
+    if not isinstance(questions,list) or len(questions)>256 or any(type(q) is not int or q not in range(len(QUESTIONS)) for q in questions):raise ValueError('invalid bookmarks')
+    visitor=digest(data['visitor']);questions=sorted(set(questions))
+    with connect() as db:
+        existing={r[0] for r in db.execute('SELECT q FROM bookmarks WHERE visitor=?',(visitor,))}
+        for q in existing-set(questions):db.execute('DELETE FROM bookmarks WHERE visitor=? AND q=?',(visitor,q))
+        for q in set(questions)-existing:db.execute('INSERT INTO bookmarks VALUES(?,?,?)',(visitor,q,now))
+        db.execute('INSERT INTO bookmark_state VALUES(?,?) ON CONFLICT(visitor) DO UPDATE SET updated=excluded.updated',(visitor,now))
+        db.execute('DELETE FROM bookmarks WHERE visitor IN (SELECT visitor FROM bookmark_state WHERE updated<?)',(now-90*86400,))
+        db.execute('DELETE FROM bookmark_state WHERE updated<?',(now-90*86400,))
+
+def bookmark_detail(visitor):
+    with connect() as db:
+        state=db.execute('SELECT updated FROM bookmark_state WHERE visitor=?',(visitor,)).fetchone()
+        rows=db.execute('SELECT q,ts FROM bookmarks WHERE visitor=? ORDER BY ts DESC,q',(visitor,)).fetchall()
+    return {'bookmarks':len(rows) if state else None,'bookmarksUpdated':state['updated'] if state else None,'bookmarkedQuestions':[{'id':r['q'],'title':QUESTIONS[r['q']]['title'],'ts':r['ts']} for r in rows]}
+
+def recent_activity(days,now):
+    start=report_start(days,now)
+    with connect() as db:
+        messages=db.execute("SELECT * FROM conversation_messages WHERE ts>=? AND ts<=? AND (role='user' OR source='model') ORDER BY ts DESC,id DESC LIMIT 100",(start,now)).fetchall()
+        completions=db.execute("SELECT * FROM events WHERE kind='complete' AND ts>=? AND ts<=? ORDER BY ts DESC LIMIT 30",(start,now)).fetchall()
+        answers=db.execute("SELECT * FROM events WHERE kind='answer' AND ts>=? AND ts<=? ORDER BY ts DESC LIMIT 45",(start,now)).fetchall()
+        items=[];paired=set()
+        for m in messages:
+            if m['role']!='assistant':continue
+            user=db.execute("SELECT * FROM conversation_messages WHERE visitor=? AND thread=? AND role='user' AND position<? ORDER BY position DESC,ts DESC LIMIT 1",(m['visitor'],m['thread'],m['position'])).fetchone()
+            if user:paired.add(user['id'])
+            q=QUESTIONS[m['q']]
+            items.append({'id':'chat:'+m['id'],'type':'conversation','visitor':m['visitor'],'label':'访客 '+m['visitor'][:10],'ts':m['ts'],'title':q['title'],'userText':user['content'][:700] if user else '', 'aiText':m['content'][:700]})
+        for m in messages:
+            if m['role']!='user' or m['id'] in paired:continue
+            q=QUESTIONS[m['q']]
+            items.append({'id':'message:'+m['id'],'type':'answer' if q['kind']=='open' else 'question','visitor':m['visitor'],'label':'访客 '+m['visitor'][:10],'ts':m['ts'],'title':q['title'],'userText':m['content'][:700]})
+        for event in completions:
+            run_answers=db.execute("SELECT * FROM events WHERE kind='answer' AND run=? AND visitor=? ORDER BY ts",(event['run'],event['visitor'])).fetchall()
+            begun=db.execute("SELECT * FROM events WHERE kind='start' AND run=? AND visitor=?",(event['run'],event['visitor'])).fetchone()
+            if not begun:continue
+            graded=[graded_value(r) for r in run_answers if graded_value(r) is not None]
+            chapter=COURSE['chapters'][QUESTIONS[begun['start']]['chapter']]['title'] if begun['course']==2 else '历史练习'
+            items.append({'id':'score:'+event['id'],'type':'score','visitor':event['visitor'],'label':'访客 '+event['visitor'][:10],'ts':event['ts'],'title':chapter,'score':round(100*sum(graded)/len(graded)) if graded and len(graded)==len(run_answers) else None,'correct':sum(graded),'graded':len(graded),'total':len(run_answers)})
+        for event in answers:
+            verdict=graded_value(event)
+            if verdict is None:continue
+            q=QUESTIONS[event['q']] if event['course']==2 else None
+            items.append({'id':'verdict:'+event['id'],'type':'verdict','visitor':event['visitor'],'label':'访客 '+event['visitor'][:10],'ts':event['ts'],'title':q['title'] if q else NAMES[event['q']],'correct':verdict,'kind':q['kind'] if q else 'choice'})
+    with connect() as db:
+        for record in db.execute('SELECT visitor,q,ts FROM bookmarks WHERE ts>=? AND ts<=? ORDER BY ts DESC LIMIT 12',(start,now)):
+            items.append({'id':f"bookmark:{record['visitor']}:{record['q']}",'type':'bookmark','visitor':record['visitor'],'ts':record['ts'],'title':QUESTIONS[record['q']]['title']})
+    codes=public_ids({item['visitor'] for item in items})
+    for item in items:item['label']='用户 '+codes[item['visitor']]
+    items.sort(key=lambda item:(item['ts'],item['id']),reverse=True)
+    # Keep recent examples of each kind so a burst of clicks cannot hide all writing or scores.
+    chosen=[];counts={}
+    for item in items:
+        kind=item['type']
+        if counts.get(kind,0)>=6:continue
+        counts[kind]=counts.get(kind,0)+1;chosen.append(item)
+    return chosen[:36]
+
+def learning_report(days,page=0,search='',now=None,sort=None,direction=None):
     now=time.time() if now is None else now;start=report_start(days,now)
     if not isinstance(search,str) or len(search)>64:raise ValueError('invalid search')
     with connect() as db:
@@ -293,17 +435,29 @@ def learning_report(days,page=0,search='',now=None):
         for row in rows:people.setdefault(row['visitor'],{'events':[],'messages':[]})[kind].append(row)
     codes=public_ids(people)
     users=[{'id':key,'publicId':codes[key],'label':'用户 '+codes[key],**learner_totals(v['events'],v['messages'])} for key,v in people.items() if search.lower() in key or search.upper() in codes[key] or search.lower() in ('用户 '+codes[key]).lower() or search.lower() in ('访客 '+key[:10])]
-    users.sort(key=lambda u:u['lastActive'] or 0,reverse=True)
+    with connect() as db:
+        synced={r['visitor'] for r in db.execute('SELECT visitor FROM bookmark_state')}
+        bookmark_counts={r['visitor']:r['count'] for r in db.execute('SELECT visitor,COUNT(*) AS count FROM bookmarks GROUP BY visitor')}
+        question_bookmarks={r['q']:r['count'] for r in db.execute('SELECT q,COUNT(*) AS count FROM bookmarks GROUP BY q')}
+    for user in users:user['bookmarks']=bookmark_counts.get(user['id'],0) if user['id'] in synced else None
+    if sort is not None and (sort not in ('label','depth','chapters','correct','accuracy','openAnswers','lastActive','bookmarks') or direction not in ('asc','desc')):raise ValueError('invalid sort')
+    users.sort(key=lambda u:(u['lastActive'] or 0,u['id']),reverse=True)
+    if sort:
+        def value(user):
+            if sort=='accuracy':return user['correct']/user['graded'] if user['graded'] else None
+            return user[sort]
+        available=[u for u in users if value(u) is not None];missing=[u for u in users if value(u) is None]
+        available.sort(key=value,reverse=direction=='desc');users=available+missing
     totals=learner_totals(events,messages)
     totals.update(users=len(people),recordingSince=since)
     question_stats=[]
     for q in QUESTIONS:
         answers=[r for r in events if r['kind']=='answer' and r['course']==2 and r['q']==q['id']]
         graded=[graded_value(r) for r in answers if graded_value(r) is not None]
-        question_stats.append({'id':q['id'],'title':q['title'],'principle':q['principle'],'kind':q['kind'],'chapter':q['chapter'],'chapterName':COURSE['chapters'][q['chapter']]['title'],'answers':len(answers),'graded':len(graded),'correct':sum(graded),'users':len({r['visitor'] for r in answers})})
-    return {'users':users[page*30:(page+1)*30],'total':len(users),'page':page,'pageSize':30,'totals':totals,'questions':question_stats,'chapters':COURSE['chapters'],'trend':daily_trends(days,now)}
+        question_stats.append({'id':q['id'],'title':q['title'],'principle':q['principle'],'kind':q['kind'],'chapter':q['chapter'],'chapterName':COURSE['chapters'][q['chapter']]['title'],'answers':len(answers),'graded':len(graded),'correct':sum(graded),'users':len({r['visitor'] for r in answers}),'bookmarks':question_bookmarks.get(q['id'],0)})
+    return {'users':users[page*30:(page+1)*30],'total':len(users),'page':page,'pageSize':30,'totals':totals,'questions':question_stats,'chapters':COURSE['chapters'],'trend':daily_trends(days,now),'activity':recent_activity(days,now)}
 
-def learner_detail(visitor,days,page=0,now=None):
+def learner_detail(visitor,days,page=0,now=None,journey_page=0):
     if isinstance(visitor,str) and re.fullmatch('[A-Z0-9]{3,12}',visitor.upper()):
         with connect() as db:row=db.execute('SELECT visitor FROM public_identities WHERE code=?',(visitor.upper(),)).fetchone()
         if not row:raise ValueError('invalid visitor')
@@ -324,7 +478,7 @@ def learner_detail(visitor,days,page=0,now=None):
         q=resolve_question(r['q'],r['variant'],json.loads(r['option_order']))
         records.append({'id':r['id'],'thread':r['thread'],'position':r['position'],'q':r['q'],'title':q['title'],'question':q['brief']+(' '+q.get('prompt','') if q['kind']=='open' else ''),'kind':q['kind'],'role':r['role'],'content':r['content'],'ts':r['ts'],'source':r['source'],'correct':None if r['correct'] is None else bool(r['correct'])})
     code=public_ids([visitor])[visitor]
-    return {'id':visitor,'publicId':code,'label':'用户 '+code,**learner_totals(events,message_meta),'answers':answers,'records':records,'page':page,'hasMore':len(messages)>50}
+    return {'id':visitor,'publicId':code,'label':'用户 '+code,**learner_totals(events,message_meta),'answers':answers,'records':records,'page':page,'hasMore':len(messages)>50,**usage_paths(visitor,days,journey_page,now),**bookmark_detail(visitor)}
 
 class Handler(BaseHTTPRequestHandler):
     def log_message(self,*args): pass
@@ -357,7 +511,7 @@ class Handler(BaseHTTPRequestHandler):
         path=urlparse(self.path).path
         if self.headers.get('Origin') not in ORIGINS:
             return self.reply(403,{'error':'origin rejected'})
-        if path not in (BASE+'/api/login',BASE+'/api/logout',BASE+'/api/collect',BASE+'/api/review',BASE+'/api/conversation',BASE+'/api/identity'):
+        if path not in (BASE+'/api/login',BASE+'/api/logout',BASE+'/api/collect',BASE+'/api/review',BASE+'/api/conversation',BASE+'/api/journey',BASE+'/api/bookmarks',BASE+'/api/identity'):
             return self.reply(404,{'error':'not found'})
         key=digest(self.headers.get('X-Real-IP',self.client_address[0]))
         now=time.time()
@@ -403,7 +557,9 @@ class Handler(BaseHTTPRequestHandler):
         if count>=180:return self.reply(429,{'error':'rate limited'})
         try:
             payload=self.body()
-            if path.endswith('/conversation'):save_conversation(payload,now)
+            if path.endswith('/bookmarks'):save_bookmarks(payload,now)
+            elif path.endswith('/journey'):save_journey(payload,now)
+            elif path.endswith('/conversation'):save_conversation(payload,now)
             else:collect(payload)
         except ValueError as ex:return self.reply(400,{'error':str(ex)})
         except sqlite3.Error:return self.reply(503,{'error':'storage unavailable'})
@@ -470,13 +626,17 @@ class Handler(BaseHTTPRequestHandler):
                 with connect() as db:db.execute('SELECT 1 FROM events LIMIT 1')
             except sqlite3.Error:return self.reply(503,{'ok':False})
             return self.reply(200,{'ok':True})
-        if path in (BASE+'/api/learners',BASE+'/api/learner'):
+        if path in (BASE+'/api/learners',BASE+'/api/learner',BASE+'/api/question'):
             if not self.authorized():return self.reply(401,{'error':'authentication required'})
             try:
                 params=parse_qs(parsed.query);period=params.get('days',['7'])[0];days='all' if period=='all' else int(period);page=int(params.get('page',['0'])[0])
                 if days not in (7,30,90,'all') or not 0<=page<=100000:raise ValueError()
-                if path.endswith('/learners'):result=learning_report(days,page,params.get('search',[''])[0])
-                else:result=learner_detail(params.get('id',[''])[0],days,page)
+                if path.endswith('/learners'):result=learning_report(days,page,params.get('search',[''])[0],sort=params.get('sort',[None])[0],direction=params.get('direction',[None])[0])
+                elif path.endswith('/question'):result=question_detail(int(params.get('id',['-1'])[0]),days)
+                else:
+                    journey_page=int(params.get('journeyPage',['0'])[0])
+                    if not 0<=journey_page<=100000:raise ValueError()
+                    result=learner_detail(params.get('id',[''])[0],days,page,journey_page=journey_page)
                 return self.reply(200,result)
             except ValueError:return self.reply(400,{'error':'invalid query'})
             except sqlite3.Error:return self.reply(503,{'error':'storage unavailable'})

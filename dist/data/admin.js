@@ -2,8 +2,106 @@ const $=s=>document.querySelector(s),esc=s=>String(s??'').replaceAll('&','&amp;'
 const fmt=n=>Number(n).toLocaleString('zh-CN'),pct=(a,b)=>b?`${(100*a/b).toFixed(1)}%`:'—',date=t=>t?new Date(t*1000).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false}):'—';
 let period='7',data=null,pin='',busy=false,lockedUntil=0,userPage=0,generation=0,detailGeneration=0,selectedUser=null,recordPage=0,searchTimer;
 const transcriptNodes=new Map();
+const tableSorts=new Map(),tableRows=new WeakMap();
+let savedColumnWidths={};try{savedColumnWidths=JSON.parse(localStorage.getItem('refinetaste-admin-column-widths')||'{}')}catch{}
+if(!savedColumnWidths||typeof savedColumnWidths!=='object'||Array.isArray(savedColumnWidths))savedColumnWidths={};
+function tableValue(cell){const raw=cell.dataset.value??cell.textContent.trim();if(raw===''||raw==='—')return null;return /^-?\d+(\.\d+)?$/.test(raw)?Number(raw):raw}
+function compareTableValues(a,b,direction){
+ if(a===null||b===null)return a===b?0:a===null?1:-1;
+ const value=typeof a==='number'&&typeof b==='number'?a-b:String(a).localeCompare(String(b),'zh-CN',{numeric:true});return direction==='asc'?value:-value;
+}
+function applyTableSort(table){
+ const body=table.tBodies[0];if(!body)return;
+ const current=[...body.rows];let original=tableRows.get(table);
+ if(!original||current.length!==original.length||current.some(row=>!original.includes(row))){original=current;tableRows.set(table,original)}
+ const state=tableSorts.get(table.id);
+ if(!table.dataset.remoteSort){
+  const rows=[...original];if(state?.direction)rows.sort((a,b)=>compareTableValues(tableValue(a.cells[state.column]),tableValue(b.cells[state.column]),state.direction)||original.indexOf(a)-original.indexOf(b));
+  for(const row of rows)body.append(row);
+ }
+ [...table.tHead.rows[0].cells].forEach((th,index)=>{
+  const direction=state?.column===index?state.direction:null;
+  th.setAttribute('aria-sort',direction==='asc'?'ascending':direction==='desc'?'descending':'none');
+  th.querySelector('.sort-indicator').textContent=direction==='asc'?'↑':direction==='desc'?'↓':'↕';
+  const next=direction==='asc'?'降序':direction==='desc'?'恢复原始顺序':'升序';th.querySelector('.column-sort').title='点击'+next;
+ });
+}
+function setColumnWidths(table,widths){
+ let group=table.querySelector('colgroup');if(!group){group=document.createElement('colgroup');table.prepend(group)}
+ while(group.children.length<widths.length)group.append(document.createElement('col'));
+ widths.forEach((width,index)=>{group.children[index].style.width=width+'px';const grip=table.tHead.rows[0].cells[index].querySelector('.column-resize');grip?.setAttribute('aria-valuenow',Math.round(width))});
+ table.style.tableLayout='fixed';table.style.width=widths.reduce((a,b)=>a+b,0)+'px';
+}
+function resizeTableColumn(table,index,width){
+ const headers=[...table.tHead.rows[0].cells];
+ let widths=savedColumnWidths[table.id];if(!Array.isArray(widths)||widths.length!==headers.length)widths=headers.map(th=>Math.max(72,th.getBoundingClientRect().width||140));else widths=[...widths];
+ widths[index]=Math.max(72,Math.min(900,width));savedColumnWidths[table.id]=widths;setColumnWidths(table,widths);
+ try{localStorage.setItem('refinetaste-admin-column-widths',JSON.stringify(savedColumnWidths))}catch{}
+}
+function enhanceTables(root=document){
+ root.querySelectorAll('table').forEach(table=>{
+  if(!table.id||!table.tHead?.rows[0]||!table.tBodies[0])return;
+  const headers=[...table.tHead.rows[0].cells];
+  headers.forEach((th,index)=>{
+   if(th.querySelector('.column-sort'))return;
+   const label=th.textContent.trim();th.textContent='';
+   const button=document.createElement('button');button.type='button';button.className='column-sort';button.innerHTML=`<span>${esc(label)}</span><span class="sort-indicator" aria-hidden="true">↕</span>`;th.append(button);
+   button.onclick=()=>{
+    const previous=tableSorts.get(table.id),direction=previous?.column!==index||!previous.direction?'asc':previous.direction==='asc'?'desc':null;
+    tableSorts.set(table.id,{column:index,direction});applyTableSort(table);
+    if(table.dataset.remoteSort){userPage=0;load()}
+   };
+   const grip=document.createElement('span');grip.className='column-resize';grip.tabIndex=0;grip.setAttribute('role','separator');grip.setAttribute('aria-orientation','vertical');grip.setAttribute('aria-label',`调整${label}列宽`);grip.setAttribute('aria-valuemin','72');grip.setAttribute('aria-valuemax','900');grip.setAttribute('aria-valuenow',Math.round(th.getBoundingClientRect().width||140));th.append(grip);
+   grip.onpointerdown=event=>{
+    event.preventDefault();event.stopPropagation();const start=event.clientX,width=th.getBoundingClientRect().width;
+    grip.setPointerCapture(event.pointerId);table.classList.add('resizing');
+    grip.onpointermove=move=>resizeTableColumn(table,index,width+move.clientX-start);
+    const finish=()=>{grip.onpointermove=null;table.classList.remove('resizing');grip.onpointerup=null;grip.onpointercancel=null};grip.onpointerup=finish;grip.onpointercancel=finish;
+   };
+   grip.onkeydown=event=>{if(!['ArrowLeft','ArrowRight'].includes(event.key))return;event.preventDefault();resizeTableColumn(table,index,th.getBoundingClientRect().width+(event.key==='ArrowRight'?1:-1)*(event.shiftKey?40:10))};
+  });
+  const widths=savedColumnWidths[table.id];if(Array.isArray(widths)&&widths.length===headers.length&&widths.every(v=>Number.isFinite(v)&&v>=72&&v<=900))setColumnWidths(table,widths);
+  applyTableSort(table);
+ });
+}
+function userSortQuery(){const state=tableSorts.get('user-table');if(!state?.direction)return '';const key=['label','depth','chapters','correct','accuracy','openAnswers','lastActive','bookmarks'][state.column];return `&sort=${key}&direction=${state.direction}`}
+
+let activityItems=[],activityIndex=0,activitySignature='',activityColumns=0;
+function prepareActivities(force=false){
+ const records=data?.activity||[],signature=records.map(r=>r.id).join('|');
+ if(force||signature!==activitySignature){
+  activitySignature=signature;const pool=[...records];
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+  const first=[],types=new Set();for(const record of pool)if(!types.has(record.type)&&first.length<3){types.add(record.type);first.push(record)}
+  activityItems=[...first,...pool.filter(record=>!first.includes(record))];activityIndex=0;
+ }
+ renderActivities();
+}
+function renderActivities(){
+ const host=$('#activity-cards'),count=parseInt(getComputedStyle(host).getPropertyValue('--cards'))||3;
+ activityColumns=count;
+ if(activityIndex>=activityItems.length)activityIndex=0;
+ const rows=activityItems.slice(activityIndex,activityIndex+count);
+ const names={conversation:'和 AI 讨论',answer:'提交简答',question:'发起追问',score:'获得新成绩',verdict:'完成作答',bookmark:'收藏题目'};
+ host.innerHTML=rows.length?rows.map(record=>{
+  let body='';
+  if(record.type==='score')body=`<div class="activity-score">${record.score===null?'已完成':`${record.score}<small>分</small>`}</div><p class="activity-result">${record.correct} / ${record.total} 道答对${record.graded<record.total?`，${record.total-record.graded} 道未判定`:''}</p>`;
+  else if(record.type==='verdict')body=`<div class="activity-verdict ${record.correct?'right':'wrong'}">${record.correct?'答对了':'再想一想'}</div><p class="activity-result">${record.kind==='open'?'简答题 · AI 原则判定':'选择题'}</p>`;
+  else if(record.type==='bookmark')body='<p class="activity-result">已加入收藏。</p>';
+  else body=`${record.userText?`<blockquote><small>用户</small><p>${esc(record.userText)}</p></blockquote>`:''}${record.aiText?`<blockquote class="activity-ai"><small>JOJO</small><p>${esc(record.aiText)}</p></blockquote>`:''}`;
+  return `<article class="activity-card"><div class="activity-card-meta"><span>${names[record.type]}</span><time>${date(record.ts)}</time></div><h3>${esc(record.title)}</h3><div class="activity-body">${body}</div><div class="activity-card-foot"><span>${esc(record.label)}</span><button class="activity-user" data-activity-user="${record.visitor}">查看详情 →</button></div></article>`;
+ }).join(''):'<p class="activity-empty">当前范围还没有可展示的作答动态。有新的回答、对话或成绩后会出现在这里。</p>';
+ $('#activity-page').textContent=rows.length?`${activityIndex+1}–${activityIndex+rows.length} / ${activityItems.length}`:'0 / 0';
+ for(const id of ['activity-prev','activity-next','activity-shuffle'])$('#'+id).disabled=activityItems.length<=count;
+ host.querySelectorAll('[data-activity-user]').forEach(button=>button.onclick=()=>{openUser(button.dataset.activityUser)});
+}
+$('#activity-next').onclick=()=>{activityIndex=activityIndex+activityColumns>=activityItems.length?0:activityIndex+activityColumns;renderActivities()};
+$('#activity-prev').onclick=()=>{activityIndex=activityIndex===0?Math.floor((activityItems.length-1)/activityColumns)*activityColumns:Math.max(0,activityIndex-activityColumns);renderActivities()};
+$('#activity-shuffle').onclick=()=>prepareActivities(true);
+new ResizeObserver(()=>{const columns=parseInt(getComputedStyle($('#activity-cards')).getPropertyValue('--cards'))||3;if(columns!==activityColumns)renderActivities()}).observe($('#activity-cards'));
+
 function dots(){document.querySelectorAll('.pin-dots i').forEach((n,i)=>n.classList.toggle('filled',i<pin.length));$('.pin-dots').setAttribute('aria-label',`已输入 ${pin.length} 位`)}
-function gate(){data=null;selectedUser=null;detailGeneration++;$('#gate').hidden=false;$('#dashboard').hidden=true;$('#users').replaceChildren();$('#transcripts').replaceChildren();$('#learner-detail').hidden=true}
+function gate(){data=null;selectedUser=null;detailGeneration++;$('#gate').hidden=false;$('#dashboard').hidden=true;$('#users').replaceChildren();$('#transcripts').replaceChildren();$('#learner-detail').hidden=true;activityItems=[];activitySignature='';$('#activity-cards').replaceChildren();$('#detail-modal').close()}
 async function api(path,options){const response=await fetch('../api/'+path,{cache:'no-store',...options});if(response.status===401){gate();throw Error('请重新输入访问码。')}const value=await response.json();if(!response.ok)throw Error(value.error||'数据暂时无法读取，请重试。');return value}
 async function key(k){
  if(busy||Date.now()<lockedUntil)return;
@@ -20,7 +118,7 @@ async function load(){
  const token=++generation;$('#load-state').textContent='正在读取…';$('#refresh').disabled=true;
  selectedUser=null;detailGeneration++;$('#learner-detail').hidden=true;
  try{
-  const result=await api(`learners?days=${period}&page=${userPage}&search=${encodeURIComponent($('#user-search').value.trim())}`);
+  const result=await api(`learners?days=${period}&page=${userPage}&search=${encodeURIComponent($('#user-search').value.trim())}${userSortQuery()}`);
   if(token!==generation)return;data=result;render();$('#load-state').textContent='';$('#pin-error').textContent='';$('#gate').hidden=true;$('#dashboard').hidden=false;
  }catch(error){if(token===generation){if($('#dashboard').hidden)$('#pin-error').textContent=error.message==='请重新输入访问码。'?'':error.message;else $('#load-state').textContent=error.message+' 当前数据未更新。'}}
  finally{if(token===generation)$('#refresh').disabled=false}
@@ -32,10 +130,11 @@ function render(){
  $('#metrics').innerHTML=items.map(([label,value,detail])=>`<div><div class="metric-label">${label}</div><div class="metric-value">${value}</div><div class="metric-detail">${detail}</div></div>`).join('');
  const chapter=$('#chapter').value;
  $('#chapter').innerHTML='<option value="all">全部章节</option>'+data.chapters.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');$('#chapter').value=chapter;
- renderQuestions();drawTrend();
- $('#users').innerHTML=data.users.length?data.users.map(u=>`<tr><td><button class="user-link" data-user="${u.id}">${esc(u.label)}</button><small>${u.starts} 轮练习</small></td><td><span class="depth-value">${u.depth} / ${u.totalQuestions}</span><progress max="${u.totalQuestions}" value="${u.depth}" aria-label="答题深度 ${u.depth} / ${u.totalQuestions}"></progress></td><td>${u.chapters} / ${data.chapters.length}</td><td>${u.correct} / ${u.graded}</td><td>${pct(u.correct,u.graded)}</td><td>${u.openAnswers}</td><td>${date(u.lastActive)}</td></tr>`).join(''):'<tr><td colspan="7" class="empty-cell">当前范围暂无匹配用户。</td></tr>';
+ renderQuestions();drawTrend();prepareActivities();
+ $('#users').innerHTML=data.users.length?data.users.map(u=>`<tr><td data-value="${esc(u.label)}"><button class="user-link" data-user="${u.id}">${esc(u.label)}</button><small>${u.starts} 轮练习</small></td><td data-value="${u.depth}"><span class="depth-value">${u.depth} / ${u.totalQuestions}</span><progress max="${u.totalQuestions}" value="${u.depth}" aria-label="答题深度 ${u.depth} / ${u.totalQuestions}"></progress></td><td data-value="${u.chapters}">${u.chapters} / ${data.chapters.length}</td><td data-value="${u.correct}">${u.correct} / ${u.graded}</td><td data-value="${u.graded?u.correct/u.graded:''}">${pct(u.correct,u.graded)}</td><td data-value="${u.openAnswers}">${u.openAnswers}</td><td data-value="${u.lastActive??''}">${date(u.lastActive)}</td><td data-value="${u.bookmarks??''}">${u.bookmarks===null?'未同步':u.bookmarks}</td></tr>`).join(''):'<tr><td colspan="8" class="empty-cell">当前范围暂无匹配用户。</td></tr>';
  $('#user-count').textContent=`${fmt(data.total)} 位用户`;$('#user-page').textContent=`第 ${userPage+1} / ${Math.max(1,Math.ceil(data.total/data.pageSize))} 页`;
  $('#user-prev').disabled=userPage===0;$('#user-next').disabled=(userPage+1)*data.pageSize>=data.total;
+ enhanceTables();
  document.querySelectorAll('[data-user]').forEach(button=>button.onclick=()=>openUser(button.dataset.user));
  $('#recording-since').textContent=`简答与对话正文从 ${date(t.recordingSince)} 起接入。此前服务器未保存正文，无法恢复；后续继续对话时，可同步该浏览器仍保存的同题历史。数字统计与正文覆盖时间可能不同。`;
 }
@@ -56,7 +155,8 @@ function drawTrend(){
  $('#trend-legend').querySelectorAll('input').forEach(input=>input.onchange=()=>{input.checked?shownSeries.add(input.dataset.series):shownSeries.delete(input.dataset.series);drawTrend()});
  }
  $('#trend-note').textContent='访问量、用户数和使用深度看左侧数量刻度；留存率与正确率看右侧百分比。留存的次日尚未结束时显示「待观察」。';
- $('#trend-table').innerHTML=`<table><thead><tr><th>日期</th>${trendSeries.map(s=>`<th>${s.name}</th>`).join('')}<th>次日回来 / 首次出现</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.day}${r.covered?'':' · 未采集'}</td>${trendSeries.map(s=>`<td>${trendValue(s,r[s.key])}</td>`).join('')}<td>${!r.cohort?'—':r.retentionMature?`${r.returned} / ${r.cohort}`:`待观察 / ${r.cohort}`}</td></tr>`).join('')}</tbody></table>`;
+ $('#trend-table').innerHTML=`<table id="daily-table"><thead><tr><th>日期</th>${trendSeries.map(s=>`<th>${s.name}</th>`).join('')}<th>次日回来 / 首次出现</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.day}${r.covered?'':' · 未采集'}</td>${trendSeries.map(s=>`<td data-value="${r[s.key]??''}">${trendValue(s,r[s.key])}</td>`).join('')}<td data-value="${r.returned??''}">${!r.cohort?'—':r.retentionMature?`${r.returned} / ${r.cohort}`:`待观察 / ${r.cohort}`}</td></tr>`).join('')}</tbody></table>`;
+ enhanceTables($('#trend-table'));
  $('#trend-tooltip').hidden=true;
  if(!active.length){host.innerHTML='<div class="trend-empty">选择上方任意指标，即可查看趋势。</div>';return}
  if(!rows.some(r=>active.some(s=>r[s.key]!==null&&r[s.key]!==undefined))){host.innerHTML='<div class="trend-empty">当前范围暂无这些指标的有效数据。</div>';return}
@@ -110,7 +210,7 @@ document.querySelectorAll('[data-period]').forEach((button,index,all)=>{
  button.onkeydown=event=>{let next=index;if(event.key==='ArrowRight')next=(index+1)%all.length;else if(event.key==='ArrowLeft')next=(index+all.length-1)%all.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=all.length-1;else return;event.preventDefault();selectPeriod(all[next]);all[next].focus()};
 });
 function selectReport(button){
- document.querySelectorAll('[data-report]').forEach(tab=>{const selected=tab===button;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;$('#'+tab.dataset.report).hidden=!selected});
+ document.querySelectorAll('[data-report]').forEach(tab=>{const selected=tab===button;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;$('#'+tab.dataset.report).hidden=!selected});enhanceTables($('#'+button.dataset.report));
 }
 document.querySelectorAll('[data-report]').forEach((button,index,all)=>{
  button.onclick=()=>selectReport(button);
@@ -120,14 +220,16 @@ let chartWidth=0;new ResizeObserver(entries=>{const width=Math.round(entries[0].
 
 function renderQuestions(){
  if(!data)return;
- const chapter=$('#chapter').value,sort=$('#question-sort').value;
+ const chapter=$('#chapter').value;
  const rows=data.questions.filter(q=>chapter==='all'||q.chapter===Number(chapter));
- rows.sort((a,b)=>sort==='accuracy'?(a.graded?a.correct/a.graded:2)-(b.graded?b.correct/b.graded:2)||a.id-b.id:sort==='answers'?b.answers-a.answers:a.id-b.id);
- $('#questions').innerHTML=rows.map(q=>`<tr><td><strong>${q.id+1}. ${esc(q.title)}</strong><small>${esc(q.chapterName)} · ${q.kind==='open'?'简答题 · AI 判定':'选择题'}</small></td><td>${q.users}</td><td>${q.answers}</td><td>${q.correct} / ${q.graded}</td><td>${pct(q.correct,q.graded)}</td></tr>`).join('');
+ rows.sort((a,b)=>a.id-b.id);
+ $('#questions').innerHTML=rows.map(q=>`<tr><td data-value="${esc(q.title)}"><button class="question-link" data-question-detail="${q.id}">${q.id+1}. ${esc(q.title)}</button><small>${esc(q.chapterName)} · ${q.kind==='open'?'简答题 · AI 判定':'选择题'}</small></td><td data-value="${q.users}">${q.users}</td><td data-value="${q.answers}">${q.answers}</td><td data-value="${q.correct}">${q.correct} / ${q.graded}</td><td data-value="${q.graded?q.correct/q.graded:''}">${pct(q.correct,q.graded)}</td><td data-value="${q.bookmarks}">${q.bookmarks}</td></tr>`).join('');
+ enhanceTables($('#learning'));
+ $('#questions').querySelectorAll('[data-question-detail]').forEach(button=>button.onclick=()=>openQuestion(+button.dataset.questionDetail));
 }
 async function openUser(id){
- selectedUser=id;recordPage=0;transcriptNodes.clear();$('#transcripts').replaceChildren();$('#answer-history').replaceChildren();$('#learner-summary').textContent='';$('#learner-title').textContent=data?.users?.find(user=>user.id===id)?.label||'用户';$('#learner-detail').hidden=false;$('#records-more').hidden=true;
- $('#learner-title').focus({preventScroll:true});$('#learner-detail').scrollIntoView({behavior:'smooth',block:'start'});await loadRecords(true);
+ questionGeneration++;$('#question-detail').hidden=true;selectedUser=id;recordPage=0;transcriptNodes.clear();$('#transcripts').replaceChildren();$('#answer-history').replaceChildren();$('#learner-summary').textContent='';$('#learner-title').textContent=data?.users?.find(user=>user.id===id)?.label||'用户';$('#learner-detail').hidden=false;$('#records-more').hidden=true;$('#journeys').replaceChildren();$('#bookmarked-questions').replaceChildren();$('#journeys-more').hidden=true;if(!$('#detail-modal').open)$('#detail-modal').showModal();
+ $('#detail-modal').scrollTop=0;$('#learner-title').focus({preventScroll:true});await loadRecords(true);
 }
 async function loadRecords(first=false){
  const id=selectedUser,token=++detailGeneration;$('#detail-status').textContent='正在读取作答与对话…';$('#records-more').disabled=true;
@@ -136,9 +238,13 @@ async function loadRecords(first=false){
   if(token!==detailGeneration||selectedUser!==id)return;
   if(first){
    $('#learner-title').textContent=d.label;
+   $('#bookmarked-questions').innerHTML=d.bookmarks===null?'<p class="section-description">此用户尚未同步收藏，无法确认当前收藏状态。</p>':d.bookmarkedQuestions.length?`<div class="bookmarked-list">${d.bookmarkedQuestions.map(q=>`<button class="question-link" data-bookmarked-question="${q.id}">${q.id+1}. ${esc(q.title)}</button>`).join('')}</div>`:'<p class="section-description">当前没有收藏的题目。</p>';
+   $('#bookmarked-questions').querySelectorAll('[data-bookmarked-question]').forEach(button=>button.onclick=()=>openQuestion(+button.dataset.bookmarkedQuestion));
    $('#learner-summary').textContent=`答题深度 ${d.depth} / ${d.totalQuestions} · 涉及 ${d.chapters} 章 · 答题记录 ${d.answers.length} 次 · 正确率 ${pct(d.correct,d.graded)}（${d.correct} / ${d.graded} 次已判定）`;
-   $('#answer-history').innerHTML=d.answers.length?`<table><thead><tr><th>题目</th><th>题型</th><th>判定</th><th>时间</th></tr></thead><tbody>${d.answers.map(a=>`<tr><td>${a.course===1?'旧版 · ':''}${a.q+1}. ${esc(a.title)}</td><td>${a.kind==='open'?'简答':'选择'}</td><td><span class="outcome ${a.correct===null?'ungraded':a.correct?'right':'wrong'}">${a.correct===null?'未判定':a.correct?'答对':'答错'}</span></td><td>${date(a.ts)}</td></tr>`).join('')}</tbody></table>`:'<p class="empty-cell">暂无答题判定记录。</p>';
+   $('#answer-history').innerHTML=d.answers.length?`<table id="answer-table"><thead><tr><th>题目</th><th>题型</th><th>判定</th><th>时间</th></tr></thead><tbody>${d.answers.map(a=>`<tr><td data-value="${esc(a.title)}">${a.course===1?'旧版 · ':''}<button class="question-link" data-question-detail="${a.q}" ${a.course===1?'disabled':''}>${a.q+1}. ${esc(a.title)}</button></td><td>${a.kind==='open'?'简答':'选择'}</td><td data-value="${a.correct===null?'':a.correct?1:0}"><span class="outcome ${a.correct===null?'ungraded':a.correct?'right':'wrong'}">${a.correct===null?'未判定':a.correct?'答对':'答错'}</span></td><td data-value="${a.ts}">${date(a.ts)}</td></tr>`).join('')}</tbody></table>`:'<p class="empty-cell">暂无答题判定记录。</p>';
   }
+  if(first)renderJourneys(d);
+  enhanceTables($('#answer-history'));$('#answer-history').querySelectorAll('[data-question-detail]:not(:disabled)').forEach(button=>button.onclick=()=>openQuestion(+button.dataset.questionDetail));
   for(const m of d.records){
    let thread=transcriptNodes.get(m.thread);
    if(!thread){thread=document.createElement('details');thread.className='transcript';thread.open=true;thread.innerHTML=`<summary>${m.q+1}. ${esc(m.title)} <small>${m.kind==='open'?'简答题':'选择题讨论'}</small></summary><p class="transcript-question">${esc(m.question)}</p><ol class="message-list"></ol>`;$('#transcripts').append(thread);transcriptNodes.set(m.thread,thread)}
@@ -149,9 +255,41 @@ async function loadRecords(first=false){
  }catch(error){if(token===detailGeneration){$('#detail-status').textContent=error.message+' 可再次点击重试。';$('#records-more').hidden=false}}
  finally{if(token===detailGeneration)$('#records-more').disabled=false}
 }
+let questionGeneration=0,journeyPage=0;
+function renderJourneys(result,append=false){
+ if(!append){$('#journeys').replaceChildren();journeyPage=0}
+ for(const path of result.journeys||[]){
+  const item=document.createElement('details');item.className='journey-card';item.open=!$('#journeys').children.length;
+  const summary=document.createElement('summary');summary.textContent=`${date(path.ts)} · ${path.precise?'使用路径':'历史会话（未记录停留时长）'} · ${path.steps} 步`;
+  const text=document.createElement('p');text.className='journey-text';text.textContent=path.text;item.append(summary,text);$('#journeys').append(item);
+ }
+ $('#journeys-more').hidden=!result.journeysHasMore;
+ $('#journey-status').textContent=$('#journeys').children.length?'':'本期尚无使用路径记录。精确停留时长从本次更新后开始采集。';
+}
+$('#journeys-more').onclick=async()=>{
+ const id=selectedUser,token=detailGeneration;$('#journeys-more').disabled=true;
+ try{const result=await api(`learner?id=${id}&days=${period}&journeyPage=${journeyPage+1}`);if(id!==selectedUser||token!==detailGeneration)return;journeyPage++;renderJourneys(result,true)}
+ catch(error){if(id===selectedUser)$('#journey-status').textContent=error.message}
+ finally{$('#journeys-more').disabled=false}
+};
+async function openQuestion(id){
+ const token=++questionGeneration;detailGeneration++;selectedUser=null;$('#learner-detail').hidden=true;$('#question-detail').hidden=false;$('#question-title').textContent='题目详情';$('#question-content').replaceChildren();$('#question-status').textContent='正在读取…';
+ if(!$('#detail-modal').open)$('#detail-modal').showModal();$('#detail-modal').scrollTop=0;$('#question-title').focus({preventScroll:true});
+ try{
+  const result=await api(`question?id=${id}&days=${period}`);if(token!==questionGeneration||!$('#detail-modal').open)return;
+  const q=result.question;
+  $('#question-title').textContent=`${q.id+1}. ${q.title}`;
+  $('#question-content').innerHTML=`<p class="section-description">${esc(result.chapter)} · ${q.kind==='open'?'简答题':'选择题'} · ${result.answers} 次提交 · ${result.bookmarks} 人收藏 · 正确率 ${pct(result.correct,result.graded)}（${result.correct} / ${result.graded} 次已判定）</p><h4>完整题干</h4><p class="question-full-text">${esc(q.brief)} ${q.kind==='open'?`<strong>${esc(q.prompt)}</strong>`:''}</p>${q.kind==='choice'?`<h4>默认选项说明</h4><p class="section-description">练习中问法和选项位置可能变化；以下按默认顺序展示。</p><div class="question-options">${q.labels.map((label,index)=>`<div class="question-option"><strong>${index===0?'A':'B'}</strong><p>${esc(label)}</p>${index===q.correct?'<span class="outcome right">正确方案</span>':''}</div>`).join('')}</div><h4>判断依据</h4><p class="question-full-text">${esc(q.why)}</p>`:`<h4>参考思路</h4><p class="question-full-text">${esc(q.reference||'')}</p>`}${q.rule?`<h4>核心原则</h4><p class="question-full-text">${esc(q.rule)}</p>`:''}<h4>最近的作答用户</h4><p class="section-description">最多展示最近 50 次提交，点击用户可继续查看完整记录。</p><div class="table-wrap">${result.recentAnswers.length?`<table id="question-users-table"><thead><tr><th>用户</th><th>判定</th><th>提交时间</th></tr></thead><tbody>${result.recentAnswers.map(answer=>`<tr><td data-value="${esc(answer.label)}"><button class="user-link" data-detail-user="${answer.visitor}">${esc(answer.label)}</button></td><td data-value="${answer.correct===null?'':answer.correct?1:0}"><span class="outcome ${answer.correct===null?'ungraded':answer.correct?'right':'wrong'}">${answer.correct===null?'未判定':answer.correct?'答对':'答错'}</span></td><td data-value="${answer.ts}">${date(answer.ts)}</td></tr>`).join('')}</tbody></table>`:'<p class="empty-cell">本期尚无作答记录。</p>'}</div>`;
+  enhanceTables($('#question-content'));$('#question-content').querySelectorAll('[data-detail-user]').forEach(button=>button.onclick=()=>openUser(button.dataset.detailUser));$('#question-status').textContent='';
+ }catch(error){if(token===questionGeneration)$('#question-status').textContent=error.message}
+}
+$('#question-close').onclick=()=>$('#detail-modal').close();
+$('#detail-modal').addEventListener('close',()=>{detailGeneration++;questionGeneration++;selectedUser=null;$('#learner-detail').hidden=true;$('#question-detail').hidden=true;$('#transcripts').replaceChildren();$('#journeys').replaceChildren();$('#question-content').replaceChildren()});
+$('#detail-modal').addEventListener('click',event=>{if(event.target!==$('#detail-modal'))return;const rect=$('#detail-modal').getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)$('#detail-modal').close()});
+
 $('#records-more').onclick=()=>{const count=$('#transcripts').querySelectorAll('li').length;recordPage=Math.floor(count/50);loadRecords(count===0)};
-$('#detail-close').onclick=()=>{detailGeneration++;selectedUser=null;$('#learner-detail').hidden=true;$('#transcripts').replaceChildren()};
-$('#chapter').onchange=renderQuestions;$('#question-sort').onchange=renderQuestions;
+$('#detail-close').onclick=()=>$('#detail-modal').close();
+$('#chapter').onchange=renderQuestions;
 $('#refresh').onclick=load;
 $('#user-prev').onclick=()=>{userPage--;load()};$('#user-next').onclick=()=>{userPage++;load()};
 $('#user-search').oninput=()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{userPage=0;load()},300)};
