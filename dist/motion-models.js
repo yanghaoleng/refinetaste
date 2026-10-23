@@ -15,7 +15,7 @@
  function project(p,zoom=48,baseline=288){const yaw=.28,pitch=.12,x=p[0]*Math.cos(yaw)-p[2]*Math.sin(yaw),z=p[0]*Math.sin(yaw)+p[2]*Math.cos(yaw);return [200+x*zoom,baseline-(p[1]*Math.cos(pitch)-z*Math.sin(pitch))*zoom,z*Math.cos(pitch)+p[1]*Math.sin(pitch)]}
  const rgb=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));
  function renderer(ctx,options={}){
-  const triangles=[],bones=[],silhouette=options.silhouette,view=p=>project(p,options.zoom||48,options.baseline||288);
+  const triangles=[],bones=[],pivots=[],silhouette=options.silhouette,view=p=>project(p,options.zoom||48,options.baseline||288);
   function mesh(geo,position,scale,color,angle=0,alpha=1){
    const vertices=geo.vertices.map(p=>{const q=rotate(p.map((v,i)=>v*scale[i]),angle);return q.map((v,i)=>v+position[i])}),screen=vertices.map(view),base=rgb(color);
    for(const face of geo.faces){const a=vertices[face[0]],b=vertices[face[1]],c=vertices[face[2]],n=norm(cross(sub(b,a),sub(c,a))),light=.72+.28*Math.max(0,n[0]*-.45+n[1]*.74+n[2]*.5),points=face.map(i=>screen[i]);triangles.push({points,depth:points.reduce((s,p)=>s+p[2],0)/3,color:silhouette?'#293e38':`rgb(${base.map(v=>Math.round(v*light)).join(',')})`,alpha})}
@@ -24,8 +24,9 @@
   function link(a,b,width,color){const d=sub(b,a),length=Math.hypot(d[0],d[1]);orb(a.map((v,i)=>(v+b[i])/2),[width,length/2+width,width],color,-Math.atan2(d[0],d[1]));bones.push([a,b])}
   function finish(){triangles.sort((a,b)=>a.depth-b.depth);for(const f of triangles){ctx.globalAlpha=f.alpha;ctx.fillStyle=f.color;ctx.beginPath();f.points.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.fill()}ctx.globalAlpha=1;
    if(options.rig&&!silhouette){ctx.lineWidth=2;ctx.strokeStyle='#f4d267';ctx.fillStyle='#fff4bc';for(const pair of bones){const points=pair.map(view);ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);ctx.lineTo(points[1][0],points[1][1]);ctx.stroke();for(const p of points)ctx.fillRect(p[0]-2,p[1]-2,4,4)}}
+   if(options.rig)for(const pivot of pivots){const p=view(pivot.point);ctx.fillStyle=pivot.color;ctx.fillRect(p[0]-4,p[1]-4,8,8)}
   }
-  return {orb,box,link,finish};
+  return {orb,box,link,finish,anchor:(point,color)=>pivots.push({point,color})};
  }
  function knee(a,b,length=.73,bend=1){const d=sub(b,a),distance=Math.min(length*2-.001,Math.hypot(d[0],d[1])),h=Math.sqrt(Math.max(0,length*length-distance*distance/4)),l=Math.hypot(d[0],d[1])||1;return [(a[0]+b[0])/2-d[1]/l*h*bend,(a[1]+b[1])/2+d[0]/l*h*bend,(a[2]+b[2])/2]}
  function state(kind,variant,t){
@@ -36,7 +37,7 @@
    else{p.ballY=radius;const bounces=variant==='elastic'?[[.34,.62,1.8],[.62,.82,.75],[.82,.96,.25]]:[[.34,.53,.3],[.53,.65,.08]];for(const [a,b,h]of bounces)if(t>=a&&t<b){const u=(t-a)/(b-a);p.ballY=radius+4*h*u*(1-u)}}
   }
   if(kind==='spacing'){const u=clamp((t-.12)/.3125);p.x=mix(-2,2,variant==='eased'?smooth(u):u)}
-  if(kind==='wave'||kind==='review'){p.armL=-2.3+.28*Math.sin(t*2*PI);p.foreL=-.5+.3*Math.sin(t*2*PI);if(variant==='lively'){p.y=.12*Math.abs(Math.sin(t*4*PI));p.armL=-2.1+.7*Math.sin(t*4*PI);p.bag=.15*Math.sin(t*4*PI)}}
+  if(kind==='wave'||kind==='review'){p.armL=-2.3+.7*Math.sin(t*2*PI);p.foreL=-.5+.3*Math.sin(t*2*PI);if(variant==='lively'){p.y=.12*Math.abs(Math.sin(t*4*PI));p.armL=-2.1+.7*Math.sin(t*4*PI);p.bag=.15*Math.sin(t*4*PI)}}
   if(kind==='weight'){
    const lift=smooth(clamp((t-.25)/.4));p.lift=lift;p.crouch=(1-lift)*.9;p.boxY=.54+1.26*lift;
    if(variant==='grounded'){p.lean=-.22*lift;p.feet=[[-.48,.10,.1],[.4,.10,-.1]]}else{p.crouch=0;p.feet=[[-.10,.10,.1],[.1,.10,-.1]]}
@@ -81,7 +82,12 @@
    const shoulder=point(lean+side*(facing?.1:.44),shoulderY,facing?side*.32:.06),a=[Math.sin(angle)*.54,-Math.cos(angle)*.54,0],elbow=shoulder.map((v,i)=>v+a[i]*s);let wrist=elbow.map((v,i)=>v+[Math.sin(angle+fore)*.48,-Math.cos(angle+fore)*.48,.05][i]*s);
    if(p.wrist&&side===1){wrist=point(...p.wrist);const bend=knee(shoulder,wrist,.6*s,1);elbow.splice(0,3,...bend)}
    if(p.lift!==undefined){const target=point(side===-1?.40:1.30,p.boxY-.28,.40);wrist=target;elbow.splice(0,3,...knee(shoulder,wrist,.78*s,side===-1?1:-1))}
-   if(options.wrong&&side===-1){const drift=Math.sin(options.t*PI*2)*.28*s;shoulder[0]+=drift;elbow[0]+=drift;wrist[0]+=drift;shoulder[1]+=drift*.6;elbow[1]+=drift*.6;wrist[1]+=drift*.6}
+   if(options.pivot&&side===-1){
+    // Rotating around the midpoint changes the shoulder position by (I - R) * offset.
+    const offset=[Math.sin(-2.3)*.27*s,-Math.cos(-2.3)*.27*s,0],rotated=rotate(offset,p.armL+2.3),pivot=shoulder.map((v,i)=>v+(options.wrong?offset[i]:0));
+    r.anchor(pivot,options.wrong?'#cf725d':'#ebc35f');
+    if(options.wrong)for(const joint of [shoulder,elbow,wrist])for(let i=0;i<3;i++)joint[i]+=offset[i]-rotated[i];
+   }
    link(shoulder,elbow,.14*s,c.coat);link(elbow,wrist,.11*s,c.coat);orb(wrist,[.13*s,.13*s,.13*s],c.skin);
   }
   if(options.busy){[-1,1].forEach(side=>{box(point(side*.4,hipY+.32,.4),[.12*s,.16*s,.09*s],c.gold,side*.2);orb(point(side*.26,hipY+.80,.32),[.08*s,.08*s,.04*s],side===1?'#b38cb5':c.paper)})}
@@ -102,7 +108,7 @@
    const poses=[{...p,armR:-.3,lean:.06},{...p,wrist:[1.1,1.85,.35],lean:.14},{...p,armR:-.5,foreR:-.8,lean:-.10}];
    poses.forEach((pose,i)=>{person(r,pose,{x:(i-1)*2.45,scale:.55});box([(i-1)*2.45+.78,.91,.18],[.15,.23,.08],palette.gold)});
   }else{
-   person(r,p,{wrong:kind==='wave'&&variant==='center',t,facing:['walk','walk-contact','jump','stop','weight'].includes(kind)?1:0,busy:kind==='review'&&variant==='lively'});
+   person(r,p,{wrong:kind==='wave'&&variant==='center',pivot:kind==='wave',t,facing:['walk','walk-contact','jump','stop','weight'].includes(kind)?1:0,busy:kind==='review'&&variant==='lively'});
    if(kind==='breakdown'){box([1.7,1.35,.0],[.35,.08,.45],palette.paper);orb([1.6,1.65,.1],[.18,.23,.18],palette.gold)}
   }
   if(options.trace&&kind!=='keys'){
