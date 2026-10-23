@@ -19,6 +19,9 @@ CORRECT = [1, 1, 1, 1, 0, 1, 1, 1]
 COURSE = json.loads((ROOT / 'dist/course.json').read_text())
 QUESTIONS = COURSE['questions']
 CHAPTER_STARTS=tuple(next(q['id'] for q in QUESTIONS if q['chapter']==chapter['id']) for chapter in COURSE['chapters'])
+CHAPTER_QUESTIONS={start:tuple(q['id'] for q in QUESTIONS if q['chapter']==QUESTIONS[start]['chapter']) for start in CHAPTER_STARTS}
+# Runs created before chapter expansion did not submit a syllabus; their IDs stop at 55.
+LEGACY_CHAPTER_QUESTIONS={start:tuple(q for q in ids if q<56) for start,ids in CHAPTER_QUESTIONS.items()}
 NAMES = ['对比', '重复', '亲密', '对齐', '场景与调性', '信息层级', '用户路径', '协作表达']
 UUID = re.compile(r'^[a-f0-9-]{36}$')
 lock = threading.Lock()
@@ -47,6 +50,7 @@ def init_db():
           CREATE UNIQUE INDEX IF NOT EXISTS answer_once ON events(run,q) WHERE kind='answer';
           CREATE UNIQUE INDEX IF NOT EXISTS start_once ON events(run) WHERE kind='start';
           CREATE UNIQUE INDEX IF NOT EXISTS complete_once ON events(run) WHERE kind='complete';
+          CREATE TABLE IF NOT EXISTS run_syllabi(run TEXT PRIMARY KEY, questions TEXT NOT NULL);
           CREATE TABLE IF NOT EXISTS review_usage(id TEXT PRIMARY KEY, day TEXT, client TEXT, q INTEGER);
           CREATE INDEX IF NOT EXISTS events_visitor_ts ON events(visitor,ts);
           CREATE TABLE IF NOT EXISTS conversation_messages(
@@ -100,6 +104,10 @@ def collect(data, now=None):
     start = data.get('start')
     if kind == 'start' and (type(start) is not int or start not in ((0,4,6) if course==1 else CHAPTER_STARTS)):
         raise ValueError('invalid start')
+    syllabus=None
+    if kind=='start' and course==2:
+        syllabus=data.get('questions',list(LEGACY_CHAPTER_QUESTIONS[start]))
+        if not isinstance(syllabus,list) or any(type(q) is not int for q in syllabus) or tuple(syllabus) not in (CHAPTER_QUESTIONS[start],LEGACY_CHAPTER_QUESTIONS[start]) or not syllabus:raise ValueError('invalid syllabus')
     q, choice = data.get('q'), data.get('choice')
     if kind == 'answer' and (type(q) is not int or q not in range(8 if course==1 else len(QUESTIONS)) or type(choice) is not int or choice not in (0,1,-1)):
         raise ValueError('invalid answer')
@@ -113,14 +121,18 @@ def collect(data, now=None):
             begun=db.execute("SELECT * FROM events WHERE kind='start' AND run=? AND visitor=? AND session=?",(run,visitor,session)).fetchone()
             if not begun: raise ValueError('run not started')
             if begun['course']!=course:raise ValueError('course mismatch')
-            if kind=='answer' and (q < begun['start'] or (course==2 and q>=begun['start']+8)):raise ValueError('invalid question')
+            recorded=db.execute('SELECT questions FROM run_syllabi WHERE run=?',(run,)).fetchone()
+            syllabus=tuple(json.loads(recorded['questions'])) if recorded else LEGACY_CHAPTER_QUESTIONS.get(begun['start'],())
+            if kind=='answer' and (q < begun['start'] if course==1 else q not in syllabus):raise ValueError('invalid question')
             if kind=='complete':
                 count=db.execute("SELECT COUNT(*) FROM events WHERE run=? AND kind='answer'",(run,)).fetchone()[0]
-                if count!=(8-begun['start'] if course==1 else 8): raise ValueError('run incomplete')
+                if count!=(8-begun['start'] if course==1 else len(syllabus)): raise ValueError('run incomplete')
         db.execute('INSERT OR IGNORE INTO events(id,day,ts,visitor,session,kind,run,start,q,choice,course) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
           (data['id'],day,now,visitor,session,kind,run,start,q,choice,course))
+        if kind=='start' and course==2:db.execute('INSERT OR IGNORE INTO run_syllabi VALUES(?,?)',(run,json.dumps(syllabus)))
         # Store only a rolling 90 days; no raw IP, UA, prompt or note text enters this table.
         db.execute('DELETE FROM events WHERE ts < ?', (now-90*86400,))
+        db.execute("DELETE FROM run_syllabi WHERE run NOT IN (SELECT run FROM events WHERE kind='start')")
 
 def summary(days, now=None):
     now = time.time() if now is None else now
@@ -130,6 +142,7 @@ def summary(days, now=None):
     with connect() as db:
         rows = db.execute('SELECT * FROM events WHERE ts>=? AND ts<=?',(start,now)).fetchall()
         earliest=db.execute('SELECT MIN(ts) FROM events').fetchone()[0]
+        syllabi={r['run']:tuple(json.loads(r['questions'])) for r in db.execute('SELECT * FROM run_syllabi')}
     views=[r for r in rows if r['kind']=='view']
     starts=[r for r in rows if r['kind']=='start']
     runids={r['run'] for r in starts}
@@ -147,7 +160,7 @@ def summary(days, now=None):
         for q,item in enumerate(catalog):
             a=[r for r in answers if r['q']==q and r['course']==version]
             submitted=a
-            entrants={r['run'] for r in starts if r['course']==version and r['start']<=q and (version==1 or q<r['start']+8)}
+            entrants={r['run'] for r in starts if r['course']==version and (r['start']<=q if version==1 else q in syllabi.get(r['run'],LEGACY_CHAPTER_QUESTIONS[r['start']]))}
             questions.append({'index':q,'course':version,'kind':item['kind'],'name':item['principle'],'answers':len(submitted),'correct':sum(r['choice']==item['correct'] for r in submitted) if item['kind']=='choice' else (sum(r['choice']==1 for r in submitted) if any(r['choice'] in (0,1) for r in submitted) else None),'gradedAnswers':sum(r['choice'] in (0,1) for r in submitted),'eligible':len(entrants)})
     chapters=[]
     for version,starts_at in ((1,(0,4,6)),(2,CHAPTER_STARTS)):

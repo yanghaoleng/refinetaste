@@ -11,7 +11,7 @@ class CourseTests(unittest.TestCase):
   self.temp=tempfile.TemporaryDirectory();app.DB=str(Path(self.temp.name)/'test.sqlite3');app.SECRET='test-secret-with-at-least-thirty-two-chars';app.PIN_HASH=hashlib.sha256(b'123456').hexdigest();app.init_db();app.review_rates.clear()
  def tearDown(self):self.temp.cleanup()
  def test_catalog_and_versioned_completion(self):
-  self.assertEqual(len(app.QUESTIONS),56);self.assertEqual(sum(q['kind']=='open' for q in app.QUESTIONS),24)
+  self.assertEqual(len(app.QUESTIONS),60);self.assertEqual(sum(q['kind']=='open' for q in app.QUESTIONS),24)
   visitor,session,run=(str(uuid.uuid4()) for _ in range(3))
   def event(kind,**extra):app.collect(dict(id=str(uuid.uuid4()),visitor=visitor,session=session,run=run,course=2,kind=kind,**extra))
   event('start',start=8)
