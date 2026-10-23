@@ -255,10 +255,11 @@ class Handler(BaseHTTPRequestHandler):
                 return self.reply(200,reply if isinstance(reply,dict) else {'reply':reply,'emotion':'neutral'})
             feedback=reviewer.review(question,answer.strip())
             return self.reply(200,{'feedback':feedback,'modelLabel':os.environ.get('REFINETASTE_AI_LABEL','设计教练')})
-        except reviewer.ReviewUnavailable:
+        except reviewer.ReviewUnavailable as error:
+            reviewer.record_failure(error,request_id,q,'assessment' if assess else 'chat' if chat else 'review')
             if reserved:
                 with connect() as db:db.execute('DELETE FROM review_usage WHERE id=?',(request_id,))
-            return self.reply(502,{'error':'模型暂时没有完成点评，请重试。你的回答已留在本机，也可以先自行复盘。'})
+            return self.reply(502,{'error':error.public_message,'errorCode':error.kind})
         except sqlite3.Error:return self.reply(503,{'error':'点评服务暂时繁忙，请稍后重试。'})
         finally:review_slots.release()
     def do_GET(self):
