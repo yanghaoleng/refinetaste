@@ -109,6 +109,13 @@ document.querySelectorAll('[data-period]').forEach((button,index,all)=>{
  button.onclick=()=>selectPeriod(button);
  button.onkeydown=event=>{let next=index;if(event.key==='ArrowRight')next=(index+1)%all.length;else if(event.key==='ArrowLeft')next=(index+all.length-1)%all.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=all.length-1;else return;event.preventDefault();selectPeriod(all[next]);all[next].focus()};
 });
+function selectReport(button){
+ document.querySelectorAll('[data-report]').forEach(tab=>{const selected=tab===button;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;$('#'+tab.dataset.report).hidden=!selected});
+}
+document.querySelectorAll('[data-report]').forEach((button,index,all)=>{
+ button.onclick=()=>selectReport(button);
+ button.onkeydown=event=>{let next=index;if(event.key==='ArrowRight')next=(index+1)%all.length;else if(event.key==='ArrowLeft')next=(index+all.length-1)%all.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=all.length-1;else return;event.preventDefault();selectReport(all[next]);all[next].focus()};
+});
 let chartWidth=0;new ResizeObserver(entries=>{const width=Math.round(entries[0].contentRect.width);if(width&&width!==chartWidth){chartWidth=width;if(data)drawTrend()}}).observe($('#trend-plot'));
 
 function renderQuestions(){
