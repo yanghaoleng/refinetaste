@@ -396,3 +396,11 @@ body.hero-only>.privacy-footer{opacity:1}
 #feedback-wechat .icon{width:14px;height:14px;stroke-width:1.7;color:var(--muted)}
 #feedback-wechat:hover .icon{color:var(--text)}
 .feedback-panel p{font-size:11px;line-height:1.7;color:var(--muted);margin:16px 0 0}
+
+html{scrollbar-gutter:stable}
+body.home-notes-open{overflow:hidden}
+#home-notes-dialog{width:min(1040px,calc(100vw - 48px));max-width:none;max-height:calc(100dvh - 64px);padding:0;border:0;border-radius:18px;background:var(--bg);color:var(--text);overflow:visible}
+#home-notes-dialog::backdrop{background:#0008;backdrop-filter:blur(3px)}
+#home-notes-dialog #notebook{position:static;inset:auto;transform:none;width:100%;max-width:none;max-height:calc(100dvh - 64px);min-height:260px;margin:0;padding:28px;overscroll-behavior:contain}
+#home-notes-dialog .note-designs{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:759px){#home-notes-dialog{width:calc(100vw - 28px);max-height:calc(100dvh - 40px)}#home-notes-dialog #notebook{padding:20px;max-height:calc(100dvh - 40px)}#home-notes-dialog .note-designs{grid-template-columns:minmax(0,1fr)}}

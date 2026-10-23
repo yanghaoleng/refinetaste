@@ -21,5 +21,5 @@ class IdentityTests(unittest.TestCase):
   self.assertEqual(self.request(str(uuid.uuid4()),'https://evil.example')[0],403)
 
  def test_privacy_document_and_styles_are_public_without_authentication(self):
-  for asset in ('privacy.html','privacy.css','feedback.js'):
+  for asset in ('privacy.html','privacy.css','feedback.js','privacy-id.js'):
    connection=http.client.HTTPConnection('127.0.0.1',self.server.server_port,timeout=3);connection.request('GET',app.BASE+'/'+asset);response=connection.getresponse();self.assertEqual(response.status,200);self.assertTrue(response.read());connection.close()

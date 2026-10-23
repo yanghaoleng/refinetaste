@@ -83,5 +83,5 @@ window.RefineText = { text, slots, duration };
 const toastHost=document.createElement('div');toastHost.id='toast-host';document.body.append(toastHost);
 const toastRoot=createRoot(toastHost);
 flushSync(()=>toastRoot.render(<Toaster theme="system" position="top-center" offset={76} mobileOffset={72} visibleToasts={1} toastOptions={{duration:1800,style:{background:'var(--panel)',color:'var(--text)',border:'1px solid var(--line)',borderRadius:'12px',fontSize:'13px'}}} />));
-function notify(type,message){const parent=document.querySelector('#training[open]')||document.body;if(toastHost.parentElement!==parent)parent.append(toastHost);toast[type](message,{id:'copy-concept'});}
+function notify(type,message){const parent=document.querySelector('#home-notes-dialog[open],#training[open]')||document.body;if(toastHost.parentElement!==parent)parent.append(toastHost);toast[type](message,{id:'copy-concept'});}
 window.RefineToast={success:message=>notify('success',message),error:message=>notify('error',message)};
