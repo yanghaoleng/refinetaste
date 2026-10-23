@@ -315,7 +315,7 @@ class Handler(BaseHTTPRequestHandler):
         path=urlparse(self.path).path
         if self.headers.get('Origin') not in ORIGINS:
             return self.reply(403,{'error':'origin rejected'})
-        if path not in (BASE+'/api/login',BASE+'/api/logout',BASE+'/api/collect',BASE+'/api/review',BASE+'/api/conversation'):
+        if path not in (BASE+'/api/login',BASE+'/api/logout',BASE+'/api/collect',BASE+'/api/review',BASE+'/api/conversation',BASE+'/api/identity'):
             return self.reply(404,{'error':'not found'})
         key=digest(self.headers.get('X-Real-IP',self.client_address[0]))
         now=time.time()
@@ -323,6 +323,12 @@ class Handler(BaseHTTPRequestHandler):
             for mapping in (attempts,collect_rates,review_rates,sessions):
                 if len(mapping)>10000:
                     mapping.clear()
+        if path.endswith('/identity'):
+            try:
+                visitor=self.body().get('visitor')
+                if not isinstance(visitor,str) or not UUID.fullmatch(visitor):raise ValueError()
+                return self.reply(200,{'id':digest(visitor)})
+            except ValueError:return self.reply(400,{'error':'invalid visitor'})
         if path.endswith('/review'):
             return self.review_request(key,now)
         if path.endswith('/login'):
@@ -444,7 +450,7 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(308);self.send_header('Location',path+'/');self.end_headers();return
         files={BASE+'/':'index.html',BASE+'/data/':'data/index.html',BASE+'/style.css':'style.css',BASE+'/app.js':'app.js',BASE+'/analytics.js':'analytics.js',BASE+'/data/admin.js':'data/admin.js',BASE+'/data/admin.css':'data/admin.css'}
         files[BASE+'/icons.svg']='icons.svg'
-        for asset in ('hero-carousel.js','hero-carousel.css','theme.js','theme.css','motion.js','coach-guide.js','conversation-sequence.js','chat-format.js','question-run.js','sonner.css','sonner.LICENSE.txt','viewport.js','site-icon.js','chapter-score.js','chapter-practice.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
+        for asset in ('feedback.js','privacy.html','privacy.css','hero-carousel.js','hero-carousel.css','theme.js','theme.css','motion.js','coach-guide.js','conversation-sequence.js','chat-format.js','question-run.js','sonner.css','sonner.LICENSE.txt','viewport.js','site-icon.js','chapter-score.js','chapter-practice.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):
             files[BASE+'/'+asset]=asset
         for asset in ('chick-emotions.webp','chick-positive-emotions.webp','chick-cool-expressions.webp','chick-gaze.webp','chick-starry-96.webp','chick-starry-192.webp','favicon-starry.ico','favicon-starry-32.png','apple-touch-starry.png','chick-positive-emotions.png','chick-emotions.png','chick-eyes-original.png','chick-eyes-128.webp','chick-eyes-512.webp','apple-touch-icon.png','favicon-32.png','favicon.ico'):
             files[BASE+'/assets/'+asset]='assets/'+asset

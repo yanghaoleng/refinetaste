@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
+function setup(){
+ const timers=new Map(),documentEvents={},windowEvents={};let sequence=0,field,copied,toast;
+ const element=()=>({hidden:true,events:{},style:{},addEventListener(n,fn){this.events[n]=fn},setAttribute(k,v){this[k]=v},getBoundingClientRect:()=>({left:600,top:800,width:280,height:140}),focus(){},append(value){field=value}});
+ const entry=element(),trigger=element(),panel=element(),copy=element();entry.contains=target=>[entry,trigger,panel,copy].includes(target);
+ const document={activeElement:trigger,querySelector:s=>({'.feedback-entry':entry,'#feedback-trigger':trigger,'#feedback-panel':panel,'#feedback-wechat':copy})[s],addEventListener:(n,fn)=>documentEvents[n]=fn,createElement:()=>({style:{},select(){},setSelectionRange(){},remove(){}}),execCommand(){copied=field.value;return true}};
+ const window={addEventListener:(n,fn)=>windowEvents[n]=fn,RefineToast:{success:value=>toast=value,error:value=>toast=value}};
+ vm.runInNewContext(fs.readFileSync('dist/feedback.js','utf8'),{document,window,innerWidth:1200,clearTimeout:id=>timers.delete(id),setTimeout:fn=>{timers.set(++sequence,fn);return sequence}});
+ return {entry,trigger,panel,copy,documentEvents,timers,get copied(){return copied},get toast(){return toast}};
+}
+test('hover and click show the same anchored panel; outside and Escape dismiss it',()=>{const e=setup();e.entry.events.pointerenter({pointerType:'mouse'});assert.equal(e.panel.hidden,false);e.trigger.events.click();assert.equal(e.panel.hidden,false);assert.equal(e.trigger['aria-expanded'],'true');e.entry.events.pointerleave({pointerType:'mouse'});assert.equal(e.timers.size,0);e.documentEvents.pointerdown({target:{}});assert.equal(e.panel.hidden,true);e.trigger.events.click();e.entry.events.keydown({key:'Escape',preventDefault(){},stopPropagation(){}});assert.equal(e.panel.hidden,true);assert.equal(e.trigger['aria-expanded'],'false')});
+test('the entire WeChat button copies the full contact and confirms success',async()=>{const e=setup();e.trigger.events.click();await e.copy.events.click();assert.equal(e.copied,'yanghaoleng');assert.equal(e.toast,'复制成功')});

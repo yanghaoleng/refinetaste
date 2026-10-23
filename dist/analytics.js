@@ -1,7 +1,7 @@
 /* Anonymous browser identity; submitted conversations are recorded for the protected dashboard. */
 (()=>{
  let visitor,session,qa=false,enabled=true,queue=Promise.resolve(),run=null;
- const threads=new Map(),sent=new Set();
+ const threads=new Map(),sent=new Set();let identityRequest=null;
  try{
   const params=new URLSearchParams(location.search);
   if(params.has('qa'))sessionStorage.setItem('refinetaste-qa',params.get('qa')==='1'?'1':'0');
@@ -18,12 +18,17 @@
   return false;
  }
  window.RefineMetrics={
+  identity(){
+   if(!enabled||!visitor)return Promise.resolve(null);
+   if(!identityRequest)identityRequest=fetch('/refinetaste/api/identity',{method:'POST',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify({visitor})}).then(async response=>{if(!response.ok)throw Error('identity unavailable');const data=await response.json();if(!/^[a-f0-9]{64}$/.test(data.id))throw Error('invalid identity');return data.id}).catch(()=>{identityRequest=null;return null});
+   return identityRequest;
+  },
   send(kind,extra={}){
    if(!active())return;
    const body={id:crypto.randomUUID(),visitor,session,kind,run,course:2,...extra};
    queue=queue.then(()=>post('collect',body)).catch(()=>{});
   },
-  start(index){run=crypto.randomUUID();this.send('start',{start:index})},
+  start(index,questions){run=crypto.randomUUID();this.send('start',{start:index,...(questions?{questions}:{})})},
   tracking(q){
    if(!active()||!q)return null;
    const key='refinetaste-thread-'+q.id+'-'+(q.contextKey||q.variantId+':'+(q.optionOrder||[0,1]).join(''));
