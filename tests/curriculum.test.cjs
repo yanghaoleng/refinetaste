@@ -1,5 +1,11 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const c=JSON.parse(fs.readFileSync('dist/course.json','utf8'));
+test('comparison cards expose different content and the evidence question shows both conclusions',()=>{
+ for(const q of c.questions.filter(q=>q.kind==='choice'&&q.visuals.length===2))assert.notDeepEqual(q.visuals[0],q.visuals[1],`Question ${q.id} has identical visible choices`);
+ const q=c.questions.find(q=>q.id===17);
+ assert.deepEqual(q.visuals.map(v=>v.title),q.labels);
+ for(const v of q.visuals)assert.deepEqual(v.lines,['点击率 4% → 6%','两组流量来源不同','尚未追踪后续支付']);
+});
 test('both learning paths have complete graded chapters and grounded open tasks',()=>{
  assert.equal(c.questions.length,56);assert.deepEqual(c.chapters.map(ch=>ch.track),[0,0,0,0,1,1,1]);
  for(const ch of c.chapters){const qs=c.questions.filter(q=>q.chapter===ch.id);assert.equal(qs.length,8);for(const q of qs){assert.ok(q.brief.length>15);assert.equal(q.variants.length,1);if(q.kind==='choice'){assert.equal(q.visuals.length||q.labels.length,2);assert.ok(q.labels[q.correct]);assert.ok(/哪|选择|找出|挑出/.test(q.brief))}else{assert.ok(q.prompt);assert.ok(q.reference);assert.ok(q.variants[0].prompt)}}}
