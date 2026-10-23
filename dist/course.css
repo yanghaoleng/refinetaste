@@ -352,3 +352,13 @@ html[data-theme="light"] .chat-composer.awaiting-answer:focus-within{border-colo
 .gaze-emotion{background-image:url('assets/chick-gaze.webp');background-size:200% 200%;animation-name:coach-gaze-frames}
 .emotion-look-left{--face-x:0%;--face-y:0%}.emotion-look-right{--face-x:100%;--face-y:0%}
 @keyframes coach-gaze-frames{0%,100%{background-position:var(--face-x) 0%}50%{background-position:var(--face-x) 100%}}
+
+/* A reserved check cell keeps the score line still while the full-score stamp lands. */
+.result-score-line{position:relative;display:flex;align-items:center;justify-content:center;gap:18px;width:max-content;max-width:100%;margin:0 auto 30px;font-size:clamp(88px,15vw,128px);isolation:isolate}
+.result-score-line .result-count{margin:0}
+.result-check{display:grid;place-items:center;flex-shrink:0;width:.48em;height:.48em;border-radius:50%;background:#287e50;color:#fff;transform:rotate(-6deg)}
+.result-check[hidden]{display:grid;visibility:hidden}
+.result-check .icon{width:66%;height:66%;stroke-width:3}
+.result-confetti{position:absolute;left:50%;top:50%;width:0;height:0;z-index:2;pointer-events:none}
+.result-confetti i{position:absolute;left:0;top:0;width:7px;height:11px;border-radius:1px;pointer-events:none}
+@media(max-width:600px){.result-score-line{gap:13px}}
