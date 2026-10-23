@@ -1,5 +1,5 @@
-"""设计积累 / RefineTaste: same-origin analytics, aggregate-only administration, stdlib runtime."""
-import os, json, sqlite3, hashlib, hmac, secrets, time, re, threading, mimetypes
+"""设计积累 / RefineTaste: same-origin analytics, protected learning records, stdlib runtime."""
+import os, json, sqlite3, hashlib, hmac, secrets, time, re, threading, mimetypes, uuid
 from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -47,9 +47,20 @@ def init_db():
           CREATE UNIQUE INDEX IF NOT EXISTS answer_once ON events(run,q) WHERE kind='answer';
           CREATE UNIQUE INDEX IF NOT EXISTS start_once ON events(run) WHERE kind='start';
           CREATE UNIQUE INDEX IF NOT EXISTS complete_once ON events(run) WHERE kind='complete';
-          CREATE TABLE IF NOT EXISTS review_usage(id TEXT PRIMARY KEY, day TEXT, client TEXT, q INTEGER);''')
+          CREATE TABLE IF NOT EXISTS review_usage(id TEXT PRIMARY KEY, day TEXT, client TEXT, q INTEGER);
+          CREATE INDEX IF NOT EXISTS events_visitor_ts ON events(visitor,ts);
+          CREATE TABLE IF NOT EXISTS conversation_messages(
+            id TEXT PRIMARY KEY,visitor TEXT NOT NULL,session TEXT NOT NULL,thread TEXT NOT NULL,
+            q INTEGER NOT NULL,variant TEXT NOT NULL,option_order TEXT NOT NULL,
+            position INTEGER NOT NULL,role TEXT NOT NULL,content TEXT NOT NULL,ts REAL NOT NULL,
+            source TEXT NOT NULL,correct INTEGER);
+          CREATE INDEX IF NOT EXISTS conversation_visitor_ts ON conversation_messages(visitor,ts);
+          CREATE TABLE IF NOT EXISTS recording_meta(key TEXT PRIMARY KEY,value REAL NOT NULL);''')
         if 'course' not in [r[1] for r in db.execute('PRAGMA table_info(events)')]:
             db.execute('ALTER TABLE events ADD COLUMN course INTEGER NOT NULL DEFAULT 1')
+
+    with connect() as db:
+        db.execute("INSERT OR IGNORE INTO recording_meta VALUES('conversations_since',?)",(time.time(),))
 
 def resolve_question(question_id,variant='base',order=None):
     base=QUESTIONS[question_id]
@@ -148,6 +159,92 @@ def summary(days, now=None):
       'metrics':{'views':len(views),'visitors':len(active),'sessions':len({r['session'] for r in rows}),'starts':len(starts),'completed':len(completions),'answers':len(answers),'notes':sum(r['kind']=='note_saved' for r in rows)},
       'daily':daily,'questions':questions,'chapters':chapters}
 
+def save_conversation(data,now=None,source='browser'):
+    now=time.time() if now is None else now
+    for key in ('visitor','session','thread'):
+        if not isinstance(data.get(key),str) or not UUID.fullmatch(data[key]):raise ValueError('invalid identity')
+    q=data.get('q')
+    if type(q) is not int or q not in range(len(QUESTIONS)):raise ValueError('invalid question')
+    variant=data.get('variant','base');order=data.get('optionOrder',[0,1])
+    question=resolve_question(q,variant,order)
+    messages=data.get('messages')
+    if not isinstance(messages,list) or not 1<=len(messages)<=12:raise ValueError('invalid messages')
+    rows=[]
+    for m in messages:
+        if not isinstance(m,dict) or m.get('role') not in ('user','assistant'):raise ValueError('invalid message')
+        if not isinstance(m.get('id'),str) or not UUID.fullmatch(m['id']):raise ValueError('invalid message id')
+        text=m.get('content');position=m.get('position')
+        if not isinstance(text,str) or not 1<=len(text)<=4000 or not text.strip():raise ValueError('invalid content')
+        if type(position) is not int or not 0<=position<=100000:raise ValueError('invalid message position')
+        correct=int(m['correct']) if type(m.get('correct')) is bool else None
+        rows.append((digest(data['visitor']+':'+m['id']),digest(data['visitor']),digest(data['session']),digest(data['visitor']+':'+data['thread']),q,variant,json.dumps(order),position,m['role'],text,now,source,correct))
+    with connect() as db:
+        db.executemany('INSERT OR IGNORE INTO conversation_messages VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)',rows)
+        db.execute('DELETE FROM conversation_messages WHERE ts<?',(now-90*86400,))
+
+def report_start(days,now):
+    first=datetime.fromtimestamp(now,ZONE).date()-timedelta(days=days-1)
+    return datetime.combine(first,datetime.min.time(),ZONE).timestamp()
+
+def graded_value(row):
+    if row['choice'] not in (0,1):return None
+    if row['course']==2:
+        q=QUESTIONS[row['q']]
+        return row['choice']==(1 if q['kind']=='open' else q['correct'])
+    return row['choice']==CORRECT[row['q']]
+
+def learner_totals(events,messages):
+    answers=[r for r in events if r['kind']=='answer']
+    current=[r for r in answers if r['course']==2]
+    graded=[graded_value(r) for r in answers if graded_value(r) is not None]
+    submitted={r['q'] for r in current}|{r['q'] for r in messages if r['role']=='user'}
+    return {'answers':len(answers),'graded':len(graded),'correct':sum(graded),
+      'depth':len(submitted),'totalQuestions':len(QUESTIONS),
+      'chapters':len({QUESTIONS[q]['chapter'] for q in submitted}),
+      'starts':sum(r['kind']=='start' for r in events),'completed':sum(r['kind']=='complete' for r in events),
+      'messages':len(messages),'userMessages':sum(r['role']=='user' for r in messages),
+      'openAnswers':sum(r['role']=='user' and QUESTIONS[r['q']]['kind']=='open' for r in messages),
+      'lastActive':max([r['ts'] for r in events]+[r['ts'] for r in messages],default=None)}
+
+def learning_report(days,page=0,search='',now=None):
+    now=time.time() if now is None else now;start=report_start(days,now)
+    if not isinstance(search,str) or len(search)>64:raise ValueError('invalid search')
+    with connect() as db:
+        events=db.execute('SELECT * FROM events WHERE ts>=? AND ts<=?',(start,now)).fetchall()
+        messages=db.execute('SELECT visitor,ts,role,q FROM conversation_messages WHERE ts>=? AND ts<=?',(start,now)).fetchall()
+        since=db.execute("SELECT value FROM recording_meta WHERE key='conversations_since'").fetchone()[0]
+    people={}
+    for kind,rows in (('events',events),('messages',messages)):
+        for row in rows:people.setdefault(row['visitor'],{'events':[],'messages':[]})[kind].append(row)
+    users=[{'id':key,'label':'访客 '+key[:10],**learner_totals(v['events'],v['messages'])} for key,v in people.items() if search.lower() in key or search.lower() in ('访客 '+key[:10])]
+    users.sort(key=lambda u:u['lastActive'] or 0,reverse=True)
+    totals=learner_totals(events,messages)
+    totals.update(users=len(people),recordingSince=since)
+    question_stats=[]
+    for q in QUESTIONS:
+        answers=[r for r in events if r['kind']=='answer' and r['course']==2 and r['q']==q['id']]
+        graded=[graded_value(r) for r in answers if graded_value(r) is not None]
+        question_stats.append({'id':q['id'],'title':q['title'],'principle':q['principle'],'kind':q['kind'],'chapter':q['chapter'],'chapterName':COURSE['chapters'][q['chapter']]['title'],'answers':len(answers),'graded':len(graded),'correct':sum(graded),'users':len({r['visitor'] for r in answers})})
+    return {'users':users[page*30:(page+1)*30],'total':len(users),'page':page,'pageSize':30,'totals':totals,'questions':question_stats,'chapters':COURSE['chapters']}
+
+def learner_detail(visitor,days,page=0,now=None):
+    if not isinstance(visitor,str) or not re.fullmatch('[a-f0-9]{64}',visitor):raise ValueError('invalid visitor')
+    now=time.time() if now is None else now;start=report_start(days,now)
+    with connect() as db:
+        events=db.execute('SELECT * FROM events WHERE visitor=? AND ts>=? AND ts<=? ORDER BY ts',(visitor,start,now)).fetchall()
+        message_meta=db.execute('SELECT visitor,ts,role,q FROM conversation_messages WHERE visitor=? AND ts>=? AND ts<=?',(visitor,start,now)).fetchall()
+        messages=db.execute('SELECT * FROM conversation_messages WHERE visitor=? AND ts>=? AND ts<=? ORDER BY ts,thread,position,id LIMIT 51 OFFSET ?',(visitor,start,now,page*50)).fetchall()
+    answers=[]
+    for r in events:
+        if r['kind']!='answer':continue
+        q=QUESTIONS[r['q']] if r['course']==2 else None
+        answers.append({'q':r['q'],'course':r['course'],'title':q['title'] if q else NAMES[r['q']], 'kind':q['kind'] if q else 'choice','correct':graded_value(r),'ts':r['ts']})
+    records=[]
+    for r in messages[:50]:
+        q=resolve_question(r['q'],r['variant'],json.loads(r['option_order']))
+        records.append({'id':r['id'],'thread':r['thread'],'position':r['position'],'q':r['q'],'title':q['title'],'question':q['brief']+(' '+q.get('prompt','') if q['kind']=='open' else ''),'kind':q['kind'],'role':r['role'],'content':r['content'],'ts':r['ts'],'source':r['source'],'correct':None if r['correct'] is None else bool(r['correct'])})
+    return {'id':visitor,'label':'访客 '+visitor[:10],**learner_totals(events,message_meta),'answers':answers,'records':records,'page':page,'hasMore':len(messages)>50}
+
 class Handler(BaseHTTPRequestHandler):
     def log_message(self,*args): pass
     def reply(self,code,data=None,cookie=None):
@@ -169,7 +266,8 @@ class Handler(BaseHTTPRequestHandler):
     def body(self):
         try:
             size=int(self.headers.get('Content-Length','0'))
-            if size<2 or size>16384:raise ValueError()
+            limit=131072 if urlparse(self.path).path.endswith('/review') else 32768 if urlparse(self.path).path.endswith('/conversation') else 16384
+            if size<2 or size>limit:raise ValueError()
             data=json.loads(self.rfile.read(size))
             if not isinstance(data,dict):raise ValueError()
             return data
@@ -178,7 +276,7 @@ class Handler(BaseHTTPRequestHandler):
         path=urlparse(self.path).path
         if self.headers.get('Origin') not in ORIGINS:
             return self.reply(403,{'error':'origin rejected'})
-        if path not in (BASE+'/api/login',BASE+'/api/logout',BASE+'/api/collect',BASE+'/api/review'):
+        if path not in (BASE+'/api/login',BASE+'/api/logout',BASE+'/api/collect',BASE+'/api/review',BASE+'/api/conversation'):
             return self.reply(404,{'error':'not found'})
         key=digest(self.headers.get('X-Real-IP',self.client_address[0]))
         now=time.time()
@@ -216,7 +314,10 @@ class Handler(BaseHTTPRequestHandler):
             if until<=now:count,until=0,now+60
             collect_rates[key]=(count+1,until)
         if count>=180:return self.reply(429,{'error':'rate limited'})
-        try:collect(self.body())
+        try:
+            payload=self.body()
+            if path.endswith('/conversation'):save_conversation(payload,now)
+            else:collect(payload)
         except ValueError as ex:return self.reply(400,{'error':str(ex)})
         except sqlite3.Error:return self.reply(503,{'error':'storage unavailable'})
         return self.reply(204)
@@ -232,6 +333,12 @@ class Handler(BaseHTTPRequestHandler):
             if not isinstance(answer,str) or not (1 if chat else 30)<=len(answer.strip())<=2000:raise ValueError()
             if not isinstance(request_id,str) or not UUID.fullmatch(request_id):raise ValueError()
         except ValueError:return self.reply(400,{'error':'请针对本题写下 30—2000 字的思路。'})
+        tracking=data.get('tracking')
+        if tracking is not None and not isinstance(tracking,dict):return self.reply(400,{'error':'invalid recording context'})
+        if tracking:
+            try:save_conversation({**tracking,'q':q,'variant':data.get('variant','base'),'optionOrder':data.get('optionOrder',[0,1]),'messages':data.get('messages') or [{'id':request_id,'role':'user','content':answer,'position':0}]},now)
+            except ValueError:return self.reply(400,{'error':'invalid recording context'})
+            except sqlite3.Error:return self.reply(503,{'error':'作答记录暂时无法保存，请稍后重试。'})
         if not reviewer.configured():return self.reply(503,{'error':'AI 暂未配置，暂时无法回复。你的想法已留在本机。'})
         day=datetime.fromtimestamp(now,ZONE).date().isoformat()
         with lock:
@@ -252,7 +359,13 @@ class Handler(BaseHTTPRequestHandler):
                 reserved=True
             if chat:
                 reply=reviewer.chat(question,messages,assess=True) if assess else reviewer.chat(question,messages)
-                return self.reply(200,reply if isinstance(reply,dict) else {'reply':reply,'emotion':'neutral'})
+                result=reply if isinstance(reply,dict) else {'reply':reply,'emotion':'neutral'}
+                if tracking:
+                    message_id=str(uuid.uuid4())
+                    last=data['messages'][-1]
+                    save_conversation({**tracking,'q':q,'variant':data.get('variant','base'),'optionOrder':data.get('optionOrder',[0,1]),'messages':[{'id':message_id,'role':'assistant','content':result['reply'],'position':last.get('position',len(data['messages'])-1)+1,'correct':result.get('correct')}]},time.time(),source='model')
+                    result={**result,'messageId':message_id}
+                return self.reply(200,result)
             feedback=reviewer.review(question,answer.strip())
             return self.reply(200,{'feedback':feedback,'modelLabel':os.environ.get('REFINETASTE_AI_LABEL','设计教练')})
         except reviewer.ReviewUnavailable as error:
@@ -270,6 +383,16 @@ class Handler(BaseHTTPRequestHandler):
                 with connect() as db:db.execute('SELECT 1 FROM events LIMIT 1')
             except sqlite3.Error:return self.reply(503,{'ok':False})
             return self.reply(200,{'ok':True})
+        if path in (BASE+'/api/learners',BASE+'/api/learner'):
+            if not self.authorized():return self.reply(401,{'error':'authentication required'})
+            try:
+                params=parse_qs(parsed.query);days=int(params.get('days',['7'])[0]);page=int(params.get('page',['0'])[0])
+                if days not in (7,30,90) or not 0<=page<=100000:raise ValueError()
+                if path.endswith('/learners'):result=learning_report(days,page,params.get('search',[''])[0])
+                else:result=learner_detail(params.get('id',[''])[0],days,page)
+                return self.reply(200,result)
+            except ValueError:return self.reply(400,{'error':'invalid query'})
+            except sqlite3.Error:return self.reply(503,{'error':'storage unavailable'})
         if path==BASE+'/api/summary':
             if not self.authorized():return self.reply(401,{'error':'authentication required'})
             try:

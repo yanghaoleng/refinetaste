@@ -366,3 +366,5 @@ html[data-theme="light"] .chat-composer.awaiting-answer:focus-within{border-colo
 /* One question voice; the final task carries the strongest emphasis. */
 #exercise .question-heading h2{font-weight:500}
 #exercise .question-heading h2 strong,.note-question strong{font-weight:800}
+
+.recording-notice{font-size:10px;line-height:1.7;color:var(--muted);margin:8px 0 0}

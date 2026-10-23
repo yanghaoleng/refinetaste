@@ -1,2 +1,45 @@
-/* Anonymous counters only. Never sends note contents, IP, URL parameters or UA. */
-(()=>{let visitor,session,qa=false,enabled=true,queue=Promise.resolve();try{const params=new URLSearchParams(location.search);if(params.has('qa'))sessionStorage.setItem('refinetaste-qa',params.get('qa')==='1'?'1':'0');qa=sessionStorage.getItem('refinetaste-qa')==='1';visitor=localStorage.getItem('refinetaste-visitor')||crypto.randomUUID();localStorage.setItem('refinetaste-visitor',visitor);session=sessionStorage.getItem('refinetaste-session')||crypto.randomUUID();sessionStorage.setItem('refinetaste-session',session)}catch{enabled=false}let run=null;window.RefineMetrics={send(kind,extra={}){if(!enabled||qa||!location.pathname.startsWith('/refinetaste/'))return;const body={id:crypto.randomUUID(),visitor,session,kind,run,course:2,...extra};queue=queue.then(()=>fetch('/refinetaste/api/collect',{method:'POST',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),keepalive:true})).catch(()=>{});},start(index){run=crypto.randomUUID();this.send('start',{start:index})}};window.RefineMetrics.send('view');})();
+/* Anonymous browser identity; submitted conversations are recorded for the protected dashboard. */
+(()=>{
+ let visitor,session,qa=false,enabled=true,queue=Promise.resolve(),run=null;
+ const threads=new Map(),sent=new Set();
+ try{
+  const params=new URLSearchParams(location.search);
+  if(params.has('qa'))sessionStorage.setItem('refinetaste-qa',params.get('qa')==='1'?'1':'0');
+  qa=sessionStorage.getItem('refinetaste-qa')==='1';
+  visitor=localStorage.getItem('refinetaste-visitor')||crypto.randomUUID();localStorage.setItem('refinetaste-visitor',visitor);
+  session=sessionStorage.getItem('refinetaste-session')||crypto.randomUUID();sessionStorage.setItem('refinetaste-session',session);
+ }catch{enabled=false}
+ const active=()=>enabled&&!qa&&location.pathname.startsWith('/refinetaste/');
+ async function post(path,body){
+  for(let attempt=0;attempt<3;attempt++){
+   try{const response=await fetch('/refinetaste/api/'+path,{method:'POST',credentials:'omit',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),keepalive:true});if(response.ok)return true;if(response.status<500&&response.status!==429)return false}catch{}
+   if(attempt<2)await new Promise(resolve=>setTimeout(resolve,1000*(attempt+1)));
+  }
+  return false;
+ }
+ window.RefineMetrics={
+  send(kind,extra={}){
+   if(!active())return;
+   const body={id:crypto.randomUUID(),visitor,session,kind,run,course:2,...extra};
+   queue=queue.then(()=>post('collect',body)).catch(()=>{});
+  },
+  start(index){run=crypto.randomUUID();this.send('start',{start:index})},
+  tracking(q){
+   if(!active()||!q)return null;
+   const key='refinetaste-thread-'+q.id+'-'+(q.contextKey||q.variantId+':'+(q.optionOrder||[0,1]).join(''));
+   try{if(!threads.has(key)){const id=localStorage.getItem(key)||crypto.randomUUID();localStorage.setItem(key,id);threads.set(key,id)}}catch{return null}
+   return {visitor,session,thread:threads.get(key)};
+  },
+  conversation(q,messages){
+   const tracking=this.tracking(q);if(!tracking||!messages?.some(m=>m.role==='user'))return;
+   messages.forEach((m,index)=>{m.id=m.id||crypto.randomUUID();m.position=index});
+   for(const m of messages){
+    if(sent.has(m.id))continue;
+    // One message per request fits the existing 32 KiB recording limit, including Chinese text.
+    const body={...tracking,q:q.id,variant:q.variantId||'base',optionOrder:q.optionOrder||[0,1],messages:[{id:m.id,position:m.position,role:m.role,content:m.content,...(typeof m.correct==='boolean'?{correct:m.correct}:{})}]};
+    sent.add(m.id);queue=queue.then(async()=>{if(!await post('conversation',body))sent.delete(m.id)}).catch(()=>sent.delete(m.id));
+   }
+  }
+ };
+ window.RefineMetrics.send('view');
+})();
