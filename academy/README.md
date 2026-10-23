@@ -7,7 +7,7 @@
 - 设计：https://mikeywa.site/refinetaste/ 。
 - 音乐：https://m.mikeywa.site/pianoclass/ ，李老师的音乐班，原有工具与课程继续独立。
 
-四个首页底部使用原生 `<a href>` 互相推荐另外三个站，不拦截导航或读取其他站的学习记录。推荐区在主要学习入口之后，随内容滚动；隐私与反馈继续保留。
+四个首页在“用户隐私协议”左侧放置同等弱化的“更多课程”按钮，悬停、键盘聚焦或点击可展开小面板。面板内使用原生 `<a href>` 推荐另外三个站；支持再次点击、外部点击与 Escape 关闭，不读取其他站的学习记录。旧的大块推荐区已移除。
 
 ## 课程
 
@@ -42,3 +42,5 @@
 哲学参考 Stanford Encyclopedia of Philosophy 的 [Critical Thinking](https://plato.stanford.edu/entries/critical-thinking/)、[Classical Logic](https://plato.stanford.edu/entries/logic-classical/)、[Epistemology](https://plato.stanford.edu/entries/epistemology/)、[Personal Identity](https://plato.stanford.edu/entries/identity-personal/)、[Free Will](https://plato.stanford.edu/entries/freewill/)、[Virtue Ethics](https://plato.stanford.edu/entries/ethics-virtue/)、[Deontological Ethics](https://plato.stanford.edu/entries/ethics-deontological/)、[Consequentialism](https://plato.stanford.edu/entries/consequentialism/)、[Distributive Justice](https://plato.stanford.edu/entries/justice-distributive/)、[Confucius](https://plato.stanford.edu/entries/confucius/)、[Daoism](https://plato.stanford.edu/entries/daoism/)、[Beauty](https://plato.stanford.edu/entries/beauty/) 与 [The Meaning of Life](https://plato.stanford.edu/entries/life-meaning/)。争议概念不写成公认终局答案，传统内部解释差异在题目中明确保留。
 
 制作参考 [BBC Academy：Self Shooting](https://downloads.bbc.co.uk/academy/collegeofproduction/docs/self_shooting_ts.pdf)、[BBC Academy：Interviewing](https://downloads.bbc.co.uk/academy/collegeofproduction/docs/interviewing_ts.pdf)、[YouTube 官方内容策略与品牌课程](https://news.youtube/get-started/)、[观众留存](https://support.google.com/youtube/answer/9314415?hl=zh-Hans)、[缩略图](https://support.google.com/youtube/answer/72431?hl=zh-Hans)、[字幕](https://support.google.com/youtube/answer/2734796?hl=zh-Hans)、[合作披露](https://support.google.com/youtube/answer/154235?hl=zh-Hans)、[TikTok Creative Codes](https://ads.tiktok.com/business/en/creative-codes) 与[小红书官方种草学](https://xue.xiaohongshu.com/)。不复刻平台素材；不同地区和平台的具体合规与发布设置需核对当期官方要求，课程不编造固定流量阈值。
+
+2026-10-24：新增课程的独立名字与像素角色第一稿见 [形象与命名](identity/README.md)。这轮先交付角色方案，未批量替换在线教练与表情。

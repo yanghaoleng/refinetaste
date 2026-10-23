@@ -8,10 +8,10 @@ test('two curricula retain the full interaction runtime with separate storage an
   for(const [i,q] of course.questions.entries()){assert.equal(q.id,i);assert.ok(q.sources.length);assert.ok(q.brief.length>15);if(q.kind==='choice'){assert.equal(q.visuals.length,2);assert.notDeepEqual(q.visuals[0],q.visuals[1])}else{assert.ok(q.prompt);assert.ok(q.reference.length>35)}}
  }
 });
-test('every homepage recommends all three other fields with direct usable anchors and no self link',()=>{
+test('every homepage hides its three native course links behind the footer entry before privacy',()=>{
  const cases=[['design','dist/index.html'],['music',path.resolve('..','音乐班/lilaoshi/web/index.html')],['philosophy',path.join(dir,'philosophy/dist/index.html')],['mediaclass',path.join(dir,'mediaclass/dist/index.html')]];
  const urls={design:'https://mikeywa.site/refinetaste/',music:'https://m.mikeywa.site/pianoclass/',philosophy:'https://mikeywa.site/philosophy/',mediaclass:'https://mikeywa.site/mediaclass/'};
- for(const [current,file] of cases){if(!fs.existsSync(file)&&current==='music')continue;const section=fs.readFileSync(file,'utf8').match(/<section id="other-fields".*?<\/section>/s)[0];assert.equal((section.match(/<a /g)||[]).length,3);for(const [key,url] of Object.entries(urls))assert.equal(section.includes('href="'+url+'"'),key!==current)}
+ for(const [current,file] of cases){if(!fs.existsSync(file)&&current==='music')continue;const document=fs.readFileSync(file,'utf8');assert.ok(document.indexOf('id="more-courses"')<document.indexOf('id="privacy-open"'));assert.match(document,/<section id="more-courses-panel"[^>]+hidden>/);const section=document.match(/<span id="other-fields".*?<\/section><\/span>/s)[0];assert.equal((section.match(/<a /g)||[]).length,3);for(const [key,url] of Object.entries(urls))assert.equal(section.includes('href="'+url+'"'),key!==current)}
 });
 test('each subject case renders as native readable information, without new vector illustrations',()=>{
  const ctx={window:{}};vm.runInNewContext(fs.readFileSync('dist/marketing-cases.js','utf8'),ctx);
