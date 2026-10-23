@@ -90,7 +90,10 @@
     if(heading){
       const entrance=play(heading,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,delay:cursor});
       if(entrance)animations.push(entrance);
-      for(const element of [heading.querySelector('h2'),heading.querySelector('p'),heading.querySelector('.question-task')].filter(Boolean)){
+      // The open-question summary is both the first paragraph and .question-task.
+      // Schedule each node once so a second delayed animation cannot restart it.
+      const paragraphs=new Set([heading.querySelector('h2'),heading.querySelector('p'),heading.querySelector('.question-task')].filter(Boolean));
+      for(const element of paragraphs){
         const paragraph=play(element,[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,delay:cursor});if(paragraph)animations.push(paragraph);
         let textDuration=240;
         if(window.RefineText){animations.push(...window.RefineText.text(element,{delay:cursor}));textDuration=window.RefineText.duration(element.textContent)}
