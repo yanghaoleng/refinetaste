@@ -362,3 +362,7 @@ html[data-theme="light"] .chat-composer.awaiting-answer:focus-within{border-colo
 .result-confetti{position:absolute;left:50%;top:50%;width:0;height:0;z-index:2;pointer-events:none}
 .result-confetti i{position:absolute;left:0;top:0;width:7px;height:11px;border-radius:1px;pointer-events:none}
 @media(max-width:600px){.result-score-line{gap:13px}}
+
+/* One question voice; the final task carries the strongest emphasis. */
+#exercise .question-heading h2{font-weight:500}
+#exercise .question-heading h2 strong,.note-question strong{font-weight:800}

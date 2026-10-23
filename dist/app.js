@@ -85,6 +85,12 @@ function activateQuestionContext(){
  const archives={...saved.conversationArchives,[oldKey]:{messages:saved.messages||[],chatDraft:saved.chatDraft||'',openingVersion:saved.openingVersion}},restored=archives[key]||{};
  progress[current]={...saved,...restored,messages:restored.messages||[],chatDraft:restored.chatDraft||'',openingVersion:restored.openingVersion,contextKey:key,conversationArchives:archives};persist('refinetaste-course-v2',progress);
 }
+function questionText(q){
+ const brief=q.brief.trim();
+ if(q.kind==='open'&&q.prompt?.trim())return `${esc(brief)} <strong>${esc(q.prompt.trim())}</strong>`;
+ const sentences=brief.match(/[^。！？]+[。！？]?/g)||[brief],focus=sentences.pop();
+ return `${esc(sentences.join(''))}<strong>${esc(focus)}</strong>`;
+}
 function presentQuestion(q,heading){
  // Input must remain usable even when a decorative animation cannot initialize.
  if(q.kind==='choice')document.querySelectorAll('[data-option]').forEach(button=>button.onclick=()=>answer(+button.dataset.option));
@@ -95,7 +101,7 @@ function presentQuestion(q,heading){
 function render(){
  activateQuestionContext();screen='lesson';const q=activeQuestion(),ch=course.chapters[chapter];selected=sessionAnswers[current]??null;
  $('#coach-header').hidden=false;setCoachGaze(null);setCoachMood('curious');$('#exit').innerHTML=icon('arrow-left');$('#exit').setAttribute('aria-label','返回课程目录');setExerciseProgress(runPosition+1,runOrder.length);
- $('#exercise').innerHTML=`<div class="lesson-stream"><section class="exercise-heading question-heading chat-message assistant" aria-label="JOJO 的提问"><div class="chat-bubble question-bubble"><h2 id="exercise-title" tabindex="-1">${esc(q.brief)}</h2>${q.kind==='open'?`<p class="question-task">${esc(q.prompt)}</p>`:''}</div></section>${q.kind==='choice'?`<div class="options" aria-label="JOJO 发来的两个设计方案">${q.labels.map((label,i)=>`<button class="option" data-option="${i}" aria-label="选项 ${i?'B':'A'}：${esc(label)}"><div class="option-design">${q.visuals?.length?specimen(q.visuals[i]):sampleForQuestion(q,i)}</div><div class="option-label"><span class="letter">${i?'B':'A'}</span></div></button>`).join('')}</div>`:`<div class="open-case ${q.visuals.length>1?'case-pair':''}" aria-label="JOJO 发来的设计案例">${q.visuals.map(specimen).join('')}</div>`}<span id="bookmark-status" class="sr-only" role="status"></span><div id="feedback-slot" aria-live="polite"></div></div>`;
+ $('#exercise').innerHTML=`<div class="lesson-stream"><section class="exercise-heading question-heading chat-message assistant" aria-label="JOJO 的提问"><div class="chat-bubble question-bubble"><h2 id="exercise-title" tabindex="-1">${questionText(q)}</h2></div></section>${q.kind==='choice'?`<div class="options" aria-label="JOJO 发来的两个设计方案">${q.labels.map((label,i)=>`<button class="option" data-option="${i}" aria-label="选项 ${i?'B':'A'}：${esc(label)}"><div class="option-design">${q.visuals?.length?specimen(q.visuals[i]):sampleForQuestion(q,i)}</div><div class="option-label"><span class="letter">${i?'B':'A'}</span></div></button>`).join('')}</div>`:`<div class="open-case ${q.visuals.length>1?'case-pair':''}" aria-label="JOJO 发来的设计案例">${q.visuals.map(specimen).join('')}</div>`}<span id="bookmark-status" class="sr-only" role="status"></span><div id="feedback-slot" aria-live="polite"></div></div>`;
  presentQuestion(q,$('#exercise .question-heading'));focusTitle();window.RefineGuide.home();
 }
 function recordAnswer(verdict,metricChoice=verdict){if(Object.hasOwn(sessionAnswers,current))return;sessionAnswers[current]=verdict;if(runMode==='full')window.RefineMetrics?.send('answer',{q:current,choice:metricChoice});saveProgress({done:true,choice:activeQuestion().kind==='choice'?selected:verdict,correct:!!verdict});updateExerciseCatalog()}
@@ -195,7 +201,7 @@ function renderNoteDetail(index){
  $('#note-chat-form').onsubmit=event=>{event.preventDefault();sendNoteChat(note)};updateNoteSend(note);
 }
 function fullNoteQuestion(q,choice){
- return `<section class="note-question"><p>${esc(q.brief)}</p>${q.prompt?`<p class="question-task">${esc(q.prompt)}</p>`:''}</section>${q.kind==='choice'?`<div class="note-designs">${q.labels.map((label,i)=>`<article class="note-option"><div class="option-design">${q.visuals?.length?specimen(q.visuals[i]):sampleForQuestion(q,i)}</div><div class="note-option-label"><span>${i?'B':'A'}</span>${choice===i?`<span class="note-choice-result ${i===q.correct?'is-correct':'is-incorrect'}" aria-label="你的选择${i===q.correct?'，答对':'，答错'}">${icon(i===q.correct?'check':'xmark')}<span>你的选择</span></span>`:''}</div></article>`).join('')}</div>`:`<div class="note-designs">${q.visuals.map(specimen).join('')}</div>`}`;
+ return `<section class="note-question"><p>${questionText(q)}</p></section>${q.kind==='choice'?`<div class="note-designs">${q.labels.map((label,i)=>`<article class="note-option"><div class="option-design">${q.visuals?.length?specimen(q.visuals[i]):sampleForQuestion(q,i)}</div><div class="note-option-label"><span>${i?'B':'A'}</span>${choice===i?`<span class="note-choice-result ${i===q.correct?'is-correct':'is-incorrect'}" aria-label="你的选择${i===q.correct?'，答对':'，答错'}">${icon(i===q.correct?'check':'xmark')}<span>你的选择</span></span>`:''}</div></article>`).join('')}</div>`:`<div class="note-designs">${q.visuals.map(specimen).join('')}</div>`}`;
 }
 function noteIsVisible(note){return !$('#notebook').hidden&&notes[notesDetail]===note&&!!$('#note-messages')}
 function storeNoteConversation(note){
