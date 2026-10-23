@@ -1,12 +1,15 @@
 const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
-function setup(){
+function setup(identity=async()=>'AB123'){
  const timers=new Map(),documentEvents={},windowEvents={};let sequence=0,field,copied,toast;
  const element=()=>({hidden:true,events:{},style:{},addEventListener(n,fn){this.events[n]=fn},setAttribute(k,v){this[k]=v},getBoundingClientRect:()=>({left:600,top:800,width:280,height:140}),focus(){},append(value){field=value}});
- const entry=element(),trigger=element(),panel=element(),copy=element();entry.contains=target=>[entry,trigger,panel,copy].includes(target);
- const document={activeElement:trigger,querySelector:s=>({'.feedback-entry':entry,'#feedback-trigger':trigger,'#feedback-panel':panel,'#feedback-wechat':copy})[s],addEventListener:(n,fn)=>documentEvents[n]=fn,createElement:()=>({style:{},select(){},setSelectionRange(){},remove(){}}),execCommand(){copied=field.value;return true}};
- const window={addEventListener:(n,fn)=>windowEvents[n]=fn,RefineToast:{success:value=>toast=value,error:value=>toast=value}};
+ const entry=element(),trigger=element(),panel=element(),copy=element(),uid=element(),uidValue=element();uid.disabled=true;entry.contains=target=>[entry,trigger,panel,copy,uid].includes(target);
+ const document={activeElement:trigger,querySelector:s=>({'.feedback-entry':entry,'#feedback-trigger':trigger,'#feedback-panel':panel,'#feedback-wechat':copy,'#feedback-uid':uid,'#feedback-uid-value':uidValue})[s],addEventListener:(n,fn)=>documentEvents[n]=fn,createElement:()=>({style:{},select(){},setSelectionRange(){},remove(){}}),execCommand(){copied=field.value;return true}};
+ const window={RefineMetrics:{identity},addEventListener:(n,fn)=>windowEvents[n]=fn,RefineToast:{success:value=>toast=value,error:value=>toast=value}};
  vm.runInNewContext(fs.readFileSync('dist/feedback.js','utf8'),{document,window,innerWidth:1200,clearTimeout:id=>timers.delete(id),setTimeout:fn=>{timers.set(++sequence,fn);return sequence}});
- return {entry,trigger,panel,copy,documentEvents,timers,get copied(){return copied},get toast(){return toast}};
+ return {entry,trigger,panel,copy,uid,uidValue,documentEvents,timers,get copied(){return copied},get toast(){return toast}};
 }
 test('hover and click show the same anchored panel; outside and Escape dismiss it',()=>{const e=setup();e.entry.events.pointerenter({pointerType:'mouse'});assert.equal(e.panel.hidden,false);e.trigger.events.click();assert.equal(e.panel.hidden,false);assert.equal(e.trigger['aria-expanded'],'true');e.entry.events.pointerleave({pointerType:'mouse'});assert.equal(e.timers.size,0);e.documentEvents.pointerdown({target:{}});assert.equal(e.panel.hidden,true);e.trigger.events.click();e.entry.events.keydown({key:'Escape',preventDefault(){},stopPropagation(){}});assert.equal(e.panel.hidden,true);assert.equal(e.trigger['aria-expanded'],'false')});
 test('the entire WeChat button copies the full contact and confirms success',async()=>{const e=setup();e.trigger.events.click();await e.copy.events.click();assert.equal(e.copied,'yanghaoleng');assert.equal(e.toast,'复制成功')});
+
+test('feedback shows the current dashboard UID and copies the complete value',async()=>{const e=setup();e.trigger.events.click();await new Promise(setImmediate);assert.equal(e.uidValue.textContent,'AB123');assert.equal(e.uid.disabled,false);await e.uid.events.click();assert.equal(e.copied,'AB123');assert.equal(e.toast,'UID 已复制')});
+test('unavailable UID stays disabled and is retried when feedback reopens',async()=>{let calls=0;const e=setup(async()=>++calls===1?null:'ZX789');e.trigger.events.click();await new Promise(setImmediate);assert.equal(e.uidValue.textContent,'暂不可用');assert.equal(e.uid.disabled,true);assert.equal(e.uid.events.click(),undefined);e.trigger.events.click();await new Promise(setImmediate);assert.equal(e.uidValue.textContent,'ZX789');assert.equal(e.uid.disabled,false)});
