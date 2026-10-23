@@ -78,6 +78,7 @@ class AnalyticsTests(unittest.TestCase):
             self.assertEqual(status,200)
             for asset in re.findall(r'(?:src|href)="([^\"]+\.(?:js|css))"',html.decode()):
                 self.assertEqual(request('GET',app.BASE+'/'+asset)[0],200,asset)
+            self.assertEqual(request('GET',app.BASE+'/assets/chick-gaze.webp')[0],200)
             self.assertEqual(request('GET',app.BASE+'/api/summary')[0],401)
             self.assertEqual(request('GET',app.BASE+'/../../.env')[0],404)
             self.assertEqual(request('POST',app.BASE+'/api/login',{'code':'123456'},{'Origin':'https://evil.example'})[0],403)

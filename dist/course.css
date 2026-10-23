@@ -347,3 +347,8 @@ html[data-theme="light"] .chat-composer.awaiting-answer{border-color:#ffdc00;bac
 html[data-theme="light"] .chat-composer.awaiting-answer::before{background:conic-gradient(from 0deg,#ffe36b 0deg,#ffeaa0 70deg,#ffcf00 125deg,#fff7c0 160deg,#ffdc00 185deg,#ffe36b 240deg)}
 html[data-theme="light"] .chat-composer.awaiting-answer:focus-within{border-color:#ffdc00;box-shadow:0 0 0 3px #ffdc0025}
 @media(prefers-reduced-motion:reduce){html[data-theme="light"] .chat-composer.awaiting-answer::before{background:#ffdc00}}
+
+/* Each direction has two frames; directional gaze never changes the conversation mood. */
+.gaze-emotion{background-image:url('assets/chick-gaze.webp');background-size:200% 200%;animation-name:coach-gaze-frames}
+.emotion-look-left{--face-x:0%;--face-y:0%}.emotion-look-right{--face-x:100%;--face-y:0%}
+@keyframes coach-gaze-frames{0%,100%{background-position:var(--face-x) 0%}50%{background-position:var(--face-x) 100%}}

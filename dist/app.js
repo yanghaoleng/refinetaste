@@ -1,6 +1,6 @@
 const icon=name=>`<svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#${name}"></use></svg>`;
 const $=s=>document.querySelector(s);
-const coachAssetImages=['assets/chick-emotions.webp','assets/chick-positive-emotions.webp','assets/chick-cool-expressions.webp'].map(src=>{const image=new Image();image.src=src;return image});
+const coachAssetImages=['assets/chick-emotions.webp','assets/chick-positive-emotions.webp','assets/chick-cool-expressions.webp','assets/chick-gaze.webp'].map(src=>{const image=new Image();image.src=src;return image});
 const coachAssetsReady=Promise.allSettled(coachAssetImages.map(image=>image.decode()));
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function read(key,fallback){try{return JSON.parse(localStorage.getItem(key))||fallback}catch{return fallback}}
@@ -24,7 +24,7 @@ function chapterArt(index){return `<canvas class="chapter-illustration" data-par
 function bindCatalogs(){document.querySelectorAll('.chapter-catalog').forEach(wrapper=>{const button=wrapper.querySelector('button'),popup=wrapper.querySelector('.catalog-popup');let timer;const hide=()=>{clearTimeout(timer);popup.hidden=true;button.setAttribute('aria-expanded','false')};const show=()=>{clearTimeout(timer);popup.hidden=false;button.setAttribute('aria-expanded','true');const rect=button.getBoundingClientRect(),height=popup.getBoundingClientRect().height;popup.style.left=Math.max(16,Math.min(rect.left,innerWidth-popup.offsetWidth-16))+'px';popup.style.top=Math.max(16,rect.bottom+10+height<innerHeight-16?rect.bottom+10:rect.top-height-10)+'px'};wrapper.onpointerenter=show;wrapper.onpointerleave=event=>{if(event.pointerType!=='touch')timer=setTimeout(hide,140)};popup.onpointerenter=()=>clearTimeout(timer);popup.onpointerleave=event=>{if(event.pointerType!=='touch')timer=setTimeout(hide,140)};button.onfocus=show;wrapper.onfocusout=event=>{if(!wrapper.contains(event.relatedTarget))hide()};button.onclick=show;wrapper.onkeydown=event=>{if(event.key==='Escape'){event.preventDefault();event.stopPropagation();hide()}}})}
 function showMap(){
  navigationGeneration++;loadCourse().then(warmCourse).catch(()=>{});const menu=course||window.RefinePractice.menu;
- stopReview();stopCoachMood();screen='map';$('#coach-header').hidden=true;$('#exit').innerHTML=icon('arrow-left');$('#exit').setAttribute('aria-label','返回首页');setExerciseProgress();
+ stopReview();stopCoachMood();setCoachGaze(null);screen='map';$('#coach-header').hidden=true;$('#exit').innerHTML=icon('arrow-left');$('#exit').setAttribute('aria-label','返回首页');setExerciseProgress();
  if(!$('#training').open||screen!=='map')return;
  $('#exercise').innerHTML=`<div class="course-map"><h2 id="exercise-title" class="sr-only" tabindex="-1">课程目录</h2><div class="course-chapters">${menu.chapters.map((ch,i)=>{const qs=menu.questions.filter(q=>q.chapter===i),done=qs.filter(q=>progress[q.id]?.done).length,stored=chapterScores[qs[0].id],score=stored?{...stored,passed:stored.passed&&stored.total===qs.length}:null;return `${i===0||ch.track!==menu.chapters[i-1].track?`<h2 class="course-track-title">${esc(menu.tracks[ch.track].title)}</h2>`:''}<article class="course-chapter"><button class="chapter-entry" data-chapter="${i}" aria-label="${score?.passed?'已通过，从头练习':score?'从头练习':done?'重新练习':'开始练习'}${esc(ch.title)}"></button>${chapterArt(i)}<div class="chapter-copy"><h3>${['一','二','三','四','五','六','七'][i]}、${ch.title}</h3><p>${ch.subtitle}</p><div class="chapter-catalog"><button class="catalog-trigger chapter-progress" aria-label="${esc(ch.title)}，已完成 ${done} / 8，查看知识点" aria-expanded="false" aria-controls="catalog-${i}"><span class="chapter-progress-track"><span data-chapter-progress="${done/8}"></span></span></button><div id="catalog-${i}" class="catalog-popup" role="region" aria-label="${ch.title}知识点目录" hidden><ol>${catalogPoints(qs)}</ol></div></div></div><div class="chapter-action">${score&&!score.passed?`<button class="chapter-arrow chapter-retry chapter-mistakes" data-mistakes="${i}" aria-label="消灭${esc(ch.title)}的错题">消灭错题</button>`:`<span class="chapter-arrow ${score?.passed?'chapter-passed':''}" aria-hidden="true">${score?.passed?icon('check'):icon('arrow-right')}</span>`}</div></article>`}).join('')}</div></div>`;
  document.querySelectorAll('[data-chapter]').forEach(b=>b.onclick=()=>transition(()=>begin(+b.dataset.chapter)));document.querySelectorAll('[data-mistakes]').forEach(b=>b.onclick=()=>transition(()=>begin(+b.dataset.mistakes,true)));document.querySelectorAll('[data-chapter-progress]').forEach(fill=>fill.style.transform=`scaleX(${fill.dataset.chapterProgress})`);bindCatalogs();requestAnimationFrame(()=>{if(screen==='map'&&$('#training').open)window.RefineParticles.mount($('#exercise'))});focusTitle();window.RefineGuide.map(window.RefinePractice.continueChapter(menu.chapters,menu.questions,chapterScores,progress,read('refinetaste-last-chapter',{}).index??null));
@@ -94,7 +94,7 @@ function presentQuestion(q,heading){
 }
 function render(){
  activateQuestionContext();screen='lesson';const q=activeQuestion(),ch=course.chapters[chapter];selected=sessionAnswers[current]??null;
- $('#coach-header').hidden=false;setCoachMood('curious');$('#exit').innerHTML=icon('arrow-left');$('#exit').setAttribute('aria-label','返回课程目录');setExerciseProgress(runPosition+1,runOrder.length);
+ $('#coach-header').hidden=false;setCoachGaze(null);setCoachMood('curious');$('#exit').innerHTML=icon('arrow-left');$('#exit').setAttribute('aria-label','返回课程目录');setExerciseProgress(runPosition+1,runOrder.length);
  $('#exercise').innerHTML=`<div class="lesson-stream"><section class="exercise-heading question-heading chat-message assistant" aria-label="JOJO 的提问"><div class="chat-bubble question-bubble"><h2 id="exercise-title" tabindex="-1">${esc(q.brief)}</h2>${q.kind==='open'?`<p class="question-task">${esc(q.prompt)}</p>`:''}</div></section>${q.kind==='choice'?`<div class="options" aria-label="JOJO 发来的两个设计方案">${q.labels.map((label,i)=>`<button class="option" data-option="${i}" aria-label="选项 ${i?'B':'A'}：${esc(label)}"><div class="option-design">${q.visuals?.length?specimen(q.visuals[i]):sampleForQuestion(q,i)}</div><div class="option-label"><span class="letter">${i?'B':'A'}</span></div></button>`).join('')}</div>`:`<div class="open-case ${q.visuals.length>1?'case-pair':''}" aria-label="JOJO 发来的设计案例">${q.visuals.map(specimen).join('')}</div>`}<span id="bookmark-status" class="sr-only" role="status"></span><div id="feedback-slot" aria-live="polite"></div></div>`;
  presentQuestion(q,$('#exercise .question-heading'));focusTitle();window.RefineGuide.home();
 }
@@ -102,7 +102,7 @@ function recordAnswer(verdict,metricChoice=verdict){if(Object.hasOwn(sessionAnsw
 function nextButton(){return `<button id="bookmark" class="bookmark secondary" aria-label="收藏这道题" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4Z"/></svg><span class="bookmark-label">收藏</span></button><button class="primary" id="next" aria-keyshortcuts="n" title="下一步">${runPosition===runOrder.length-1?'查看本章结果':'下一题'}<span>${icon('arrow-right')}</span></button>`}
 function bindNext(){positionControls();$('#bookmark').onclick=toggleBookmark;updateBookmark();$('#next').onclick=()=>transition(()=>{if(runPosition===runOrder.length-1)result();else{runPosition++;current=runOrder[runPosition];selected=null;render()}})}
 async function answer(i){
- if(selected!==null)return;window.RefineMotion.finishDesignBuild($('.options'));selected=i;const q=activeQuestion(),canonical=course.questions[current].correct;recordAnswer(i===q.correct?1:0,i===q.correct?canonical:1-canonical);$('.options').classList.add('answered');
+ if(selected!==null)return;setCoachGaze(null);window.RefineMotion.finishDesignBuild($('.options'));selected=i;const q=activeQuestion(),canonical=course.questions[current].correct;recordAnswer(i===q.correct?1:0,i===q.correct?canonical:1-canonical);$('.options').classList.add('answered');
  document.querySelectorAll('[data-option]').forEach(b=>{b.disabled=true;b.classList.toggle('selected',+b.dataset.option===i);b.classList.toggle('correct',+b.dataset.option===q.correct)});
  const verdict=document.createElement('span');verdict.className=`option-verdict ${i===q.correct?'is-correct':'is-incorrect'}`;verdict.setAttribute('role','img');verdict.setAttribute('aria-label',i===q.correct?'答对了':'答错了');verdict.innerHTML=icon(i===q.correct?'check':'xmark');document.querySelector(`[data-option="${i}"] .option-label`).append(verdict);
  await window.RefineMotion.afterAnimations(verdict);if(!verdict.isConnected||screen!=='lesson'||$('#exercise').hasAttribute('aria-busy'))return;
@@ -121,7 +121,7 @@ function renderOpen(q){
  openDiscussion(false,restored);bindNext();const composer=$('#chat-form .chat-composer');composer.classList.toggle('awaiting-answer',!Object.hasOwn(sessionAnswers,current));animateMessage($('#chat-form'));revealConversation();
 }
 function result(){
- stopCoachMood();screen='result';$('#coach-header').hidden=false;if(runMode==='full')window.RefineMetrics?.send('complete');
+ stopCoachMood();setCoachGaze(null);screen='result';$('#coach-header').hidden=false;if(runMode==='full')window.RefineMetrics?.send('complete');
  const qs=course.questions.filter(q=>q.chapter===chapter),combined=window.RefinePractice.merge(qs,chapterBaseline,sessionAnswers),score=window.RefineScores.calculate(qs,combined),review=qs.filter(q=>combined[q.id]!==1),opens=qs.filter(q=>q.kind==='open');
  if(score.complete){chapterScores[qs[0].id]={...score,answers:combined,date:new Date().toISOString()};persist('refinetaste-chapter-scores',chapterScores)}
  setExerciseProgress(8);
@@ -146,10 +146,20 @@ function updateBookmark(){const b=$('#bookmark');if(!b)return;const saved=!!note
 function toggleBookmark(event){const existing=noteForQuestion(),previous=notes.slice();if(existing)notes=notes.filter(n=>n!==existing);else{const q=activeQuestion();notes.push({questionId:current,contextKey:q.contextKey||'base:01',questionContext:q,choice:checkpoint().choice,title:q.title,topic:q.principle,brief:q.brief,date:new Date().toLocaleDateString('zh-CN'),draft:checkpoint().draft||'',feedback:checkpoint().feedback||null,messages:checkpoint().messages||[]})}if(!persist('muguang-notes',notes)){notes=previous;$('#bookmark-status').textContent='浏览器无法保存，请先复制需要保留的内容。';return}updateBookmark();updateCount();$('#bookmark-status').textContent=existing?'已取消收藏':'已收藏到我的笔记';if(!existing)window.RefineMetrics?.send('note_saved');if(event.detail!==0)window.RefineMotion.bookmarkFeedback($('#bookmark .icon'),$('#note-count-in'))}
 const coachEmotions=['neutral','happy','thinking','curious','surprised','encouraging','empathetic','confused','playful','delighted','approving','inspired','relieved','grateful','amused','cool','confident','mischievous'];
 function conversationMarkup(messages){return messages.map(m=>`<div class="chat-message ${m.role}"><div class="chat-bubble">${typeof m.correct==='boolean'?`<span class="message-verdict ${m.correct?'is-correct':'is-incorrect'}" role="img" aria-label="${m.correct?'符合原则':'尚未符合原则'}">${icon(m.correct?'check':'xmark')}</span>`:''}<p>${m.role==='assistant'?window.RefineRichText.render(m.content):esc(m.content)}</p></div></div>`).join('')}
-let coachMoodTimer=null,coachMoodAnchor='curious',coachMoodCurrent='curious';
+let coachMoodTimer=null,coachMoodAnchor='curious',coachMoodCurrent='curious',coachGazeDirection=null;
 const coachMoodFamilies=[['neutral','curious','thinking'],['happy','delighted','approving','inspired','encouraging','grateful','amused','playful','cool','confident','mischievous'],['empathetic','relieved'],['confused','thinking','curious'],['surprised','curious','inspired']];
 function stopCoachMood(){clearTimeout(coachMoodTimer);coachMoodTimer=null}
-function drawCoachMood(mood){const avatar=$('#coach-avatar .coach-avatar');if(!avatar)return;coachMoodCurrent=mood;avatar.className=`coach-avatar coach-emotion${coachEmotions.indexOf(mood)>=15?' cool-emotion':coachEmotions.indexOf(mood)>=9?' positive-emotion':''} emotion-${mood}`}
+function drawCoachMood(mood){const avatar=$('#coach-avatar .coach-avatar');if(!avatar)return;coachMoodCurrent=mood;avatar.className=coachGazeDirection?`coach-avatar coach-emotion gaze-emotion emotion-look-${coachGazeDirection}`:`coach-avatar coach-emotion${coachEmotions.indexOf(mood)>=15?' cool-emotion':coachEmotions.indexOf(mood)>=9?' positive-emotion':''} emotion-${mood}`}
+// Gaze is a temporary pointer reaction; conversation mood continues underneath it.
+function optionGazeDirection(option){
+ if(!option||option.disabled||!option.isConnected)return null;
+ const parent=option.closest('.options');if(!parent||parent.hasAttribute('data-design-entering'))return null;
+ const choices=[...parent.querySelectorAll('[data-option]')];if(choices.length!==2)return null;
+ const [first,second]=choices.map(choice=>choice.getBoundingClientRect());
+ if(!first.width||!second.width||Math.abs(first.top-second.top)>Math.min(first.height,second.height)*.25||first.right>second.left+2)return null;
+ return choices.indexOf(option)===0?'left':choices.indexOf(option)===1?'right':null;
+}
+function setCoachGaze(direction){if(coachGazeDirection===direction)return;coachGazeDirection=direction;drawCoachMood(coachMoodCurrent)}
 function scheduleCoachMood(){stopCoachMood();if(screen!=='lesson'||!$('#training').open||document.hidden||matchMedia('(prefers-reduced-motion: reduce)').matches)return;coachMoodTimer=setTimeout(()=>{const family=coachMoodFamilies.find(group=>group.includes(coachMoodAnchor))||coachMoodFamilies[0],alternatives=family.filter(mood=>mood!==coachMoodCurrent);drawCoachMood(alternatives[Math.floor(Math.random()*alternatives.length)]);scheduleCoachMood()},7000+Math.random()*1000)}
 function setCoachMood(emotion='neutral'){coachMoodAnchor=coachEmotions.includes(emotion)?emotion:'neutral';drawCoachMood(coachMoodAnchor);scheduleCoachMood()}
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopCoachMood();else scheduleCoachMood()});
@@ -237,17 +247,23 @@ document.addEventListener('keydown',event=>{
 document.addEventListener('pointermove',event=>{
  if(!event.movementX&&!event.movementY)return;
  const option=event.target.closest('.option');
+ setCoachGaze(event.pointerType==='mouse'&&screen==='lesson'?optionGazeDirection(option):null);
  if(option&&!option.parentElement.hasAttribute('data-design-entering'))option.classList.add('hover-ready');
 });
 document.addEventListener('pointerout',event=>{
  const option=event.target.closest('.option');
- if(option&&!option.contains(event.relatedTarget))option.classList.remove('hover-ready');
+ if(option&&!option.contains(event.relatedTarget)){option.classList.remove('hover-ready');setCoachGaze(null)}
 });
 
 document.addEventListener('pointerdown',event=>{document.querySelectorAll('.chapter-catalog').forEach(wrapper=>{if(!wrapper.contains(event.target)){wrapper.querySelector('.catalog-popup').hidden=true;wrapper.querySelector('button').setAttribute('aria-expanded','false')}})});
 
 // Reuse the same in-flight work when the user later opens the directory.
 loadCourse().then(warmCourse).catch(()=>{});
+
+
+window.addEventListener('resize',()=>setCoachGaze(null));
+window.addEventListener('blur',()=>setCoachGaze(null));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)setCoachGaze(null)});
 
 // A floating notebook owns its scroll chain, including when it has no overflow.
 const notebookPanel=$('#notebook');
