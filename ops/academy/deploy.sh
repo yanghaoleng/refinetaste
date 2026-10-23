@@ -56,7 +56,7 @@ if ! python3 "$release/ops/connect-nginx.py"; then
  if [ -n "$previous" ] && [ -d "$previous" ]; then ln -s "$previous" "/opt/$slug/current-rollback";mv -Tf "/opt/$slug/current-rollback" "/opt/$slug/current";systemctl restart "$slug.service";else systemctl stop "$slug.service";fi
  exit 1
 fi
-curl -fsS --retry 3 --retry-all-errors --max-time 15 --resolve mikeywa.site:443:127.0.0.1 "https://mikeywa.site/$slug/api/health"
+python3 "$release/ops/verify-public.py"
 printf '%s release=%s previous=%s health=ok\n' "$(date -Is)" "$release" "$previous" >> "/opt/$slug/releases.log"
 systemctl is-active "$slug.service"
 REMOTE
