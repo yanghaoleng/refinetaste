@@ -648,6 +648,7 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(308);self.send_header('Location',path+'/');self.end_headers();return
         files={BASE+'/':'index.html',BASE+'/data/':'data/index.html',BASE+'/style.css':'style.css',BASE+'/app.js':'app.js',BASE+'/analytics.js':'analytics.js',BASE+'/data/admin.js':'data/admin.js',BASE+'/data/admin.css':'data/admin.css'}
         files[BASE+'/icons.svg']='icons.svg'
+        files[BASE+'/other-fields.css']='other-fields.css'
         for asset in ('pixel-motion.webp','pixel-studies.webp','pixel-ball.webp'):
             files[BASE+'/assets/characters/'+asset]='assets/characters/'+asset
         for asset in ('marketing-cases.js','marketing-cases.css','motion-models.js','character-studies.js','character-studies.css','privacy-modal.js','privacy-id.js','feedback.js','privacy.html','privacy.css','hero-carousel.js','hero-carousel.css','theme.js','theme.css','motion.js','coach-guide.js','conversation-sequence.js','chat-format.js','question-run.js','sonner.css','sonner.LICENSE.txt','viewport.js','site-icon.js','chapter-score.js','chapter-practice.js','chapter-particles.js','text-motion.js','text-motion.LICENSE.txt','motion.css','course.json','course.css'):

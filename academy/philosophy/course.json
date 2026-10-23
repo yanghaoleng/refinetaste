@@ -1,0 +1,4842 @@
+{
+  "version": 1,
+  "tracks": [
+    {
+      "id": 0,
+      "title": "哲学思考",
+      "goal": "澄清问题，提出理由，认真回应另一种可能。"
+    }
+  ],
+  "chapters": [
+    {
+      "id": 0,
+      "title": "把问题问清楚",
+      "subtitle": "先分清概念、事实与价值，再认真讨论。",
+      "objective": "能把含糊争论改写成可讨论的问题。",
+      "minutes": "20—35 分钟",
+      "track": 0
+    },
+    {
+      "id": 1,
+      "title": "理由怎样支撑结论",
+      "subtitle": "区分推理有效、前提可信与常见论证错误。",
+      "objective": "能重建简单论证并用反例检验。",
+      "minutes": "20—35 分钟",
+      "track": 0
+    },
+    {
+      "id": 2,
+      "title": "我们凭什么知道",
+      "subtitle": "在相信、知识、证据与怀疑之间找位置。",
+      "objective": "能区分支持程度，按证据调整相信。",
+      "minutes": "20—35 分钟",
+      "track": 0
+    },
+    {
+      "id": 3,
+      "title": "自我、选择与责任",
+      "subtitle": "思考同一性、行动控制与责任的条件。",
+      "objective": "能区分解释行为、理解处境与评价责任。",
+      "minutes": "20—35 分钟",
+      "track": 0
+    },
+    {
+      "id": 4,
+      "title": "面对道德两难",
+      "subtitle": "比较后果、义务与品格，承认理由之间的张力。",
+      "objective": "能解释不同伦理视角怎样改变关注点。",
+      "minutes": "20—35 分钟",
+      "track": 0
+    },
+    {
+      "id": 5,
+      "title": "公正与共同生活",
+      "subtitle": "在平等、需要、贡献与程序之间作比较。",
+      "objective": "能给分配规则和公共讨论提供可公开的理由。",
+      "minutes": "20—35 分钟",
+      "track": 0
+    },
+    {
+      "id": 6,
+      "title": "从中国哲学进入日常",
+      "subtitle": "在关系、修养与不同生活路径中提出问题。",
+      "objective": "能联系语境理解概念，避免把传统压成口号。",
+      "minutes": "20—35 分钟",
+      "track": 0
+    },
+    {
+      "id": 7,
+      "title": "意义、审美与认真对话",
+      "subtitle": "让生活判断有理由，也留出分歧与继续追问的空间。",
+      "objective": "能表达立场、回应反例，并承认判断限度。",
+      "minutes": "20—35 分钟",
+      "track": 0
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "chapter": 0,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "概念澄清",
+      "title": "大家说的自由，是同一种自由吗？",
+      "brief": "两位朋友争论“选课自由”：一人指没人禁止，一人指有时间和费用才能选。哪种分析更能推进讨论？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "分歧",
+              "text": "先区分不受阻拦与实际选择能力"
+            },
+            {
+              "label": "行动",
+              "text": "分别追问两种自由需要什么条件"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "分歧",
+              "text": "认定两人只是性格不同"
+            },
+            {
+              "label": "行动",
+              "text": "继续重复“自由最重要”"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "先辨明同一个词的不同用法，才知道在争论什么；澄清概念本身还没有决定哪种自由更重要。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "先辨明同一个词的不同用法，才知道在争论什么；澄清概念本身还没有决定哪种自由更重要。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "先辨明同一个词的不同用法，才知道在争论什么；澄清概念本身还没有决定哪种自由更重要。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：大家说的自由，是同一种自由吗？",
+          "brief": "两位朋友争论“选课自由”：一人指没人禁止，一人指有时间和费用才能选。哪种分析更能推进讨论？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "先辨明同一个词的不同用法，才知道在争论什么；澄清概念本身还没有决定哪种自由更重要。"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "chapter": 0,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "事实与价值",
+      "title": "有很多人喜欢，就说明应该推广吗？",
+      "brief": "有人说一种活动很受欢迎，所以学校应该投入全部社团预算。哪种分析指出了尚缺的理由？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "事实",
+              "text": "受欢迎说明某种偏好"
+            },
+            {
+              "label": "结论",
+              "text": "人数多自然等于道德上应该优先"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "事实",
+              "text": "受欢迎说明某种偏好"
+            },
+            {
+              "label": "价值桥梁",
+              "text": "还要说明为何流行应优先于其他需求"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "从事实到“应该”还需要价值前提与资源取舍，不能只靠受欢迎程度。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "从事实到“应该”还需要价值前提与资源取舍，不能只靠受欢迎程度。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "从事实到“应该”还需要价值前提与资源取舍，不能只靠受欢迎程度。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：有很多人喜欢，就说明应该推广吗？",
+          "brief": "有人说一种活动很受欢迎，所以学校应该投入全部社团预算。哪种分析指出了尚缺的理由？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "从事实到“应该”还需要价值前提与资源取舍，不能只靠受欢迎程度。"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "chapter": 0,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "定义与反例",
+      "title": "给“游戏”下定义，需要检查什么？",
+      "brief": "小禾把游戏定义为“有输赢的活动”。哪种回应更能检查这个定义，而不是评价她本人？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "反例",
+              "text": "合作探索、没有最终输赢的玩法是否也算游戏？"
+            },
+            {
+              "label": "追问",
+              "text": "定义想覆盖日常用法还是特定比赛？"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "反例",
+              "text": "小禾从来不玩，所以她不懂"
+            },
+            {
+              "label": "追问",
+              "text": "换一个资历更老的人宣布答案"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "用边界案例检查定义的覆盖范围，比攻击提出者更能推进讨论。定义也可能服务不同目的。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "用边界案例检查定义的覆盖范围，比攻击提出者更能推进讨论。定义也可能服务不同目的。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "用边界案例检查定义的覆盖范围，比攻击提出者更能推进讨论。定义也可能服务不同目的。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：给“游戏”下定义，需要检查什么？",
+          "brief": "小禾把游戏定义为“有输赢的活动”。哪种回应更能检查这个定义，而不是评价她本人？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "用边界案例检查定义的覆盖范围，比攻击提出者更能推进讨论。定义也可能服务不同目的。"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "chapter": 0,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "问题层次",
+      "title": "怎样回答“AI 会思考吗”？",
+      "brief": "面对这个问题，哪份讨论起点更清楚？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "概念",
+              "text": "回答像人就一定有人的全部体验"
+            },
+            {
+              "label": "证据",
+              "text": "只挑一句流畅回答就结束讨论"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "概念",
+              "text": "思考指计算、推理还是主观体验？"
+            },
+            {
+              "label": "证据",
+              "text": "分别说明哪类行为能支持哪种判断"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "先拆开能力和体验等不同问题，再寻找相应证据；行为相似并不独自解决全部心灵问题。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "先拆开能力和体验等不同问题，再寻找相应证据；行为相似并不独自解决全部心灵问题。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "先拆开能力和体验等不同问题，再寻找相应证据；行为相似并不独自解决全部心灵问题。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：怎样回答“AI 会思考吗”？",
+          "brief": "面对这个问题，哪份讨论起点更清楚？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "先拆开能力和体验等不同问题，再寻找相应证据；行为相似并不独自解决全部心灵问题。"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "chapter": 0,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "问题改写",
+      "title": "把一句争吵变成三个问题",
+      "brief": "同学讨论“短视频让人变笨”，各自拿一段经历互相反驳。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "原话",
+              "text": "短视频让人变笨"
+            },
+            {
+              "label": "分歧",
+              "text": "有人学到技能，有人觉得难以专注"
+            },
+            {
+              "label": "条件",
+              "text": "未说明内容类型与使用时间"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可先说明“变笨”指注意持续、记忆还是判断能力，再问特定使用方式是否影响它们，最后讨论什么习惯值得选择。个人经历可形成线索，不能直接代替全部证据。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可先说明“变笨”指注意持续、记忆还是判断能力，再问特定使用方式是否影响它们，最后讨论什么习惯值得选择。个人经历可形成线索，不能直接代替全部证据。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "把这句话拆成概念、经验事实和价值判断三个问题，说明各自需要什么材料。",
+      "reference": "可先说明“变笨”指注意持续、记忆还是判断能力，再问特定使用方式是否影响它们，最后讨论什么习惯值得选择。个人经历可形成线索，不能直接代替全部证据。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“问题改写”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "把一句争吵变成三个问题",
+          "prompt": "把这句话拆成概念、经验事实和价值判断三个问题，说明各自需要什么材料。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "chapter": 0,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "边界案例",
+      "title": "友谊一定要求每天联系吗？",
+      "brief": "一位朋友认为很久不联系就不算朋友，另一位朋友长期异地仍彼此信任。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "案例甲",
+              "text": "一年才见面，但遇到困难会认真帮助"
+            },
+            {
+              "label": "案例乙",
+              "text": "每天聊天，但从不关心对方处境"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可以把关心、信任与愿意回应需要作为标准，再用不常联系的老友或每日聊天却互不关心的人检验。标准不必唯一，关键是说明它解释了什么、遗漏了什么。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可以把关心、信任与愿意回应需要作为标准，再用不常联系的老友或每日聊天却互不关心的人检验。标准不必唯一，关键是说明它解释了什么、遗漏了什么。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "提出一个暂定的友谊标准，用至少一个边界案例检查，并说明你愿意怎样修改。",
+      "reference": "可以把关心、信任与愿意回应需要作为标准，再用不常联系的老友或每日聊天却互不关心的人检验。标准不必唯一，关键是说明它解释了什么、遗漏了什么。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“边界案例”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "友谊一定要求每天联系吗？",
+          "prompt": "提出一个暂定的友谊标准，用至少一个边界案例检查，并说明你愿意怎样修改。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "chapter": 0,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "隐含前提",
+      "title": "这句话中，藏着哪一步？",
+      "brief": "小组有人说：“这本书很难，所以它一定更值得读。”",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "已知",
+              "text": "这本书读起来很难"
+            },
+            {
+              "label": "未给",
+              "text": "内容质量、个人目标和基础"
+            },
+            {
+              "label": "结论",
+              "text": "一定更值得读"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "隐含前提是难度越高价值越高。混乱写作也可能很难，而清楚的入门书也可能很有价值。可改为难度有时对应新概念，需要结合学习目标、论证和已有基础判断。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "隐含前提是难度越高价值越高。混乱写作也可能很难，而清楚的入门书也可能很有价值。可改为难度有时对应新概念，需要结合学习目标、论证和已有基础判断。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "找出隐含前提，提出一种反例，并写一个更有限的结论。",
+      "reference": "隐含前提是难度越高价值越高。混乱写作也可能很难，而清楚的入门书也可能很有价值。可改为难度有时对应新概念，需要结合学习目标、论证和已有基础判断。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“隐含前提”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "这句话中，藏着哪一步？",
+          "prompt": "找出隐含前提，提出一种反例，并写一个更有限的结论。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "chapter": 0,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "讨论规则",
+      "title": "给一次分歧订一份讨论约定",
+      "brief": "读书会里，一位成员每次都用“这是我的感受”结束所有追问，另一位则否定感受有讨论价值。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "场景",
+              "text": "六人读书会"
+            },
+            {
+              "label": "问题",
+              "text": "个人感受与普遍主张混在一起"
+            },
+            {
+              "label": "目标",
+              "text": "能继续讨论而不攻击个人"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可以约定先复述、区分体验报告和一般断言、用反例检查推广范围；个人体验值得听，但“我这样感受”不自动证明所有人都如此。讨论目标是理解与改进理由，不是强迫一致。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可以约定先复述、区分体验报告和一般断言、用反例检查推广范围；个人体验值得听，但“我这样感受”不自动证明所有人都如此。讨论目标是理解与改进理由，不是强迫一致。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "提出三条可执行的讨论约定，既保留体验，也允许追问理由与适用范围。",
+      "reference": "可以约定先复述、区分体验报告和一般断言、用反例检查推广范围；个人体验值得听，但“我这样感受”不自动证明所有人都如此。讨论目标是理解与改进理由，不是强迫一致。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“讨论规则”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "给一次分歧订一份讨论约定",
+          "prompt": "提出三条可执行的讨论约定，既保留体验，也允许追问理由与适用范围。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "chapter": 1,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "有效与可靠",
+      "title": "推理形式正确，就一定可信吗？",
+      "brief": "论证：所有猫都会飞；团团是猫；所以团团会飞。哪种评价更准确？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "形式",
+              "text": "若前提都真，结论就必须真"
+            },
+            {
+              "label": "问题",
+              "text": "第一个前提事实上不可信，因此不是可靠论证"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "形式",
+              "text": "结论听起来荒谬，所以任何推理形式都错误"
+            },
+            {
+              "label": "问题",
+              "text": "无需区分前提与形式"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "形式有效与论证可靠需要区分；这个形式有效，但包含假的前提，不能凭它相信结论。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "形式有效与论证可靠需要区分；这个形式有效，但包含假的前提，不能凭它相信结论。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Classical Logic",
+          "url": "https://plato.stanford.edu/entries/logic-classical/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "形式有效与论证可靠需要区分；这个形式有效，但包含假的前提，不能凭它相信结论。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：推理形式正确，就一定可信吗？",
+          "brief": "论证：所有猫都会飞；团团是猫；所以团团会飞。哪种评价更准确？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "形式有效与论证可靠需要区分；这个形式有效，但包含假的前提，不能凭它相信结论。"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "chapter": 1,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "肯定后件",
+      "title": "地面湿了，就一定下雨了吗？",
+      "brief": "已知“如果下雨，地面会湿”，现在看见地面湿。选择更合理的判断。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "可能",
+              "text": "只要地面湿就证明下过雨"
+            },
+            {
+              "label": "限制",
+              "text": "不需要查看其他原因"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "可能",
+              "text": "下雨能解释地面湿"
+            },
+            {
+              "label": "限制",
+              "text": "洒水等原因也能使地面湿，不能必然推出下雨"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "由“如果 P 则 Q”和 Q 不能必然推出 P；需要检查其他使 Q 成立的可能。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "由“如果 P 则 Q”和 Q 不能必然推出 P；需要检查其他使 Q 成立的可能。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Classical Logic",
+          "url": "https://plato.stanford.edu/entries/logic-classical/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "由“如果 P 则 Q”和 Q 不能必然推出 P；需要检查其他使 Q 成立的可能。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：地面湿了，就一定下雨了吗？",
+          "brief": "已知“如果下雨，地面会湿”，现在看见地面湿。选择更合理的判断。 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "由“如果 P 则 Q”和 Q 不能必然推出 P；需要检查其他使 Q 成立的可能。"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "chapter": 1,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "论证重建",
+      "title": "反对者真的主张禁止一切吗？",
+      "brief": "甲建议图书馆夜间减少外放。乙回应“你要禁止所有人交流”。哪种分析更公平？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "复述",
+              "text": "先回应夜间外放的具体限制"
+            },
+            {
+              "label": "反驳",
+              "text": "可讨论执行成本、例外与替代方案"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "复述",
+              "text": "把甲说成禁止一切交谈"
+            },
+            {
+              "label": "反驳",
+              "text": "只攻击这个更极端的立场"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "把对方主张改成容易攻击的极端版本，没有回应原论证。可先准确重建再反驳。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "把对方主张改成容易攻击的极端版本，没有回应原论证。可先准确重建再反驳。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Classical Logic",
+          "url": "https://plato.stanford.edu/entries/logic-classical/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "把对方主张改成容易攻击的极端版本，没有回应原论证。可先准确重建再反驳。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：反对者真的主张禁止一切吗？",
+          "brief": "甲建议图书馆夜间减少外放。乙回应“你要禁止所有人交流”。哪种分析更公平？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "把对方主张改成容易攻击的极端版本，没有回应原论证。可先准确重建再反驳。"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "chapter": 1,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "相关理由",
+      "title": "提出者迟到过，就能否定时间表吗？",
+      "brief": "某人提出新排班方案，但他上周迟到。哪种审查更直接相关？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "检查",
+              "text": "指出他本人曾迟到"
+            },
+            {
+              "label": "结论",
+              "text": "时间表每一项都必然错误"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "检查",
+              "text": "时间表能否覆盖实际任务和休息需求"
+            },
+            {
+              "label": "区分",
+              "text": "迟到可能影响执行信任，但不直接证明方案无效"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "提出者的行为可能与可信度或执行有关，但方案是否合理仍需检查具体理由。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "提出者的行为可能与可信度或执行有关，但方案是否合理仍需检查具体理由。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Classical Logic",
+          "url": "https://plato.stanford.edu/entries/logic-classical/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "提出者的行为可能与可信度或执行有关，但方案是否合理仍需检查具体理由。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：提出者迟到过，就能否定时间表吗？",
+          "brief": "某人提出新排班方案，但他上周迟到。哪种审查更直接相关？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "提出者的行为可能与可信度或执行有关，但方案是否合理仍需检查具体理由。"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "chapter": 1,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "前提与结论",
+      "title": "把一段话整理成论证",
+      "brief": "“应该延长图书馆开放，因为很多人晚上才下班，现有时段让他们无法借书。”",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "陈述",
+              "text": "下班后借不到书"
+            },
+            {
+              "label": "诉求",
+              "text": "延长开放"
+            },
+            {
+              "label": "未知",
+              "text": "人数、成本与替代服务"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "事实是部分人晚间无法借书，价值前提可以是公共服务应兼顾不同时间安排；结论是延长或调整时段。人员、安全与替代服务会影响方案，应检查而不是自动否定目标。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "事实是部分人晚间无法借书，价值前提可以是公共服务应兼顾不同时间安排；结论是延长或调整时段。人员、安全与替代服务会影响方案，应检查而不是自动否定目标。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Classical Logic",
+          "url": "https://plato.stanford.edu/entries/logic-classical/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "列出事实前提、价值前提和结论，并指出一种会改变判断的新信息。",
+      "reference": "事实是部分人晚间无法借书，价值前提可以是公共服务应兼顾不同时间安排；结论是延长或调整时段。人员、安全与替代服务会影响方案，应检查而不是自动否定目标。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“前提与结论”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "把一段话整理成论证",
+          "prompt": "列出事实前提、价值前提和结论，并指出一种会改变判断的新信息。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "chapter": 1,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "反例检验",
+      "title": "怎样推翻“只要努力就会成功”？",
+      "brief": "朋友把自己的成功经验总结为“所有努力的人都会成功”。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "命题",
+              "text": "所有努力的人都会成功"
+            },
+            {
+              "label": "经验",
+              "text": "提出者确实付出并取得成果"
+            },
+            {
+              "label": "遗漏",
+              "text": "条件差异与未成功案例"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "有人努力仍受资源、机会或健康限制，可反驳保证成功的全称断言；它并不证明努力毫无作用。可说在特定任务和条件下，合适努力可能提高成功机会。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "有人努力仍受资源、机会或健康限制，可反驳保证成功的全称断言；它并不证明努力毫无作用。可说在特定任务和条件下，合适努力可能提高成功机会。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Classical Logic",
+          "url": "https://plato.stanford.edu/entries/logic-classical/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "区分“努力有帮助”与“努力足够保证成功”，给出反例并提出较合理的表述。",
+      "reference": "有人努力仍受资源、机会或健康限制，可反驳保证成功的全称断言；它并不证明努力毫无作用。可说在特定任务和条件下，合适努力可能提高成功机会。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“反例检验”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样推翻“只要努力就会成功”？",
+          "prompt": "区分“努力有帮助”与“努力足够保证成功”，给出反例并提出较合理的表述。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "chapter": 1,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "归纳强度",
+      "title": "三次准时，就能放心永远准时吗？",
+      "brief": "你连续三次乘坐同一公交都准时到达，想据此安排一次不能迟到的考试行程。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "样本",
+              "text": "三次乘车"
+            },
+            {
+              "label": "任务",
+              "text": "重要考试"
+            },
+            {
+              "label": "未知",
+              "text": "路况、时段与偶发故障"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "经历能形成有限期待，不能证明永远准时。可补查更长时段和当天情况，给重要行程留缓冲；谨慎程度取决于迟到代价，不必要求日常行动都有绝对确定性。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "经历能形成有限期待，不能证明永远准时。可补查更长时段和当天情况，给重要行程留缓冲；谨慎程度取决于迟到代价，不必要求日常行动都有绝对确定性。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Classical Logic",
+          "url": "https://plato.stanford.edu/entries/logic-classical/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "说明这些经历支持什么、不支持什么，再提出一个与风险相称的安排。",
+      "reference": "经历能形成有限期待，不能证明永远准时。可补查更长时段和当天情况，给重要行程留缓冲；谨慎程度取决于迟到代价，不必要求日常行动都有绝对确定性。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“归纳强度”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "三次准时，就能放心永远准时吗？",
+          "prompt": "说明这些经历支持什么、不支持什么，再提出一个与风险相称的安排。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "chapter": 1,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "最强回应",
+      "title": "替反对者把理由说完整",
+      "brief": "你赞成学校开设手机存放区，同学担心紧急联系不便。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "立场",
+              "text": "减少上课分心"
+            },
+            {
+              "label": "反对",
+              "text": "担心紧急联络"
+            },
+            {
+              "label": "约束",
+              "text": "不能假定所有人有同样家庭安排"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可以承认紧急可联系性是正当要求，再讨论备用联络、例外和自愿使用。不要把顾虑说成“只想玩手机”；能够容纳合理反对理由的方案通常更可讨论。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可以承认紧急可联系性是正当要求，再讨论备用联络、例外和自愿使用。不要把顾虑说成“只想玩手机”；能够容纳合理反对理由的方案通常更可讨论。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Classical Logic",
+          "url": "https://plato.stanford.edu/entries/logic-classical/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "先用对方愿意认可的方式重述顾虑，再回应一个最强理由，并说明自己方案要修改哪里。",
+      "reference": "可以承认紧急可联系性是正当要求，再讨论备用联络、例外和自愿使用。不要把顾虑说成“只想玩手机”；能够容纳合理反对理由的方案通常更可讨论。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“最强回应”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "替反对者把理由说完整",
+          "prompt": "先用对方愿意认可的方式重述顾虑，再回应一个最强理由，并说明自己方案要修改哪里。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "chapter": 2,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "真信念与知识",
+      "title": "猜对了，就算知道吗？",
+      "brief": "小安随便猜明天的列车晚点，结果碰巧猜中。哪种分析更谨慎？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "判断",
+              "text": "猜测恰巧为真"
+            },
+            {
+              "label": "追问",
+              "text": "它缺少什么可靠根据，是否足以称为知道？"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "判断",
+              "text": "只要结果为真就掌握了知识"
+            },
+            {
+              "label": "追问",
+              "text": "以后都可以用同样办法作决定"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "猜中与有根据地知道不同；知识的完整定义存在争论，本题只检查偶然真与理由的区别。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "猜中与有根据地知道不同；知识的完整定义存在争论，本题只检查偶然真与理由的区别。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Epistemology",
+          "url": "https://plato.stanford.edu/entries/epistemology/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "猜中与有根据地知道不同；知识的完整定义存在争论，本题只检查偶然真与理由的区别。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：猜对了，就算知道吗？",
+          "brief": "小安随便猜明天的列车晚点，结果碰巧猜中。哪种分析更谨慎？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "猜中与有根据地知道不同；知识的完整定义存在争论，本题只检查偶然真与理由的区别。"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "chapter": 2,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "证词与核验",
+      "title": "有名的人说过，就不必查了吗？",
+      "brief": "一位演员介绍天文现象，视频没有说明来源。哪种核验更相关？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "查证",
+              "text": "名气足够大就无需材料"
+            },
+            {
+              "label": "态度",
+              "text": "质疑来源等于不尊重本人"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "查证",
+              "text": "寻找原始观测或相关领域资料"
+            },
+            {
+              "label": "态度",
+              "text": "身份可提供线索，仍需核对具体主张"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "名气不自动构成某一领域的知识根据；应检查专长、出处与可核对材料，也不必因演员身份就一概否定。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "名气不自动构成某一领域的知识根据；应检查专长、出处与可核对材料，也不必因演员身份就一概否定。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Epistemology",
+          "url": "https://plato.stanford.edu/entries/epistemology/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "名气不自动构成某一领域的知识根据；应检查专长、出处与可核对材料，也不必因演员身份就一概否定。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：有名的人说过，就不必查了吗？",
+          "brief": "一位演员介绍天文现象，视频没有说明来源。哪种核验更相关？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "名气不自动构成某一领域的知识根据；应检查专长、出处与可核对材料，也不必因演员身份就一概否定。"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "chapter": 2,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "可修正的相信",
+      "title": "发现新证据，改口就是不坚定吗？",
+      "brief": "你原以为展览免费，后来看到正式公告：部分区域收费。哪种更新合理？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "更新",
+              "text": "区分免费区与收费区，修改原判断"
+            },
+            {
+              "label": "说明",
+              "text": "新材料怎样改变原来支持程度"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "更新",
+              "text": "为了前后一致继续说全部免费"
+            },
+            {
+              "label": "说明",
+              "text": "坚持原话比检查公告重要"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "根据更相关的新证据修正相信，是认真求知的一部分；还应核对公告日期和适用范围。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "根据更相关的新证据修正相信，是认真求知的一部分；还应核对公告日期和适用范围。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Epistemology",
+          "url": "https://plato.stanford.edu/entries/epistemology/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "根据更相关的新证据修正相信，是认真求知的一部分；还应核对公告日期和适用范围。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：发现新证据，改口就是不坚定吗？",
+          "brief": "你原以为展览免费，后来看到正式公告：部分区域收费。哪种更新合理？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "根据更相关的新证据修正相信，是认真求知的一部分；还应核对公告日期和适用范围。"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "chapter": 2,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "怀疑的分寸",
+      "title": "不能百分之百确定，就什么都不能信吗？",
+      "brief": "有人认为视觉偶尔会误导，所以连眼前桌上有杯子都不能在日常中相信。选择更审慎的回应。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "区分",
+              "text": "可能出错意味着所有看法同样可信"
+            },
+            {
+              "label": "行动",
+              "text": "证据之间不再需要比较"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "区分",
+              "text": "逻辑上可能出错与日常有充分理由不同"
+            },
+            {
+              "label": "行动",
+              "text": "按风险与可核验性调整确信程度"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "承认感知可错不意味着一切证据等价；怀疑需要说明范围和标准，而不抹平支持程度差异。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "承认感知可错不意味着一切证据等价；怀疑需要说明范围和标准，而不抹平支持程度差异。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Epistemology",
+          "url": "https://plato.stanford.edu/entries/epistemology/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "承认感知可错不意味着一切证据等价；怀疑需要说明范围和标准，而不抹平支持程度差异。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：不能百分之百确定，就什么都不能信吗？",
+          "brief": "有人认为视觉偶尔会误导，所以连眼前桌上有杯子都不能在日常中相信。选择更审慎的回应。 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "承认感知可错不意味着一切证据等价；怀疑需要说明范围和标准，而不抹平支持程度差异。"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "chapter": 2,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "支持程度",
+      "title": "这张截图值得相信到什么程度？",
+      "brief": "朋友转来一张没有日期和原链接的活动取消截图。你正准备出发。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "材料",
+              "text": "无日期截图"
+            },
+            {
+              "label": "决策",
+              "text": "今天是否出发"
+            },
+            {
+              "label": "可核对",
+              "text": "主办方与场地"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "截图是一条待核线索，可以查主办方当前公告或联系场地；向同行说明尚未确认、何时再决定。不要把“未核实”说成必然虚假，也不把转发次数当确认。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "截图是一条待核线索，可以查主办方当前公告或联系场地；向同行说明尚未确认、何时再决定。不要把“未核实”说成必然虚假，也不把转发次数当确认。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Epistemology",
+          "url": "https://plato.stanford.edu/entries/epistemology/"
+        }
+      ],
+      "correct": null,
+      "prompt": "说明当前可暂信什么、还需要核对什么，以及怎样向同行的人表达不确定性。",
+      "reference": "截图是一条待核线索，可以查主办方当前公告或联系场地；向同行说明尚未确认、何时再决定。不要把“未核实”说成必然虚假，也不把转发次数当确认。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“支持程度”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "这张截图值得相信到什么程度？",
+          "prompt": "说明当前可暂信什么、还需要核对什么，以及怎样向同行的人表达不确定性。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "chapter": 2,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "解释与证据",
+      "title": "为什么总能“应验”的说法难检查？",
+      "brief": "某人声称护身石有用：顺利就是生效，不顺利就是挡掉更大的灾难。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "成功解释",
+              "text": "护身石生效"
+            },
+            {
+              "label": "失败解释",
+              "text": "避免了更大失败"
+            },
+            {
+              "label": "问题",
+              "text": "什么结果会让提出者修改判断？"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "若任何结果都被视为支持，就难用经验区分有用与无用。可以先明确“有用”的具体含义和什么结果会削弱主张；提供安慰与改变外部事件是两类不同主张。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "若任何结果都被视为支持，就难用经验区分有用与无用。可以先明确“有用”的具体含义和什么结果会削弱主张；提供安慰与改变外部事件是两类不同主张。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Epistemology",
+          "url": "https://plato.stanford.edu/entries/epistemology/"
+        }
+      ],
+      "correct": null,
+      "prompt": "说明这个说法怎样处理所有结果，提出能使主张接受检验的条件，并区分检验与个人安慰。",
+      "reference": "若任何结果都被视为支持，就难用经验区分有用与无用。可以先明确“有用”的具体含义和什么结果会削弱主张；提供安慰与改变外部事件是两类不同主张。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“解释与证据”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "为什么总能“应验”的说法难检查？",
+          "prompt": "说明这个说法怎样处理所有结果，提出能使主张接受检验的条件，并区分检验与个人安慰。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "chapter": 2,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "观察与解释",
+      "title": "看到排队，能知道店一定好吃吗？",
+      "brief": "一家新店门前长队，但你不知道是不是发赠品、出餐慢或确实受欢迎。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "观察",
+              "text": "门前有人排队"
+            },
+            {
+              "label": "未知",
+              "text": "促销、服务速度和口味评价"
+            },
+            {
+              "label": "任务",
+              "text": "决定是否值得尝试"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "事实是某时刻有队伍；好吃、促销和出餐慢是不同解释。可看是否有促销、等待与出餐速度、不同时间的情况，并询问真实体验；单一线索不足以锁定唯一原因。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "事实是某时刻有队伍；好吃、促销和出餐慢是不同解释。可看是否有促销、等待与出餐速度、不同时间的情况，并询问真实体验；单一线索不足以锁定唯一原因。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Epistemology",
+          "url": "https://plato.stanford.edu/entries/epistemology/"
+        }
+      ],
+      "correct": null,
+      "prompt": "列出观察事实与两种解释，说明怎样获得能区分解释的新材料。",
+      "reference": "事实是某时刻有队伍；好吃、促销和出餐慢是不同解释。可看是否有促销、等待与出餐速度、不同时间的情况，并询问真实体验；单一线索不足以锁定唯一原因。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“观察与解释”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "看到排队，能知道店一定好吃吗？",
+          "prompt": "列出观察事实与两种解释，说明怎样获得能区分解释的新材料。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "chapter": 2,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "证据责任",
+      "title": "别人不能证明错，就等于我说对吗？",
+      "brief": "有人说某种看不见的力量决定每次抛硬币，理由是别人无法证明没有。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "主张",
+              "text": "不可见力量决定结果"
+            },
+            {
+              "label": "依据",
+              "text": "别人不能证明没有"
+            },
+            {
+              "label": "边界",
+              "text": "没有独立观察材料"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "无法证明不存在不等于已有存在证据。可以请提出者说明预测、独立观察或与其他解释的差异；若没有可区分条件，可承认讨论的限制，而不伪装已经证伪。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "无法证明不存在不等于已有存在证据。可以请提出者说明预测、独立观察或与其他解释的差异；若没有可区分条件，可承认讨论的限制，而不伪装已经证伪。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Epistemology",
+          "url": "https://plato.stanford.edu/entries/epistemology/"
+        }
+      ],
+      "correct": null,
+      "prompt": "说明不能反驳与已经获得支持的区别，并给出你愿意继续讨论的证据条件。",
+      "reference": "无法证明不存在不等于已有存在证据。可以请提出者说明预测、独立观察或与其他解释的差异；若没有可区分条件，可承认讨论的限制，而不伪装已经证伪。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“证据责任”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "别人不能证明错，就等于我说对吗？",
+          "prompt": "说明不能反驳与已经获得支持的区别，并给出你愿意继续讨论的证据条件。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "chapter": 3,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "同一性的标准",
+      "title": "旧船换完木板，还算原来那艘吗？",
+      "brief": "维修后每块木板都换过。哪种讨论更能呈现问题，而不假装已有唯一公认答案？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "标准",
+              "text": "分别比较材料连续、结构连续与使用历史"
+            },
+            {
+              "label": "分歧",
+              "text": "说明采用哪种标准以及理由"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "标准",
+              "text": "只要名字相同就逻辑上必定同一"
+            },
+            {
+              "label": "分歧",
+              "text": "其他标准都无需讨论"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "思想实验让不同同一性标准发生张力；选择标准需要理由，不能只宣布一种日常习惯解决所有情形。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "思想实验让不同同一性标准发生张力；选择标准需要理由，不能只宣布一种日常习惯解决所有情形。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Personal Identity",
+          "url": "https://plato.stanford.edu/entries/identity-personal/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Free Will",
+          "url": "https://plato.stanford.edu/entries/freewill/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "思想实验让不同同一性标准发生张力；选择标准需要理由，不能只宣布一种日常习惯解决所有情形。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：旧船换完木板，还算原来那艘吗？",
+          "brief": "维修后每块木板都换过。哪种讨论更能呈现问题，而不假装已有唯一公认答案？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "思想实验让不同同一性标准发生张力；选择标准需要理由，不能只宣布一种日常习惯解决所有情形。"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "chapter": 3,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "控制与强迫",
+      "title": "两次相同动作，责任一定一样吗？",
+      "brief": "甲自愿交出钥匙，乙在明确威胁下交出钥匙。哪种分析更充分？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "比较",
+              "text": "只看钥匙离手这一结果"
+            },
+            {
+              "label": "评价",
+              "text": "责任必须完全相同"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "比较",
+              "text": "外部动作相同，但选择条件不同"
+            },
+            {
+              "label": "评价",
+              "text": "考察胁迫程度、可行替代与知情情况"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "责任评价常与控制、知情和可行替代有关；理解胁迫并不要求否定所有责任讨论。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "责任评价常与控制、知情和可行替代有关；理解胁迫并不要求否定所有责任讨论。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Personal Identity",
+          "url": "https://plato.stanford.edu/entries/identity-personal/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Free Will",
+          "url": "https://plato.stanford.edu/entries/freewill/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "责任评价常与控制、知情和可行替代有关；理解胁迫并不要求否定所有责任讨论。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：两次相同动作，责任一定一样吗？",
+          "brief": "甲自愿交出钥匙，乙在明确威胁下交出钥匙。哪种分析更充分？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "责任评价常与控制、知情和可行替代有关；理解胁迫并不要求否定所有责任讨论。"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "chapter": 3,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "决定论与宿命",
+      "title": "如果行为有原因，就不用做决定了吗？",
+      "brief": "有人说一切行动都有原因，所以思考计划不会有任何作用。选择更有根据的分析。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "区分",
+              "text": "决定论与无论做什么结果都相同不是一回事"
+            },
+            {
+              "label": "作用",
+              "text": "思考、计划本身也可能是因果过程的一部分"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "区分",
+              "text": "既然有原因，选择过程就完全不存在"
+            },
+            {
+              "label": "作用",
+              "text": "任何计划都不会影响未来"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "行为有因果解释，不自动推出行动和计划没有作用；这仍没有解决自由意志争论的全部问题。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "行为有因果解释，不自动推出行动和计划没有作用；这仍没有解决自由意志争论的全部问题。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Personal Identity",
+          "url": "https://plato.stanford.edu/entries/identity-personal/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Free Will",
+          "url": "https://plato.stanford.edu/entries/freewill/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "行为有因果解释，不自动推出行动和计划没有作用；这仍没有解决自由意志争论的全部问题。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：如果行为有原因，就不用做决定了吗？",
+          "brief": "有人说一切行动都有原因，所以思考计划不会有任何作用。选择更有根据的分析。 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "行为有因果解释，不自动推出行动和计划没有作用；这仍没有解决自由意志争论的全部问题。"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "chapter": 3,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "解释与辩护",
+      "title": "理解原因，就等于赞成行为吗？",
+      "brief": "同学因长期被排挤而在群里辱骂别人。哪种回应区分了不同任务？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "理解",
+              "text": "一旦解释了原因就必须认为行为正当"
+            },
+            {
+              "label": "评价",
+              "text": "不再考虑被辱骂者"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "理解",
+              "text": "认真了解处境与行为原因"
+            },
+            {
+              "label": "评价",
+              "text": "仍可讨论伤害、责任和更好的回应"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "解释行为为何发生、体谅处境与判断行为是否正当不同，可以同时理解背景并讨论责任。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "解释行为为何发生、体谅处境与判断行为是否正当不同，可以同时理解背景并讨论责任。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Personal Identity",
+          "url": "https://plato.stanford.edu/entries/identity-personal/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Free Will",
+          "url": "https://plato.stanford.edu/entries/freewill/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "解释行为为何发生、体谅处境与判断行为是否正当不同，可以同时理解背景并讨论责任。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：理解原因，就等于赞成行为吗？",
+          "brief": "同学因长期被排挤而在群里辱骂别人。哪种回应区分了不同任务？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "解释行为为何发生、体谅处境与判断行为是否正当不同，可以同时理解背景并讨论责任。"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "chapter": 3,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "人格连续性",
+      "title": "失去一段记忆，还是不是我？",
+      "brief": "一个人失去了几年前的记忆，却保持许多关系、习惯与身体连续性。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "保留",
+              "text": "身体、部分习惯和人际关系"
+            },
+            {
+              "label": "变化",
+              "text": "一段自传记忆缺失"
+            },
+            {
+              "label": "问题",
+              "text": "同一性的不同含义"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可以比较身体连续性与心理联系：前者保留生物个体，后者关心记忆、性格和意向；记忆不完整提醒我们心理联系也可能有不同程度。题目是概念比较，不能据此诊断真实个体。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可以比较身体连续性与心理联系：前者保留生物个体，后者关心记忆、性格和意向；记忆不完整提醒我们心理联系也可能有不同程度。题目是概念比较，不能据此诊断真实个体。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Personal Identity",
+          "url": "https://plato.stanford.edu/entries/identity-personal/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Free Will",
+          "url": "https://plato.stanford.edu/entries/freewill/"
+        }
+      ],
+      "correct": null,
+      "prompt": "选两种“还是同一个人”的标准，说明各自解释力与困难，不要求给医学判断。",
+      "reference": "可以比较身体连续性与心理联系：前者保留生物个体，后者关心记忆、性格和意向；记忆不完整提醒我们心理联系也可能有不同程度。题目是概念比较，不能据此诊断真实个体。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“人格连续性”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "失去一段记忆，还是不是我？",
+          "prompt": "选两种“还是同一个人”的标准，说明各自解释力与困难，不要求给医学判断。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "chapter": 3,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "自主与影响",
+      "title": "推荐算法懂我，选择还算我的吗？",
+      "brief": "你发现自己大多只看平台推荐，很少主动搜索；仍能关掉推荐和寻找别的内容。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "情境",
+              "text": "主要依赖推荐"
+            },
+            {
+              "label": "可选",
+              "text": "搜索、订阅和离开"
+            },
+            {
+              "label": "未知",
+              "text": "系统影响程度与个人目标"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "受影响不等于完全失去自主，但默认、信息不对称和习惯可能缩小实际选择。可以主动订阅、搜索反面材料、设定使用时段；这些做法增加反思空间，不证明人能完全不受环境影响。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "受影响不等于完全失去自主，但默认、信息不对称和习惯可能缩小实际选择。可以主动订阅、搜索反面材料、设定使用时段；这些做法增加反思空间，不证明人能完全不受环境影响。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Personal Identity",
+          "url": "https://plato.stanford.edu/entries/identity-personal/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Free Will",
+          "url": "https://plato.stanford.edu/entries/freewill/"
+        }
+      ],
+      "correct": null,
+      "prompt": "区分受影响、被操纵与有选择能力，提出一个能增加自主性的具体做法及其限制。",
+      "reference": "受影响不等于完全失去自主，但默认、信息不对称和习惯可能缩小实际选择。可以主动订阅、搜索反面材料、设定使用时段；这些做法增加反思空间，不证明人能完全不受环境影响。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“自主与影响”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "推荐算法懂我，选择还算我的吗？",
+          "prompt": "区分受影响、被操纵与有选择能力，提出一个能增加自主性的具体做法及其限制。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "chapter": 3,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "责任程度",
+      "title": "一个错误，怎样比较责任？",
+      "brief": "甲事先被清楚告知风险仍忽视，乙获得的说明有关键遗漏，两人造成相同损失。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "甲",
+              "text": "已知风险仍忽视"
+            },
+            {
+              "label": "乙",
+              "text": "关键信息未被告知"
+            },
+            {
+              "label": "共同",
+              "text": "造成相同损失"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "应考察知情、可控制程度、可行替代和角色义务。相同损失不独自决定同等责任；遗漏由谁造成、乙是否有合理核查机会也影响判断，不宜仅凭摘要定罪。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "应考察知情、可控制程度、可行替代和角色义务。相同损失不独自决定同等责任；遗漏由谁造成、乙是否有合理核查机会也影响判断，不宜仅凭摘要定罪。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Personal Identity",
+          "url": "https://plato.stanford.edu/entries/identity-personal/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Free Will",
+          "url": "https://plato.stanford.edu/entries/freewill/"
+        }
+      ],
+      "correct": null,
+      "prompt": "说明相同结果是否足以判定相同责任，并列出要了解的三类事实。",
+      "reference": "应考察知情、可控制程度、可行替代和角色义务。相同损失不独自决定同等责任；遗漏由谁造成、乙是否有合理核查机会也影响判断，不宜仅凭摘要定罪。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“责任程度”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "一个错误，怎样比较责任？",
+          "prompt": "说明相同结果是否足以判定相同责任，并列出要了解的三类事实。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "chapter": 3,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "反思选择",
+      "title": "写给未来自己的一个承诺",
+      "brief": "你想每天学习，却总在疲惫时取消计划。有人说“真实的你就是当下最想做的事”。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "愿望一",
+              "text": "当下休息"
+            },
+            {
+              "label": "愿望二",
+              "text": "长期掌握技能"
+            },
+            {
+              "label": "约束",
+              "text": "精力有限，目标可能需要调整"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可以区分一时冲动和反思后认可的愿望，安排较短学习与必要休息。长期目标也未必天然更真实，应检查是否出于自己认可、是否可持续，不能把疲惫简单说成道德失败。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可以区分一时冲动和反思后认可的愿望，安排较短学习与必要休息。长期目标也未必天然更真实，应检查是否出于自己认可、是否可持续，不能把疲惫简单说成道德失败。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Personal Identity",
+          "url": "https://plato.stanford.edu/entries/identity-personal/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Free Will",
+          "url": "https://plato.stanford.edu/entries/freewill/"
+        }
+      ],
+      "correct": null,
+      "prompt": "比较即时愿望与长期认可的目标，提出一种尊重两者的安排，并解释它为什么仍需要反思。",
+      "reference": "可以区分一时冲动和反思后认可的愿望，安排较短学习与必要休息。长期目标也未必天然更真实，应检查是否出于自己认可、是否可持续，不能把疲惫简单说成道德失败。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“反思选择”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "写给未来自己的一个承诺",
+          "prompt": "比较即时愿望与长期认可的目标，提出一种尊重两者的安排，并解释它为什么仍需要反思。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "chapter": 4,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "伦理视角",
+      "title": "同样帮助别人，理由可以不同吗？",
+      "brief": "三人都愿意帮助迷路者。哪种比较更准确？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "比较",
+              "text": "有人重视减少痛苦，有人重视助人义务，有人重视仁厚品格"
+            },
+            {
+              "label": "边界",
+              "text": "视角不同不意味着只能关注一个维度"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "比较",
+              "text": "只要行动一样，理由就没有任何区别"
+            },
+            {
+              "label": "边界",
+              "text": "伦理学只需要记录最终动作"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "相同行动可能有不同理由。伦理视角的重点可以不同，也可能同时考虑后果、义务与品格。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "相同行动可能有不同理由。伦理视角的重点可以不同，也可能同时考虑后果、义务与品格。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Virtue Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-virtue/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Deontological Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-deontological/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Consequentialism",
+          "url": "https://plato.stanford.edu/entries/consequentialism/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "相同行动可能有不同理由。伦理视角的重点可以不同，也可能同时考虑后果、义务与品格。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：同样帮助别人，理由可以不同吗？",
+          "brief": "三人都愿意帮助迷路者。哪种比较更准确？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "相同行动可能有不同理由。伦理视角的重点可以不同，也可能同时考虑后果、义务与品格。"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "chapter": 4,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "后果与边界",
+      "title": "整体收益高，就不用考虑任何人吗？",
+      "brief": "社团准备公开某成员的私信以增加募捐，未征得同意。哪种分析更充分？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "后果",
+              "text": "只要预计善款多，其他理由都自动失效"
+            },
+            {
+              "label": "边界",
+              "text": "不必考虑当事人"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "后果",
+              "text": "考虑募捐收益与可能伤害"
+            },
+            {
+              "label": "边界",
+              "text": "讨论隐私、同意和是否有替代方法"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "预计收益是理由之一，但不能未经论证就抹除同意、权利和其他方案；还应检验预测。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "预计收益是理由之一，但不能未经论证就抹除同意、权利和其他方案；还应检验预测。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Virtue Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-virtue/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Deontological Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-deontological/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Consequentialism",
+          "url": "https://plato.stanford.edu/entries/consequentialism/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "预计收益是理由之一，但不能未经论证就抹除同意、权利和其他方案；还应检验预测。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：整体收益高，就不用考虑任何人吗？",
+          "brief": "社团准备公开某成员的私信以增加募捐，未征得同意。哪种分析更充分？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "预计收益是理由之一，但不能未经论证就抹除同意、权利和其他方案；还应检验预测。"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "chapter": 4,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "义务冲突",
+      "title": "承诺总能机械执行吗？",
+      "brief": "你答应按时赴约，却在途中遇见需要紧急求助的人。选择更认真处理冲突的分析。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "冲突",
+              "text": "守约与援助都构成理由"
+            },
+            {
+              "label": "行动",
+              "text": "比较紧急程度、替代帮助并尽快说明"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "冲突",
+              "text": "一句“必须守约”足以结束所有讨论"
+            },
+            {
+              "label": "行动",
+              "text": "情境与可用替代都无关"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "承认义务不等于忽略义务之间的冲突；可以说明优先理由、可行替代和如何补偿失约。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "承认义务不等于忽略义务之间的冲突；可以说明优先理由、可行替代和如何补偿失约。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Virtue Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-virtue/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Deontological Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-deontological/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Consequentialism",
+          "url": "https://plato.stanford.edu/entries/consequentialism/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "承认义务不等于忽略义务之间的冲突；可以说明优先理由、可行替代和如何补偿失约。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：承诺总能机械执行吗？",
+          "brief": "你答应按时赴约，却在途中遇见需要紧急求助的人。选择更认真处理冲突的分析。 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "承认义务不等于忽略义务之间的冲突；可以说明优先理由、可行替代和如何补偿失约。"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "chapter": 4,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "品格与情境",
+      "title": "一次勇敢举动，就能确定完整品格吗？",
+      "brief": "某人一次冒险帮助他人，有人据此判断他在任何情境都一定勇敢。哪种评价更谨慎？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "观察",
+              "text": "一次行为足以证明永远如此"
+            },
+            {
+              "label": "限制",
+              "text": "不必区分勇敢与鲁莽"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "观察",
+              "text": "这次行为可以体现勇敢"
+            },
+            {
+              "label": "限制",
+              "text": "稳定品格还需看动机、判断与不同情境"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "品格判断需要比单次外部动作更多的依据；勇敢还涉及对风险和理由的适当判断。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "品格判断需要比单次外部动作更多的依据；勇敢还涉及对风险和理由的适当判断。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Virtue Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-virtue/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Deontological Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-deontological/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Consequentialism",
+          "url": "https://plato.stanford.edu/entries/consequentialism/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "品格判断需要比单次外部动作更多的依据；勇敢还涉及对风险和理由的适当判断。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：一次勇敢举动，就能确定完整品格吗？",
+          "brief": "某人一次冒险帮助他人，有人据此判断他在任何情境都一定勇敢。哪种评价更谨慎？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "品格判断需要比单次外部动作更多的依据；勇敢还涉及对风险和理由的适当判断。"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "chapter": 4,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "多视角比较",
+      "title": "一次善意隐瞒，怎样分析？",
+      "brief": "朋友询问你对他作品的看法，你担心直说缺点让他难过，却也知道他希望改进。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "事实",
+              "text": "朋友主动求反馈"
+            },
+            {
+              "label": "顾虑",
+              "text": "情绪与改进可能冲突"
+            },
+            {
+              "label": "未知",
+              "text": "反馈用途与承受方式"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可以用具体、温和且真实的反馈兼顾改进与关系；也可先问他需要哪种反馈。两种视角可能支持相似做法，关键在解释理由，不把善意当所有谎言的许可。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可以用具体、温和且真实的反馈兼顾改进与关系；也可先问他需要哪种反馈。两种视角可能支持相似做法，关键在解释理由，不把善意当所有谎言的许可。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Virtue Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-virtue/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Deontological Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-deontological/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Consequentialism",
+          "url": "https://plato.stanford.edu/entries/consequentialism/"
+        }
+      ],
+      "correct": null,
+      "prompt": "分别从后果、诚实义务或关系品格中选两个视角，提出回应，并说明代价。",
+      "reference": "可以用具体、温和且真实的反馈兼顾改进与关系；也可先问他需要哪种反馈。两种视角可能支持相似做法，关键在解释理由，不把善意当所有谎言的许可。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“多视角比较”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "一次善意隐瞒，怎样分析？",
+          "prompt": "分别从后果、诚实义务或关系品格中选两个视角，提出回应，并说明代价。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "chapter": 4,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "利益相关者",
+      "title": "谁的损失被漏掉了？",
+      "brief": "校园活动用一次性装饰制造很好的现场效果，参与者开心，清理人员加班，废弃物显著增加。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "收益",
+              "text": "现场体验"
+            },
+            {
+              "label": "代价",
+              "text": "清理劳动与废弃物"
+            },
+            {
+              "label": "替代",
+              "text": "可重复材料或不同布置"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可以把参与者、清理人员、后续使用者和环境影响纳入，比较可重复材料、缩减规模或共同清理；说明代价和分担，不要求某一种结论才算正确。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可以把参与者、清理人员、后续使用者和环境影响纳入，比较可重复材料、缩减规模或共同清理；说明代价和分担，不要求某一种结论才算正确。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Virtue Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-virtue/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Deontological Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-deontological/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Consequentialism",
+          "url": "https://plato.stanford.edu/entries/consequentialism/"
+        }
+      ],
+      "correct": null,
+      "prompt": "列出受影响者，比较两种替代方案，并说明你如何权衡看得见与不易看见的影响。",
+      "reference": "可以把参与者、清理人员、后续使用者和环境影响纳入，比较可重复材料、缩减规模或共同清理；说明代价和分担，不要求某一种结论才算正确。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“利益相关者”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "谁的损失被漏掉了？",
+          "prompt": "列出受影响者，比较两种替代方案，并说明你如何权衡看得见与不易看见的影响。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "chapter": 4,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "可普遍化的理由",
+      "title": "我可以例外，因为是我吗？",
+      "brief": "一位成员希望自己不用轮值，理由只是“我不喜欢”，但认为别人仍应照常完成。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "规则",
+              "text": "成员轮值"
+            },
+            {
+              "label": "申请",
+              "text": "只因不喜欢要求例外"
+            },
+            {
+              "label": "问题",
+              "text": "哪些差异与分工相关？"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "仅因是自己而例外缺少可一致适用的理由。健康、照护或能力限制可能支持调整，前提是标准能解释相关差异并公平分担；公平不必等于所有任务完全相同。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "仅因是自己而例外缺少可一致适用的理由。健康、照护或能力限制可能支持调整，前提是标准能解释相关差异并公平分担；公平不必等于所有任务完全相同。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Virtue Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-virtue/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Deontological Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-deontological/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Consequentialism",
+          "url": "https://plato.stanford.edu/entries/consequentialism/"
+        }
+      ],
+      "correct": null,
+      "prompt": "解释这个理由能否一致地用于他人，提出一种可能正当的例外条件。",
+      "reference": "仅因是自己而例外缺少可一致适用的理由。健康、照护或能力限制可能支持调整，前提是标准能解释相关差异并公平分担；公平不必等于所有任务完全相同。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“可普遍化的理由”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "我可以例外，因为是我吗？",
+          "prompt": "解释这个理由能否一致地用于他人，提出一种可能正当的例外条件。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "chapter": 4,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "判断与不确定性",
+      "title": "没有完美方案，怎样负责任？",
+      "brief": "活动延期会让远途参与者损失，继续又存在尚未弄清的安全隐患。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "选择",
+              "text": "继续、延期或缩减"
+            },
+            {
+              "label": "未知",
+              "text": "风险严重程度"
+            },
+            {
+              "label": "影响",
+              "text": "安全、时间与已投入成本"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "先核查风险程度与专业意见，比较延期、缩减或取消的可行性，及时告知并考虑受影响者补救。负责任不等于保证零损失，而是给出相称理由、透明沟通并承担后果。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "先核查风险程度与专业意见，比较延期、缩减或取消的可行性，及时告知并考虑受影响者补救。负责任不等于保证零损失，而是给出相称理由、透明沟通并承担后果。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Virtue Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-virtue/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Deontological Ethics",
+          "url": "https://plato.stanford.edu/entries/ethics-deontological/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Consequentialism",
+          "url": "https://plato.stanford.edu/entries/consequentialism/"
+        }
+      ],
+      "correct": null,
+      "prompt": "说明需要哪些信息、怎样处理不确定风险，以及决定后应怎样解释和补救。",
+      "reference": "先核查风险程度与专业意见，比较延期、缩减或取消的可行性，及时告知并考虑受影响者补救。负责任不等于保证零损失，而是给出相称理由、透明沟通并承担后果。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“判断与不确定性”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "没有完美方案，怎样负责任？",
+          "prompt": "说明需要哪些信息、怎样处理不确定风险，以及决定后应怎样解释和补救。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "chapter": 5,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "分配标准",
+      "title": "每人一份，就一定公平吗？",
+      "brief": "社团分配交通补助，成员住得远近、经济条件与任务负担不同。哪种分析更清楚？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "比较",
+              "text": "平均分、按需要和按任务各有理由"
+            },
+            {
+              "label": "要求",
+              "text": "先说明补助目标，再解释相关差异"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "比较",
+              "text": "所有场景都只能平均分"
+            },
+            {
+              "label": "要求",
+              "text": "任何需求差异都与公平无关"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "公平可能涉及平等、需要、贡献和机会等标准；应先说明分配目标和相关差异。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "公平可能涉及平等、需要、贡献和机会等标准；应先说明分配目标和相关差异。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Distributive Justice",
+          "url": "https://plato.stanford.edu/entries/justice-distributive/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "公平可能涉及平等、需要、贡献和机会等标准；应先说明分配目标和相关差异。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：每人一份，就一定公平吗？",
+          "brief": "社团分配交通补助，成员住得远近、经济条件与任务负担不同。哪种分析更清楚？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "公平可能涉及平等、需要、贡献和机会等标准；应先说明分配目标和相关差异。"
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "chapter": 5,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "程序与结果",
+      "title": "抽签公开，就自动解决公平了吗？",
+      "brief": "两个社团抽签分场地，但一个只有现场活动可做，另一个还有多种替代空间。选择更完整的评价。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "程序",
+              "text": "抽签公开，所以所有规则必定公正"
+            },
+            {
+              "label": "结果",
+              "text": "不必检查谁被纳入或排除"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "程序",
+              "text": "公开抽签减少部分偏袒"
+            },
+            {
+              "label": "结果",
+              "text": "仍可问参与资格、需要和替代机会是否合理"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "公平程序有价值，但程序设计、初始条件与结果负担仍可讨论。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "公平程序有价值，但程序设计、初始条件与结果负担仍可讨论。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Distributive Justice",
+          "url": "https://plato.stanford.edu/entries/justice-distributive/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "公平程序有价值，但程序设计、初始条件与结果负担仍可讨论。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：抽签公开，就自动解决公平了吗？",
+          "brief": "两个社团抽签分场地，但一个只有现场活动可做，另一个还有多种替代空间。选择更完整的评价。 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "公平程序有价值，但程序设计、初始条件与结果负担仍可讨论。"
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "chapter": 5,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "多数与少数",
+      "title": "票多，就可以忽略一切反对吗？",
+      "brief": "多数人赞成把安静自习室改成活动室，少数人没有其他可用自习空间。哪种讨论更充分？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "承认",
+              "text": "多数偏好是公共决策材料"
+            },
+            {
+              "label": "补充",
+              "text": "考虑少数的基本需要、替代与协商"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "承认",
+              "text": "多数通过等于没有任何损失值得解释"
+            },
+            {
+              "label": "补充",
+              "text": "反对者只能退出"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "多数决是一种程序，不自动消除少数利益与基本需要的理由；应公开解释并寻求可行安排。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "多数决是一种程序，不自动消除少数利益与基本需要的理由；应公开解释并寻求可行安排。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Distributive Justice",
+          "url": "https://plato.stanford.edu/entries/justice-distributive/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "多数决是一种程序，不自动消除少数利益与基本需要的理由；应公开解释并寻求可行安排。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：票多，就可以忽略一切反对吗？",
+          "brief": "多数人赞成把安静自习室改成活动室，少数人没有其他可用自习空间。哪种讨论更充分？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "多数决是一种程序，不自动消除少数利益与基本需要的理由；应公开解释并寻求可行安排。"
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "chapter": 5,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "形式机会与实际条件",
+      "title": "报名都开放，机会就完全相同吗？",
+      "brief": "课程免费开放报名，但只在工作日上午线下进行。哪种分析更能识别实际限制？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "形式",
+              "text": "报名按钮对所有人可见"
+            },
+            {
+              "label": "实际",
+              "text": "因此参与条件完全相同"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "形式",
+              "text": "没有限制谁能报名"
+            },
+            {
+              "label": "实际",
+              "text": "时间、交通和照护条件影响可达性"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "形式上相同的规则可能带来不同的实际机会；怎样改善还需结合资源、目的与代价。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "形式上相同的规则可能带来不同的实际机会；怎样改善还需结合资源、目的与代价。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Distributive Justice",
+          "url": "https://plato.stanford.edu/entries/justice-distributive/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "形式上相同的规则可能带来不同的实际机会；怎样改善还需结合资源、目的与代价。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：报名都开放，机会就完全相同吗？",
+          "brief": "课程免费开放报名，但只在工作日上午线下进行。哪种分析更能识别实际限制？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "形式上相同的规则可能带来不同的实际机会；怎样改善还需结合资源、目的与代价。"
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "chapter": 5,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "规则设计",
+      "title": "怎样分配最后两张工作台？",
+      "brief": "四人希望使用两张工作台：有人有截止任务，有人已使用很久，有人没有替代设备。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "资源",
+              "text": "两张工作台"
+            },
+            {
+              "label": "需求",
+              "text": "紧迫性与替代不同"
+            },
+            {
+              "label": "历史",
+              "text": "使用时长不同"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可结合截止紧迫、既往占用和替代条件安排时段，说明为何某些差异相关；提供公开申请与复核。不是哪套分配数字固定正确，而是理由一致且考虑受影响者。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可结合截止紧迫、既往占用和替代条件安排时段，说明为何某些差异相关；提供公开申请与复核。不是哪套分配数字固定正确，而是理由一致且考虑受影响者。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Distributive Justice",
+          "url": "https://plato.stanford.edu/entries/justice-distributive/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "提出一套可说明的规则，比较至少两种公平标准，并给出申诉或修正办法。",
+      "reference": "可结合截止紧迫、既往占用和替代条件安排时段，说明为何某些差异相关；提供公开申请与复核。不是哪套分配数字固定正确，而是理由一致且考虑受影响者。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“规则设计”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样分配最后两张工作台？",
+          "prompt": "提出一套可说明的规则，比较至少两种公平标准，并给出申诉或修正办法。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "chapter": 5,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "立场交换",
+      "title": "不知道自己位置时，你会怎样定规则？",
+      "brief": "班级决定小组展示的评分与帮助机制，成员能力和家庭资源差异明显。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "差异",
+              "text": "设备、时间和经验"
+            },
+            {
+              "label": "共同目标",
+              "text": "学习与合理评价"
+            },
+            {
+              "label": "限制",
+              "text": "支持资源有限"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可优先保证基本资源、清楚标准和合理支持，再讨论努力与成果怎样评价。立场交换能减少只为自己设计的偏见，但人们对风险、需要和公平仍可能有合理分歧。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可优先保证基本资源、清楚标准和合理支持，再讨论努力与成果怎样评价。立场交换能减少只为自己设计的偏见，但人们对风险、需要和公平仍可能有合理分歧。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Distributive Justice",
+          "url": "https://plato.stanford.edu/entries/justice-distributive/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "暂时不知道自己会处在哪个位置，提出规则，再说明这种思考方法能帮助什么、不能保证什么。",
+      "reference": "可优先保证基本资源、清楚标准和合理支持，再讨论努力与成果怎样评价。立场交换能减少只为自己设计的偏见，但人们对风险、需要和公平仍可能有合理分歧。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“立场交换”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "不知道自己位置时，你会怎样定规则？",
+          "prompt": "暂时不知道自己会处在哪个位置，提出规则，再说明这种思考方法能帮助什么、不能保证什么。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "chapter": 5,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "公共理由",
+      "title": "怎样讨论一条你不喜欢的规则？",
+      "brief": "社区夜间活动影响休息，但参与者也需要工作后共同活动的空间。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "甲",
+              "text": "需要安静休息"
+            },
+            {
+              "label": "乙",
+              "text": "工作后才有共同活动时间"
+            },
+            {
+              "label": "可能",
+              "text": "时间、地点与音量调整"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "休息与共同活动都有理由，可讨论时段、音量、地点及试行复盘。不要把一方说成自私或懒惰；折中是否可行还要听受影响者并核查环境。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "休息与共同活动都有理由，可讨论时段、音量、地点及试行复盘。不要把一方说成自私或懒惰；折中是否可行还要听受影响者并核查环境。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Distributive Justice",
+          "url": "https://plato.stanford.edu/entries/justice-distributive/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "为双方重建一个合理理由，提出折中或替代，并解释为什么可向不同立场的人说明。",
+      "reference": "休息与共同活动都有理由，可讨论时段、音量、地点及试行复盘。不要把一方说成自私或懒惰；折中是否可行还要听受影响者并核查环境。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“公共理由”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样讨论一条你不喜欢的规则？",
+          "prompt": "为双方重建一个合理理由，提出折中或替代，并解释为什么可向不同立场的人说明。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "chapter": 5,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "平等与照顾",
+      "title": "帮助更多，需要被解释吗？",
+      "brief": "一位新成员需要更多培训时间，老成员认为每人支持时长必须一样。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "新成员",
+              "text": "缺少基础培训"
+            },
+            {
+              "label": "老成员",
+              "text": "担心劳动分担"
+            },
+            {
+              "label": "目标",
+              "text": "每人都能真实参与"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "尊重相等不必要求资源完全相同；更多帮助可能让实际参与机会接近。还需说明培训目标、支持边界和承担者的时间，避免把包容成本默默压给少数人。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "尊重相等不必要求资源完全相同；更多帮助可能让实际参与机会接近。还需说明培训目标、支持边界和承担者的时间，避免把包容成本默默压给少数人。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Distributive Justice",
+          "url": "https://plato.stanford.edu/entries/justice-distributive/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "比较同等尊重与相同时长，说明怎样回应新成员需要并公平分担支持劳动。",
+      "reference": "尊重相等不必要求资源完全相同；更多帮助可能让实际参与机会接近。还需说明培训目标、支持边界和承担者的时间，避免把包容成本默默压给少数人。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“平等与照顾”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "帮助更多，需要被解释吗？",
+          "prompt": "比较同等尊重与相同时长，说明怎样回应新成员需要并公平分担支持劳动。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "chapter": 6,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "仁与礼的关系",
+      "title": "形式周到，就一定照顾到了人吗？",
+      "brief": "聚会礼节齐全，却没人注意到一位来宾无法参与。哪种分析更适合作为儒家关系伦理的入门讨论？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "讨论",
+              "text": "礼的形式怎样表达尊重与关怀"
+            },
+            {
+              "label": "检查",
+              "text": "具体的人是否被真正照顾，形式是否需要调整"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "讨论",
+              "text": "动作完全照旧就是全部道德要求"
+            },
+            {
+              "label": "检查",
+              "text": "无需关心当事人的处境"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可把礼理解为需要关怀与修养支撑的实践，而不把它缩成机械动作；儒家内部也有解释差异。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可把礼理解为需要关怀与修养支撑的实践，而不把它缩成机械动作；儒家内部也有解释差异。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Confucius",
+          "url": "https://plato.stanford.edu/entries/confucius/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Daoism",
+          "url": "https://plato.stanford.edu/entries/daoism/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "可把礼理解为需要关怀与修养支撑的实践，而不把它缩成机械动作；儒家内部也有解释差异。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：形式周到，就一定照顾到了人吗？",
+          "brief": "聚会礼节齐全，却没人注意到一位来宾无法参与。哪种分析更适合作为儒家关系伦理的入门讨论？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "可把礼理解为需要关怀与修养支撑的实践，而不把它缩成机械动作；儒家内部也有解释差异。"
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "chapter": 6,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "修养与反思",
+      "title": "改过，是背一句话还是改行动？",
+      "brief": "小林每天背诵“尊重他人”，开会时却总打断别人。哪种学习安排更能联系修养？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "实践",
+              "text": "增加背诵次数即可"
+            },
+            {
+              "label": "反思",
+              "text": "是否尊重只取决于口号是否熟练"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "实践",
+              "text": "观察自己何时打断，尝试先听完并复述"
+            },
+            {
+              "label": "反思",
+              "text": "请同伴反馈，持续调整具体行为"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "修养可以通过具体关系中的行动、反思和练习来讨论，不能只由口号熟练程度判断。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "修养可以通过具体关系中的行动、反思和练习来讨论，不能只由口号熟练程度判断。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Confucius",
+          "url": "https://plato.stanford.edu/entries/confucius/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Daoism",
+          "url": "https://plato.stanford.edu/entries/daoism/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "修养可以通过具体关系中的行动、反思和练习来讨论，不能只由口号熟练程度判断。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：改过，是背一句话还是改行动？",
+          "brief": "小林每天背诵“尊重他人”，开会时却总打断别人。哪种学习安排更能联系修养？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "修养可以通过具体关系中的行动、反思和练习来讨论，不能只由口号熟练程度判断。"
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "chapter": 6,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "无为与强制",
+      "title": "无为，就是任何事都不做吗？",
+      "brief": "园丁比较两种养护：了解植物习性后适度照料，与完全不管。哪种比喻更能避免把道家无为简单化？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "理解",
+              "text": "减少违背条件的强制和过度干预"
+            },
+            {
+              "label": "边界",
+              "text": "仍可有细致观察与适当行动"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "理解",
+              "text": "任何行动都违反无为"
+            },
+            {
+              "label": "边界",
+              "text": "不必观察具体条件"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "无为有多种历史解释，不能机械等于懒散或完全停止行动；此处只以减少强制的适切行动作入门比喻。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "无为有多种历史解释，不能机械等于懒散或完全停止行动；此处只以减少强制的适切行动作入门比喻。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Confucius",
+          "url": "https://plato.stanford.edu/entries/confucius/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Daoism",
+          "url": "https://plato.stanford.edu/entries/daoism/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "无为有多种历史解释，不能机械等于懒散或完全停止行动；此处只以减少强制的适切行动作入门比喻。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：无为，就是任何事都不做吗？",
+          "brief": "园丁比较两种养护：了解植物习性后适度照料，与完全不管。哪种比喻更能避免把道家无为简单化？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "无为有多种历史解释，不能机械等于懒散或完全停止行动；此处只以减少强制的适切行动作入门比喻。"
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "chapter": 6,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "视角与边界",
+      "title": "看见视角不同，就什么都一样了吗？",
+      "brief": "同一棵树，木工看材料，路人看树荫。哪种延伸更谨慎？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "启发",
+              "text": "既然视角不同，所有说法同样真实"
+            },
+            {
+              "label": "边界",
+              "text": "不必检查树的实际情况"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "启发",
+              "text": "目的影响我们注意什么"
+            },
+            {
+              "label": "边界",
+              "text": "不同视角仍可在具体问题上比较理由与事实"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "视角多样提醒我们反思标准和用途，不自动推出所有事实判断等价，也不能代替具体论证。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "视角多样提醒我们反思标准和用途，不自动推出所有事实判断等价，也不能代替具体论证。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Confucius",
+          "url": "https://plato.stanford.edu/entries/confucius/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Daoism",
+          "url": "https://plato.stanford.edu/entries/daoism/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "视角多样提醒我们反思标准和用途，不自动推出所有事实判断等价，也不能代替具体论证。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：看见视角不同，就什么都一样了吗？",
+          "brief": "同一棵树，木工看材料，路人看树荫。哪种延伸更谨慎？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "视角多样提醒我们反思标准和用途，不自动推出所有事实判断等价，也不能代替具体论证。"
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "chapter": 6,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "关系中的关怀",
+      "title": "一份礼貌，怎样变成真实尊重？",
+      "brief": "你为长辈安排活动，却从未询问他是否喜欢，只按“对长辈好”的惯例决定。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "出发点",
+              "text": "表达敬意"
+            },
+            {
+              "label": "遗漏",
+              "text": "当事人的偏好"
+            },
+            {
+              "label": "限制",
+              "text": "时间和安排已部分确定"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可先询问偏好与实际能力，保留表达敬意的方式，同时允许拒绝或改期。关系中的关怀不等于包办；不同家庭语境可有不同表达，需说明具体理由。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可先询问偏好与实际能力，保留表达敬意的方式，同时允许拒绝或改期。关系中的关怀不等于包办；不同家庭语境可有不同表达，需说明具体理由。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Confucius",
+          "url": "https://plato.stanford.edu/entries/confucius/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Daoism",
+          "url": "https://plato.stanford.edu/entries/daoism/"
+        }
+      ],
+      "correct": null,
+      "prompt": "提出一次兼顾关系、倾听与适当礼节的修改，说明怎样避免替对方定义全部需要。",
+      "reference": "可先询问偏好与实际能力，保留表达敬意的方式，同时允许拒绝或改期。关系中的关怀不等于包办；不同家庭语境可有不同表达，需说明具体理由。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“关系中的关怀”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "一份礼貌，怎样变成真实尊重？",
+          "prompt": "提出一次兼顾关系、倾听与适当礼节的修改，说明怎样避免替对方定义全部需要。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "chapter": 6,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "习惯与修养",
+      "title": "选择一个能观察的改变",
+      "brief": "你希望待人更耐心，但“变成更好的人”太模糊，难以回看。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "目标",
+              "text": "更耐心地对话"
+            },
+            {
+              "label": "场景",
+              "text": "小组开会"
+            },
+            {
+              "label": "材料",
+              "text": "可记录自己的行动，不给别人贴标签"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可练习开会先听完再复述，每周回看一次误解并请同伴举例。次数能记录实践，不能独自证明关怀与判断已经成熟；修养也应面对具体情境。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可练习开会先听完再复述，每周回看一次误解并请同伴举例。次数能记录实践，不能独自证明关怀与判断已经成熟；修养也应面对具体情境。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Confucius",
+          "url": "https://plato.stanford.edu/entries/confucius/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Daoism",
+          "url": "https://plato.stanford.edu/entries/daoism/"
+        }
+      ],
+      "correct": null,
+      "prompt": "选择一个日常场景，提出可重复练习、反思和接受反馈的安排，并说明不能仅靠次数衡量的部分。",
+      "reference": "可练习开会先听完再复述，每周回看一次误解并请同伴举例。次数能记录实践，不能独自证明关怀与判断已经成熟；修养也应面对具体情境。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“习惯与修养”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "选择一个能观察的改变",
+          "prompt": "选择一个日常场景，提出可重复练习、反思和接受反馈的安排，并说明不能仅靠次数衡量的部分。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "chapter": 6,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "适切行动",
+      "title": "什么时候多做反而帮倒忙？",
+      "brief": "朋友正在学习做饭，你不断替他完成每一步，结果他始终没有机会尝试。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "意图",
+              "text": "帮助朋友"
+            },
+            {
+              "label": "现状",
+              "text": "你替他完成大部分步骤"
+            },
+            {
+              "label": "风险",
+              "text": "自主练习与安全都需要考虑"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可以先询问需要，只在必要提示和安全边界处介入，让对方尝试并复盘。减少控制不等于放任危险；这个比喻只帮助讨论支持与自主，不能代表道家所有观点。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可以先询问需要，只在必要提示和安全边界处介入，让对方尝试并复盘。减少控制不等于放任危险；这个比喻只帮助讨论支持与自主，不能代表道家所有观点。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Confucius",
+          "url": "https://plato.stanford.edu/entries/confucius/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Daoism",
+          "url": "https://plato.stanford.edu/entries/daoism/"
+        }
+      ],
+      "correct": null,
+      "prompt": "借“减少过度干预”的思路安排支持，说明何时退后、何时仍要介入，不把比喻当万能原则。",
+      "reference": "可以先询问需要，只在必要提示和安全边界处介入，让对方尝试并复盘。减少控制不等于放任危险；这个比喻只帮助讨论支持与自主，不能代表道家所有观点。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“适切行动”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "什么时候多做反而帮倒忙？",
+          "prompt": "借“减少过度干预”的思路安排支持，说明何时退后、何时仍要介入，不把比喻当万能原则。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "chapter": 6,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "比较而非贴标签",
+      "title": "两种传统，怎样认真地放在一起？",
+      "brief": "有人把儒家概括为“只讲服从”，把道家概括为“只讲躺平”，准备据此选择人生道路。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "口号一",
+              "text": "儒家等于服从"
+            },
+            {
+              "label": "口号二",
+              "text": "道家等于躺平"
+            },
+            {
+              "label": "任务",
+              "text": "选择具体问题，而非给人分类"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可围绕如何帮助朋友比较关系责任与适切干预，承认内部多样性和历史语境；继续回到具体文本、注释与不同解释，而不把传统变成性格测试。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可围绕如何帮助朋友比较关系责任与适切干预，承认内部多样性和历史语境；继续回到具体文本、注释与不同解释，而不把传统变成性格测试。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · Confucius",
+          "url": "https://plato.stanford.edu/entries/confucius/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Daoism",
+          "url": "https://plato.stanford.edu/entries/daoism/"
+        }
+      ],
+      "correct": null,
+      "prompt": "指出这种概括漏掉什么，选择一个具体问题比较两种视角，并说明还需阅读什么。",
+      "reference": "可围绕如何帮助朋友比较关系责任与适切干预，承认内部多样性和历史语境；继续回到具体文本、注释与不同解释，而不把传统变成性格测试。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“比较而非贴标签”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "两种传统，怎样认真地放在一起？",
+          "prompt": "指出这种概括漏掉什么，选择一个具体问题比较两种视角，并说明还需阅读什么。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "chapter": 7,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "偏好与评价",
+      "title": "“我不喜欢”与“它毫无价值”一样吗？",
+      "brief": "你不喜欢一幅画的颜色，朋友认为它表达了一段复杂经历。哪种讨论更清楚？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "区分",
+              "text": "个人喜好与作品价值评价"
+            },
+            {
+              "label": "追问",
+              "text": "形式、语境和表达提供了什么理由"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "区分",
+              "text": "只要我不喜欢，作品就毫无价值"
+            },
+            {
+              "label": "追问",
+              "text": "别人的理解不值得听"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "喜好是重要体验，但更广的审美评价还可讨论形式、表达和语境；也不必因了解背景就强迫喜欢。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "喜好是重要体验，但更广的审美评价还可讨论形式、表达和语境；也不必因了解背景就强迫喜欢。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · The Meaning of Life",
+          "url": "https://plato.stanford.edu/entries/life-meaning/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Beauty",
+          "url": "https://plato.stanford.edu/entries/beauty/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "喜好是重要体验，但更广的审美评价还可讨论形式、表达和语境；也不必因了解背景就强迫喜欢。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：“我不喜欢”与“它毫无价值”一样吗？",
+          "brief": "你不喜欢一幅画的颜色，朋友认为它表达了一段复杂经历。哪种讨论更清楚？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "喜好是重要体验，但更广的审美评价还可讨论形式、表达和语境；也不必因了解背景就强迫喜欢。"
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "chapter": 7,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "意义与快乐",
+      "title": "有意义的事，必须每刻都快乐吗？",
+      "brief": "照护家人可能疲惫，练习一项技能也常枯燥。哪种分析避免把意义与即时愉快完全等同？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "比较",
+              "text": "只要当下不开心就完全无意义"
+            },
+            {
+              "label": "边界",
+              "text": "无需看长期认可与关系"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "比较",
+              "text": "愉快、关系、投入和价值可能不同"
+            },
+            {
+              "label": "边界",
+              "text": "不把所有痛苦自动说成有意义"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "意义与愉快可能关联但不必等同；反过来痛苦本身也不是意义的保证，仍需讨论价值与选择。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "意义与愉快可能关联但不必等同；反过来痛苦本身也不是意义的保证，仍需讨论价值与选择。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · The Meaning of Life",
+          "url": "https://plato.stanford.edu/entries/life-meaning/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Beauty",
+          "url": "https://plato.stanford.edu/entries/beauty/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "意义与愉快可能关联但不必等同；反过来痛苦本身也不是意义的保证，仍需讨论价值与选择。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：有意义的事，必须每刻都快乐吗？",
+          "brief": "照护家人可能疲惫，练习一项技能也常枯燥。哪种分析避免把意义与即时愉快完全等同？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "意义与愉快可能关联但不必等同；反过来痛苦本身也不是意义的保证，仍需讨论价值与选择。"
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "chapter": 7,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "善意理解",
+      "title": "真正回应分歧，先做什么？",
+      "brief": "朋友说他更重视安静生活，你认为应不断挑战。哪种回应更有助于理解？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "复述",
+              "text": "先问清安静对他意味着什么"
+            },
+            {
+              "label": "回应",
+              "text": "讨论可能得到和失去的东西"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "复述",
+              "text": "直接说他害怕成长"
+            },
+            {
+              "label": "回应",
+              "text": "只用自己的生活目标给他下结论"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "先澄清对方实际价值和处境，才能回应其最强理由；理解不要求放弃自己的立场。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "先澄清对方实际价值和处境，才能回应其最强理由；理解不要求放弃自己的立场。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · The Meaning of Life",
+          "url": "https://plato.stanford.edu/entries/life-meaning/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Beauty",
+          "url": "https://plato.stanford.edu/entries/beauty/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "先澄清对方实际价值和处境，才能回应其最强理由；理解不要求放弃自己的立场。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：真正回应分歧，先做什么？",
+          "brief": "朋友说他更重视安静生活，你认为应不断挑战。哪种回应更有助于理解？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "先澄清对方实际价值和处境，才能回应其最强理由；理解不要求放弃自己的立场。"
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "chapter": 7,
+      "module": "philosophy-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "判断可修正",
+      "title": "好的结尾，必须把一切定死吗？",
+      "brief": "读书会讨论后仍有分歧。哪种记录更能继续推进？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "记录",
+              "text": "为了显得坚定删除所有疑问"
+            },
+            {
+              "label": "后续",
+              "text": "不允许任何条件改变判断"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "分析记录",
+          "rows": [
+            {
+              "label": "记录",
+              "text": "当前立场、最强理由和未解决反例"
+            },
+            {
+              "label": "后续",
+              "text": "说明什么新材料会让自己修改"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "清楚的暂定结论与开放问题可以同时存在；承认限度不等于没有立场。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "清楚的暂定结论与开放问题可以同时存在；承认限度不等于没有立场。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · The Meaning of Life",
+          "url": "https://plato.stanford.edu/entries/life-meaning/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Beauty",
+          "url": "https://plato.stanford.edu/entries/beauty/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选分析",
+        "候选分析"
+      ],
+      "why": "清楚的暂定结论与开放问题可以同时存在；承认限度不等于没有立场。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：好的结尾，必须把一切定死吗？",
+          "brief": "读书会讨论后仍有分歧。哪种记录更能继续推进？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "清楚的暂定结论与开放问题可以同时存在；承认限度不等于没有立场。"
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "chapter": 7,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "审美理由",
+      "title": "为一个审美判断多说一步",
+      "brief": "朋友问你为什么喜欢一段很安静的电影，你只回答“有感觉”。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "作品",
+              "text": "安静、长停顿的片段"
+            },
+            {
+              "label": "你的体验",
+              "text": "被吸引"
+            },
+            {
+              "label": "不同体验",
+              "text": "有人觉得缓慢"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可指向停顿、画外声与人物动作如何让你留意关系；别人感到缓慢也有可理解的依据。说明体验与形式的联系，比宣布某类电影永远更高级更可讨论。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可指向停顿、画外声与人物动作如何让你留意关系；别人感到缓慢也有可理解的依据。说明体验与形式的联系，比宣布某类电影永远更高级更可讨论。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · The Meaning of Life",
+          "url": "https://plato.stanford.edu/entries/life-meaning/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Beauty",
+          "url": "https://plato.stanford.edu/entries/beauty/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "描述一个具体形式或观看经验，说明它怎样支撑你的评价，再回应一种不同的合理感受。",
+      "reference": "可指向停顿、画外声与人物动作如何让你留意关系；别人感到缓慢也有可理解的依据。说明体验与形式的联系，比宣布某类电影永远更高级更可讨论。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“审美理由”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "为一个审美判断多说一步",
+          "prompt": "描述一个具体形式或观看经验，说明它怎样支撑你的评价，再回应一种不同的合理感受。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "chapter": 7,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "生活价值",
+      "title": "两条生活道路，怎样比较？",
+      "brief": "甲有稳定工作和很多陪伴时间，乙选择不稳定但投入的创作。两人都认可自己的选择。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "甲",
+              "text": "稳定与陪伴"
+            },
+            {
+              "label": "乙",
+              "text": "创作与不确定"
+            },
+            {
+              "label": "共同",
+              "text": "都在反思自己的生活"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可比较自主、关系、创造和安全感，问是否反思认可、代价是否可承受、是否尊重他人。不同价值可能无法完全换算；不据此推出所有选择没有优劣可谈。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可比较自主、关系、创造和安全感，问是否反思认可、代价是否可承受、是否尊重他人。不同价值可能无法完全换算；不据此推出所有选择没有优劣可谈。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · The Meaning of Life",
+          "url": "https://plato.stanford.edu/entries/life-meaning/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Beauty",
+          "url": "https://plato.stanford.edu/entries/beauty/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "选两种价值维度比较，提出一条对双方都公平的追问，不以收入或忙碌独自给人生排序。",
+      "reference": "可比较自主、关系、创造和安全感，问是否反思认可、代价是否可承受、是否尊重他人。不同价值可能无法完全换算；不据此推出所有选择没有优劣可谈。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“生活价值”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "两条生活道路，怎样比较？",
+          "prompt": "选两种价值维度比较，提出一条对双方都公平的追问，不以收入或忙碌独自给人生排序。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "chapter": 7,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "立场与反例",
+      "title": "给自己的判断找一个强对手",
+      "brief": "你主张“任何时候都应说出全部真相”，现在要认真检查它。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "立场",
+              "text": "任何时候说出全部真相"
+            },
+            {
+              "label": "支持",
+              "text": "信任与诚实"
+            },
+            {
+              "label": "检查",
+              "text": "隐私、伤害与知情责任"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可先说明诚实对信任的价值，再考虑隐私、求助安全或尚未核实的信息；修正为在适当关系与情境中真实而负责地沟通。也允许坚持更强义务，但须回应反例而不是跳过。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可先说明诚实对信任的价值，再考虑隐私、求助安全或尚未核实的信息；修正为在适当关系与情境中真实而负责地沟通。也允许坚持更强义务，但须回应反例而不是跳过。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · The Meaning of Life",
+          "url": "https://plato.stanford.edu/entries/life-meaning/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Beauty",
+          "url": "https://plato.stanford.edu/entries/beauty/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "重建支持理由，提出一个强反例，形成可解释的修正版或说明为何仍保留原立场。",
+      "reference": "可先说明诚实对信任的价值，再考虑隐私、求助安全或尚未核实的信息；修正为在适当关系与情境中真实而负责地沟通。也允许坚持更强义务，但须回应反例而不是跳过。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“立场与反例”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "给自己的判断找一个强对手",
+          "prompt": "重建支持理由，提出一个强反例，形成可解释的修正版或说明为何仍保留原立场。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "chapter": 7,
+      "module": "philosophy-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "综合论证",
+      "title": "把一段“我觉得”写成小论证",
+      "brief": "你可以选“学校应不应该设无手机时段”或另一个具体生活问题，写一次认真判断。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "思想实验",
+          "title": "问题材料",
+          "rows": [
+            {
+              "label": "可选",
+              "text": "无手机时段或自选具体问题"
+            },
+            {
+              "label": "要求",
+              "text": "理由与反例"
+            },
+            {
+              "label": "边界",
+              "text": "事实与价值前提应分开"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "合格表达可以赞成、反对或有条件支持，只要概念清楚、理由相关并认真回应异议。不按世界观方向判分，练习检验的是本次论证质量。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "合格表达可以赞成、反对或有条件支持，只要概念清楚、理由相关并认真回应异议。不按世界观方向判分，练习检验的是本次论证质量。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Stanford Encyclopedia · The Meaning of Life",
+          "url": "https://plato.stanford.edu/entries/life-meaning/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Beauty",
+          "url": "https://plato.stanford.edu/entries/beauty/"
+        },
+        {
+          "title": "Stanford Encyclopedia · Critical Thinking",
+          "url": "https://plato.stanford.edu/entries/critical-thinking/"
+        }
+      ],
+      "correct": null,
+      "prompt": "给出立场、两条理由、一个最强反对意见和回应；说明至少一个会使你改口的条件。",
+      "reference": "合格表达可以赞成、反对或有条件支持，只要概念清楚、理由相关并认真回应异议。不按世界观方向判分，练习检验的是本次论证质量。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“综合论证”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "把一段“我觉得”写成小论证",
+          "prompt": "给出立场、两条理由、一个最强反对意见和回应；说明至少一个会使你改口的条件。 请说明一个可能的限制或反例。"
+        }
+      ]
+    }
+  ]
+}

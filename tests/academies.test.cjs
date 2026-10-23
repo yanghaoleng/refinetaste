@@ -1,0 +1,19 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),vm=require('node:vm'),cp=require('node:child_process');
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'academy-test-'));cp.execFileSync('python3',['scripts/build-academies.py','--output',dir]);process.on('exit',()=>fs.rmSync(dir,{recursive:true,force:true}));
+test('two curricula retain the full interaction runtime with separate storage and valid sources',()=>{
+ for(const [slug,total,chapters] of [['philosophy',64,8],['mediaclass',96,12]]){const root=path.join(dir,slug,'dist'),course=JSON.parse(fs.readFileSync(path.join(root,'course.json'),'utf8'));assert.equal(course.questions.length,total);assert.equal(course.chapters.length,chapters);
+  const ctx={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'chapter-practice.js'),'utf8'),ctx);assert.deepEqual(JSON.parse(JSON.stringify(ctx.window.RefinePractice.menu.chapters)),course.chapters);
+  for(const name of ['app.js','analytics.js','privacy-id.js']){const s=fs.readFileSync(path.join(root,name),'utf8');assert.doesNotMatch(s,/refinetaste/);if(name==='analytics.js')assert.ok(s.includes('/'+slug+'/api/'))}
+  for(const ch of course.chapters){const qs=course.questions.filter(q=>q.chapter===ch.id);assert.equal(qs.length,8);assert.equal(qs.filter(q=>q.kind==='choice').length,4)}
+  for(const [i,q] of course.questions.entries()){assert.equal(q.id,i);assert.ok(q.sources.length);assert.ok(q.brief.length>15);if(q.kind==='choice'){assert.equal(q.visuals.length,2);assert.notDeepEqual(q.visuals[0],q.visuals[1])}else{assert.ok(q.prompt);assert.ok(q.reference.length>35)}}
+ }
+});
+test('every homepage recommends all three other fields with direct usable anchors and no self link',()=>{
+ const cases=[['design','dist/index.html'],['music',path.resolve('..','音乐班/lilaoshi/web/index.html')],['philosophy',path.join(dir,'philosophy/dist/index.html')],['mediaclass',path.join(dir,'mediaclass/dist/index.html')]];
+ const urls={design:'https://mikeywa.site/refinetaste/',music:'https://m.mikeywa.site/pianoclass/',philosophy:'https://mikeywa.site/philosophy/',mediaclass:'https://mikeywa.site/mediaclass/'};
+ for(const [current,file] of cases){if(!fs.existsSync(file)&&current==='music')continue;const section=fs.readFileSync(file,'utf8').match(/<section id="other-fields".*?<\/section>/s)[0];assert.equal((section.match(/<a /g)||[]).length,3);for(const [key,url] of Object.entries(urls))assert.equal(section.includes('href="'+url+'"'),key!==current)}
+});
+test('each subject case renders as native readable information, without new vector illustrations',()=>{
+ const ctx={window:{}};vm.runInNewContext(fs.readFileSync('dist/marketing-cases.js','utf8'),ctx);
+ for(const slug of ['philosophy','mediaclass'])for(const q of JSON.parse(fs.readFileSync('academy/'+slug+'/course.json')).questions)for(const v of q.visuals){const html=ctx.window.RefineMarketing.render(v);assert.match(html,/<figcaption>/);assert.doesNotMatch(html,/<svg|<script/);for(const row of v.rows)assert.ok(html.includes(row.text))}
+});
