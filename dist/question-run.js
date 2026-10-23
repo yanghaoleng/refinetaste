@@ -19,5 +19,10 @@
   if(!Number.isInteger(position)||position<0||position>=order.length-1||Object.hasOwn(answers,order[position]))return null;
   const next=[...order],question=next.splice(position,1)[0];next.push(question);return next;
  }
- window.RefineRun={create,resolve,defer};
+ function nextPending(order,current,answers={}){
+  const start=order.indexOf(current);
+  for(let offset=1;offset<=order.length;offset++){const id=order[(Math.max(start,-1)+offset)%order.length];if(!Object.hasOwn(answers,id))return id}
+  return null;
+ }
+ window.RefineRun={create,resolve,defer,nextPending};
 })();

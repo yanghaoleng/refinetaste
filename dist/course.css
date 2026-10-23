@@ -424,3 +424,8 @@ body.privacy-open{overflow:hidden}
 
 /* Limit catalogue interaction to the progress control rather than the text column. */
 .chapter-copy .chapter-catalog{width:fit-content;max-width:100%}
+
+.catalog-popup .catalog-point:has(.catalog-jump){padding:0;align-items:center}
+.catalog-jump{flex:1;min-width:0;padding:11px 6px;border:0;border-radius:6px;background:transparent;color:inherit;text-align:left;font:inherit;font-weight:600;line-height:1.5;cursor:pointer}
+.catalog-jump:hover,.catalog-jump:focus-visible{background:var(--surface);outline:1px solid var(--line)}
+.catalog-jump[aria-current="step"]{color:var(--text);text-decoration:underline;text-underline-offset:4px}
