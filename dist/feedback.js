@@ -26,5 +26,7 @@
  }
  const wechat=document.querySelector('#feedback-wechat');
  wechat.addEventListener('click',()=>copyValue('yanghaoleng',wechat));
+ const dingtalk=document.querySelector('#feedback-dingtalk');
+ dingtalk.addEventListener('click',()=>copyValue('杨皓棱',dingtalk,'钉钉昵称已复制'));
  uidButton?.addEventListener('click',()=>{if(uid)return copyValue(uid,uidButton,'UID 已复制')});
 })();
