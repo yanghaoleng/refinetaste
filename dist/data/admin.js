@@ -2,6 +2,39 @@ const $=s=>document.querySelector(s),esc=s=>String(s??'').replaceAll('&','&amp;'
 const fmt=n=>Number(n).toLocaleString('zh-CN'),pct=(a,b)=>b?`${(100*a/b).toFixed(1)}%`:'—',date=t=>t?new Date(t*1000).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false}):'—';
 let period='7',data=null,pin='',busy=false,lockedUntil=0,userPage=0,generation=0,detailGeneration=0,selectedUser=null,recordPage=0,searchTimer;
 const transcriptNodes=new Map();
+// Retarget from the current presentation when an interaction interrupts motion.
+const adminMotion=new WeakMap(),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+let keyboardInput=false;
+document.addEventListener('keydown',()=>{keyboardInput=true;document.documentElement.dataset.adminInput='keyboard'},true);
+document.addEventListener('pointerdown',()=>{keyboardInput=false;document.documentElement.dataset.adminInput='pointer'},true);
+function moveContent(node,{offset=0,x=0,scale=1,duration=180,delay=0,exit=false}={}){
+ const running=adminMotion.get(node),current=running?getComputedStyle(node):null;
+ const from=current?{opacity:current.opacity,transform:current.transform}:{opacity:exit?1:.6,transform:exit?'none':`translate(${x}px,${offset}px) scale(${scale})`};
+ running?.cancel();adminMotion.delete(node);
+ if(keyboardInput||!node.animate||!node.getClientRects().length)return Promise.resolve();
+ const to={opacity:exit?0:1,transform:reducedMotion.matches?'none':exit?'scale(.98)':'none'};
+ if(reducedMotion.matches)from.transform='none';
+ const easing=getComputedStyle(document.documentElement).getPropertyValue('--ease-out').trim();
+ const animation=node.animate([from,to],{duration:reducedMotion.matches?125:duration,delay:reducedMotion.matches?0:delay,easing,fill:'backwards'});
+ adminMotion.set(node,animation);
+ return animation.finished.catch(()=>{}).finally(()=>{if(adminMotion.get(node)===animation)adminMotion.delete(node)});
+}
+let modalCloseGeneration=0;
+function showDetail(){
+ modalCloseGeneration++;const modal=$('#detail-modal'),wasOpen=modal.open;
+ adminMotion.get(modal)?.cancel();modal.classList.remove('is-closing');
+ if(!wasOpen){modal.showModal();moveContent(modal,{duration:250,scale:.98})}
+ else moveContent(modal.querySelector('section:not([hidden])'),{duration:180});
+}
+async function closeDetail(){
+ const modal=$('#detail-modal');if(!modal.open||modal.classList.contains('is-closing'))return;
+ const token=++modalCloseGeneration;modal.classList.add('is-closing');
+ await moveContent(modal,{duration:180,exit:true});
+ if(token!==modalCloseGeneration)return;
+ modal.close();modal.classList.remove('is-closing');
+}
+$('#detail-modal').addEventListener('cancel',event=>{event.preventDefault();closeDetail()});
+
 const tableSorts=new Map(),tableRows=new WeakMap();
 let savedColumnWidths={};try{savedColumnWidths=JSON.parse(localStorage.getItem('refinetaste-admin-column-widths')||'{}')}catch{}
 if(!savedColumnWidths||typeof savedColumnWidths!=='object'||Array.isArray(savedColumnWidths))savedColumnWidths={};
@@ -49,7 +82,7 @@ function enhanceTables(root=document){
    button.onclick=()=>{
     const previous=tableSorts.get(table.id),direction=previous?.column!==index||!previous.direction?'asc':previous.direction==='asc'?'desc':null;
     tableSorts.set(table.id,{column:index,direction});applyTableSort(table);
-    if(table.dataset.remoteSort){userPage=0;load()}
+    if(table.dataset.remoteSort){userPage=0;load()}else moveContent(table.tBodies[0],{duration:125})
    };
    const grip=document.createElement('span');grip.className='column-resize';grip.tabIndex=0;grip.setAttribute('role','separator');grip.setAttribute('aria-orientation','vertical');grip.setAttribute('aria-label',`调整${label}列宽`);grip.setAttribute('aria-valuemin','72');grip.setAttribute('aria-valuemax','900');grip.setAttribute('aria-valuenow',Math.round(th.getBoundingClientRect().width||140));th.append(grip);
    grip.onpointerdown=event=>{
@@ -77,7 +110,7 @@ function prepareActivities(force=false){
  }
  renderActivities();
 }
-function renderActivities(){
+function renderActivities(direction=0){
  const host=$('#activity-cards'),count=parseInt(getComputedStyle(host).getPropertyValue('--cards'))||3;
  activityColumns=count;
  if(activityIndex>=activityItems.length)activityIndex=0;
@@ -89,14 +122,15 @@ function renderActivities(){
   else if(record.type==='verdict')body=`<div class="activity-verdict ${record.correct?'right':'wrong'}">${record.correct?'答对了':'再想一想'}</div><p class="activity-result">${record.kind==='open'?'简答题 · AI 原则判定':'选择题'}</p>`;
   else if(record.type==='bookmark')body='<p class="activity-result">已加入收藏。</p>';
   else body=`${record.userText?`<blockquote><small>用户</small><p>${esc(record.userText)}</p></blockquote>`:''}${record.aiText?`<blockquote class="activity-ai"><small>JOJO</small><p>${esc(record.aiText)}</p></blockquote>`:''}`;
-  return `<article class="activity-card"><div class="activity-card-meta"><span>${names[record.type]}</span><time>${date(record.ts)}</time></div><h3>${esc(record.title)}</h3><div class="activity-body">${body}</div><div class="activity-card-foot"><span>${esc(record.label)}</span><button class="activity-user" data-activity-user="${record.visitor}">查看详情 →</button></div></article>`;
+  return `<article class="activity-card"><div class="activity-card-meta"><span>${names[record.type]}</span><time>${date(record.ts)}</time></div><h3>${esc(record.title)}</h3><div class="activity-body">${body}</div><div class="activity-card-foot"><span>${esc(record.label)}</span><button class="activity-user" data-activity-user="${record.visitor}">查看详情 <span class="activity-arrow" aria-hidden="true">→</span></button></div></article>`;
  }).join(''):'<p class="activity-empty">当前范围还没有可展示的作答动态。有新的回答、对话或成绩后会出现在这里。</p>';
  $('#activity-page').textContent=rows.length?`${activityIndex+1}–${activityIndex+rows.length} / ${activityItems.length}`:'0 / 0';
  for(const id of ['activity-prev','activity-next','activity-shuffle'])$('#'+id).disabled=activityItems.length<=count;
+ [...host.children].forEach((card,index)=>moveContent(card,{offset:direction?0:8,x:direction*10,duration:180,delay:index*30}));
  host.querySelectorAll('[data-activity-user]').forEach(button=>button.onclick=()=>{openUser(button.dataset.activityUser)});
 }
-$('#activity-next').onclick=()=>{activityIndex=activityIndex+activityColumns>=activityItems.length?0:activityIndex+activityColumns;renderActivities()};
-$('#activity-prev').onclick=()=>{activityIndex=activityIndex===0?Math.floor((activityItems.length-1)/activityColumns)*activityColumns:Math.max(0,activityIndex-activityColumns);renderActivities()};
+$('#activity-next').onclick=()=>{activityIndex=activityIndex+activityColumns>=activityItems.length?0:activityIndex+activityColumns;renderActivities(1)};
+$('#activity-prev').onclick=()=>{activityIndex=activityIndex===0?Math.floor((activityItems.length-1)/activityColumns)*activityColumns:Math.max(0,activityIndex-activityColumns);renderActivities(-1)};
 $('#activity-shuffle').onclick=()=>prepareActivities(true);
 new ResizeObserver(()=>{const columns=parseInt(getComputedStyle($('#activity-cards')).getPropertyValue('--cards'))||3;if(columns!==activityColumns)renderActivities()}).observe($('#activity-cards'));
 
@@ -115,13 +149,16 @@ document.querySelectorAll('[data-key]').forEach(b=>b.onclick=()=>key(b.dataset.k
 document.addEventListener('keydown',event=>{if($('#gate').hidden||event.ctrlKey||event.metaKey||event.altKey)return;let k=event.key;if(k==='Backspace')k='delete';if(k==='Escape')k='clear';if(/^\d$/.test(k)||['delete','clear'].includes(k)){event.preventDefault();key(k)}});
 setInterval(()=>{if(Date.now()<lockedUntil)$('#pin-error').textContent=`尝试过于频繁，${Math.ceil((lockedUntil-Date.now())/1000)} 秒后重试。`;else if(lockedUntil){lockedUntil=0;$('#pin-error').textContent='可以重新输入访问码。'}},1000);
 async function load(){
- const token=++generation;$('#load-state').textContent='正在读取…';$('#refresh').disabled=true;
+ const firstLoad=$('#dashboard').hidden;
+ const token=++generation;$('#data-content').setAttribute('aria-busy','true');$('#load-state').textContent='正在读取…';$('#refresh').disabled=true;
  selectedUser=null;detailGeneration++;$('#learner-detail').hidden=true;
  try{
   const result=await api(`learners?days=${period}&page=${userPage}&search=${encodeURIComponent($('#user-search').value.trim())}${userSortQuery()}`);
   if(token!==generation)return;data=result;render();$('#load-state').textContent='';$('#pin-error').textContent='';$('#gate').hidden=true;$('#dashboard').hidden=false;
+  if(firstLoad){[$('.dash-title'),$('#trend'),$('.activity-section'),$('#metrics')].forEach((node,index)=>moveContent(node,{offset:8,duration:220,delay:index*30}))}
+  else moveContent($('#'+document.querySelector('[data-report][aria-selected=true]').dataset.report),{duration:150});
  }catch(error){if(token===generation){if($('#dashboard').hidden)$('#pin-error').textContent=error.message==='请重新输入访问码。'?'':error.message;else $('#load-state').textContent=error.message+' 当前数据未更新。'}}
- finally{if(token===generation)$('#refresh').disabled=false}
+ finally{if(token===generation){$('#refresh').disabled=false;$('#data-content').setAttribute('aria-busy','false')}}
 }
 function render(){
  const t=data.totals;
@@ -152,7 +189,7 @@ function drawTrend(){
  const rows=data?.trend?.days||[],active=trendSeries.filter(s=>shownSeries.has(s.key)),host=$('#trend-chart');
  if(!$('#trend-legend').children.length){
  $('#trend-legend').innerHTML=trendSeries.map(s=>`<label class="trend-toggle legend-${s.key}"><input type="checkbox" data-series="${s.key}" ${shownSeries.has(s.key)?'checked':''}><span class="metric-dot" aria-hidden="true"></span><span>${s.name}</span></label>`).join('');
- $('#trend-legend').querySelectorAll('input').forEach(input=>input.onchange=()=>{input.checked?shownSeries.add(input.dataset.series):shownSeries.delete(input.dataset.series);drawTrend()});
+ $('#trend-legend').querySelectorAll('input').forEach(input=>input.onchange=()=>{input.checked?shownSeries.add(input.dataset.series):shownSeries.delete(input.dataset.series);drawTrend();moveContent($('#trend-chart'),{duration:150})});
  }
  $('#trend-note').textContent='访问量、用户数和使用深度看左侧数量刻度；留存率与正确率看右侧百分比。留存的次日尚未结束时显示「待观察」。';
  $('#trend-table').innerHTML=`<table id="daily-table"><thead><tr><th>日期</th>${trendSeries.map(s=>`<th>${s.name}</th>`).join('')}<th>次日回来 / 首次出现</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.day}${r.covered?'':' · 未采集'}</td>${trendSeries.map(s=>`<td data-value="${r[s.key]??''}">${trendValue(s,r[s.key])}</td>`).join('')}<td data-value="${r.returned??''}">${!r.cohort?'—':r.retentionMature?`${r.returned} / ${r.cohort}`:`待观察 / ${r.cohort}`}</td></tr>`).join('')}</tbody></table>`;
@@ -201,6 +238,7 @@ function drawTrend(){
  drawing.onkeydown=event=>{let next=trendCursor;if(event.key==='ArrowLeft')next--;else if(event.key==='ArrowRight')next++;else if(event.key==='Home')next=0;else if(event.key==='End')next=rows.length-1;else return;event.preventDefault();showPoint(next)};
 }
 function selectPeriod(button){
+ if(button.getAttribute('aria-selected')==='true')return;
  period=button.dataset.period;userPage=0;
  document.querySelectorAll('[data-period]').forEach(tab=>{const selected=tab===button;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1});
  $('#data-content').setAttribute('aria-labelledby',button.id);load();
@@ -210,7 +248,9 @@ document.querySelectorAll('[data-period]').forEach((button,index,all)=>{
  button.onkeydown=event=>{let next=index;if(event.key==='ArrowRight')next=(index+1)%all.length;else if(event.key==='ArrowLeft')next=(index+all.length-1)%all.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=all.length-1;else return;event.preventDefault();selectPeriod(all[next]);all[next].focus()};
 });
 function selectReport(button){
- document.querySelectorAll('[data-report]').forEach(tab=>{const selected=tab===button;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;$('#'+tab.dataset.report).hidden=!selected});enhanceTables($('#'+button.dataset.report));
+ if(button.getAttribute('aria-selected')==='true')return;
+ $('.report-tabs').dataset.active=button.dataset.report;
+ document.querySelectorAll('[data-report]').forEach(tab=>{const selected=tab===button;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;$('#'+tab.dataset.report).hidden=!selected});enhanceTables($('#'+button.dataset.report));moveContent($('#'+button.dataset.report),{duration:150});
 }
 document.querySelectorAll('[data-report]').forEach((button,index,all)=>{
  button.onclick=()=>selectReport(button);
@@ -228,7 +268,7 @@ function renderQuestions(){
  $('#questions').querySelectorAll('[data-question-detail]').forEach(button=>button.onclick=()=>openQuestion(+button.dataset.questionDetail));
 }
 async function openUser(id){
- questionGeneration++;$('#question-detail').hidden=true;selectedUser=id;recordPage=0;transcriptNodes.clear();$('#transcripts').replaceChildren();$('#answer-history').replaceChildren();$('#learner-summary').textContent='';$('#learner-title').textContent=data?.users?.find(user=>user.id===id)?.label||'用户';$('#learner-detail').hidden=false;$('#records-more').hidden=true;$('#journeys').replaceChildren();$('#bookmarked-questions').replaceChildren();$('#journeys-more').hidden=true;if(!$('#detail-modal').open)$('#detail-modal').showModal();
+ questionGeneration++;$('#question-detail').hidden=true;selectedUser=id;recordPage=0;transcriptNodes.clear();$('#transcripts').replaceChildren();$('#answer-history').replaceChildren();$('#learner-summary').textContent='';$('#learner-title').textContent=data?.users?.find(user=>user.id===id)?.label||'用户';$('#learner-detail').hidden=false;$('#records-more').hidden=true;$('#journeys').replaceChildren();$('#bookmarked-questions').replaceChildren();$('#journeys-more').hidden=true;showDetail();
  $('#detail-modal').scrollTop=0;$('#learner-title').focus({preventScroll:true});await loadRecords(true);
 }
 async function loadRecords(first=false){
@@ -251,6 +291,7 @@ async function loadRecords(first=false){
    const item=document.createElement('li');item.className='record-message '+m.role;
    item.innerHTML=`<div class="record-meta"><strong>${m.role==='user'?(m.kind==='open'?'用户 · 简答原文':'用户'):'JOJO'}</strong><time>${date(m.ts)}</time>${m.correct!==null?`<span class="outcome ${m.correct?'right':'wrong'}">AI 判定${m.correct?'答对':'答错'}</span>`:''}</div><p>${esc(m.content)}</p>`;thread.querySelector('ol').append(item);
   }
+  if(first)moveContent($('#learner-summary'),{duration:180});
   $('#records-more').hidden=!d.hasMore;$('#detail-status').textContent=d.messages?`已显示 ${$('#transcripts').querySelectorAll('li').length} / ${d.messages} 条消息`:'本期没有服务器保存的对话正文。历史正文未采集，无法恢复。';
  }catch(error){if(token===detailGeneration){$('#detail-status').textContent=error.message+' 可再次点击重试。';$('#records-more').hidden=false}}
  finally{if(token===detailGeneration)$('#records-more').disabled=false}
@@ -274,22 +315,22 @@ $('#journeys-more').onclick=async()=>{
 };
 async function openQuestion(id){
  const token=++questionGeneration;detailGeneration++;selectedUser=null;$('#learner-detail').hidden=true;$('#question-detail').hidden=false;$('#question-title').textContent='题目详情';$('#question-content').replaceChildren();$('#question-status').textContent='正在读取…';
- if(!$('#detail-modal').open)$('#detail-modal').showModal();$('#detail-modal').scrollTop=0;$('#question-title').focus({preventScroll:true});
+ showDetail();$('#detail-modal').scrollTop=0;$('#question-title').focus({preventScroll:true});
  try{
   const result=await api(`question?id=${id}&days=${period}`);if(token!==questionGeneration||!$('#detail-modal').open)return;
   const q=result.question;
   $('#question-title').textContent=`${q.id+1}. ${q.title}`;
   $('#question-content').innerHTML=`<p class="section-description">${esc(result.chapter)} · ${q.kind==='open'?'简答题':'选择题'} · ${result.answers} 次提交 · ${result.bookmarks} 人收藏 · 正确率 ${pct(result.correct,result.graded)}（${result.correct} / ${result.graded} 次已判定）</p><h4>完整题干</h4><p class="question-full-text">${esc(q.brief)} ${q.kind==='open'?`<strong>${esc(q.prompt)}</strong>`:''}</p>${q.kind==='choice'?`<h4>默认选项说明</h4><p class="section-description">练习中问法和选项位置可能变化；以下按默认顺序展示。</p><div class="question-options">${q.labels.map((label,index)=>`<div class="question-option"><strong>${index===0?'A':'B'}</strong><p>${esc(label)}</p>${index===q.correct?'<span class="outcome right">正确方案</span>':''}</div>`).join('')}</div><h4>判断依据</h4><p class="question-full-text">${esc(q.why)}</p>`:`<h4>参考思路</h4><p class="question-full-text">${esc(q.reference||'')}</p>`}${q.rule?`<h4>核心原则</h4><p class="question-full-text">${esc(q.rule)}</p>`:''}<h4>最近的作答用户</h4><p class="section-description">最多展示最近 50 次提交，点击用户可继续查看完整记录。</p><div class="table-wrap">${result.recentAnswers.length?`<table id="question-users-table"><thead><tr><th>用户</th><th>判定</th><th>提交时间</th></tr></thead><tbody>${result.recentAnswers.map(answer=>`<tr><td data-value="${esc(answer.label)}"><button class="user-link" data-detail-user="${answer.visitor}">${esc(answer.label)}</button></td><td data-value="${answer.correct===null?'':answer.correct?1:0}"><span class="outcome ${answer.correct===null?'ungraded':answer.correct?'right':'wrong'}">${answer.correct===null?'未判定':answer.correct?'答对':'答错'}</span></td><td data-value="${answer.ts}">${date(answer.ts)}</td></tr>`).join('')}</tbody></table>`:'<p class="empty-cell">本期尚无作答记录。</p>'}</div>`;
-  enhanceTables($('#question-content'));$('#question-content').querySelectorAll('[data-detail-user]').forEach(button=>button.onclick=()=>openUser(button.dataset.detailUser));$('#question-status').textContent='';
+  enhanceTables($('#question-content'));$('#question-content').querySelectorAll('[data-detail-user]').forEach(button=>button.onclick=()=>openUser(button.dataset.detailUser));$('#question-status').textContent='';moveContent($('#question-content'),{duration:180});
  }catch(error){if(token===questionGeneration)$('#question-status').textContent=error.message}
 }
-$('#question-close').onclick=()=>$('#detail-modal').close();
+$('#question-close').onclick=()=>closeDetail();
 $('#detail-modal').addEventListener('close',()=>{detailGeneration++;questionGeneration++;selectedUser=null;$('#learner-detail').hidden=true;$('#question-detail').hidden=true;$('#transcripts').replaceChildren();$('#journeys').replaceChildren();$('#question-content').replaceChildren()});
-$('#detail-modal').addEventListener('click',event=>{if(event.target!==$('#detail-modal'))return;const rect=$('#detail-modal').getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)$('#detail-modal').close()});
+$('#detail-modal').addEventListener('click',event=>{if(event.target!==$('#detail-modal'))return;const rect=$('#detail-modal').getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)closeDetail()});
 
 $('#records-more').onclick=()=>{const count=$('#transcripts').querySelectorAll('li').length;recordPage=Math.floor(count/50);loadRecords(count===0)};
-$('#detail-close').onclick=()=>$('#detail-modal').close();
-$('#chapter').onchange=renderQuestions;
+$('#detail-close').onclick=()=>closeDetail();
+$('#chapter').onchange=()=>{renderQuestions();moveContent($('#questions'),{duration:150})};
 $('#refresh').onclick=load;
 $('#user-prev').onclick=()=>{userPage--;load()};$('#user-next').onclick=()=>{userPage++;load()};
 $('#user-search').oninput=()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{userPage=0;load()},300)};
