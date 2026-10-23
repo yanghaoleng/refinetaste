@@ -385,37 +385,30 @@ def recent_activity(days,now):
     with connect() as db:
         messages=db.execute("SELECT * FROM conversation_messages WHERE ts>=? AND ts<=? AND (role='user' OR source='model') ORDER BY ts DESC,id DESC LIMIT 100",(start,now)).fetchall()
         completions=db.execute("SELECT * FROM events WHERE kind='complete' AND ts>=? AND ts<=? ORDER BY ts DESC LIMIT 30",(start,now)).fetchall()
-        answers=db.execute("SELECT * FROM events WHERE kind='answer' AND ts>=? AND ts<=? ORDER BY ts DESC LIMIT 45",(start,now)).fetchall()
         items=[];paired=set()
         for m in messages:
             if m['role']!='assistant':continue
             user=db.execute("SELECT * FROM conversation_messages WHERE visitor=? AND thread=? AND role='user' AND position<? ORDER BY position DESC,ts DESC LIMIT 1",(m['visitor'],m['thread'],m['position'])).fetchone()
-            if user:paired.add(user['id'])
+            if not user:continue
+            paired.add(user['id'])
             q=QUESTIONS[m['q']]
             items.append({'id':'chat:'+m['id'],'type':'conversation','visitor':m['visitor'],'label':'访客 '+m['visitor'][:10],'ts':m['ts'],'title':q['title'],'userText':user['content'][:700] if user else '', 'aiText':m['content'][:700]})
         for m in messages:
             if m['role']!='user' or m['id'] in paired:continue
             q=QUESTIONS[m['q']]
-            items.append({'id':'message:'+m['id'],'type':'answer' if q['kind']=='open' else 'question','visitor':m['visitor'],'label':'访客 '+m['visitor'][:10],'ts':m['ts'],'title':q['title'],'userText':m['content'][:700]})
+            if q['kind']!='open':continue
+            items.append({'id':'message:'+m['id'],'type':'answer','visitor':m['visitor'],'label':'访客 '+m['visitor'][:10],'ts':m['ts'],'title':q['title'],'userText':m['content'][:700]})
         for event in completions:
             run_answers=db.execute("SELECT * FROM events WHERE kind='answer' AND run=? AND visitor=? ORDER BY ts",(event['run'],event['visitor'])).fetchall()
             begun=db.execute("SELECT * FROM events WHERE kind='start' AND run=? AND visitor=?",(event['run'],event['visitor'])).fetchone()
             if not begun:continue
             graded=[graded_value(r) for r in run_answers if graded_value(r) is not None]
             chapter=COURSE['chapters'][QUESTIONS[begun['start']]['chapter']]['title'] if begun['course']==2 else '历史练习'
-            items.append({'id':'score:'+event['id'],'type':'score','visitor':event['visitor'],'label':'访客 '+event['visitor'][:10],'ts':event['ts'],'title':chapter,'score':round(100*sum(graded)/len(graded)) if graded and len(graded)==len(run_answers) else None,'correct':sum(graded),'graded':len(graded),'total':len(run_answers)})
-        for event in answers:
-            verdict=graded_value(event)
-            if verdict is None:continue
-            q=QUESTIONS[event['q']] if event['course']==2 else None
-            items.append({'id':'verdict:'+event['id'],'type':'verdict','visitor':event['visitor'],'label':'访客 '+event['visitor'][:10],'ts':event['ts'],'title':q['title'] if q else NAMES[event['q']],'correct':verdict,'kind':q['kind'] if q else 'choice'})
-    with connect() as db:
-        for record in db.execute('SELECT visitor,q,ts FROM bookmarks WHERE ts>=? AND ts<=? ORDER BY ts DESC LIMIT 12',(start,now)):
-            items.append({'id':f"bookmark:{record['visitor']}:{record['q']}",'type':'bookmark','visitor':record['visitor'],'ts':record['ts'],'title':QUESTIONS[record['q']]['title']})
+            items.append({'id':'score:'+event['id'],'type':'score','visitor':event['visitor'],'label':'访客 '+event['visitor'][:10],'ts':event['ts'],'title':chapter,'score':round(100*sum(graded)/len(graded)) if graded and len(graded)==len(run_answers) else None,'accuracy':round(100*sum(graded)/len(graded),1) if graded else None,'correct':sum(graded),'graded':len(graded),'total':len(run_answers)})
     codes=public_ids({item['visitor'] for item in items})
     for item in items:item['label']='用户 '+codes[item['visitor']]
     items.sort(key=lambda item:(item['ts'],item['id']),reverse=True)
-    # Keep recent examples of each kind so a burst of clicks cannot hide all writing or scores.
+    # Balance actual conversations, short answers, and completed practice summaries.
     chosen=[];counts={}
     for item in items:
         kind=item['type']

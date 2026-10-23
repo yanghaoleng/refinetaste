@@ -19,6 +19,13 @@ function moveContent(node,{offset=0,x=0,scale=1,duration=180,delay=0,exit=false}
  adminMotion.set(node,animation);
  return animation.finished.catch(()=>{}).finally(()=>{if(adminMotion.get(node)===animation)adminMotion.delete(node)});
 }
+function counter(host,value){
+ const text=String(value);host.setAttribute('aria-label',text);
+ if(!window.RefineText){host.textContent=text;return}
+ if(host.dataset.counterReady){window.RefineText.slots(host,text);return}
+ host.dataset.counterReady='true';window.RefineText.slots(host,reducedMotion.matches?text:'0');
+ requestAnimationFrame(()=>{if(host.isConnected)window.RefineText.slots(host,text)});
+}
 let modalCloseGeneration=0;
 function showDetail(){
  modalCloseGeneration++;const modal=$('#detail-modal'),wasOpen=modal.open;
@@ -115,17 +122,16 @@ function renderActivities(direction=0){
  activityColumns=count;
  if(activityIndex>=activityItems.length)activityIndex=0;
  const rows=activityItems.slice(activityIndex,activityIndex+count);
- const names={conversation:'和 AI 讨论',answer:'提交简答',question:'发起追问',score:'获得新成绩',verdict:'完成作答',bookmark:'收藏题目'};
+ const names={conversation:'和 AI 讨论',answer:'提交简答',score:'完成一轮答题'};
  host.innerHTML=rows.length?rows.map(record=>{
   let body='';
-  if(record.type==='score')body=`<div class="activity-score">${record.score===null?'已完成':`${record.score}<small>分</small>`}</div><p class="activity-result">${record.correct} / ${record.total} 道答对${record.graded<record.total?`，${record.total-record.graded} 道未判定`:''}</p>`;
-  else if(record.type==='verdict')body=`<div class="activity-verdict ${record.correct?'right':'wrong'}">${record.correct?'答对了':'再想一想'}</div><p class="activity-result">${record.kind==='open'?'简答题 · AI 原则判定':'选择题'}</p>`;
-  else if(record.type==='bookmark')body='<p class="activity-result">已加入收藏。</p>';
+  if(record.type==='score')body=`<div class="activity-score">${record.accuracy===null?'待判定':`<span class="activity-number" data-counter="${record.accuracy}"></span><small>% 正确率</small>`}</div><p class="activity-result">完成 ${record.total} 道题 · 答对 ${record.correct} 道${record.graded<record.total?`<br>已判定 ${record.graded} 道，另有 ${record.total-record.graded} 道待判定；正确率按已判定题目计算`:''}</p>`;
   else body=`${record.userText?`<blockquote><small>用户</small><p>${esc(record.userText)}</p></blockquote>`:''}${record.aiText?`<blockquote class="activity-ai"><small>JOJO</small><p>${esc(record.aiText)}</p></blockquote>`:''}`;
   return `<article class="activity-card"><div class="activity-card-meta"><span>${names[record.type]}</span><time>${date(record.ts)}</time></div><h3>${esc(record.title)}</h3><div class="activity-body">${body}</div><div class="activity-card-foot"><span>${esc(record.label)}</span><button class="activity-user" data-activity-user="${record.visitor}">查看详情 <span class="activity-arrow" aria-hidden="true">→</span></button></div></article>`;
- }).join(''):'<p class="activity-empty">当前范围还没有可展示的作答动态。有新的回答、对话或成绩后会出现在这里。</p>';
+ }).join(''):'<p class="activity-empty">当前范围还没有符合条件的动态。提交简答、与 AI 对话或完成一轮答题后会出现在这里。</p>';
  $('#activity-page').textContent=rows.length?`${activityIndex+1}–${activityIndex+rows.length} / ${activityItems.length}`:'0 / 0';
  for(const id of ['activity-prev','activity-next','activity-shuffle'])$('#'+id).disabled=activityItems.length<=count;
+ host.querySelectorAll('[data-counter]').forEach(node=>counter(node,node.dataset.counter));
  [...host.children].forEach((card,index)=>moveContent(card,{offset:direction?0:8,x:direction*10,duration:180,delay:index*30}));
  host.querySelectorAll('[data-activity-user]').forEach(button=>button.onclick=()=>{openUser(button.dataset.activityUser)});
 }
@@ -164,7 +170,8 @@ function render(){
  const t=data.totals;
  $('#scope').textContent=`${period==='all'?'全部可用数据':`近 ${period} 天`} · ${data.trend.from} 至 ${data.trend.to} · 上海时区 · 刷新于 ${new Date().toLocaleTimeString('zh-CN',{timeZone:'Asia/Shanghai'})}`;
  const items=[['匿名用户',fmt(t.users),'按浏览器标识去重'],['答题记录',fmt(t.answers),'包含重复练习；正文另列'],['总体正确率',pct(t.correct,t.graded),`${fmt(t.correct)} / ${fmt(t.graded)} 次已判定`],['简答题原文',fmt(t.openAnswers),'用户提交消息数'],['对话消息',fmt(t.messages),'包含用户与 JOJO']];
- $('#metrics').innerHTML=items.map(([label,value,detail])=>`<div><div class="metric-label">${label}</div><div class="metric-value">${value}</div><div class="metric-detail">${detail}</div></div>`).join('');
+ if(!$('#metrics').children.length)$('#metrics').innerHTML=items.map(()=>'<div><div class="metric-label"></div><div class="metric-value"></div><div class="metric-detail"></div></div>').join('');
+ items.forEach(([label,value,detail],index)=>{const item=$('#metrics').children[index];item.querySelector('.metric-label').textContent=label;item.querySelector('.metric-detail').textContent=detail;counter(item.querySelector('.metric-value'),value)});
  const chapter=$('#chapter').value;
  $('#chapter').innerHTML='<option value="all">全部章节</option>'+data.chapters.map(c=>`<option value="${c.id}">${esc(c.title)}</option>`).join('');$('#chapter').value=chapter;
  renderQuestions();drawTrend();prepareActivities();

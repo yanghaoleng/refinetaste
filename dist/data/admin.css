@@ -61,3 +61,20 @@ html[data-theme=light]{--admin-link-hover:#8c6500}html[data-theme=light] .report
  :is(.report-tabs,.period-tabs,.activity-controls,.pager,.detail-heading,.keypad) button:active,:is(#refresh,#logout,#records-more,#journeys-more):active{transform:none}
  .activity-card,.trend-toggle,.trend-tooltip,.detail-modal::backdrop,.report-tabs button,.period-tabs button{transition:opacity 125ms ease!important}
 }
+
+/* Match the learner's score counters, including the one-line Slot reel mask. */
+@font-face{font-family:Manrope Counter;src:url(../assets/fonts/manrope-counter-700.ttf) format('truetype');font-style:normal;font-weight:700;font-display:swap}
+.metric-value,.activity-number{font-family:"Manrope Counter",ui-rounded,system-ui,sans-serif;font-weight:700;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"tnum";letter-spacing:-.045em}
+.metric-value{display:flex;align-items:center;min-height:1.35em}
+.activity-number{display:inline-flex;align-items:center;vertical-align:baseline;letter-spacing:-.055em}
+.calligraph-slots{overflow:hidden}
+.activity-score{font-size:clamp(34px,3.8vw,50px);letter-spacing:-1px}
+.activity-score>small{font-family:inherit;font-weight:500;white-space:nowrap;letter-spacing:0}
+.gate{padding-top:clamp(65px,13dvh,130px)}
+.gate .brand{display:inline-flex;margin:0 auto 34px}
+.gate .brand-icon{width:56px;height:56px}
+.gate .pin-dots{margin:0 0 24px}
+.gate #pin-error:empty{display:none}
+.gate #pin-error{min-height:0;margin:0 0 16px}
+.gate .keypad svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}
+.table-wrap td[data-value]:not(:first-child),.depth-value,.trend-axis{font-family:"Manrope Counter",system-ui,sans-serif;font-weight:700;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"tnum"}

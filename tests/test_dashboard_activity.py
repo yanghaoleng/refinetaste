@@ -34,6 +34,23 @@ class ActivityTests(unittest.TestCase):
   app.save_conversation(dict(**context,messages=[dict(id=uid(),role='assistant',position=2,content='AI 的真实回复')]),self.now+1,source='model')
   cards=app.recent_activity('all',self.now+2);chat=next(c for c in cards if c['type']=='conversation');score=next(c for c in cards if c['type']=='score')
   self.assertEqual(chat['userText'],'原始回答 <文字>');self.assertEqual(chat['aiText'],'AI 的真实回复');self.assertEqual(score['score'],100);self.assertNotIn('自动教学开场',json.dumps(cards,ensure_ascii=False))
+ def test_activity_excludes_choice_verdicts_bookmarks_and_unanswered_choice_prompts(self):
+  self.event('start',start=0);self.event('answer',q=0,choice=app.QUESTIONS[0]['correct'])
+  app.save_bookmarks(dict(visitor=self.visitor,session=self.session,questions=[0]),self.now)
+  for q,text in [(0,'还没有模型回复的选择题追问'),(6,'我的简答原文')]:
+   app.save_conversation(dict(visitor=self.visitor,session=self.session,thread=uid(),q=q,messages=[dict(id=uid(),role='user',position=0,content=text)]),self.now)
+  cards=app.recent_activity('all',self.now+1)
+  self.assertEqual(len(cards),1);self.assertEqual(cards[0]['type'],'answer');self.assertEqual(cards[0]['userText'],'我的简答原文')
+ def test_activity_retains_choice_ai_dialogue_and_reports_partial_grading_honestly(self):
+  self.event('start',start=0)
+  for q in app.QUESTIONS[:8]:self.event('answer',q=q['id'],choice=q['correct'] if q['kind']=='choice' else -1)
+  self.event('complete')
+  context=dict(visitor=self.visitor,session=self.session,thread=uid(),q=0)
+  app.save_conversation(dict(**context,messages=[dict(id=uid(),role='user',position=0,content='为什么信息需要有层级？')]),self.now)
+  app.save_conversation(dict(**context,messages=[dict(id=uid(),role='assistant',position=1,content='帮助用户找到首要信息。')]),self.now+1,source='model')
+  cards=app.recent_activity('all',self.now+2)
+  self.assertEqual({c['type'] for c in cards},{'conversation','score'})
+  summary=next(c for c in cards if c['type']=='score');self.assertEqual((summary['total'],summary['graded'],summary['correct'],summary['accuracy']),(8,6,6,100));self.assertIsNone(summary['score'])
  def test_user_sort_is_global_before_pagination_and_missing_accuracy_stays_last(self):
   for i in range(35):
    self.visitor=uid();self.session=uid();self.run=uid();self.event('start',start=0)
