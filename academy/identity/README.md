@@ -1,4 +1,4 @@
-# 两个独立课程品牌：第一版形象与命名
+# 独立课程品牌：形象与命名
 
 日期：2026-10-24。用户确认本次一起替换进网站。两个独立站同步更新名字、首页角色、教练十八种表情、Logo 与 favicon，学习记录与稳定站点路径保留。
 
@@ -21,3 +21,11 @@
 完整最终提示词见 [prompts.json](prompts.json)，键 `wenwen` 和 `aying` 对应上述两张图。两者都要求：原创角色、可爱的清晰像素块、完整身体与安全留白、透明背景、无文字和水印、不像黄色小鸡。已另外生成十八种表情头部图集，按 6 列 3 行拆格并留出头像安全区；没有把全身稿挤进表情格。表情变化继续复用原互动，基础两帧使用同一表情，未额外伪造眨眼。
 
 表情原图：`wenwen-expressions-v1.png`、`aying-expressions-v1.png`（1774×887）；完整生成提示见 [expression-prompts.json](expression-prompts.json)。`*-asset-map.json` 保存每个格子的裁切坐标。`scripts/build-academy-identity.py` 只负责裁格、尺寸与原有运行时文件格式的打包，使用 Pillow；已打包资产位于 `compiled/` 并入库，普通站点构建和服务器运行不要求 Pillow。问问使用苔绿，阿映使用杏桃色作为强调色。
+
+## 自我照顾班：小满
+
+用户指定「自我照顾班」，角色名小满。按用户最新选择制作毛毡风格肉桂小太阳鹦鹉：浅肉桂棕头部、奶油色胸羽、柔绿脸颊与翅膀、浅角质色弯喙、淡粉脚、红褐尾羽。保留毛毡纤维与柔和光照，不使用像素化渲染。先前未采用的海獭稿不接入网站。
+
+最终全身素材：[xiaoman-v1.png](xiaoman-v1.png)，1312×1199、RGBA；十八表情原图：[xiaoman-expressions-v1.png](xiaoman-expressions-v1.png)，1774×887、RGBA，6 列 3 行。两张均由内置 image_gen 生成，完整实际提示词见 [xiaoman-prompts.json](xiaoman-prompts.json)，未使用 CLI。源图保留原样；头像打包用高质量缩放，四套答题图集、十八表情图标和首页全身形象位于 `compiled/selfcare/`。裁格坐标见 [xiaoman-asset-map.json](xiaoman-asset-map.json)。
+
+已检查十八个头像格的边缘透明留白；每个格独立裁切并加安全区，表情图集沿用现有帧布局，相邻两帧为同一表情，未虚构独立眨眼动画。站点构建为答题图集生成 `xiaoman-<类型>-<内容摘要>.webp` 独立地址，首页预加载、题中头像、反馈和对话头像指向同一批已验证素材。

@@ -1,4 +1,20 @@
 {
+  "selfcare": {
+    "name": "自我照顾班",
+    "base": "/selfcare",
+    "env": "SELFCARE",
+    "port": 8845,
+    "headline": [["照顾", "方法"], ["连接", "温度"], ["好奇", "方向"], ["休息", "余地"], ["交流", "分寸"], ["探索", "可能"]],
+    "intro": "照顾身体，也给生活留一点新的连接。<br>健康日常、破圈探索与真诚的 coffee chat。",
+    "cta": "开始自我照顾练习",
+    "coach": "学习伙伴 小满",
+    "track": "Selfcare · 健康、连接与探索",
+    "goal": "练习可持续的自我照顾，带着好奇与边界走近陌生领域的人。",
+    "character": "小满",
+    "identity": "xiaoman",
+    "accent": "#9dcbdc",
+    "ink": "#244c60"
+  },
   "philosophy": {
     "name": "问问哲学班",
     "base": "/philosophy",

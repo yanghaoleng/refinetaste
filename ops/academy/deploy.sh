@@ -1,8 +1,8 @@
 #!/bin/sh
 set -eu
 cd "$(dirname "$0")/../.."
-slug="${1:?philosophy or mediaclass}"
-case "$slug" in philosophy|mediaclass) ;; *) exit 2;; esac
+slug="${1:?selfcare, philosophy or mediaclass}"
+case "$slug" in selfcare|philosophy|mediaclass) ;; *) exit 2;; esac
 version="$(TZ=Asia/Shanghai date +%Y%m%d-%H%M%S)-$(git rev-parse --short HEAD)"
 work="$(mktemp -d -t academy-release)"
 trap 'rm -rf "$work"' EXIT
@@ -13,7 +13,7 @@ scp "$work/release.tar.gz" "mikeywa-rive-old:/tmp/$slug-$version.tar.gz"
 ssh mikeywa-rive-old sudo sh -s -- "$slug" "$version" <<'REMOTE'
 set -eu
 slug="$1";version="$2"
-case "$slug" in philosophy) port=8843;; mediaclass) port=8844;; *) exit 2;; esac
+case "$slug" in selfcare) port=8845;; philosophy) port=8843;; mediaclass) port=8844;; *) exit 2;; esac
 release="/opt/$slug/releases/$version"
 previous="$(readlink -f "/opt/$slug/current" || true)"
 install -d -m755 "$release"
@@ -23,7 +23,7 @@ python3 -m py_compile "$release/server/app.py" "$release/server/reviewer.py"
 python3 "$release/ops/init-production.py"
 cat > "/etc/systemd/system/$slug.service" <<UNIT
 [Unit]
-Description=JOJO $slug learning site
+Description=$slug learning site
 After=network.target
 [Service]
 Type=simple

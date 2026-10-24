@@ -1,12 +1,15 @@
 """Package generated portrait cells as the existing runtime's bitmap assets. No drawn substitutes."""
-import json,shutil
+import argparse,json,shutil
 from pathlib import Path
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1];BASE=ROOT/'academy/identity'
 MOODS=['neutral','happy','thinking','curious','surprised','encouraging','empathetic','confused','playful','delighted','approving','inspired','relieved','grateful','amused','cool','confident','mischievous']
 def resize(image,size,padding=0):
- im=image.copy();im.thumbnail((size-padding*2,size-padding*2),Image.Resampling.NEAREST);out=Image.new('RGBA',(size,size));out.alpha_composite(im,((size-im.width)//2,(size-im.height)//2));return out
-for slug,key in [('philosophy','wenwen'),('mediaclass','aying')]:
+ im=image.copy();im.thumbnail((size-padding*2,size-padding*2),sampling);out=Image.new('RGBA',(size,size));out.alpha_composite(im,((size-im.width)//2,(size-im.height)//2));return out
+parser=argparse.ArgumentParser();parser.add_argument('--site',choices=['selfcare','philosophy','mediaclass']);args=parser.parse_args()
+for slug,key in [('philosophy','wenwen'),('mediaclass','aying'),('selfcare','xiaoman')]:
+ if args.site and slug!=args.site:continue
+ sampling=Image.Resampling.LANCZOS if slug=='selfcare' else Image.Resampling.NEAREST
  out=BASE/'compiled'/slug;icons=out/'icons';icons.mkdir(parents=True,exist_ok=True)
  source=Image.open(BASE/(key+'-expressions-v1.png')).convert('RGBA');w,h=source.size;faces=[];cells=[]
  for i,mood in enumerate(MOODS):

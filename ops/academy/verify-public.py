@@ -8,7 +8,7 @@ def read(path):
 for attempt in range(8):
  try:
   assert read('api/health').get('ok') is True
-  course=read('course.json');assert len(course['questions'])==(64 if cfg['slug']=='philosophy' else 96)
+  course=read('course.json');expected=json.loads((Path(__file__).resolve().parent.parent/'dist/course.json').read_text());assert course==expected
   print('Public JSON health and complete syllabus verified:',cfg['slug']);break
  except (ValueError,AssertionError,subprocess.CalledProcessError):
   if attempt==7:raise SystemExit('Public route did not return the expected site')
