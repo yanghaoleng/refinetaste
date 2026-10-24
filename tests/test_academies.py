@@ -1,5 +1,5 @@
 """Exercise the built sites as separate backends, including namespacing and full chapters."""
-import importlib.util,json,os,subprocess,sys,tempfile,threading,http.client,unittest,uuid
+import importlib.util,json,os,re,subprocess,sys,tempfile,threading,http.client,unittest,uuid
 from pathlib import Path
 from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[1]
@@ -43,6 +43,9 @@ class AcademyTests(unittest.TestCase):
   for slug,a in self.apps.items():
    server=a.ThreadingHTTPServer(('127.0.0.1',0),a.Handler);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
    try:
+    sprites=re.findall(r"assets/((?:wenwen|aying)-[a-z-]+-[a-f0-9]{12}\.webp)",(a.ROOT/'dist/course.css').read_text());self.assertEqual(len(sprites),4)
+    for sprite in sprites:
+     con=http.client.HTTPConnection('127.0.0.1',server.server_port,timeout=3);con.request('GET',a.BASE+'/assets/'+sprite);response=con.getresponse();body=response.read();con.close();self.assertEqual(response.status,200);self.assertEqual(body,(a.ROOT/'dist/assets'/sprite).read_bytes())
     for path,status in [('/',404),(a.BASE+'/',200),(a.BASE+'/academy.css',200),(a.BASE+'/other-fields.css',200),(a.BASE+'/other-fields.js',200),(a.BASE+'/assets/mascot.png',200),(a.BASE+'/assets/icons/thinking-96.webp',200),(a.BASE+'/course.json',200),(a.BASE+'/api/health',200),(a.BASE+'/api/summary',401),('/refinetaste/course.json',404)]:
      con=http.client.HTTPConnection('127.0.0.1',server.server_port,timeout=3);con.request('GET',path);response=con.getresponse();body=response.read();con.close();self.assertEqual(response.status,status,(slug,path))
      if path.endswith('course.json') and status==200:self.assertEqual(len(json.loads(body)['questions']),len(a.QUESTIONS))

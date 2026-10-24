@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build two self-contained sites from the tested Design Class experience."""
-import argparse,importlib.util,json,re,shutil
+import argparse,hashlib,importlib.util,json,re,shutil
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('links',ROOT/'scripts/link-academies.py');links=importlib.util.module_from_spec(spec);spec.loader.exec_module(links)
@@ -47,6 +47,24 @@ def build(slug,out):
  identity=ROOT/'academy/identity/compiled'/slug
  if identity.exists():shutil.copytree(identity,dst/'dist/assets',dirs_exist_ok=True)
  s=(dst/'server/app.py').read_text().replace("        files[BASE+'/icons.svg']='icons.svg'","        files[BASE+'/icons.svg']='icons.svg'\n        files[BASE+'/assets/mascot.png']='assets/mascot.png'");(dst/'server/app.py').write_text(s)
+ # Give the lesson sprites their own content-versioned URLs, including preloads and server routes.
+ # Reusing the design classroom filenames can retain an already loaded chicken in existing browsers.
+ assets={}
+ for name in ('chick-emotions.webp','chick-positive-emotions.webp','chick-cool-expressions.webp','chick-gaze.webp'):
+  source=dst/'dist/assets'/name;digest=hashlib.sha256(source.read_bytes()).hexdigest()[:12]
+  target=cfg['identity']+'-'+source.stem.removeprefix('chick-')+'-'+digest+source.suffix
+  source.rename(source.with_name(target));assets[name]=target
+ for directory in ('dist','server'):
+  for p in (dst/directory).rglob('*'):
+   if p.suffix in ('.html','.css','.js','.py'):
+    text=p.read_text()
+    for old,new in assets.items():text=text.replace(old,new)
+    p.write_text(text)
+ p=dst/'dist/index.html';text=p.read_text()
+ for name,attribute in [('course.css','href'),('app.js','src')]:
+  digest=hashlib.sha256((dst/'dist'/name).read_bytes()).hexdigest()[:12]
+  text=text.replace(f'{attribute}="{name}"',f'{attribute}="{name}?v={digest}"')
+ p.write_text(text)
  links.install(dst/'dist',slug)
  # Preserve the light menu and chapter numbering helper without embedding the design syllabus.
  p=dst/'dist/chapter-practice.js';s=p.read_text().split('window.RefinePractice.menu=')[0]

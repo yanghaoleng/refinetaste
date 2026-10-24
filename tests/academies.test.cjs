@@ -28,10 +28,15 @@ test('independent academy identities replace the coach, portraits and icons with
   assert.ok(home.includes(cfg.coach));const app=fs.readFileSync(path.join(web,'app.js'),'utf8');assert.ok(app.includes(cfg.character));assert.doesNotMatch(app,/JOJO/);
   const generated=JSON.parse(fs.readFileSync(path.join(web,'course.json'),'utf8'));
   const source=JSON.parse(fs.readFileSync('academy/'+slug+'/course.json','utf8'));assert.deepEqual(generated.questions,source.questions);
-  for(const name of ['chick-emotions.webp','chick-positive-emotions.webp','chick-cool-expressions.webp','chick-gaze.webp','favicon-starry-32.png','apple-touch-starry.png']){
+  for(const name of ['favicon-starry-32.png','apple-touch-starry.png']){
    const image=fs.readFileSync(path.join(web,'assets',name));assert.ok(image.length>100);assert.notDeepEqual(image,fs.readFileSync(path.join('dist/assets',name)));
   }
   const icons=fs.readdirSync(path.join(web,'assets/icons')).filter(x=>x.endsWith('-96.webp'));assert.equal(icons.length,18);
   assert.notDeepEqual(fs.readFileSync(path.join(web,'assets/icons/happy-96.webp')),fs.readFileSync(path.join(web,'assets/icons/thinking-96.webp')));
+  const css=fs.readFileSync(path.join(web,'course.css'),'utf8');
+  const sprites=[...css.matchAll(/assets\/((?:wenwen|aying)-[a-z-]+-[a-f0-9]{12}\.webp)/g)].map(m=>m[1]);assert.equal(sprites.length,4);
+  for(const asset of sprites){assert.ok(asset.startsWith(cfg.identity+'-'));assert.ok(home.includes('assets/'+asset));assert.ok(app.includes('assets/'+asset));assert.ok(fs.existsSync(path.join(web,'assets',asset)))}
+  for(const text of [home,app,css])assert.doesNotMatch(text,/chick-(?:emotions|positive-emotions|cool-expressions|gaze)\.webp/);
+  assert.match(home,/href="course\.css\?v=[a-f0-9]{12}"/);assert.match(home,/src="app\.js\?v=[a-f0-9]{12}"/);
  }
 });
