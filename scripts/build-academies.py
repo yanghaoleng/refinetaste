@@ -50,9 +50,15 @@ def build(slug,out):
  s=s.replace('</head>','<link rel="stylesheet" href="academy.css"></head>');p.write_text(s)
  (dst/'dist/academy.css').write_text((ROOT/'academy/academy.css').read_text()+f"\nhtml[data-theme=dark] body{{--accent:{cfg['accent']};--button:{cfg['accent']};--button-text:#17201a;--focus:{cfg['accent']}}}\nhtml[data-theme=light] body{{--accent:{cfg['accent']};--button:{cfg['ink']};--button-text:#ffffff;--focus:{cfg['ink']}}}\n")
  if slug=='selfcare':
-  p=dst/'dist/academy.css';p.write_text(p.read_text()+'\n.academy-mascot,.brand-icon{image-rendering:auto}\n')
+  p=dst/'dist/academy.css';p.write_text(p.read_text()+'\n.academy-mascot,.brand-icon{image-rendering:auto}.brand-icon{border-radius:50%}#coach-avatar,.coach-header #coach-avatar{padding:0;border:0;box-shadow:none;background:none}\n')
  identity=ROOT/'academy/identity/compiled'/slug
  if identity.exists():shutil.copytree(identity,dst/'dist/assets',dirs_exist_ok=True)
+ if slug=='selfcare':
+  identity_version=hashlib.sha256(b''.join(p.read_bytes() for p in sorted(identity.rglob('*')) if p.is_file())).hexdigest()[:12]
+  p=dst/'dist/site-icon.js';p.write_text(p.read_text().replace("mood+'-'+size,base",f"mood+'-'+size+'?v={identity_version}',base"))
+  p=dst/'dist/index.html';text=p.read_text()
+  text=re.sub(r'assets/(?:mascot\.png|chick-starry-(?:96|192)\.webp|favicon-starry\.(?:ico)|favicon-starry-32\.png|apple-touch-starry\.png)',lambda m:m[0]+'?v='+identity_version,text)
+  p.write_text(text)
  s=(dst/'server/app.py').read_text().replace("        files[BASE+'/icons.svg']='icons.svg'","        files[BASE+'/icons.svg']='icons.svg'\n        files[BASE+'/assets/mascot.png']='assets/mascot.png'");(dst/'server/app.py').write_text(s)
  # Give the lesson sprites their own content-versioned URLs, including preloads and server routes.
  # Reusing the design classroom filenames can retain an already loaded chicken in existing browsers.
@@ -68,7 +74,7 @@ def build(slug,out):
     for old,new in assets.items():text=text.replace(old,new)
     p.write_text(text)
  p=dst/'dist/index.html';text=p.read_text()
- for name,attribute in [('course.css','href'),('app.js','src')]:
+ for name,attribute in [('course.css','href'),('app.js','src')]+([('site-icon.js','src')] if slug=='selfcare' else []):
   digest=hashlib.sha256((dst/'dist'/name).read_bytes()).hexdigest()[:12]
   text=text.replace(f'{attribute}="{name}"',f'{attribute}="{name}?v={digest}"')
  p.write_text(text)

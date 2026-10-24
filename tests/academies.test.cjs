@@ -25,7 +25,7 @@ test('independent academy identities replace the coach, portraits and icons with
   const home=fs.readFileSync(path.join(web,'index.html'),'utf8');
   assert.ok(home.includes('<title>'+cfg.name+'</title>'));
   assert.ok(home.includes('alt="'+cfg.character+'"'));
-  assert.ok(home.includes('src="assets/mascot.png"'));
+  assert.match(home,/src="assets\/mascot\.png(?:\?v=[a-f0-9]{12})?"/);
   assert.ok(home.includes(cfg.coach));const app=fs.readFileSync(path.join(web,'app.js'),'utf8');assert.ok(app.includes(cfg.character));assert.doesNotMatch(app,/JOJO/);
   const generated=JSON.parse(fs.readFileSync(path.join(web,'course.json'),'utf8'));
   const source=JSON.parse(fs.readFileSync('academy/'+slug+'/course.json','utf8'));assert.deepEqual(generated.questions,source.questions);
@@ -39,6 +39,7 @@ test('independent academy identities replace the coach, portraits and icons with
   for(const asset of sprites){assert.ok(asset.startsWith(cfg.identity+'-'));assert.ok(home.includes('assets/'+asset));assert.ok(app.includes('assets/'+asset));assert.ok(fs.existsSync(path.join(web,'assets',asset)))}
   for(const text of [home,app,css])assert.doesNotMatch(text,/chick-(?:emotions|positive-emotions|cool-expressions|gaze)\.webp/);
   assert.match(home,/href="course\.css\?v=[a-f0-9]{12}"/);assert.match(home,/src="app\.js\?v=[a-f0-9]{12}"/);
+  if(slug==='selfcare'){assert.match(home,/src="site-icon\.js\?v=[a-f0-9]{12}"/);assert.match(home,/src="assets\/mascot\.png\?v=[a-f0-9]{12}"/);assert.match(fs.readFileSync(path.join(web,'site-icon.js'),'utf8'),/\?v=[a-f0-9]{12}/)}
  }
 });
 test('selfcare covers health and the whole coffee chat process with private notes and non-performance grading',()=>{
