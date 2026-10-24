@@ -1,4 +1,5 @@
 {
+  "version": "v2",
   "sourceSize": [
     1774,
     887
@@ -15,7 +16,14 @@
         0,
         296,
         296
-      ]
+      ],
+      "faceCrop": [
+        43,
+        42,
+        266,
+        266
+      ],
+      "circleCoverage": 0.99928
     },
     {
       "mood": "happy",
@@ -24,7 +32,14 @@
         0,
         591,
         296
-      ]
+      ],
+      "faceCrop": [
+        44,
+        51,
+        251,
+        257
+      ],
+      "circleCoverage": 0.99957
     },
     {
       "mood": "thinking",
@@ -33,7 +48,14 @@
         0,
         887,
         296
-      ]
+      ],
+      "faceCrop": [
+        40,
+        46,
+        256,
+        263
+      ],
+      "circleCoverage": 0.99914
     },
     {
       "mood": "curious",
@@ -42,7 +64,14 @@
         0,
         1183,
         296
-      ]
+      ],
+      "faceCrop": [
+        40,
+        46,
+        256,
+        263
+      ],
+      "circleCoverage": 0.99986
     },
     {
       "mood": "surprised",
@@ -51,7 +80,14 @@
         0,
         1478,
         296
-      ]
+      ],
+      "faceCrop": [
+        40,
+        47,
+        255,
+        262
+      ],
+      "circleCoverage": 0.99986
     },
     {
       "mood": "encouraging",
@@ -60,7 +96,14 @@
         0,
         1774,
         296
-      ]
+      ],
+      "faceCrop": [
+        35,
+        45,
+        253,
+        264
+      ],
+      "circleCoverage": 0.99986
     },
     {
       "mood": "empathetic",
@@ -69,7 +112,14 @@
         296,
         296,
         591
-      ]
+      ],
+      "faceCrop": [
+        43,
+        36,
+        266,
+        260
+      ],
+      "circleCoverage": 0.99986
     },
     {
       "mood": "confused",
@@ -78,7 +128,14 @@
         296,
         591,
         591
-      ]
+      ],
+      "faceCrop": [
+        40,
+        40,
+        255,
+        256
+      ],
+      "circleCoverage": 0.99928
     },
     {
       "mood": "playful",
@@ -87,7 +144,14 @@
         296,
         887,
         591
-      ]
+      ],
+      "faceCrop": [
+        36,
+        36,
+        260,
+        260
+      ],
+      "circleCoverage": 0.99928
     },
     {
       "mood": "delighted",
@@ -96,7 +160,14 @@
         296,
         1183,
         591
-      ]
+      ],
+      "faceCrop": [
+        30,
+        32,
+        262,
+        264
+      ],
+      "circleCoverage": 0.99942
     },
     {
       "mood": "approving",
@@ -105,7 +176,14 @@
         296,
         1478,
         591
-      ]
+      ],
+      "faceCrop": [
+        31,
+        34,
+        261,
+        264
+      ],
+      "circleCoverage": 0.99914
     },
     {
       "mood": "inspired",
@@ -114,7 +192,14 @@
         296,
         1774,
         591
-      ]
+      ],
+      "faceCrop": [
+        28,
+        34,
+        258,
+        264
+      ],
+      "circleCoverage": 0.99914
     },
     {
       "mood": "relieved",
@@ -123,7 +208,14 @@
         591,
         296,
         887
-      ]
+      ],
+      "faceCrop": [
+        38,
+        20,
+        270,
+        253
+      ],
+      "circleCoverage": 0.99957
     },
     {
       "mood": "grateful",
@@ -132,7 +224,14 @@
         591,
         591,
         887
-      ]
+      ],
+      "faceCrop": [
+        40,
+        29,
+        255,
+        244
+      ],
+      "circleCoverage": 0.99942
     },
     {
       "mood": "amused",
@@ -141,7 +240,14 @@
         591,
         887,
         887
-      ]
+      ],
+      "faceCrop": [
+        36,
+        23,
+        260,
+        248
+      ],
+      "circleCoverage": 0.99957
     },
     {
       "mood": "cool",
@@ -150,7 +256,14 @@
         591,
         1183,
         887
-      ]
+      ],
+      "faceCrop": [
+        36,
+        24,
+        260,
+        248
+      ],
+      "circleCoverage": 1.0
     },
     {
       "mood": "confident",
@@ -159,7 +272,14 @@
         591,
         1478,
         887
-      ]
+      ],
+      "faceCrop": [
+        31,
+        21,
+        262,
+        253
+      ],
+      "circleCoverage": 0.99957
     },
     {
       "mood": "mischievous",
@@ -168,7 +288,14 @@
         591,
         1774,
         887
-      ]
+      ],
+      "faceCrop": [
+        30,
+        22,
+        259,
+        250
+      ],
+      "circleCoverage": 0.99928
     }
   ],
   "packaged": "academy/identity/compiled/mediaclass"

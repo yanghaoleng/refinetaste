@@ -24,8 +24,15 @@
 
 ## 自我照顾班：小满
 
-用户指定「自我照顾班」，角色名小满。按用户最新选择制作毛毡风格肉桂小太阳鹦鹉：浅肉桂棕头部、奶油色胸羽、红色脸颊、柔绿翅膀、浅角质色弯喙、淡粉脚、红褐尾羽。脸部没有绿色。保留毛毡纤维与柔和光照，不使用像素化渲染。
+用户指定「自我照顾班」，角色名小满。按用户最新选择制作毛毡风格肉桂小太阳鹦鹉：浅肉桂棕头部、奶油色胸羽、眼睛下方小范围的柔和浅桃色脸颊、柔绿翅膀、浅角质色弯喙、淡粉脚、红褐尾羽。脸颊按用户提供的实鸟照片缩小面积、降低饱和度，避免大块鲜红腮红。脸部没有绿色。保留毛毡纤维与柔和光照，不使用像素化渲染。
 
-最终全身素材：[xiaoman-v2.png](xiaoman-v2.png)，1312×1199、RGBA；十八表情原图：[xiaoman-expressions-v2.png](xiaoman-expressions-v2.png)，1774×887、RGBA，6 列 3 行。两张均由内置 image_gen 重新生成，完整实际提示词见 [xiaoman-prompts-v2.json](xiaoman-prompts-v2.json)，未使用 CLI。源图保留原样；四套答题图集、十八表情图标和首页全身形象位于 `compiled/selfcare/`。裁格坐标见 [xiaoman-asset-map.json](xiaoman-asset-map.json)。旧 v1 仅为版本记录，不接入当前站点。
+最终全身素材：[xiaoman-v3.png](xiaoman-v3.png)，1312×1199、RGBA；十八表情原图：[xiaoman-expressions-v3.png](xiaoman-expressions-v3.png)，1774×887、RGBA，6 列 3 行。两张均由内置 image_gen 重新生成，完整实际提示词见 [xiaoman-prompts-v3.json](xiaoman-prompts-v3.json)，未使用 CLI。源图保留原样；四套答题图集、十八表情图标和首页全身形象位于 `compiled/selfcare/`。裁格坐标见 [xiaoman-asset-map.json](xiaoman-asset-map.json)。旧 v1、v2 仅为版本记录，不接入当前站点。
 
 用户要求脸部填满圆形容器，因此十八个头像均以脸部独立裁切、放大铺满圆形，没有额外内边距。打包检查圆形内像素覆盖率至少 99.9%，并记录每格裁切与覆盖率；页面同时去掉头像容器的内边距和边框。表情图集沿用现有帧布局，相邻两帧为同一表情，未虚构独立眨眼动画。答题图集使用 `xiaoman-<类型>-<内容摘要>.webp` 独立地址，首页全身、图标与图标脚本也带内容版本，避免继续复用旧图。
+
+
+## 问问与阿映：毛毡大框眼镜版本
+
+当前站点使用 `wenwen-v2.png`、`aying-v2.png` 全身素材，以及 `wenwen-expressions-v2.png`、`aying-expressions-v2.png` 十八表情图集。角色统一为柔软毛毡风格，所有表情均戴大框透明镜片眼镜；问问保留水豚与书本、绿色背心特征，阿映保留浣熊与橙色帽子、拍摄手记特征。头像原图只包含头脸，没有肩膀或衣服。旧 v1 像素素材仅为历史记录。
+
+使用内置 image_gen 编辑生成，实际提示词记录于 `wenwen-prompts-v2.json`、`aying-prompts-v2.json`。头像按脸部放大裁切，圆形内部不留额外内边距；十八格逐格检查至少 99.9% 覆盖率，坐标见对应 asset-map。运行时图集、浏览器图标及首页素材统一刷新内容版本，避免缓存旧像素头像。

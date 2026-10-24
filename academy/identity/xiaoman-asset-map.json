@@ -1,5 +1,5 @@
 {
-  "version": "v2",
+  "version": "v3",
   "sourceSize": [
     1774,
     887
@@ -18,10 +18,10 @@
         296
       ],
       "faceCrop": [
-        30,
-        28,
-        288,
-        286
+        31,
+        32,
+        279,
+        281
       ],
       "circleCoverage": 1.0
     },
@@ -34,10 +34,10 @@
         296
       ],
       "faceCrop": [
-        26,
-        36,
-        267,
-        277
+        31,
+        38,
+        264,
+        271
       ],
       "circleCoverage": 1.0
     },
@@ -50,12 +50,12 @@
         296
       ],
       "faceCrop": [
-        28,
-        30,
-        282,
-        285
+        22,
+        32,
+        270,
+        281
       ],
-      "circleCoverage": 0.99986
+      "circleCoverage": 1.0
     },
     {
       "mood": "curious",
@@ -66,12 +66,12 @@
         296
       ],
       "faceCrop": [
+        25,
         26,
-        34,
-        272,
-        280
+        283,
+        284
       ],
-      "circleCoverage": 1.0
+      "circleCoverage": 0.99986
     },
     {
       "mood": "surprised",
@@ -82,12 +82,12 @@
         296
       ],
       "faceCrop": [
-        11,
-        24,
-        271,
-        284
+        22,
+        32,
+        269,
+        280
       ],
-      "circleCoverage": 0.99957
+      "circleCoverage": 1.0
     },
     {
       "mood": "encouraging",
@@ -98,12 +98,12 @@
         296
       ],
       "faceCrop": [
-        16,
-        31,
-        269,
-        283
+        24,
+        35,
+        272,
+        282
       ],
-      "circleCoverage": 1.0
+      "circleCoverage": 0.99914
     },
     {
       "mood": "empathetic",
@@ -114,10 +114,10 @@
         591
       ],
       "faceCrop": [
+        31,
         28,
-        22,
-        288,
-        281
+        280,
+        278
       ],
       "circleCoverage": 1.0
     },
@@ -130,12 +130,12 @@
         591
       ],
       "faceCrop": [
-        27,
-        27,
-        268,
-        268
+        22,
+        26,
+        273,
+        277
       ],
-      "circleCoverage": 0.99971
+      "circleCoverage": 1.0
     },
     {
       "mood": "playful",
@@ -146,10 +146,10 @@
         591
       ],
       "faceCrop": [
-        18,
-        21,
-        275,
-        278
+        35,
+        42,
+        258,
+        264
       ],
       "circleCoverage": 1.0
     },
@@ -162,10 +162,10 @@
         591
       ],
       "faceCrop": [
-        15,
-        17,
-        280,
-        281
+        25,
+        27,
+        279,
+        280
       ],
       "circleCoverage": 1.0
     },
@@ -178,12 +178,12 @@
         591
       ],
       "faceCrop": [
-        16,
-        19,
-        277,
-        280
+        22,
+        29,
+        273,
+        279
       ],
-      "circleCoverage": 0.99986
+      "circleCoverage": 0.99957
     },
     {
       "mood": "inspired",
@@ -194,10 +194,10 @@
         591
       ],
       "faceCrop": [
-        20,
-        30,
-        264,
-        274
+        22,
+        32,
+        265,
+        276
       ],
       "circleCoverage": 1.0
     },
@@ -210,12 +210,12 @@
         887
       ],
       "faceCrop": [
-        26,
-        11,
-        292,
-        276
+        34,
+        13,
+        275,
+        254
       ],
-      "circleCoverage": 1.0
+      "circleCoverage": 0.99986
     },
     {
       "mood": "grateful",
@@ -226,12 +226,12 @@
         887
       ],
       "faceCrop": [
-        31,
-        24,
-        264,
-        258
+        35,
+        15,
+        272,
+        252
       ],
-      "circleCoverage": 0.99957
+      "circleCoverage": 1.0
     },
     {
       "mood": "amused",
@@ -242,10 +242,10 @@
         887
       ],
       "faceCrop": [
-        28,
-        18,
-        277,
-        267
+        16,
+        3,
+        278,
+        264
       ],
       "circleCoverage": 1.0
     },
@@ -258,10 +258,10 @@
         887
       ],
       "faceCrop": [
-        9,
-        3,
-        281,
-        275
+        17,
+        1,
+        283,
+        267
       ],
       "circleCoverage": 1.0
     },
@@ -274,12 +274,12 @@
         887
       ],
       "faceCrop": [
-        17,
-        12,
-        277,
-        271
+        18,
+        5,
+        276,
+        263
       ],
-      "circleCoverage": 1.0
+      "circleCoverage": 0.99914
     },
     {
       "mood": "mischievous",
@@ -290,10 +290,10 @@
         887
       ],
       "faceCrop": [
-        11,
-        13,
-        272,
-        274
+        16,
+        3,
+        279,
+        265
       ],
       "circleCoverage": 1.0
     }

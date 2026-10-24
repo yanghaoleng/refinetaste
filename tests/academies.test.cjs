@@ -39,7 +39,8 @@ test('independent academy identities replace the coach, portraits and icons with
   for(const asset of sprites){assert.ok(asset.startsWith(cfg.identity+'-'));assert.ok(home.includes('assets/'+asset));assert.ok(app.includes('assets/'+asset));assert.ok(fs.existsSync(path.join(web,'assets',asset)))}
   for(const text of [home,app,css])assert.doesNotMatch(text,/chick-(?:emotions|positive-emotions|cool-expressions|gaze)\.webp/);
   assert.match(home,/href="course\.css\?v=[a-f0-9]{12}"/);assert.match(home,/src="app\.js\?v=[a-f0-9]{12}"/);
-  if(slug==='selfcare'){assert.match(home,/src="site-icon\.js\?v=[a-f0-9]{12}"/);assert.match(home,/src="assets\/mascot\.png\?v=[a-f0-9]{12}"/);assert.match(fs.readFileSync(path.join(web,'site-icon.js'),'utf8'),/\?v=[a-f0-9]{12}/)}
+  assert.match(home,/src="site-icon\.js\?v=[a-f0-9]{12}"/);assert.match(home,/src="assets\/mascot\.png\?v=[a-f0-9]{12}"/);assert.match(fs.readFileSync(path.join(web,'site-icon.js'),'utf8'),/\?v=[a-f0-9]{12}/);
+  const faceMap=JSON.parse(fs.readFileSync('academy/identity/'+cfg.identity+'-asset-map.json','utf8'));assert.equal(faceMap.cells.length,18);assert.ok(faceMap.cells.every(cell=>cell.circleCoverage>=.999));
  }
 });
 test('selfcare covers health and the whole coffee chat process with private notes and non-performance grading',()=>{

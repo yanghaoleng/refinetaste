@@ -1,4 +1,5 @@
 {
+  "version": "v2",
   "sourceSize": [
     1774,
     887
@@ -15,7 +16,14 @@
         0,
         296,
         296
-      ]
+      ],
+      "faceCrop": [
+        41,
+        50,
+        271,
+        280
+      ],
+      "circleCoverage": 0.99914
     },
     {
       "mood": "happy",
@@ -24,7 +32,14 @@
         0,
         591,
         296
-      ]
+      ],
+      "faceCrop": [
+        40,
+        58,
+        255,
+        273
+      ],
+      "circleCoverage": 0.99986
     },
     {
       "mood": "thinking",
@@ -33,7 +48,14 @@
         0,
         887,
         296
-      ]
+      ],
+      "faceCrop": [
+        36,
+        54,
+        260,
+        278
+      ],
+      "circleCoverage": 0.99957
     },
     {
       "mood": "curious",
@@ -42,7 +64,14 @@
         0,
         1183,
         296
-      ]
+      ],
+      "faceCrop": [
+        36,
+        53,
+        260,
+        278
+      ],
+      "circleCoverage": 1.0
     },
     {
       "mood": "surprised",
@@ -51,7 +80,14 @@
         0,
         1478,
         296
-      ]
+      ],
+      "faceCrop": [
+        35,
+        53,
+        260,
+        277
+      ],
+      "circleCoverage": 1.0
     },
     {
       "mood": "encouraging",
@@ -60,7 +96,14 @@
         0,
         1774,
         296
-      ]
+      ],
+      "faceCrop": [
+        25,
+        49,
+        258,
+        282
+      ],
+      "circleCoverage": 0.99957
     },
     {
       "mood": "empathetic",
@@ -69,7 +112,14 @@
         296,
         296,
         591
-      ]
+      ],
+      "faceCrop": [
+        48,
+        40,
+        264,
+        255
+      ],
+      "circleCoverage": 1.0
     },
     {
       "mood": "confused",
@@ -78,7 +128,14 @@
         296,
         591,
         591
-      ]
+      ],
+      "faceCrop": [
+        40,
+        40,
+        255,
+        255
+      ],
+      "circleCoverage": 0.99957
     },
     {
       "mood": "playful",
@@ -87,7 +144,14 @@
         296,
         887,
         591
-      ]
+      ],
+      "faceCrop": [
+        40,
+        39,
+        256,
+        256
+      ],
+      "circleCoverage": 1.0
     },
     {
       "mood": "delighted",
@@ -96,7 +160,14 @@
         296,
         1183,
         591
-      ]
+      ],
+      "faceCrop": [
+        36,
+        35,
+        260,
+        260
+      ],
+      "circleCoverage": 0.99971
     },
     {
       "mood": "approving",
@@ -105,7 +176,14 @@
         296,
         1478,
         591
-      ]
+      ],
+      "faceCrop": [
+        40,
+        40,
+        255,
+        255
+      ],
+      "circleCoverage": 1.0
     },
     {
       "mood": "inspired",
@@ -114,7 +192,14 @@
         296,
         1774,
         591
-      ]
+      ],
+      "faceCrop": [
+        28,
+        35,
+        253,
+        260
+      ],
+      "circleCoverage": 0.99942
     },
     {
       "mood": "relieved",
@@ -123,7 +208,14 @@
         591,
         296,
         887
-      ]
+      ],
+      "faceCrop": [
+        41,
+        17,
+        271,
+        246
+      ],
+      "circleCoverage": 0.99971
     },
     {
       "mood": "grateful",
@@ -132,7 +224,14 @@
         591,
         591,
         887
-      ]
+      ],
+      "faceCrop": [
+        40,
+        23,
+        255,
+        239
+      ],
+      "circleCoverage": 1.0
     },
     {
       "mood": "amused",
@@ -141,7 +240,14 @@
         591,
         887,
         887
-      ]
+      ],
+      "faceCrop": [
+        36,
+        18,
+        260,
+        243
+      ],
+      "circleCoverage": 0.99928
     },
     {
       "mood": "cool",
@@ -150,7 +256,14 @@
         591,
         1183,
         887
-      ]
+      ],
+      "faceCrop": [
+        30,
+        16,
+        260,
+        245
+      ],
+      "circleCoverage": 0.99986
     },
     {
       "mood": "confident",
@@ -159,7 +272,14 @@
         591,
         1478,
         887
-      ]
+      ],
+      "faceCrop": [
+        37,
+        20,
+        260,
+        242
+      ],
+      "circleCoverage": 1.0
     },
     {
       "mood": "mischievous",
@@ -168,7 +288,14 @@
         591,
         1774,
         887
-      ]
+      ],
+      "faceCrop": [
+        25,
+        16,
+        255,
+        245
+      ],
+      "circleCoverage": 1.0
     }
   ],
   "packaged": "academy/identity/compiled/philosophy"

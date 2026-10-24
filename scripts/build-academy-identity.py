@@ -5,7 +5,7 @@ from PIL import Image
 ROOT=Path(__file__).resolve().parents[1];BASE=ROOT/'academy/identity'
 MOODS=['neutral','happy','thinking','curious','surprised','encouraging','empathetic','confused','playful','delighted','approving','inspired','relieved','grateful','amused','cool','confident','mischievous']
 def resize(image,size,padding=0):
- if slug=='selfcare' and padding==0:return image.resize((size,size),sampling)
+ if padding==0:return image.resize((size,size),sampling)
  im=image.copy();im.thumbnail((size-padding*2,size-padding*2),sampling);out=Image.new('RGBA',(size,size));out.alpha_composite(im,((size-im.width)//2,(size-im.height)//2));return out
 def circle_face(cell):
  # Fit the face itself to the circular UI, rather than shrinking the whole atlas cell.
@@ -15,25 +15,23 @@ def circle_face(cell):
  circle=[(x,y) for y in range(96) for x in range(96) if (x-47.5)**2+(y-47.5)**2<=47**2]
  for factor in (1,.97,.94,.91,.88,.85,.82,.79,.76,.73,.70,.67,.64):
   extent=side*factor/2;crop=(round(cx-extent),round(cy-extent),round(cx+extent),round(cy+extent))
-  portrait=cell.crop(crop).resize((96,96),Image.Resampling.LANCZOS)
+  portrait=cell.crop(crop).resize((96,96),sampling)
   a=portrait.getchannel('A');coverage=sum(a.getpixel(point)>=240 for point in circle)/len(circle)
   if coverage>=.999:return portrait,crop,coverage
  raise ValueError('Portrait does not fill its circular avatar')
 parser=argparse.ArgumentParser();parser.add_argument('--site',choices=['selfcare','philosophy','mediaclass']);args=parser.parse_args()
 for slug,key in [('philosophy','wenwen'),('mediaclass','aying'),('selfcare','xiaoman')]:
  if args.site and slug!=args.site:continue
- sampling=Image.Resampling.LANCZOS if slug=='selfcare' else Image.Resampling.NEAREST
- version='v2' if slug=='selfcare' else 'v1'
+ sampling=Image.Resampling.LANCZOS
+ version='v3' if slug=='selfcare' else 'v2'
  out=BASE/'compiled'/slug;icons=out/'icons';icons.mkdir(parents=True,exist_ok=True)
  source=Image.open(BASE/(key+'-expressions-'+version+'.png')).convert('RGBA');w,h=source.size;faces=[];cells=[]
  for i,mood in enumerate(MOODS):
   col,row=i%6,i//6;box=(round(col*w/6),round(row*h/3),round((col+1)*w/6),round((row+1)*h/3));cell=source.crop(box)
-  if slug=='selfcare':
-   face,crop,coverage=circle_face(cell);record=dict(mood=mood,sourceBox=box,faceCrop=crop,circleCoverage=round(coverage,5));icon_source=cell.crop(crop)
-  else:face=resize(cell,96,5);record=dict(mood=mood,sourceBox=box);icon_source=cell
+  face,crop,coverage=circle_face(cell);record=dict(mood=mood,sourceBox=box,faceCrop=crop,circleCoverage=round(coverage,5));icon_source=cell.crop(crop)
   faces.append(face);cells.append(record)
   face.save(icons/(mood+'-96.webp'),'WEBP',lossless=True,method=6)
-  for size in (32,180):resize(icon_source,size,0 if slug=='selfcare' else max(2,round(size*.052))).save(icons/(mood+'-'+str(size)+'.png'),optimize=True)
+  for size in (32,180):resize(icon_source,size).save(icons/(mood+'-'+str(size)+'.png'),optimize=True)
  def atlas(name,cols,rows,items):
   sheet=Image.new('RGBA',(cols*96,rows*96))
   for index,(x,y) in items:sheet.alpha_composite(faces[index],(x*96,y*96))
