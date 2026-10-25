@@ -1,6 +1,6 @@
 {
   "selfcare": {
-    "name": "自我照顾班",
+    "name": "RURU人生教练",
     "base": "/selfcare",
     "env": "SELFCARE",
     "port": 8845,

@@ -22,9 +22,9 @@
 
 表情原图：`wenwen-expressions-v1.png`、`aying-expressions-v1.png`（1774×887）；完整生成提示见 [expression-prompts.json](expression-prompts.json)。`*-asset-map.json` 保存每个格子的裁切坐标。`scripts/build-academy-identity.py` 只负责裁格、尺寸与原有运行时文件格式的打包，使用 Pillow；已打包资产位于 `compiled/` 并入库，普通站点构建和服务器运行不要求 Pillow。问问使用苔绿，阿映使用杏桃色作为强调色。
 
-## 自我照顾班：小满
+## RURU人生教练：小满
 
-用户指定「自我照顾班」，角色名小满。按用户最新选择制作毛毡风格肉桂小太阳鹦鹉：浅肉桂棕头部、奶油色胸羽、眼睛下方小范围的柔和浅桃色脸颊、柔绿翅膀、浅角质色弯喙、淡粉脚、红褐尾羽。脸颊按用户提供的实鸟照片缩小面积、降低饱和度，避免大块鲜红腮红。脸部没有绿色。保留毛毡纤维与柔和光照，不使用像素化渲染。
+用户指定「RURU人生教练」，角色名小满。按用户最新选择制作毛毡风格肉桂小太阳鹦鹉：浅肉桂棕头部、奶油色胸羽、眼睛下方小范围的柔和浅桃色脸颊、柔绿翅膀、浅角质色弯喙、淡粉脚、红褐尾羽。脸颊按用户提供的实鸟照片缩小面积、降低饱和度，避免大块鲜红腮红。脸部没有绿色。保留毛毡纤维与柔和光照，不使用像素化渲染。
 
 最终全身素材：[xiaoman-v3.png](xiaoman-v3.png)，1312×1199、RGBA；十八表情原图：[xiaoman-expressions-v3.png](xiaoman-expressions-v3.png)，1774×887、RGBA，6 列 3 行。两张均由内置 image_gen 重新生成，完整实际提示词见 [xiaoman-prompts-v3.json](xiaoman-prompts-v3.json)，未使用 CLI。源图保留原样；四套答题图集、十八表情图标和首页全身形象位于 `compiled/selfcare/`。裁格坐标见 [xiaoman-asset-map.json](xiaoman-asset-map.json)。旧 v1、v2 仅为版本记录，不接入当前站点。
 
