@@ -30,16 +30,14 @@ showMap=function(){
  if(chapterScores[88]?.complete)action.innerHTML='<span class="exploration-status">已浏览</span>';
 };
 render=function(){
- selfcareBase.render();const q=activeQuestion(),heading=$('#exercise .question-heading');
- if(q.before)heading.insertAdjacentHTML('beforebegin',`<aside class="selfcare-intro"><h3>先认识：重要性感受</h3><p>${esc(q.before)}</p><p>以下是原创探索练习，不是量表，也没有经过效果验证。</p></aside>`);
- if(q.followUps?.length){
+ selfcareBase.render();const q=activeQuestion();
+ if(!isExploration(q)&&q.followUps?.length){
   const anchor=$('#exercise .open-case');
   anchor.insertAdjacentHTML('afterend',`<details class="selfcare-followups"><summary>想继续时，任选一个追问</summary><ul>${q.followUps.map(text=>`<li>${esc(text)}</li>`).join('')}</ul></details>`);
  }
  if(isExploration(q)){
   $('#exercise .open-case').hidden=true;
   $('.lesson-skip')?.remove();
-  $('#feedback-slot').insertAdjacentHTML('beforebegin',`<details class="selfcare-followups"><summary>概念参考与练习说明</summary><p>参考节目官方简介。以下练习为原创，不是量表，没有经过效果验证。</p><ul>${q.sources.map(source=>`<li><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.title)}</a></li>`).join('')}</ul></details>`);
   if(q.id===95)mountClueCard();
  }
 };
@@ -57,19 +55,18 @@ function finishExplorationStep(skipped=false){
 renderOpen=function(q){
  selfcareRendering=true;try{selfcareBase.renderOpen(q)}finally{selfcareRendering=false}if(!isExploration(q))return;
  const next=$('#open-next');next.hidden=false;
- $('#chat-input').placeholder='不知道、暂不做，或留下一点想法…';
- $('#next').innerHTML=`${q.id===95?'留下线索':'下一步'}<span>${icon('arrow-right')}</span>`;
+ $('#chat-input').placeholder='随便聊聊就好';
+ $('#next').innerHTML=`${q.id===95?'先聊到这':'下一题'}<span>${icon('arrow-right')}</span>`;
  $('#next').onclick=()=>finishExplorationStep(false);
  next.insertAdjacentHTML('afterbegin','<button id="explore-skip" class="secondary" type="button">先跳过</button>');
  $('#explore-skip').onclick=()=>finishExplorationStep(true);
  $('#chat-form .chat-composer').classList.remove('awaiting-answer');
- $('#chat-form').insertAdjacentHTML('beforeend','<p class="selfcare-permission">可以直接继续，也可以先聊聊。不判对错；返回目录可暂停，草稿会留在本机。</p>');
  positionControls();
 };
 const clueFields=[['care','目前在意'],['connection','生活联系（或不知道）'],['learn','想了解'],['limits','现实限制'],['next','下一步（包括不行动）']];
 function currentClue(){return read('selfcare-importance-clue-v2',{})}
 function mountClueCard(){
- const clue=currentClue();$('#feedback-slot').insertAdjacentHTML('beforebegin',`<section class="selfcare-clue" aria-label="我的线索卡"><h3>我的线索卡</h3><p>填你愿意留下的部分。空白也可以；没有线索时，先留意让我停一下的时刻。</p>${clueFields.map(([key,label])=>`<label>${label}<textarea data-clue="${key}" rows="2" maxlength="500">${esc(clue[key]||'')}</textarea></label>`).join('')}<p id="clue-storage" role="status"></p></section>`);
+ const clue=currentClue();$('#feedback-slot').insertAdjacentHTML('beforebegin',`<details class="selfcare-followups selfcare-clue-fold"><summary>留张便签</summary><section class="selfcare-clue" aria-label="我的线索卡">${clueFields.map(([key,label])=>`<label>${label}<textarea data-clue="${key}" rows="2" maxlength="500">${esc(clue[key]||'')}</textarea></label>`).join('')}<p id="clue-storage" role="status"></p></section></details>`);
  document.querySelectorAll('[data-clue]').forEach(input=>input.oninput=()=>{const clue=Object.fromEntries([...document.querySelectorAll('[data-clue]')].map(field=>[field.dataset.clue,field.value]));const ok=persist('selfcare-importance-clue-v2',clue);saveProgress({clueCard:clue});$('#clue-storage').textContent=ok?'已保存在本机':'浏览器无法保存，离开前请复制内容'});
 }
 function clueMarkup(clue){return `<dl class="selfcare-clue-summary">${clueFields.map(([key,label])=>`<dt>${esc(label)}</dt><dd>${esc(clue?.[key]||'暂时留空')}</dd>`).join('')}</dl>`}

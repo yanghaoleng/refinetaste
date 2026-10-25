@@ -40,12 +40,19 @@ class SelfcareTests(unittest.TestCase):
         self.assertTrue(all(q['feedbackMode']=='exploration' and q['variants']==[] for q in active if q['chapter']==11))
         for q in active:
             if q['chapter']==11:self.assertTrue(all('xiaoyuzhoufm.com' in s['url'] for s in q['sources']))
-            if q['kind']=='open':self.assertTrue(q['followUps'])
+            if q['kind']=='open' and q['chapter']!=11:self.assertTrue(q['followUps'])
         archive=json.loads((ROOT/'academy/selfcare/legacy-mattering-v1.json').read_text())
         self.assertEqual([{k:v for k,v in q.items() if k!='archived'} for q in course['questions'][80:88]],archive['questions'])
         for i,q in enumerate(course['questions']):self.assertEqual(q['id'],i)
         self.assertNotIn('重要性感受',course['chapters'][-1]['title'])
-        self.assertIn('先认识', (ROOT/'academy/selfcare/runtime.js').read_text())
+        for q in course['questions'][88:96]:
+            self.assertEqual(q['brief'],'')
+            self.assertLessEqual(len(q['prompt']),26)
+            self.assertEqual(q['prompt'].count('？'),1)
+            self.assertEqual(q['visuals'],[])
+            self.assertEqual(q['followUps'],[])
+            self.assertFalse(q.get('before'))
+            self.assertEqual(q['coachOpening'],[])
     def test_exploration_cannot_receive_model_verdict_even_if_requested(self):
         q=self.app.QUESTIONS[88]
         captured=[]
@@ -57,6 +64,16 @@ class SelfcareTests(unittest.TestCase):
         self.assertNotIn('correct',answer)
         self.assertIn('无评分',captured[0]);self.assertNotIn('首次作答判定',captured[0])
         self.assertIn('不擅断隐藏动机',captured[0])
+        self.assertIn('每轮只说一两句',captured[0])
+        self.assertIn('最多一个问号',captured[0])
+        self.assertNotIn('rubric',captured[0])
+        self.assertNotIn('xiaoyuzhoufm.com',captured[0])
+        self.assertNotIn('参考原则',captured[0])
+    def test_short_chat_rejects_question_barrage_or_textbook_dump(self):
+        for reply in ['你看什么？为什么？', '长'*121]:
+            def completion(payload,validate):return validate(dict(reply=reply,emotion='curious'))
+            with patch.dict(os.environ,SELFCARE_AI_KEY='test',SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=completion):
+                with self.assertRaises(ValueError):self.reviewer.chat(self.app.QUESTIONS[88],[dict(role='user',content='刷剧')])
     def test_ungraded_completion_and_legacy_runs_share_existing_database(self):
         run={k:str(uuid.uuid4()) for k in ('visitor','session','run')}
         def event(kind,**extra):return self.app.collect(dict(id=str(uuid.uuid4()),course=2,kind=kind,**run,**extra))
