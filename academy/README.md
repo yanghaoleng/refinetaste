@@ -4,7 +4,7 @@
 
 - 哲学：https://mikeywa.site/philosophy/ ，8 章 64 题，32 道比较判断和 32 道对话练习。
 - 自媒体：https://mikeywa.site/mediaclass/ ，12 章 96 题，48 道比较判断和 48 道制作实作。
-- 自我照顾：https://mikeywa.site/lifecoach/ （兼容 `/selfcare/`），11 章 88 道当前练习，40 道比较判断、40 道开放练习与 8 步无评分探索，课程与来源详见 [RURU人生教练](selfcare/README.md)。
+- 自我照顾：https://mikeywa.site/lifecoach/ （兼容 `/selfcare/`），11 章，首章连续会谈与可修改探索报告，后续 40 道比较判断、40 道开放练习（旧首章八题记录保留），课程与来源详见 [RURU人生教练](selfcare/README.md)。
 - 设计：https://mikeywa.site/refinetaste/ 。
 - 音乐：https://m.mikeywa.site/pianoclass/ ，李老师的音乐班，原有工具与课程继续独立。
 

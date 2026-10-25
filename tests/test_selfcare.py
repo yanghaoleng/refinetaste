@@ -107,4 +107,73 @@ class SelfcareTests(unittest.TestCase):
             self.assertEqual(request('GET','/lifecoach/api/learners')[0],401)
         finally:server.shutdown();server.server_close();worker.join()
 
+    def session_request(self,messages,mode='exploration_session',**extra):
+        return dict(q=88,mode=mode,revision=len(messages),messages=messages,**extra)
+
+    def report_fixture(self,mid=None,quote=None):
+        result={'sections':{key:[dict(text='还没有探讨这一点。',status='not_explored',evidence=[])] for key,_ in self.app.exploration.SECTIONS},'courses':[]}
+        if mid:result['sections']['clues']=[dict(text='想给自己留一些时间。',status='tentative',evidence=[dict(messageId=mid,quote=quote)])]
+        return result
+
+    def test_continuous_context_keeps_old_words_and_corrections_beyond_twelve_messages(self):
+        messages=[dict(id='u0',role='user',content='我想聊的是照顾家人后如何给自己留时间。')]
+        for i in range(30):messages.append(dict(id='m'+str(i),role='assistant' if i%2==0 else 'user',content='这次的具体经历'+str(i)))
+        messages.append(dict(id='fix',role='user',kind='correction',content='更正：我不是不在意家人，只是也想保留自己的时间。'))
+        request=self.app.exploration.validate_request(self.session_request(messages));captured=[]
+        def completion(payload,validate):captured.append(payload);return validate(dict(reply='这两件事可以一起谈。眼下最想先说哪一点？',emotion='curious',choices=[],checkIn=None))
+        with patch.dict(os.environ,SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=completion):self.app.exploration.respond(request,self.reviewer)
+        data=json.loads(captured[0]['messages'][1]['content'].split('\n',1)[1])
+        self.assertEqual(len(data['messages']),32);self.assertIn('照顾家人',data['messages'][0]['content']);self.assertEqual(data['messages'][-1]['kind'],'correction')
+
+    def test_report_evidence_cannot_quote_assistant_or_invent_user_words(self):
+        exp=self.app.exploration;messages=[dict(id='u1',role='user',content='想留一点时间'),dict(id='a1',role='assistant',content='你是否想转行？')]
+        exp.clean_report(self.report_fixture('u1','留一点时间'),messages)
+        for report in [self.report_fixture('a1','想转行'),self.report_fixture('u1','想转行')]:
+            with self.assertRaises(ValueError):exp.clean_report(report,messages)
+        altered=self.report_fixture('u1','留一点时间');altered['sections']['clues'][0]['status']='user_edited'
+        with self.assertRaises(ValueError):exp.clean_report(altered,messages)
+
+    def test_empty_session_can_generate_initial_report_without_a_score(self):
+        exp=self.app.exploration;session=exp.validate_request(self.session_request([],mode='exploration_report'))
+        def completion(payload,validate):return validate(dict(report=self.report_fixture(),correct=True,score=100))
+        with patch.dict(os.environ,SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=completion):result=exp.respond(session,self.reviewer)
+        self.assertNotIn('correct',result);self.assertNotIn('score',result);self.assertEqual(result['basedOnRevision'],0)
+        self.assertTrue(all(row['status']=='not_explored' for rows in result['report']['sections'].values() for row in rows))
+
+    def test_empty_sections_are_honestly_unexplored_and_edits_require_user_correction(self):
+        exp=self.app.exploration
+        result=exp.clean_report(dict(sections={key:[] for key,_ in exp.SECTIONS}),[])
+        self.assertTrue(all(rows[0]['status']=='not_explored' and not rows[0]['evidence'] for rows in result['sections'].values()))
+        messages=[dict(id='fix',role='user',kind='correction',content='我想改成：我需要休息。')]
+        report=self.report_fixture('fix','我需要休息。');report['sections']['clues'][0]['status']='user_edited'
+        request=exp.validate_request(self.session_request(messages,mode='exploration_report',report=report))
+        self.assertEqual(request['report']['sections']['clues'][0]['status'],'user_edited')
+        messages[0].pop('kind')
+        with self.assertRaises(ValueError):exp.validate_request(self.session_request(messages,mode='exploration_report',report=report))
+
+    def test_check_in_stays_tentative_and_cannot_use_assistant_as_evidence(self):
+        exp=self.app.exploration
+        messages=[dict(id='u',role='user',content='想休息'),dict(id='a',role='assistant',content='可能想有自己的空间。',checkIn=dict(text='可能想有自己的空间。',evidence=[dict(messageId='u',quote='想休息')])),dict(id='u2',role='user',content='先不确定')]
+        clean=exp.validate_request(self.session_request(messages))
+        self.assertEqual(clean['messages'][1]['tentativeObservation']['status'],'tentative')
+        messages[1]['checkIn']['evidence'][0]=dict(messageId='a',quote='自己的空间')
+        with self.assertRaises(ValueError):exp.validate_request(self.session_request(messages))
+
+    def test_session_allows_no_question_but_rejects_tracking_and_oversize(self):
+        exp=self.app.exploration;messages=[dict(id='u',role='user',content='不想聊了，先休息。')];session=exp.validate_request(self.session_request(messages))
+        def completion(payload,validate):return validate(dict(reply='好，我们先停在这里。',emotion='relieved',choices=[],checkIn=None))
+        with patch.dict(os.environ,SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=completion):self.assertEqual(exp.respond(session,self.reviewer)['choices'],[])
+        with self.assertRaises(ValueError):exp.validate_request(self.session_request(messages,tracking={'visitor':'must-not-record'}))
+        with self.assertRaises(ValueError):exp.validate_request(self.session_request([dict(id=str(i),role='user',content='字'*1000) for i in range(25)]))
+
+    def test_continuous_http_mode_preserves_origin_and_does_not_record_conversation(self):
+        server=self.app.ThreadingHTTPServer(('127.0.0.1',0),self.app.Handler);worker=threading.Thread(target=server.serve_forever,daemon=True);worker.start()
+        try:
+            body=self.session_request([dict(id='u1',role='user',content='刷剧')]);body.update(id=str(uuid.uuid4()),answer='刷剧')
+            def completion(payload,validate):return validate(dict(reply='从最近看的聊起就好。最近在看哪部剧？',emotion='curious',choices=[],checkIn=None))
+            with patch.dict(os.environ,SELFCARE_AI_KEY='test',SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=completion),patch.object(self.app,'save_conversation') as record:
+                con=http.client.HTTPConnection('127.0.0.1',server.server_port,timeout=5);con.request('POST','/lifecoach/api/review',json.dumps(body),{'Origin':'https://mikeywa.site','Content-Type':'application/json'});response=con.getresponse();data=json.loads(response.read());con.close()
+                self.assertEqual(response.status,200);self.assertNotIn('correct',data);record.assert_not_called()
+        finally:server.shutdown();server.server_close();worker.join()
+
 if __name__=='__main__':unittest.main()

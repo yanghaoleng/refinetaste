@@ -15,9 +15,9 @@ def install(dst):
     s = p.read_text()
     s = replace(s, "const assess=activeQuestion().kind==='open'&&!questionAnswered()", "const assess=activeQuestion().feedbackMode!=='exploration'&&activeQuestion().kind==='open'&&!questionAnswered()")
     s = replace(s, 'score&&!score.passed?', 'score&&!score.passed&&!score.exploration?')
-    p.write_text(s + '\n' + (HERE / 'runtime.js').read_text())
+    p.write_text(s + '\n' + '\n'.join((HERE / name).read_text() for name in ('runtime.js','session-core.js','session.js')))
     p = dst / 'dist/academy.css'
-    p.write_text(p.read_text() + '\n' + (HERE / 'runtime.css').read_text())
+    p.write_text(p.read_text() + '\n' + (HERE / 'runtime.css').read_text() + '\n' + (HERE / 'session.css').read_text())
     p = dst / 'dist/analytics.js'
     s = replace(p.read_text(), "location.pathname.startsWith('/selfcare/')", "(location.pathname.startsWith('/selfcare/')||location.pathname.startsWith('/lifecoach/'))")
     p.write_text(s)
@@ -34,7 +34,14 @@ def install(dst):
     s = replace(s, "path=urlparse(self.path).path", "path=selfcare_path(urlparse(self.path).path)")
     s = replace(s, "path = urlparse(self.path).path", "path = selfcare_path(urlparse(self.path).path)") if 'path = urlparse(self.path).path' in s else s
     s = replace(s, "BASE = '/selfcare'", "BASE = '/selfcare'\ndef selfcare_path(path):\n    return '/selfcare'+path[len('/lifecoach'):] if path=='/lifecoach' or path.startswith('/lifecoach/') else path")
+    s = replace(s, "BASE = '/selfcare'", "import importlib.util\n_exp_spec=importlib.util.spec_from_file_location('ruru_exploration',ROOT/'server/exploration.py')\nexploration=importlib.util.module_from_spec(_exp_spec);_exp_spec.loader.exec_module(exploration)\nBASE = '/selfcare'")
+    s = replace(s, "    def review_request(self,key,now):\n        try:", "    def review_request(self,key,now):\n        exploring=False\n        try:")
+    s = replace(s, "            messages=data.get('messages')\n            if chat:messages=reviewer.validate_messages(messages)", "            exploring=data.get('mode') in ('exploration_session','exploration_report')\n            session_request=exploration.validate_request(data) if exploring else None\n            if exploring:chat=True;assess=False\n            messages=data.get('messages')\n            if chat and not exploring:messages=reviewer.validate_messages(messages)")
+    s = replace(s, "        except ValueError:return self.reply(400,{'error':'请针对本题写下 30—2000 字的思路。'})", "        except ValueError:return self.reply(400,{'error':'会谈记录格式或长度暂时无法处理。已有内容仍留在本机。' if exploring else '请针对本题写下 30—2000 字的思路。'})")
+    s = replace(s, "        tracking=data.get('tracking')", "        tracking=None if exploring else data.get('tracking')")
+    s = replace(s, "                reply=reviewer.chat(question,messages,assess=True) if assess else reviewer.chat(question,messages)", "                reply=exploration.respond(session_request,reviewer) if exploring else reviewer.chat(question,messages,assess=True) if assess else reviewer.chat(question,messages)")
     p.write_text(s)
+    (dst / 'server/exploration.py').write_text((HERE / 'exploration.py').read_text())
     p = dst / 'server/reviewer.py'
     s = p.read_text()
     s = replace(s, 'def chat(question,messages,assess=False):', "def chat(question,messages,assess=False):\n    exploration=question.get('feedbackMode')=='exploration'\n    if exploration:assess=False")
