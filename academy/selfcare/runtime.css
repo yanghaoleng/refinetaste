@@ -1,0 +1,9 @@
+.selfcare-intro,.selfcare-clue{box-sizing:border-box;max-width:680px;margin:0 auto 24px;padding:20px;border-radius:18px;background:var(--surface);line-height:1.8}
+.selfcare-intro h3,.selfcare-clue h3{font-size:17px;margin:0 0 12px}.selfcare-intro p{margin:8px 0}
+.selfcare-followups{max-width:680px;margin:10px auto 20px;line-height:1.8}.selfcare-followups summary{cursor:pointer;font-size:14px}.selfcare-followups li{margin:10px 0}
+.selfcare-permission{font-size:12px;line-height:1.7;color:var(--muted);max-width:42em;margin:10px 0 24px}
+.selfcare-clue label{display:block;font-size:14px;margin:16px 0}.selfcare-clue textarea{display:block;box-sizing:border-box;width:100%;margin-top:6px;padding:10px;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:9px;resize:vertical}
+.selfcare-clue textarea:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.selfcare-clue-summary{text-align:left;overflow-wrap:anywhere;line-height:1.7}.selfcare-clue-summary dt{font-size:12px;color:var(--muted);margin-top:15px}.selfcare-clue-summary dd{margin:3px 0 0;white-space:pre-wrap}
+.selfcare-result h2{font-size:28px}.selfcare-result p{line-height:1.8}.selfcare-result .result-actions{display:flex;flex-wrap:wrap;gap:12px}.exploration-status{font-size:13px;color:var(--muted)}
+@media(max-width:600px){.selfcare-intro,.selfcare-clue{padding:16px}.selfcare-result h2{font-size:24px}.selfcare-result .result-actions{flex-direction:column}.lesson-next:has(#explore-skip){gap:8px}.lesson-next #explore-skip{padding:10px 12px;white-space:nowrap}}

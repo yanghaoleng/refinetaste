@@ -13,7 +13,8 @@
     "character": "小满",
     "identity": "xiaoman",
     "accent": "#9dcbdc",
-    "ink": "#244c60"
+    "ink": "#244c60",
+    "canonicalBase": "/lifecoach"
   },
   "philosophy": {
     "name": "问问哲学班",

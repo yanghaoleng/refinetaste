@@ -3,7 +3,7 @@ from pathlib import Path
 import re,json
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=json.loads((ROOT/'academy/sites.json').read_text())
-SITES=[('design','JOJO 设计班','https://mikeywa.site/refinetaste/'),*[(slug,cfg['name'],'https://mikeywa.site'+cfg['base']+'/') for slug,cfg in CONFIG.items()],('music','李老师的音乐班','https://m.mikeywa.site/pianoclass/')]
+SITES=[('design','JOJO 设计班','https://mikeywa.site/refinetaste/'),*[(slug,cfg['name'],'https://mikeywa.site'+cfg.get('canonicalBase',cfg['base'])+'/') for slug,cfg in CONFIG.items()],('music','李老师的音乐班','https://m.mikeywa.site/pianoclass/')]
 def course_link(key,name,url):
  favicon='assets/favicon-teacher-32.png' if key=='music' else 'assets/favicon-starry-32.png'
  return f'<a href="{url}"><img class="course-favicon" src="{url}{favicon}" width="16" height="16" alt=""><span class="course-name">{name}</span><svg class="course-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="icons.svg#arrow-up-right"></use></svg></a>'

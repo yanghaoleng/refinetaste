@@ -2,17 +2,17 @@ const test=require('node:test'),assert=require('node:assert/strict'),fs=require(
 const config=JSON.parse(fs.readFileSync('academy/sites.json','utf8')),slugs=Object.keys(config);
 const dir=fs.mkdtempSync(path.join(os.tmpdir(),'academy-test-'));cp.execFileSync('python3',['scripts/build-academies.py','--output',dir]);process.on('exit',()=>fs.rmSync(dir,{recursive:true,force:true}));
 test('independent curricula retain the full interaction runtime with separate storage and valid sources',()=>{
- for(const [slug,total,chapters] of [['selfcare',88,11],['philosophy',64,8],['mediaclass',96,12]]){const root=path.join(dir,slug,'dist'),course=JSON.parse(fs.readFileSync(path.join(root,'course.json'),'utf8'));assert.equal(course.questions.length,total);assert.equal(course.chapters.length,chapters);
+ for(const [slug,total,chapters] of [['selfcare',96,11],['philosophy',64,8],['mediaclass',96,12]]){const root=path.join(dir,slug,'dist'),course=JSON.parse(fs.readFileSync(path.join(root,'course.json'),'utf8'));assert.equal(course.questions.length,total);assert.equal(course.chapters.length,chapters);
   const ctx={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'chapter-practice.js'),'utf8'),ctx);assert.deepEqual(JSON.parse(JSON.stringify(ctx.window.RefinePractice.menu.chapters)),course.chapters);
   for(const name of ['app.js','analytics.js','privacy-id.js']){const s=fs.readFileSync(path.join(root,name),'utf8');assert.doesNotMatch(s,/refinetaste/);if(name==='analytics.js')assert.ok(s.includes('/'+slug+'/api/'))}
-  for(const ch of course.chapters){const qs=course.questions.filter(q=>q.chapter===ch.id);assert.equal(qs.length,8);assert.equal(qs.filter(q=>q.kind==='choice').length,4)}
+  for(const ch of course.chapters){const qs=course.questions.filter(q=>q.chapter===ch.id);assert.equal(qs.length,8);assert.equal(qs.filter(q=>q.kind==='choice').length,ch.feedbackMode==='exploration'?0:4)}
   for(const [i,q] of course.questions.entries()){assert.equal(q.id,i);assert.ok(q.sources.length);assert.ok(q.brief.length>15);if(q.kind==='choice'){assert.equal(q.visuals.length,2);assert.notDeepEqual(q.visuals[0],q.visuals[1])}else{assert.ok(q.prompt);assert.ok(q.reference.length>35)}}
  }
 });
 test('every homepage hides all other native course links behind the footer entry before privacy',()=>{
  const cases=[['design','dist/index.html'],['music',path.resolve('..','音乐班/lilaoshi/web/index.html')],...slugs.map(slug=>[slug,path.join(dir,slug,'dist/index.html')])];
- const urls={design:'https://mikeywa.site/refinetaste/',music:'https://m.mikeywa.site/pianoclass/',...Object.fromEntries(slugs.map(slug=>[slug,'https://mikeywa.site'+config[slug].base+'/']))};
- for(const [current,file] of cases){if(!fs.existsSync(file)&&current==='music')continue;const document=fs.readFileSync(file,'utf8');assert.ok(document.indexOf('id="more-courses"')<document.indexOf('id="privacy-open"'));assert.match(document,/<section id="more-courses-panel"[^>]+hidden>/);const section=document.match(/<span id="other-fields".*?<\/section><\/span>/s)[0];assert.equal((section.match(/<a /g)||[]).length,Object.keys(urls).length-1);for(const [key,url] of Object.entries(urls))assert.equal(section.includes('href="'+url+'"'),key!==current)}
+ const urls={design:'https://mikeywa.site/refinetaste/',music:'https://m.mikeywa.site/pianoclass/',...Object.fromEntries(slugs.map(slug=>[slug,'https://mikeywa.site'+(config[slug].canonicalBase||config[slug].base)+'/']))};
+ for(const [current,file] of cases){if(!fs.existsSync(file)&&current==='music')continue;const document=fs.readFileSync(file,'utf8');assert.ok(document.indexOf('id="more-courses"')<document.indexOf('id="privacy-open"'));assert.match(document,/<section id="more-courses-panel"[^>]+hidden>/);const section=document.match(/<span id="other-fields".*?<\/section><\/span>/s)[0];assert.equal((section.match(/<a /g)||[]).length,Object.keys(urls).length-1);for(const [key,url] of Object.entries(urls))assert.equal(section.includes('href="'+((current==='design'||current==='music')&&key==='selfcare'?'https://mikeywa.site/selfcare/':url)+'"'),key!==current)}
 });
 test('each subject case renders as native readable information, without new vector illustrations',()=>{
  const ctx={window:{}};vm.runInNewContext(fs.readFileSync('dist/marketing-cases.js','utf8'),ctx);
@@ -45,8 +45,8 @@ test('independent academy identities replace the coach, portraits and icons with
 });
 test('selfcare covers health and the whole coffee chat process with private notes and non-performance grading',()=>{
  const course=JSON.parse(fs.readFileSync('academy/selfcare/course.json','utf8'));
- assert.equal(new Set(course.questions.map(q=>q.title)).size,88);
- const titles=course.chapters.map(ch=>ch.title).join(' ');for(const topic of ['睡眠','饮食','压力','关系','破圈','邀约','追问','互惠','跟进','重要性感受'])assert.ok(titles.includes(topic));
+ assert.equal(new Set(course.questions.map(q=>q.title)).size,96);
+ const titles=course.chapters.map(ch=>ch.title).join(' ');for(const topic of ['睡眠','饮食','压力','关系','破圈','邀约','追问','互惠','跟进','认真对待'])assert.ok(titles.includes(topic));
  const app=fs.readFileSync(path.join(dir,'selfcare/dist/app.js'),'utf8');assert.ok(app.includes('selfcare-notes'));assert.doesNotMatch(app,/muguang-notes/);assert.ok(app.includes('不评价健康状况、性格或社交表现'));
  for(const q of course.questions){assert.ok(q.sources.every(s=>/^https:\/\//.test(s.url)));if(q.kind==='open')assert.ok(q.rubric.length>=3)}
 });

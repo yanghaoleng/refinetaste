@@ -2,7 +2,7 @@
 import argparse,hashlib,json,os,secrets,shlex,subprocess,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('site',choices=['philosophy','mediaclass']);p.add_argument('--port',type=int);p.add_argument('--ai-env',type=Path);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('site',choices=['philosophy','mediaclass','selfcare']);p.add_argument('--port',type=int);p.add_argument('--ai-env',type=Path);a=p.parse_args()
 subprocess.run([sys.executable,str(ROOT/'scripts/build-academies.py'),'--site',a.site],check=True)
 cfg=json.loads((ROOT/'academy/sites.json').read_text())[a.site];prefix=cfg['env'];port=a.port or cfg['port'];private=ROOT/'.runtime'/('dev-'+a.site+'.json')
 if not private.exists():

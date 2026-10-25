@@ -4,7 +4,7 @@
 
 - 哲学：https://mikeywa.site/philosophy/ ，8 章 64 题，32 道比较判断和 32 道对话练习。
 - 自媒体：https://mikeywa.site/mediaclass/ ，12 章 96 题，48 道比较判断和 48 道制作实作。
-- 自我照顾：https://mikeywa.site/selfcare/ ，11 章 88 题，44 道比较判断和 44 道开放练习，课程与来源详见 [RURU人生教练](selfcare/README.md)。
+- 自我照顾：https://mikeywa.site/lifecoach/ （兼容 `/selfcare/`），11 章 88 道当前练习，40 道比较判断、40 道开放练习与 8 步无评分探索，课程与来源详见 [RURU人生教练](selfcare/README.md)。
 - 设计：https://mikeywa.site/refinetaste/ 。
 - 音乐：https://m.mikeywa.site/pianoclass/ ，李老师的音乐班，原有工具与课程继续独立。
 
@@ -23,6 +23,7 @@
 - 内容源：`build_philosophy.py`、`build_mediaclass.py`、`build_selfcare.py` 与 `course_common.py`。生成的各站 `course.json` 也入库，供审阅。
 - 重建：`python3 academy/build_philosophy.py`、`python3 academy/build_mediaclass.py`、`python3 scripts/build-academies.py`。
 - 本地哲学：`python3 scripts/dev-academies.py philosophy`，打开 `http://localhost:8843/philosophy/`。
+- 本地 RURU：`python3 scripts/dev-academies.py selfcare`，打开 `http://localhost:8845/lifecoach/`。
 - 本地自媒体：`python3 scripts/dev-academies.py mediaclass`，打开 `http://localhost:8844/mediaclass/`。
 - 可选 `--ai-env /绝对路径/私有配置文件` 只读 AI 提供商字段；不复制其他站的身份密钥、管理密码或用户数据。无模型配置时明确显示真实不可用状态，不伪造评分。
 - `?qa=1` 关闭行为采集，用于浏览器验收。真实 AI 联调应直接调用独立教练模块，避免写入正式用户对话与完成数据。
