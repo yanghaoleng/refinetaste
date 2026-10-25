@@ -1,6 +1,6 @@
 # RURU人生教练
 
-面向成年人的日常学习课，10 章、80 道原创情境练习，每章 4 道比较判断与 4 道开放练习。入口为 `https://mikeywa.site/selfcare/`。命名按用户要求使用「RURU人生教练」，角色名小满，毛毡风格肉桂小太阳鹦鹉；不沿用其他课堂的角色。
+面向成年人的日常学习课，11 章、88 道原创情境练习，每章 4 道比较判断与 4 道开放练习。入口为 `https://mikeywa.site/selfcare/`。命名按用户要求使用「RURU人生教练」，角色名小满，毛毡风格肉桂小太阳鹦鹉；不沿用其他课堂的角色。
 
 ## 课程顺序
 
@@ -14,6 +14,7 @@
 8. Coffee chat：倾听、追问与表达：经历问题、跟随追问、复述确认、沉默、轮流与自我介绍。
 9. 差异、互惠与有分寸的交流：不懂就问、隐私、介绍同意、记录与传播、透明利益关系。
 10. 结束、跟进与可持续探索：按时收尾、具体感谢、低成本尝试、学习笔记、轻量四周计划。
+11. 重要性感受：辨认被看见与贡献的线索、区分重要感与热度或不可替代、表达需要、双向小行动、环境中的公平参与与暂时找不到线索的支持。
 
 ## 内容与判定
 
@@ -36,6 +37,14 @@
 - [NIH：Social Wellness Toolkit](https://www.nih.gov/health-information/your-healthiest-self-wellness-toolkits/social-wellness-toolkit)：参与社区、建立支持、关系中的尊重和边界。
 - [UC Berkeley：Informational Interviews](https://www.career.berkeley.edu/start-exploring/informational-interviews/)：准备、联系、有限时长、提问和后续。课堂把短聊过程延伸为生活与跨领域探索练习，不将所有社交视作求职或资源交换。
 - [Huang 等（2017）：It Doesn’t Hurt to Ask](https://www.hbs.edu/ris/Publication%20Files/Huang%20et%20al%202017_6945bc5e-3b3e-4c0a-addd-254c9e603c60.pdf)：特定对话情境中的提问、回应与好感研究。课堂不将其解释为问得越多越好或保证获得好感。
+
+2026-10-25 为「重要性感受」补充核验：
+
+- [Prilleltensky（2020）：Mattering at the Intersection of Psychology, Philosophy, and Politics](https://onlinelibrary.wiley.com/doi/abs/10.1002/ajcp.12368)：感到被重视与带来价值两个互补方面，涉及自己、他人、工作与社区，也重视环境中的公平。
+- [Scarpa 等（2021）：Mattering Mediates Between Fairness and Well-being](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.744201/full)：重要感、公平与福祉的关联研究；不据此声称本章练习能产生确定效果。
+- [Prilleltensky 与 Prilleltensky：How People Matter，Feeling Valued](https://www.cambridge.org/core/books/how-people-matter/feeling-valued/3837AFDFFD9EBA17FB9E2CBD5255B4F6)：出版社公开章节摘要中的被重视、归属与尊严概念。未声称读取付费全文，未复刻量表或书中原题。
+
+本章是概念辨认与行动探索，不是重要感量表。可以暂时没有经历可写、选择虚构或期待中的场景、先获得支持或休息；不按个人价值、重要感强弱、头衔、贡献多少或被需要程度给人评分。新增章节在末尾追加，既有 80 题编号与章节保持不变。
 
 ## 运行边界
 

@@ -87,6 +87,14 @@
       "objective": "能按时收尾、具体感谢、适度跟进，并制定有余地的探索计划。",
       "minutes": "20—35 分钟",
       "track": 0
+    },
+    {
+      "id": 10,
+      "title": "重要性感受",
+      "subtitle": "辨认被看见、被重视与能够贡献的时刻，找到属于自己的重要感线索。",
+      "objective": "能区分重要感与流量、头衔或不可替代，辨认个人线索，提出兼顾自己、他人与环境的小行动。",
+      "minutes": "20—35 分钟",
+      "track": 0
     }
   ],
   "questions": [
@@ -6207,6 +6215,634 @@
           "id": "alternate",
           "title": "给下个月留一份有余地的计划",
           "prompt": "制定四周的轻量计划：各选一个自我照顾行动、已有关系联系和破圈尝试，写出一次 coffee chat 的问题、边界、备选与回看方法。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 80,
+      "chapter": 10,
+      "module": "selfcare-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "被重视的线索",
+      "title": "被很多人看到，就一定感到重要吗？",
+      "brief": "小知发的照片得到很多点赞，却最记得朋友隔周问起她上次担心的事。她想了解自己为何更在意后者，哪种分析更贴近现有材料？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "行动方案",
+          "rows": [
+            {
+              "label": "线索",
+              "text": "朋友记得她的处境，并主动关心后续"
+            },
+            {
+              "label": "下一步",
+              "text": "辨认自己是否更需要被理解和认真对待"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "行动方案",
+          "rows": [
+            {
+              "label": "线索",
+              "text": "点赞数量更容易比较，应先提高发布频率"
+            },
+            {
+              "label": "下一步",
+              "text": "用下个月的点赞增长判断自己是否更重要"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "对这位当事人而言，持续关心是值得追问的线索；可见度与感到被重视并非同一件事。点赞也可能带来连接，但单靠数量不能判断她的需要或个人价值。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "对这位当事人而言，持续关心是值得追问的线索；可见度与感到被重视并非同一件事。点赞也可能带来连接，但单靠数量不能判断她的需要或个人价值。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Prilleltensky（2020）· Mattering at the Intersection of Psychology, Philosophy, and Politics",
+          "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ajcp.12368"
+        },
+        {
+          "title": "Scarpa 等（2021）· Mattering Mediates Between Fairness and Well-being",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.744201/full"
+        },
+        {
+          "title": "Prilleltensky 与 Prilleltensky · How People Matter：Feeling Valued",
+          "url": "https://www.cambridge.org/core/books/how-people-matter/feeling-valued/3837AFDFFD9EBA17FB9E2CBD5255B4F6"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选方案",
+        "候选方案"
+      ],
+      "why": "对这位当事人而言，持续关心是值得追问的线索；可见度与感到被重视并非同一件事。点赞也可能带来连接，但单靠数量不能判断她的需要或个人价值。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：被很多人看到，就一定感到重要吗？",
+          "brief": "小知发的照片得到很多点赞，却最记得朋友隔周问起她上次担心的事。她想了解自己为何更在意后者，哪种分析更贴近现有材料？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "对这位当事人而言，持续关心是值得追问的线索；可见度与感到被重视并非同一件事。点赞也可能带来连接，但单靠数量不能判断她的需要或个人价值。"
+        }
+      ]
+    },
+    {
+      "id": 81,
+      "chapter": 10,
+      "module": "selfcare-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "贡献与边界",
+      "title": "只有离不开我，才说明我重要吗？",
+      "brief": "小序很喜欢帮助社群整理资料，但最近因每晚答疑而疲惫。她希望继续贡献，也想保留休息。哪种安排更符合这两个目标？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "行动方案",
+          "rows": [
+            {
+              "label": "安排",
+              "text": "继续独自维护全部资料，让大家有问题都先找自己"
+            },
+            {
+              "label": "回看",
+              "text": "用大家离不开自己的程度确认这份贡献"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "行动方案",
+          "rows": [
+            {
+              "label": "安排",
+              "text": "询问大家实际需要，约定每周一次整理并共享方法"
+            },
+            {
+              "label": "回看",
+              "text": "帮助是否有用，自己是否也获得尊重与休息"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "贡献可以有范围，也可以让别人更独立；被需要不等于必须不可替代。重要感不应靠耗尽自己或制造依赖维持，休息期间也不需要重新证明人的价值。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "贡献可以有范围，也可以让别人更独立；被需要不等于必须不可替代。重要感不应靠耗尽自己或制造依赖维持，休息期间也不需要重新证明人的价值。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Prilleltensky（2020）· Mattering at the Intersection of Psychology, Philosophy, and Politics",
+          "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ajcp.12368"
+        },
+        {
+          "title": "Scarpa 等（2021）· Mattering Mediates Between Fairness and Well-being",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.744201/full"
+        },
+        {
+          "title": "Prilleltensky 与 Prilleltensky · How People Matter：Feeling Valued",
+          "url": "https://www.cambridge.org/core/books/how-people-matter/feeling-valued/3837AFDFFD9EBA17FB9E2CBD5255B4F6"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选方案",
+        "候选方案"
+      ],
+      "why": "贡献可以有范围，也可以让别人更独立；被需要不等于必须不可替代。重要感不应靠耗尽自己或制造依赖维持，休息期间也不需要重新证明人的价值。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：只有离不开我，才说明我重要吗？",
+          "brief": "小序很喜欢帮助社群整理资料，但最近因每晚答疑而疲惫。她希望继续贡献，也想保留休息。哪种安排更符合这两个目标？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "贡献可以有范围，也可以让别人更独立；被需要不等于必须不可替代。重要感不应靠耗尽自己或制造依赖维持，休息期间也不需要重新证明人的价值。"
+        }
+      ]
+    },
+    {
+      "id": 82,
+      "chapter": 10,
+      "module": "selfcare-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "感受与推断",
+      "title": "分享没收到回应，该怎样理解？",
+      "brief": "小言在兴趣群分享了一次尝试，两天内无人回复。她感到失落，还不知道大家是否看见。哪种复盘更能帮助她了解重要感的来源？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "行动方案",
+          "rows": [
+            {
+              "label": "复盘",
+              "text": "承认失落，把无回复与自己不重要的结论分开"
+            },
+            {
+              "label": "尝试",
+              "text": "向一位愿意交流的人询问是否方便聊聊，并保留其他解释"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "行动方案",
+          "rows": [
+            {
+              "label": "复盘",
+              "text": "群回复是目前唯一可比较的反馈，先把它作为重要感指标"
+            },
+            {
+              "label": "尝试",
+              "text": "增加分享数量，直到回复率回升再评估自己"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "失落是真实的，但一次沉默不足以证明自己不重要。可以表达想获得回应的需要、寻找自愿的连接，也允许暂不分享；不必靠不断加量换取确认。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "失落是真实的，但一次沉默不足以证明自己不重要。可以表达想获得回应的需要、寻找自愿的连接，也允许暂不分享；不必靠不断加量换取确认。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Prilleltensky（2020）· Mattering at the Intersection of Psychology, Philosophy, and Politics",
+          "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ajcp.12368"
+        },
+        {
+          "title": "Scarpa 等（2021）· Mattering Mediates Between Fairness and Well-being",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.744201/full"
+        },
+        {
+          "title": "Prilleltensky 与 Prilleltensky · How People Matter：Feeling Valued",
+          "url": "https://www.cambridge.org/core/books/how-people-matter/feeling-valued/3837AFDFFD9EBA17FB9E2CBD5255B4F6"
+        }
+      ],
+      "correct": 0,
+      "labels": [
+        "候选方案",
+        "候选方案"
+      ],
+      "why": "失落是真实的，但一次沉默不足以证明自己不重要。可以表达想获得回应的需要、寻找自愿的连接，也允许暂不分享；不必靠不断加量换取确认。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：分享没收到回应，该怎样理解？",
+          "brief": "小言在兴趣群分享了一次尝试，两天内无人回复。她感到失落，还不知道大家是否看见。哪种复盘更能帮助她了解重要感的来源？ 请选出理由更充分的一项。",
+          "correct": 0,
+          "why": "失落是真实的，但一次沉默不足以证明自己不重要。可以表达想获得回应的需要、寻找自愿的连接，也允许暂不分享；不必靠不断加量换取确认。"
+        }
+      ]
+    },
+    {
+      "id": 83,
+      "chapter": 10,
+      "module": "selfcare-v1",
+      "kind": "choice",
+      "format": "情境比较",
+      "principle": "环境中的位置",
+      "title": "努力了，却总没有被听见的机会",
+      "brief": "小青参与项目，建议常被跳过，成果也没有注明参与者。她想找到能发挥作用、得到公平对待的位置。哪种尝试更回应题设？",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "行动方案",
+          "rows": [
+            {
+              "label": "个人",
+              "text": "先增加额外工作，用更多交付争取被注意"
+            },
+            {
+              "label": "环境",
+              "text": "暂不讨论发言和署名，等自己做得足够多再提"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        },
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "行动方案",
+          "rows": [
+            {
+              "label": "个人",
+              "text": "整理具体贡献，与可信同伴商量表达方式"
+            },
+            {
+              "label": "环境",
+              "text": "提出轮流发言和署名规则，也评估其他合作空间"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "重要感也与参与机会、回应和公平有关。可以同时尝试个人表达与环境调整；如果环境持续不支持，寻找其他空间也是合理选择，不能把未被看见全归咎于个人不够努力。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "重要感也与参与机会、回应和公平有关。可以同时尝试个人表达与环境调整；如果环境持续不支持，寻找其他空间也是合理选择，不能把未被看见全归咎于个人不够努力。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Prilleltensky（2020）· Mattering at the Intersection of Psychology, Philosophy, and Politics",
+          "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ajcp.12368"
+        },
+        {
+          "title": "Scarpa 等（2021）· Mattering Mediates Between Fairness and Well-being",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.744201/full"
+        },
+        {
+          "title": "Prilleltensky 与 Prilleltensky · How People Matter：Feeling Valued",
+          "url": "https://www.cambridge.org/core/books/how-people-matter/feeling-valued/3837AFDFFD9EBA17FB9E2CBD5255B4F6"
+        }
+      ],
+      "correct": 1,
+      "labels": [
+        "候选方案",
+        "候选方案"
+      ],
+      "why": "重要感也与参与机会、回应和公平有关。可以同时尝试个人表达与环境调整；如果环境持续不支持，寻找其他空间也是合理选择，不能把未被看见全归咎于个人不够努力。",
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "怎样判断：努力了，却总没有被听见的机会",
+          "brief": "小青参与项目，建议常被跳过，成果也没有注明参与者。她想找到能发挥作用、得到公平对待的位置。哪种尝试更回应题设？ 请选出理由更充分的一项。",
+          "correct": 1,
+          "why": "重要感也与参与机会、回应和公平有关。可以同时尝试个人表达与环境调整；如果环境持续不支持，寻找其他空间也是合理选择，不能把未被看见全归咎于个人不够努力。"
+        }
+      ]
+    },
+    {
+      "id": 84,
+      "chapter": 10,
+      "module": "selfcare-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "重要感线索地图",
+      "title": "哪些时刻，让你觉得自己有分量？",
+      "brief": "小禾想知道自己的重要感从哪里来，却发现很难用一句话回答。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "现场材料",
+          "rows": [
+            {
+              "label": "线索",
+              "text": "一次让人愿意继续参与的互动"
+            },
+            {
+              "label": "可选",
+              "text": "已有经历、虚构片段或希望发生的场景"
+            },
+            {
+              "label": "边界",
+              "text": "不需要姓名、聊天截图或私密经历"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "从具体互动辨认线索，而非列成就。被记得、被认真听、意见被采用或照顾自己的需要都可讨论；两类线索可以交叠，不要求各有一次成功经历，也不以数量、头衔或重要感强弱评分。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "从具体互动辨认线索，而非列成就。被记得、被认真听、意见被采用或照顾自己的需要都可讨论；两类线索可以交叠，不要求各有一次成功经历，也不以数量、头衔或重要感强弱评分。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Prilleltensky（2020）· Mattering at the Intersection of Psychology, Philosophy, and Politics",
+          "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ajcp.12368"
+        },
+        {
+          "title": "Scarpa 等（2021）· Mattering Mediates Between Fairness and Well-being",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.744201/full"
+        },
+        {
+          "title": "Prilleltensky 与 Prilleltensky · How People Matter：Feeling Valued",
+          "url": "https://www.cambridge.org/core/books/how-people-matter/feeling-valued/3837AFDFFD9EBA17FB9E2CBD5255B4F6"
+        }
+      ],
+      "correct": null,
+      "prompt": "用自己或虚构人物的两个小片段，分别寻找被重视、能够带来一点价值的线索；写出当时发生了什么、这说明自己在意什么。若暂时想不到，可写一种希望体验到的回应与一个愿意探索的场景。",
+      "reference": "从具体互动辨认线索，而非列成就。被记得、被认真听、意见被采用或照顾自己的需要都可讨论；两类线索可以交叠，不要求各有一次成功经历，也不以数量、头衔或重要感强弱评分。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“重要感线索地图”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "哪些时刻，让你觉得自己有分量？",
+          "prompt": "用自己或虚构人物的两个小片段，分别寻找被重视、能够带来一点价值的线索；写出当时发生了什么、这说明自己在意什么。若暂时想不到，可写一种希望体验到的回应与一个愿意探索的场景。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 85,
+      "chapter": 10,
+      "module": "selfcare-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "把重要感说具体",
+      "title": "我想被看见，可以怎样表达？",
+      "brief": "小宁常帮活动收尾，却觉得大家只在缺人时联系自己。她既喜欢参与，也希望自己的想法被认真听见。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "现场材料",
+          "rows": [
+            {
+              "label": "体验",
+              "text": "做了收尾却少有交流"
+            },
+            {
+              "label": "意愿",
+              "text": "仍喜欢活动主题"
+            },
+            {
+              "label": "限制",
+              "text": "无法保证对方回应，不要求透露真实关系"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可以在意被关心、被听见或公平参与；先描述具体体验，提出可协商的请求，不断言对方一定在利用她。可以减少投入、寻找其他支持或换环境，不要求讨好、证明不可替代或继续无偿加量。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可以在意被关心、被听见或公平参与；先描述具体体验，提出可协商的请求，不断言对方一定在利用她。可以减少投入、寻找其他支持或换环境，不要求讨好、证明不可替代或继续无偿加量。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Prilleltensky（2020）· Mattering at the Intersection of Psychology, Philosophy, and Politics",
+          "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ajcp.12368"
+        },
+        {
+          "title": "Scarpa 等（2021）· Mattering Mediates Between Fairness and Well-being",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.744201/full"
+        },
+        {
+          "title": "Prilleltensky 与 Prilleltensky · How People Matter：Feeling Valued",
+          "url": "https://www.cambridge.org/core/books/how-people-matter/feeling-valued/3837AFDFFD9EBA17FB9E2CBD5255B4F6"
+        }
+      ],
+      "correct": null,
+      "prompt": "区分她可能在意的一种需要与一个暂时的推断，写一段可以向组织者表达的具体请求，再写出请求没被接住时可选的一步。",
+      "reference": "可以在意被关心、被听见或公平参与；先描述具体体验，提出可协商的请求，不断言对方一定在利用她。可以减少投入、寻找其他支持或换环境，不要求讨好、证明不可替代或继续无偿加量。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“把重要感说具体”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "我想被看见，可以怎样表达？",
+          "prompt": "区分她可能在意的一种需要与一个暂时的推断，写一段可以向组织者表达的具体请求，再写出请求没被接住时可选的一步。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 86,
+      "chapter": 10,
+      "module": "selfcare-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "有边界的双向行动",
+      "title": "本周，试着找到一处自己的位置",
+      "brief": "小满的朋友想更有参与感，但本周只有三十分钟，也不确定自己擅长什么。",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "现场材料",
+          "rows": [
+            {
+              "label": "资源",
+              "text": "三十分钟，可缩短或暂缓"
+            },
+            {
+              "label": "场景",
+              "text": "兴趣、生活、工作或社区任选"
+            },
+            {
+              "label": "目标",
+              "text": "探索适合自己的连接，而非赚取被重视的资格"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "可以从倾听、分享一条相关资料、共同完成小事或表达自己的需要开始，先确认双方愿意；回看是否被尊重、是否贴近需要和负担是否可承受。帮助可以很小，必要时只选择被支持或休息，不能以对方满意或增加工作量作为唯一成功标准。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "可以从倾听、分享一条相关资料、共同完成小事或表达自己的需要开始，先确认双方愿意；回看是否被尊重、是否贴近需要和负担是否可承受。帮助可以很小，必要时只选择被支持或休息，不能以对方满意或增加工作量作为唯一成功标准。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Prilleltensky（2020）· Mattering at the Intersection of Psychology, Philosophy, and Politics",
+          "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ajcp.12368"
+        },
+        {
+          "title": "Scarpa 等（2021）· Mattering Mediates Between Fairness and Well-being",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.744201/full"
+        },
+        {
+          "title": "Prilleltensky 与 Prilleltensky · How People Matter：Feeling Valued",
+          "url": "https://www.cambridge.org/core/books/how-people-matter/feeling-valued/3837AFDFFD9EBA17FB9E2CBD5255B4F6"
+        }
+      ],
+      "correct": null,
+      "prompt": "为自己或虚构人物设计一个小尝试：选择愿意靠近的场景，写出想得到的回应、可自愿提供的一点帮助、需要先问的意愿与时间边界，再给出回看方法和备选。",
+      "reference": "可以从倾听、分享一条相关资料、共同完成小事或表达自己的需要开始，先确认双方愿意；回看是否被尊重、是否贴近需要和负担是否可承受。帮助可以很小，必要时只选择被支持或休息，不能以对方满意或增加工作量作为唯一成功标准。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“有边界的双向行动”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "本周，试着找到一处自己的位置",
+          "prompt": "为自己或虚构人物设计一个小尝试：选择愿意靠近的场景，写出想得到的回应、可自愿提供的一点帮助、需要先问的意愿与时间边界，再给出回看方法和备选。 请说明一个可能的限制或反例。"
+        }
+      ]
+    },
+    {
+      "id": 87,
+      "chapter": 10,
+      "module": "selfcare-v1",
+      "kind": "open",
+      "format": "思考与实作",
+      "principle": "重要感低落时",
+      "title": "暂时没找到，也可以从这里开始",
+      "brief": "小舟换了生活环境，过去熟悉的角色和回应变少了。她说：“我想不到自己现在对谁重要。”",
+      "visuals": [
+        {
+          "kind": "marketing",
+          "layout": "plan",
+          "tag": "生活练习",
+          "title": "现场材料",
+          "rows": [
+            {
+              "label": "变化",
+              "text": "熟悉角色和互动减少"
+            },
+            {
+              "label": "未知",
+              "text": "新环境中有哪些支持"
+            },
+            {
+              "label": "边界",
+              "text": "可用虚构案例、可暂停，不以是否积极或立刻好转评分"
+            }
+          ],
+          "metrics": [],
+          "tone": "neutral",
+          "footnote": "原创教学情境 · 不是真实人物记录"
+        }
+      ],
+      "rule": "允许暂时没有答案，不强迫列出成功或感谢清单，不用“你肯定对很多人很重要”替她作证。可以先联系愿意倾听的人、寻找有共同兴趣的小场景，或照顾自己的需要；没有回应不等于没有价值。若困扰持续并影响生活，可寻求合适的专业支持，本练习不进行诊断或治疗。",
+      "tip": "在条件变化时，你的理由需要怎样调整？",
+      "coachOpening": [
+        "允许暂时没有答案，不强迫列出成功或感谢清单，不用“你肯定对很多人很重要”替她作证。可以先联系愿意倾听的人、寻找有共同兴趣的小场景，或照顾自己的需要；没有回应不等于没有价值。若困扰持续并影响生活，可寻求合适的专业支持，本练习不进行诊断或治疗。",
+        "可以用自己的例子继续讨论。"
+      ],
+      "coachOpeningVersion": 1,
+      "sources": [
+        {
+          "title": "Prilleltensky（2020）· Mattering at the Intersection of Psychology, Philosophy, and Politics",
+          "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/ajcp.12368"
+        },
+        {
+          "title": "Scarpa 等（2021）· Mattering Mediates Between Fairness and Well-being",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.744201/full"
+        },
+        {
+          "title": "Prilleltensky 与 Prilleltensky · How People Matter：Feeling Valued",
+          "url": "https://www.cambridge.org/core/books/how-people-matter/feeling-valued/3837AFDFFD9EBA17FB9E2CBD5255B4F6"
+        }
+      ],
+      "correct": null,
+      "prompt": "写一段承认她感受、不过度保证的回应；提出一个获得支持或探索新线索的小步骤，并说明怎样照顾眼下的需要、何时可以暂停或寻求更多支持。",
+      "reference": "允许暂时没有答案，不强迫列出成功或感谢清单，不用“你肯定对很多人很重要”替她作证。可以先联系愿意倾听的人、寻找有共同兴趣的小场景，或照顾自己的需要；没有回应不等于没有价值。若困扰持续并影响生活，可寻求合适的专业支持，本练习不进行诊断或治疗。",
+      "rubric": [
+        "回应题设的具体问题，给出可判断的思路",
+        "用理由或材料支撑关于“重要感低落时”的判断",
+        "说明条件、取舍或一个可继续检查的问题"
+      ],
+      "variants": [
+        {
+          "id": "alternate",
+          "title": "暂时没找到，也可以从这里开始",
+          "prompt": "写一段承认她感受、不过度保证的回应；提出一个获得支持或探索新线索的小步骤，并说明怎样照顾眼下的需要、何时可以暂停或寻求更多支持。 请说明一个可能的限制或反例。"
         }
       ]
     }

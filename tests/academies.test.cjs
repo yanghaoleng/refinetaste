@@ -2,7 +2,7 @@ const test=require('node:test'),assert=require('node:assert/strict'),fs=require(
 const config=JSON.parse(fs.readFileSync('academy/sites.json','utf8')),slugs=Object.keys(config);
 const dir=fs.mkdtempSync(path.join(os.tmpdir(),'academy-test-'));cp.execFileSync('python3',['scripts/build-academies.py','--output',dir]);process.on('exit',()=>fs.rmSync(dir,{recursive:true,force:true}));
 test('independent curricula retain the full interaction runtime with separate storage and valid sources',()=>{
- for(const [slug,total,chapters] of [['selfcare',80,10],['philosophy',64,8],['mediaclass',96,12]]){const root=path.join(dir,slug,'dist'),course=JSON.parse(fs.readFileSync(path.join(root,'course.json'),'utf8'));assert.equal(course.questions.length,total);assert.equal(course.chapters.length,chapters);
+ for(const [slug,total,chapters] of [['selfcare',88,11],['philosophy',64,8],['mediaclass',96,12]]){const root=path.join(dir,slug,'dist'),course=JSON.parse(fs.readFileSync(path.join(root,'course.json'),'utf8'));assert.equal(course.questions.length,total);assert.equal(course.chapters.length,chapters);
   const ctx={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'chapter-practice.js'),'utf8'),ctx);assert.deepEqual(JSON.parse(JSON.stringify(ctx.window.RefinePractice.menu.chapters)),course.chapters);
   for(const name of ['app.js','analytics.js','privacy-id.js']){const s=fs.readFileSync(path.join(root,name),'utf8');assert.doesNotMatch(s,/refinetaste/);if(name==='analytics.js')assert.ok(s.includes('/'+slug+'/api/'))}
   for(const ch of course.chapters){const qs=course.questions.filter(q=>q.chapter===ch.id);assert.equal(qs.length,8);assert.equal(qs.filter(q=>q.kind==='choice').length,4)}
@@ -45,8 +45,8 @@ test('independent academy identities replace the coach, portraits and icons with
 });
 test('selfcare covers health and the whole coffee chat process with private notes and non-performance grading',()=>{
  const course=JSON.parse(fs.readFileSync('academy/selfcare/course.json','utf8'));
- assert.equal(new Set(course.questions.map(q=>q.title)).size,80);
- const titles=course.chapters.map(ch=>ch.title).join(' ');for(const topic of ['睡眠','饮食','压力','关系','破圈','邀约','追问','互惠','跟进'])assert.ok(titles.includes(topic));
+ assert.equal(new Set(course.questions.map(q=>q.title)).size,88);
+ const titles=course.chapters.map(ch=>ch.title).join(' ');for(const topic of ['睡眠','饮食','压力','关系','破圈','邀约','追问','互惠','跟进','重要性感受'])assert.ok(titles.includes(topic));
  const app=fs.readFileSync(path.join(dir,'selfcare/dist/app.js'),'utf8');assert.ok(app.includes('selfcare-notes'));assert.doesNotMatch(app,/muguang-notes/);assert.ok(app.includes('不评价健康状况、性格或社交表现'));
  for(const q of course.questions){assert.ok(q.sources.every(s=>/^https:\/\//.test(s.url)));if(q.kind==='open')assert.ok(q.rubric.length>=3)}
 });

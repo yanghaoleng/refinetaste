@@ -26,7 +26,7 @@ class AcademyTests(unittest.TestCase):
  def event(self,a,run,kind,**extra):return a.collect(dict(id=str(uuid.uuid4()),visitor=run['visitor'],session=run['session'],run=run['run'],course=2,kind=kind,**extra))
  def test_all_subject_chapters_complete_only_their_own_syllabus_and_do_not_mix_sites(self):
   for slug,a in self.apps.items():
-   self.assertEqual(len(a.QUESTIONS),{'selfcare':80,'philosophy':64,'mediaclass':96}[slug])
+   self.assertEqual(len(a.QUESTIONS),{'selfcare':88,'philosophy':64,'mediaclass':96}[slug])
    self.assertEqual(a.BASE,'/'+slug)
    for start in a.CHAPTER_STARTS:
     run={k:str(uuid.uuid4()) for k in ('visitor','session','run')};ids=list(a.CHAPTER_QUESTIONS[start])
@@ -39,7 +39,7 @@ class AcademyTests(unittest.TestCase):
   self.assertNotEqual(self.apps['philosophy'].DB,self.apps['mediaclass'].DB)
   self.assertEqual(self.apps['philosophy'].summary(7)['metrics']['completed'],8)
   self.assertEqual(self.apps['mediaclass'].summary(7)['metrics']['completed'],12)
-  self.assertEqual(self.apps['selfcare'].summary(7)['metrics']['completed'],10)
+  self.assertEqual(self.apps['selfcare'].summary(7)['metrics']['completed'],11)
   self.assertEqual(len({a.DB for a in self.apps.values()}),3)
  def test_builtin_assets_references_and_private_dashboard_use_correct_routes(self):
   for slug,a in self.apps.items():
@@ -65,5 +65,5 @@ class AcademyTests(unittest.TestCase):
     instruction=completion.call_args.args[0]['messages'][0]['content'];self.assertIn({'philosophy':'哲学','mediaclass':'口播','selfcare':'coffee chat'}[slug],instruction)
     if slug=='philosophy':self.assertIn('不因结论',instruction);self.assertNotIn('只讨论当前题目相关的设计',instruction)
     if slug=='selfcare':
-     for boundary in ['不根据聊天诊断疾病','不要求披露真实个人经历','不以健康结果','合理选择独处','尊重双方同意']:self.assertIn(boundary,instruction)
+     for boundary in ['不根据聊天诊断疾病','不要求披露真实个人经历','不以健康结果','合理选择独处','尊重双方同意','重要性感受','重要感强弱评分','选择被支持或休息']:self.assertIn(boundary,instruction)
      self.assertNotIn('只讨论当前题目相关的设计',instruction)
