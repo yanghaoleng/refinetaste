@@ -217,4 +217,21 @@ class SelfcareTests(unittest.TestCase):
             self.assertNotIn('score',result);self.assertNotIn('correct',result)
             with self.assertRaises(ValueError):exp.validate_request({**request,'q':88})
 
+    def test_report_cannot_erase_existing_user_material_with_an_empty_template(self):
+        exp=self.app.exploration;messages=[dict(id='u1',role='user',content='我想给照顾家人的自己留点时间读小说，但先不行动。')]
+        session=exp.validate_request(self.session_request(messages,mode='exploration_report'))
+        def empty(payload,validate):return validate(dict(report=self.report_fixture()))
+        with patch.dict(os.environ,SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=empty):
+            with self.assertRaisesRegex(ValueError,'ignored user material'):exp.respond(session,self.reviewer)
+        captured=[]
+        def grounded(payload,validate):
+            record=json.loads(payload['messages'][1]['content'].split('\n',1)[1]);captured.append(record)
+            return validate(dict(report=record['reportShape']))
+        with patch.dict(os.environ,SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=grounded):result=exp.respond(session,self.reviewer)
+        self.assertEqual(result['report']['sections']['clues'][0]['evidence'][0]['quote'],messages[0]['content'])
+        self.assertIn('reportShape',captured[0])
+        invitation=self.report_fixture('u1','我想给照顾家人的自己留点时间读小说，但先不行动。')
+        invitation['sections']['directions']=[dict(text='是否愿意继续聊读小说？',status='explicit',evidence=[dict(messageId='u1',quote=messages[0]['content'])])]
+        self.assertEqual(exp.clean_report(invitation,messages)['sections']['directions'][0]['status'],'tentative')
+
 if __name__=='__main__':unittest.main()

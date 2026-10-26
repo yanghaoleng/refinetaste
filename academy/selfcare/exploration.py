@@ -7,7 +7,7 @@ MAX_MESSAGES = 200
 MAX_CHARACTERS = 24000
 SECTIONS = [('question','本次想弄清的问题'),('clues','目前出现的线索'),('context','关切、外界标准与现实限制'),('uncertainties','仍不确定的地方'),('directions','愿意继续探索的方向')]
 COURSES = {0:'自我照顾，从看见需要开始',1:'睡眠、休息与恢复',2:'活动、饮食与日常健康',3:'情绪、压力与温柔的边界',4:'关系质量与日常连接',5:'破圈，从一个真实问题开始',6:'Coffee chat：邀约与准备',7:'Coffee chat：倾听、追问与表达',8:'差异、互惠与有分寸的交流',9:'结束、跟进与可持续探索'}
-UNEXPLORED = {'question':'还没聊到你这次想弄清的问题。','clues':'目前还没有具体经历可以整理成线索。','context':'你的关切、外界标准和现实限制还没展开。','uncertainties':'材料还少，暂时无法判断有哪些拉扯。','directions':'你还没有表达想继续探索的方向，也可以先不行动。'}
+UNEXPLORED = {'question':'本次想弄清的问题尚待进一步整理与核对。','clues':'这部分仍需更多具体经历来核对。','context':'关切、外界标准与现实限制之间的联系还需核对。','uncertainties':'哪些地方不确定或相互拉扯，还需要一起核对。','directions':'后续方向尚待本人选择，可以继续了解，也可以先不行动。'}
 SYSTEM = '''你是RURU人生教练的学习伙伴小满。这是一场连续的“重要性感受”探索会谈，不是逐题测验。重要性感受指生活里什么值得认真对待，是进一步探究的起点，不是正确性证明，不等于被重视、贡献多或爱好高级。关注用户当前议题，不按八个问题或固定流程盘问，不诱导既定价值观。出现具体议题后可自然确认最想聊清哪一点，已经明确就不反复问。
 从用户具体经验出发，复述要可纠正，观察和推测必须区分。借书单或推荐、没有行动不等于不在意。允许不知道、疲惫、停聊、暂不行动。用户明确拒绝或想结束时只回应，不再追问、给任务或行动选项。通常简短回应约40—120字，但不强制两句，不必每轮问问题；需要追问时最多一个具体问题。不要编造自己的人类生活经历，不给人格价值、热爱或重要性感受强弱打分、分级或诊断。用户要具体知识时可以说明是在分享一般参考，不装作只靠提问就能解决。
 你不是医疗、心理治疗或危机服务，不诊断、开药或建议停药；持续困扰可寻求合适的专业支持，紧迫危险优先当地紧急援助及可信的人。尊重双方同意、隐私和边界，不索要真实身份、病史或他人的隐私。不要假装进行经过验证的心理量表或科学测评。
@@ -28,7 +28,8 @@ REPORT = '''用户主动整理“重要性感受探索报告”。基于这一�
 返回JSON：report={sections:{question:[item],clues:[item],context:[item],uncertainties:[item],directions:[item]},courses:[{chapterId,reason,evidence}]}。每节1—3个item；item={text,status,evidence:[{messageId,quote}]}。status仅explicit（用户明确说过）、tentative（待核对推测）、not_explored（还没探讨，evidence为空）。前两类必须附至少一条本次user的真实逐字引用，不能引用assistant。每条简短，一项一意；若关切、外界标准或限制没有依据，用not_explored。愿意探索的方向须有用户明确意愿，不能把助手提议当用户计划；不行动也可。不要给清晰度或强弱分数。
 没有材料的节也要保留，用一条status=not_explored、evidence=[]的短句说明还没聊到。不要用空数组来表示已完成探索。
 courses可为空；最多2条，仅在会谈依据支持时推荐后续章节并说明联系，不强制跳转。章节id及标题：'''+json.dumps(COURSES,ensure_ascii=False)
-REPORT += '\n必须遵循下面的JSON结构，sections的五个英文键固定不变，值始终是数组。通常每节一项即可；用会谈真实材料替换示例，不要复制不适用的发现：\n'+json.dumps({'report':{'sections':{key:[{'text':UNEXPLORED[key],'status':'not_explored','evidence':[]}] for key,_ in SECTIONS},'courses':[]}},ensure_ascii=False)
+REPORT += '\nsections的五个英文键固定不变，值始终是数组，通常每节一项即可。先读messages，再按用户已经提供的内容整理；不能把已经表达的关切、经历或暂不行动写成“没有表达”。输入中的reportShape只帮助理解结构，须依实际材料重写，不能照抄空白模板。有任何用户消息时，至少保留一条有真实原话依据的线索；“不知道”也可如实记录为尚不确定，不推断隐藏动机。'
+REPORT += '\n用本人日常用语写问题与线索，不要求用户先提出“重要性感受议题”或哲学问题。用户说想留时间读书、休息，就已提供关注方向。directions只整理本人明确愿意的方向，包括先不行动；助手提出的“是否愿意聊……”只能是待核对邀请，不能标成用户已表达的意愿。'
 
 def text(value, maximum):
     if not isinstance(value,str) or not value.strip() or len(value)>maximum:raise ValueError('invalid text')
@@ -57,6 +58,7 @@ def clean_report(value, messages, allow_edits=False):
         for item in items:
             if not isinstance(item,dict) or item.get('status') not in ('explicit','tentative','not_explored','user_edited'):raise ValueError('invalid claim status')
             status=item['status'];proof=evidence(item.get('evidence'),messages,'history' if allow_edits and status!='not_explored' else status!='not_explored')
+            if key=='directions' and status=='explicit' and isinstance(item.get('text'),str) and re.search(r'是否愿意|要不要|愿意.{0,50}[吗？?]',item['text']):status='tentative'
             if status=='user_edited' and (not allow_edits or any(not any(m['id']==e['messageId'] and m.get('kind')=='correction' for m in messages) for e in proof)):raise ValueError('unconfirmed user edit')
             if status=='not_explored' and proof:raise ValueError('unexplored claim has evidence')
             rows.append(dict(text=text(item.get('text'),350),status=status,evidence=proof))
@@ -128,12 +130,22 @@ def respond(session, reviewer):
     if reference:return reference
     reporting=session['mode']=='exploration_report'
     record=dict(messages=session['messages'],previousReport=session.get('report'))
+    users=[m for m in session['messages'] if m['role']=='user' and not m.get('supersededBy')]
+    if reporting:
+        shape=dict(sections={key:[dict(text=UNEXPLORED[key],status='not_explored',evidence=[])] for key,_ in SECTIONS},courses=[])
+        if users:
+            shape['sections']={key:[] for key,_ in SECTIONS}
+            original=users[-1];quote=original['content'][:280]
+            shape['sections']['clues']=[dict(text='本次原话线索：'+quote,status='explicit',evidence=[dict(messageId=original['id'],quote=quote)])]
+        record['reportShape']=shape
     payload={'model':os.environ['SELFCARE_AI_MODEL'],'response_format':{'type':'json_object'},'messages':[{'role':'system','content':HEALTH_SYSTEM if session['mode']=='health_session' else PRACTICE_SYSTEM+'\n'+CHAT if session['mode']=='practice_session' else SYSTEM+'\n'+(REPORT if reporting else CHAT)},{'role':'user','content':'本次会谈全部记录（未截断）：\n'+json.dumps(record,ensure_ascii=False)}],'temperature':0.4,'max_tokens':3200 if reporting else 1200}
     if 'volces.com' in os.environ.get('SELFCARE_AI_BASE',''):payload['thinking']={'type':'disabled'}
     def validate(result):
         if not isinstance(result,dict):raise ValueError('invalid response')
         if reporting:
-            return dict(reply='报告已整理，可以逐条核对。',emotion='thinking',report=clean_report(result.get('report'),session['messages']),basedOnRevision=session['revision'])
+            report=clean_report(result.get('report'),session['messages'])
+            if users and not any(item['evidence'] for items in report['sections'].values() for item in items):raise ValueError('report ignored user material')
+            return dict(reply='报告已整理，可以逐条核对。',emotion='thinking',report=report,basedOnRevision=session['revision'])
         reply=text(result.get('reply'),800)
         if session['mode']=='health_session' and re.search(r'没有.{0,4}关系|不用.{0,4}担心|只要.{0,30}(?:健康|没问题)|肯定健康|一定健康',reply):
             raise ValueError('unsupported health reassurance')
