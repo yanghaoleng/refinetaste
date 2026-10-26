@@ -1,6 +1,6 @@
 /* One avatar, carried outside changing content until its next anchor is ready. */
 (()=>{
- let frame=0,carrier=null,target=null,flight=0;
+ let frame=0,carrier=null,target=null,flight=0,settleFrame=0;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const avatar=()=>document.getElementById('coach-avatar');
  const brand=()=>document.querySelector('.brand-coach-slot');
@@ -30,7 +30,7 @@
   const ease=t=>{let lo=0,hi=1;for(let i=0;i<12;i++){const mid=(lo+hi)/2;if(bezier(mid,.16,.3)<t)lo=mid;else hi=mid}return bezier((lo+hi)/2,1,1)};
   function track(now){
    if(token!==flight)return;
-   if(!anchor.isConnected){lift();return}
+   if(!anchor.isConnected){lift();queueSettle();return}
    const t=Math.min(1,(now-began)/500),p=t===1?1:ease(t),end=anchor.getBoundingClientRect();
    const sx=start.left+start.width/2,sy=start.top+start.height/2,dx=end.left+end.width/2-sx,dy=end.top+end.height/2-sy;
    const width=start.width+(end.width-start.width)*p,height=start.height+(end.height-start.height)*p;
@@ -59,11 +59,26 @@
   move(anchor);
  }
  function brandHome(){move(brand())}
+ // Subject-specific screens may replace the original chapter action or render a
+ // new conversation without the lesson renderer. Never leave the avatar parked
+ // in its detached flight carrier after either change.
+ function settle(){
+  const node=avatar(),exercise=document.getElementById('exercise'),training=document.getElementById('training');
+  if(!node||exercise?.hasAttribute('aria-busy')||target?.isConnected)return;
+  if(!training?.open){brandHome();return}
+  if(exercise.querySelector('.course-map')){
+   const entry=exercise.querySelector('[data-chapter]');if(entry)map(entry.dataset.chapter);
+  }else if(!document.getElementById('coach-header')?.hidden)home();
+ }
+ function queueSettle(){if(!settleFrame)settleFrame=requestAnimationFrame(()=>{settleFrame=0;settle()})}
  function init(){
   const image=document.querySelector('header .brand-icon'),node=avatar();if(!image||!node)return;
   const slot=document.createElement('span');slot.className='brand-coach-slot';image.before(slot);slot.append(image);
   node.style.setProperty('--coach-brand-image',`url("${image.src}")`);
   slot.append(node);node.classList.add('coach-at-brand');target=slot;
+  const observer=new MutationObserver(queueSettle);
+  observer.observe(document.getElementById('exercise'),{childList:true,subtree:true,attributes:true,attributeFilter:['aria-busy']});
+  observer.observe(document.getElementById('coach-header'),{attributes:true,attributeFilter:['hidden']});
  }
  reduced.addEventListener('change',()=>{if(reduced.matches&&target)land(target)});
  window.RefineGuide={hold:lift,raise,home,latest,map,brand:brandHome};

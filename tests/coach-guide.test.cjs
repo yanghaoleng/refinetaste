@@ -11,12 +11,13 @@ function setup(reduced=false){
    append(node){node.remove();node.isConnected=true;this.children.push(node);node.parentElement=this},
    prepend(node){this.append(node);if(node.className==='coach-avatar-target')anchors.push(node)},
    remove(){this.isConnected=false;if(this.parentElement)this.parentElement.children=this.parentElement.children.filter(x=>x!==this);this.parentElement=null},
-   setAttribute(){},showPopover(){this.raised=(this.raised||0)+1},hidePopover(){},
+   setAttribute(){},hasAttribute(){return false},showPopover(){this.raised=(this.raised||0)+1},hidePopover(){},
    querySelector(){return this.children.find(x=>x.className==='coach-avatar-target')}
   };
   el.classList={add(c){el.className+=' '+c},remove(c){el.className=el.className.split(' ').filter(x=>x!==c).join(' ')},toggle(c,on){this.remove(c);if(on)this.add(c)}};return el;
  }
  const win={},avatar=element(),home=element('coach-identity',rect(500,3,67.5)),brand=element('brand-coach-slot',rect(24,20,40)),body=element(),messages=[element('assistant',rect(100,600))];home.append(avatar);
+ avatar.open=true;
  const document={body,readyState:'loading',addEventListener(){},getElementById:()=>avatar,querySelector:s=>s==='.coach-identity'?home:s==='.brand-coach-slot'?brand:null,querySelectorAll:s=>s.startsWith('#chat-messages')?messages:anchors.filter(x=>x.isConnected&&!x.children.length),createElement:()=>element('',rect(100,600,48.6))};
  vm.runInNewContext(fs.readFileSync('dist/coach-guide.js','utf8'),{window:win,document,matchMedia:()=>media,performance:{now:()=>now},requestAnimationFrame:fn=>{frames.set(++serial,fn);return serial},cancelAnimationFrame:id=>frames.delete(id)});
  return {api:win.RefineGuide,avatar,home,brand,messages,frames,body,media,step(time){now=time;const jobs=[...frames.values()];frames.clear();jobs.forEach(fn=>fn(time))},element,rect};
@@ -38,4 +39,9 @@ test('flight follows a scrolling destination and closing returns to the brand wi
 test('reduced motion lands immediately, including a preference change during a flight',()=>{
  const e=setup(true);e.api.latest();assert.equal(e.avatar.parentElement,e.messages[0].querySelector());assert.equal(e.frames.size,0);e.api.home();assert.equal(e.avatar.parentElement,e.home);
  const flying=setup();flying.api.latest();flying.step(100);flying.media.matches=true;flying.media.change();assert.equal(flying.avatar.parentElement,flying.messages[0].querySelector());assert.equal(flying.frames.size,0);
+});
+test('replacing an anchor during flight recovers into the visible header instead of stranding the carrier',()=>{
+ const e=setup();e.api.latest();e.messages[0].querySelector().isConnected=false;
+ e.step(200);e.step(201);e.step(701);
+ assert.equal(e.avatar.parentElement,e.home);assert.equal(e.body.children.length,0);assert.equal(e.frames.size,0);
 });

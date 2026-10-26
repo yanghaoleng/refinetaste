@@ -1,12 +1,16 @@
 """Install the shared footer course panel; its destinations remain native links."""
 from pathlib import Path
-import re,json
+import re,json,base64
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=json.loads((ROOT/'academy/sites.json').read_text())
 SITES=[('design','JOJO 设计班','https://mikeywa.site/refinetaste/'),*[(slug,cfg['name'],'https://mikeywa.site'+cfg.get('canonicalBase',cfg['base'])+'/') for slug,cfg in CONFIG.items()],('music','李老师的音乐班','https://m.mikeywa.site/pianoclass/')]
 def course_link(key,name,url):
- favicon='assets/favicon-teacher-32.png' if key=='music' else 'assets/favicon-starry-32.png'
- return f'<a href="{url}"><img class="course-favicon" src="{url}{favicon}" width="16" height="16" alt=""><span class="course-name">{name}</span><svg class="course-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="icons.svg#arrow-up-right"></use></svg></a>'
+ # Inline these tiny native bitmaps: img-src self blocks the other course origin.
+ if key=='music':file=ROOT/'dist/assets/course-icons/music.png'
+ elif key=='design':file=ROOT/'dist/assets/favicon-starry-32.png'
+ else:file=ROOT/'academy/identity/compiled'/key/'favicon-starry-32.png'
+ favicon='data:image/png;base64,'+base64.b64encode(file.read_bytes()).decode('ascii')
+ return f'<a href="{url}"><img class="course-favicon" src="{favicon}" width="16" height="16" alt=""><span class="course-name">{name}</span><svg class="course-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="icons.svg#arrow-up-right"></use></svg></a>'
 def links(current):
  return '<span id="other-fields" class="courses-entry"><button id="more-courses" class="courses-trigger" type="button" aria-expanded="false" aria-controls="more-courses-panel">更多课程</button><section id="more-courses-panel" class="courses-panel" aria-label="更多课程" hidden><nav aria-label="其他领域的学习">'+''.join(course_link(key,name,url) for key,name,url in SITES if key!=current)+'</nav></section></span>'
 def install(folder,current):

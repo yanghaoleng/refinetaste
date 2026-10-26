@@ -52,11 +52,14 @@ def build(slug,out):
  s=s.replace('</head>','<link rel="stylesheet" href="academy.css"></head>');p.write_text(s)
  (dst/'dist/academy.css').write_text((ROOT/'academy/academy.css').read_text()+f"\nhtml[data-theme=dark] body{{--accent:{cfg['accent']};--button:{cfg['accent']};--button-text:#17201a;--focus:{cfg['accent']}}}\nhtml[data-theme=light] body{{--accent:{cfg['accent']};--button:{cfg['ink']};--button-text:#ffffff;--focus:{cfg['ink']}}}\n")
  p=dst/'dist/academy.css';p.write_text(p.read_text()+'\n.academy-mascot,.brand-icon,.coach-avatar{image-rendering:auto}.brand-icon{border-radius:50%}#coach-avatar,.coach-header #coach-avatar{padding:0;border:0;box-shadow:none;background:none}\n')
+ if slug=='selfcare':
+  p=dst/'dist/academy.css';p.write_text(p.read_text()+'\n#coach-avatar.coach-at-brand .coach-avatar{border-radius:50%}\n')
  identity=ROOT/'academy/identity/compiled'/slug
  if identity.exists():shutil.copytree(identity,dst/'dist/assets',dirs_exist_ok=True)
  if identity.exists():
   identity_version=hashlib.sha256(b''.join(p.read_bytes() for p in sorted(identity.rglob('*')) if p.is_file())).hexdigest()[:12]
   p=dst/'dist/site-icon.js';p.write_text(p.read_text().replace("mood+'-'+size,base",f"mood+'-'+size+'?v={identity_version}',base"))
+  if slug=='selfcare':p.write_text(p.read_text().replace("image.src=asset('96.webp')",f"image.src=new URL('neutral-96.webp?v={identity_version}',base).href"))
   p=dst/'dist/index.html';text=p.read_text()
   text=re.sub(r'assets/(?:mascot\.png|chick-starry-(?:96|192)\.webp|favicon-starry\.(?:ico)|favicon-starry-32\.png|apple-touch-starry\.png)',lambda m:m[0]+'?v='+identity_version,text)
   p.write_text(text)

@@ -41,7 +41,7 @@ for slug,key in [('philosophy','wenwen'),('mediaclass','aying'),('selfcare','xia
  atlas('chick-cool-expressions.webp',3,2,[(i,(i-15,j)) for i in range(15,18) for j in (0,1)])
  atlas('chick-gaze.webp',2,2,[(3,(x,y)) for x in range(2) for y in range(2)])
  hero=Image.open(BASE/(key+'-'+version+'.png'));hero.save(out/'mascot.png',optimize=True)
- inspired=faces[11];neutral=faces[0]
+ neutral=faces[0];inspired=neutral if slug=='selfcare' else faces[11]
  for size in (96,192):resize(inspired,size).save(out/f'chick-starry-{size}.webp','WEBP',lossless=True,method=6)
  resize(inspired,32).save(out/'favicon-starry-32.png');resize(inspired,180).save(out/'apple-touch-starry.png');resize(inspired,64).save(out/'favicon-starry.ico',sizes=[(16,16),(32,32),(48,48),(64,64)])
  for name,size in [('chick-eyes-original.png',512),('chick-eyes-128.webp',128),('chick-eyes-512.webp',512),('apple-touch-icon.png',180),('favicon-32.png',32),('favicon.ico',64)]:
