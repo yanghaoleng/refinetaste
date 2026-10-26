@@ -7,7 +7,8 @@
     "sonner": "^2.0.8"
   },
   "devDependencies": {
-    "esbuild": "0.25.11"
+    "esbuild": "0.25.11",
+    "linkedom": "0.18.12"
   },
   "name": "refinetaste",
   "private": true,

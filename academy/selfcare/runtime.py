@@ -15,7 +15,7 @@ def install(dst):
     s = p.read_text()
     s = replace(s, "const assess=activeQuestion().kind==='open'&&!questionAnswered()", "const assess=activeQuestion().feedbackMode!=='exploration'&&activeQuestion().kind==='open'&&!questionAnswered()")
     s = replace(s, 'score&&!score.passed?', 'score&&!score.passed&&!score.exploration?')
-    p.write_text(s + '\n' + '\n'.join((HERE / name).read_text() for name in ('runtime.js','session-core.js','guide-core.js','session.js','chapters-core.js','health-core.js','health.js')))
+    p.write_text(s + '\n' + '\n'.join((HERE / name).read_text() for name in ('runtime.js','session-core.js','guide-core.js','conversation-ui.js','session.js','chapters-core.js','health-core.js','health.js')))
     p = dst / 'dist/academy.css'
     p.write_text(p.read_text() + '\n' + (HERE / 'runtime.css').read_text() + '\n' + (HERE / 'session.css').read_text())
     p = dst / 'dist/analytics.js'

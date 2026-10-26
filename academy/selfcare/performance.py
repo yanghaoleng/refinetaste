@@ -25,6 +25,8 @@ def install(dst):
   sprite=next((d/'assets').glob(f'xiaoman-{stem}-{digest((HERE/"assets"/(stem+".webp")).read_bytes())}.webp')).name
   text+=f"\n.{cls}{{background-image:url('assets/{sprite}'),url('{portrait}');background-size:{size},100% 100%;background-position:var(--face-x) var(--face-y),center}}"
  css.write_text(text)
+ # Keep the shared send button's exact theme/disabled styles for the same RURU composer.
+ shared_css=d/'course.css';shared_css.write_text(shared_css.read_text().replace('#chat-send',':is(#chat-send,.ruru-chat-form button[type=submit])'))
  # Full questions and decorative libraries no longer start downloading in the shell.
  s=re.sub(r"const coachAssetImages=.*?\nconst coachAssetsReady=.*?;\n",'const coachAssetImages=[];\nconst coachAssetsReady=Promise.resolve();\n',s,count=1)
  s=s.replace('navigationGeneration++;loadCourse().then(warmCourse).catch(()=>{});','navigationGeneration++;')
@@ -38,6 +40,7 @@ def install(dst):
  # Keep the initially painted icon until the random portrait has decoded.
  icon=(d/'site-icon.js').read_text();icon=icon.replace("if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();", "const ready=()=>{const image=new Image();image.src=asset('96.webp');image.decode().then(apply,()=>{})};if(document.readyState==='complete')setTimeout(ready,0);else addEventListener('load',ready,{once:true});")
  (d/'site-icon.js').write_text(icon)
+ guide=d/'coach-guide.js';guide_text=guide.read_text();anchor='window.RefineGuide={hold:lift,raise,home,latest,map,brand:brandHome};';assert anchor in guide_text;guide.write_text(guide_text.replace(anchor,'window.RefineGuide={hold:lift,raise,home,latest,map,brand:brandHome,follow:move};'))
  # One deferred core script, one stylesheet. Decorative case tools load on demand/idle.
  script_names=re.findall(r'<script src="([^"?]+)(?:\?[^\"]*)?"[^>]*></script>',html)
  bundle=[]

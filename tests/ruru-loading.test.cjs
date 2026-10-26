@@ -50,9 +50,9 @@ test('old notes wait for their full chapter, and custom pages reanchor the same 
 });
 test('health cards without a chat form render safely and retain composer binding when present',()=>{
  const nodes={'#training':{open:true},'#exercise':{},'#health-clear':{}},calls=[];
- const ctx={window:{RuruChapters:{chapters:{}},RuruHealth:{cards:()=>[{key:'schedule',title:'你的作息通常是哪一种？',type:'single',options:[]}]}},begin(){},showMap(){},stopReview(){},screen:'health',$:id=>nodes[id]||null,document:{querySelectorAll:()=>[]},bindChatComposer:el=>calls.push(el),esc:s=>s};
+ const ctx={window:{RuruConversation:{before(){},after(){},privacy(){return ''},tools(_id,items){return items},bindMenu(){},bindComposer:el=>calls.push(el)},RuruChapters:{chapters:{}},RuruHealth:{cards:()=>[{key:'schedule',title:'你的作息通常是哪一种？',type:'single',options:[]}]}},begin(){},showMap(){},stopReview(){},screen:'health',$:id=>nodes[id]||null,document:{querySelectorAll:()=>[]},bindChatComposer:el=>calls.push(el),esc:s=>s};
  vm.createContext(ctx);vm.runInContext(fs.readFileSync('academy/selfcare/health.js','utf8'),ctx);
- vm.runInContext("healthState={topic:'sleep',step:0,answers:{},notes:{},view:'cards'};healthChoices=()=>'';healthRender()",ctx);
+ vm.runInContext("healthState={topic:'sleep',step:0,answers:{},notes:{},messages:[],view:'cards'};healthChoices=()=>'';healthRender()",ctx);
  assert.match(nodes['#exercise'].innerHTML,/你的作息通常是哪一种/);assert.equal(calls.length,0);
  nodes['#health-chat-form']={};nodes['#health-input']={};vm.runInContext('healthRender()',ctx);
  assert.equal(calls[0],nodes['#health-input']);assert.equal(typeof nodes['#health-chat-form'].onsubmit,'function');

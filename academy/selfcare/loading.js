@@ -30,9 +30,9 @@
   try{mapBefore()}finally{if(move)guide.map=move}
   if(screen==='map'&&destination!==null)move?.call(guide,destination);
  };
- const expBefore=expRender;expRender=function(){expBefore();if(expActive())window.RefineGuide?.home()};
- const healthBefore=healthRender;healthRender=function(){healthBefore();if(healthActive())window.RefineGuide?.home()};
- const beginBefore=begin;begin=async function(...args){await beginBefore(...args);if(expActive()||healthActive())window.RefineGuide?.home()};
+ const expBefore=expRender;expRender=function(){expBefore();if(expActive()&&!window.RuruConversation?.follow())window.RefineGuide?.home()};
+ const healthBefore=healthRender;healthRender=function(){healthBefore();if(healthActive()&&!window.RuruConversation?.follow())window.RefineGuide?.home()};
+ const beginBefore=begin;begin=async function(...args){await beginBefore(...args);if((expActive()||healthActive())&&!window.RuruConversation?.follow())window.RefineGuide?.home()};
  // Shared lesson code calls this loader before its first full-question access.
  window.RuruLoad={chapter:chapterData,tools,loaded,pending};
  warmCourse();
