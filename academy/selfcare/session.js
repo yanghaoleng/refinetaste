@@ -71,7 +71,7 @@ function expRender(){
  if($('#exp-guide-unsure'))$('#exp-guide-unsure').onclick=()=>expSubmit('还不确定从哪里聊起。');
  if($('#exp-guide-close'))$('#exp-guide-close').onclick=()=>expGuideUpdate({...expState.guide,open:false});
  $('#exp-adjust-guide').onclick=()=>{if(expRequestState)return;expState.view='chat';expGuideUpdate({...window.RuruOpening.create(),...expState.guide,open:true,step:'side'})};
- const input=$('#exp-input');if(input){input.oninput=()=>{expState.draft=input.value;expSave()};$('#exp-form').onsubmit=event=>{event.preventDefault();expSubmit(input.value)}}
+ const input=$('#exp-input');if(input){bindChatComposer(input);input.oninput=()=>{expState.draft=input.value;expSave()};$('#exp-form').onsubmit=event=>{event.preventDefault();expSubmit(input.value)}}
  document.querySelectorAll('[data-exp-choice]').forEach(button=>button.onclick=()=>expSubmit(button.dataset.expChoice));
  document.querySelectorAll('[data-exp-correct]').forEach(button=>button.onclick=()=>{const m=expState.messages[+button.dataset.expCorrect];expEdit('更正你说过的话',m.content,replacement=>expSubmit(`更正我之前说的“${m.content}”：${replacement}`,'correction'))});
  document.querySelectorAll('[data-exp-confirm]').forEach(button=>button.onclick=()=>{const m=expState.messages[+button.dataset.expConfirm];expSubmit('这句贴近我的意思：'+m.checkIn.text,'confirmation')});

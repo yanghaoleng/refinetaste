@@ -434,3 +434,11 @@ body.privacy-open{overflow:hidden}
 .ticket-scan{display:flex;align-items:center;gap:14px;margin:0 0 16px;font-size:14px}
 .ticket-scan-small{margin:22px 0 0;font-size:10px;color:#756a50}
 .ticket-scan-small .ticket-code{width:46px;height:46px}
+
+/* Grow around the centered composer, then wrap and grow vertically within the viewport. */
+.chat-composer{align-items:flex-end}
+.chat-composer textarea{box-sizing:border-box;display:block;width:0;min-width:0;flex:1;height:34px;min-height:34px;max-height:240px;resize:none;border:0;background:transparent;outline:none;color:var(--text);font:inherit;font-size:14px;line-height:22px;padding:6px 0;box-shadow:none;overflow-x:hidden;overflow-y:hidden;overflow-wrap:anywhere;white-space:pre-wrap}
+.chat-composer textarea::placeholder{color:var(--muted)}
+.chat-composer textarea:focus-visible{outline:none}
+.chat-composer>button{align-self:flex-end}
+@media(max-width:600px){.chat-composer textarea{font-size:16px}}
