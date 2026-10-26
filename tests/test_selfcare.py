@@ -176,4 +176,45 @@ class SelfcareTests(unittest.TestCase):
                 self.assertEqual(response.status,200);self.assertNotIn('correct',data);record.assert_not_called()
         finally:server.shutdown();server.server_close();worker.join()
 
+    def test_selections_are_labelled_and_replaced_choices_cannot_be_new_report_evidence(self):
+        exp=self.app.exploration
+        messages=[dict(id='s1',role='user',kind='selection',content='我点选：挑战过关。'),dict(id='s2',role='user',kind='selection',content='改选：熟悉省心。',supersedes=['s1'])]
+        clean=exp.validate_request(self.session_request(messages))
+        self.assertEqual(clean['messages'][0]['supersededBy'],'s2')
+        report=self.report_fixture('s1','挑战过关')
+        with self.assertRaises(ValueError):exp.clean_report(report,clean['messages'])
+        exp.clean_report(report,clean['messages'],allow_edits=True)
+        report=self.report_fixture('s2','熟悉省心')
+        self.assertEqual(exp.clean_report(report,clean['messages'])['sections']['clues'][0]['evidence'][0]['source'],'selection')
+        messages[1]['supersedes']=['nonexistent']
+        with self.assertRaises(ValueError):exp.validate_request(self.session_request(messages))
+
+    def test_health_session_has_topic_scope_and_no_automatic_diagnosis_or_recording(self):
+        exp=self.app.exploration;messages=[dict(id='h',role='user',kind='habit',content='盘点：我喝含糖饮料。'),dict(id='u',role='user',content='我想先了解整体搭配，不想减肥。')]
+        request=dict(q=16,mode='health_session',topic='diet',revision=2,messages=messages)
+        session=exp.validate_request(request);captured=[]
+        def completion(payload,validate):
+            captured.append(payload);return validate(dict(reply='不能由这一条习惯判断疾病，还要看整体饮食和其他条件。',choices=[],checkIn=None))
+        with patch.dict(os.environ,SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=completion):result=exp.respond(session,self.reviewer)
+        self.assertNotIn('score',result);self.assertNotIn('correct',result);self.assertIn('不是疾病诊断',captured[0]['messages'][0]['content']);self.assertIn('在床窗口',captured[0]['messages'][0]['content'])
+        with self.assertRaises(ValueError):exp.validate_request({**request,'q':88})
+        with self.assertRaises(ValueError):exp.validate_request({**request,'topic':'other'})
+
+    def test_health_references_correct_misconceptions_and_do_not_call_model_for_diagnosis(self):
+        exp=self.app.exploration
+        cases=[('sleep',8,'实际上睡了7小时，所以白天睡就是不健康吗？','不等于实际睡眠'),('diet',16,'所以我已经糖尿病了吗？','不能诊断'),('activity',16,'现在胸痛，还能坚持打卡吗？','当地急救')]
+        for topic,q,content,expected in cases:
+            session=exp.validate_request(dict(q=q,topic=topic,mode='health_session',revision=1,messages=[dict(id='u',role='user',content=content)]))
+            with patch.object(self.reviewer,'complete') as model:result=exp.respond(session,self.reviewer)
+            model.assert_not_called();self.assertIn(expected,result['reply']);self.assertEqual(result['source'],'reference')
+
+    def test_all_practice_topics_keep_independent_scopes_and_do_not_grade(self):
+        exp=self.app.exploration;topics={'selfcare':0,'stress':24,'connections':32,'curiosity':40,'invite':48,'listen':56,'boundaries':64,'followup':72}
+        for topic,q in topics.items():
+            request=dict(q=q,topic=topic,mode='practice_session',revision=1,messages=[dict(id='u',role='user',content='还不知道，先不行动。')]);session=exp.validate_request(request)
+            def completion(payload,validate):return validate(dict(reply='好，可以先留在这里。',choices=[],checkIn=None))
+            with patch.dict(os.environ,SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=completion):result=exp.respond(session,self.reviewer)
+            self.assertNotIn('score',result);self.assertNotIn('correct',result)
+            with self.assertRaises(ValueError):exp.validate_request({**request,'q':88})
+
 if __name__=='__main__':unittest.main()

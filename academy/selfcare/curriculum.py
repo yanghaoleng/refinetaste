@@ -87,6 +87,8 @@ def finish(course):
                  rubric=[], tip='', rule='不评分，不要求行动或个人隐私。')
     course.questions[-1]['after'] = '还没想清楚也没关系。接下来，聊聊怎样照顾自己。'
     course.chapters = [chapter] + course.chapters[:-1]
+    for later in course.chapters[1:]:
+        later.update(experience='habits-v1' if later['id'] in (1, 2) else 'topic-reflection-v1', minutes='随时可停')
     active = [q for q in course.questions if not q.get('archived')]
     assert len(active) == 88 and len(course.questions) == 96
     assert [q['id'] for q in course.questions] == list(range(96))

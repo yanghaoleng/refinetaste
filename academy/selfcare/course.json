@@ -23,80 +23,90 @@
       "title": "自我照顾，从看见需要开始",
       "subtitle": "先认识精力、处境与需要，练习适合自己的小行动。",
       "objective": "区分自我照顾、消费与自我要求，能提出有条件的日常照顾方案。",
-      "minutes": "20—35 分钟",
-      "track": 0
+      "minutes": "随时可停",
+      "track": 0,
+      "experience": "topic-reflection-v1"
     },
     {
       "id": 1,
       "title": "睡眠、休息与恢复",
       "subtitle": "看时长，也看质量，为恢复留出真实机会。",
       "objective": "能识别挤压睡眠的安排，区分日常调整与需要专业支持的困扰。",
-      "minutes": "20—35 分钟",
-      "track": 0
+      "minutes": "随时可停",
+      "track": 0,
+      "experience": "habits-v1"
     },
     {
       "id": 2,
       "title": "活动、饮食与日常健康",
       "subtitle": "从生活环境与可做的改变开始，减少全有全无。",
       "objective": "能比较适度活动与饮食安排，不追求统一体型或极端方案。",
-      "minutes": "20—35 分钟",
-      "track": 0
+      "minutes": "随时可停",
+      "track": 0,
+      "experience": "habits-v1"
     },
     {
       "id": 3,
       "title": "情绪、压力与温柔的边界",
       "subtitle": "给感受一点位置，也给求助和拒绝留出通道。",
       "objective": "能区分倾听与建议，提出适当边界和支持路径。",
-      "minutes": "20—35 分钟",
-      "track": 0
+      "minutes": "随时可停",
+      "track": 0,
+      "experience": "topic-reflection-v1"
     },
     {
       "id": 4,
       "title": "关系质量与日常连接",
       "subtitle": "不比朋友数量，练习真实、互相尊重的关系。",
       "objective": "能识别支持性关系，兼顾已有联系、新连接与独处。",
-      "minutes": "20—35 分钟",
-      "track": 0
+      "minutes": "随时可停",
+      "track": 0,
+      "experience": "topic-reflection-v1"
     },
     {
       "id": 5,
       "title": "破圈，从一个真实问题开始",
       "subtitle": "走近陌生领域，观察不同生活，扩大理解的可能。",
       "objective": "能把破圈目标转为具体问题，选择多样而可及的探索方式。",
-      "minutes": "20—35 分钟",
-      "track": 0
+      "minutes": "随时可停",
+      "track": 0,
+      "experience": "topic-reflection-v1"
     },
     {
       "id": 6,
       "title": "Coffee chat：邀约与准备",
       "subtitle": "把来意、时长和选择说清楚，让邀请轻而具体。",
       "objective": "能写出尊重时间、便于拒绝且有明确学习目标的邀约。",
-      "minutes": "20—35 分钟",
-      "track": 0
+      "minutes": "随时可停",
+      "track": 0,
+      "experience": "topic-reflection-v1"
     },
     {
       "id": 7,
       "title": "Coffee chat：倾听、追问与表达",
       "subtitle": "用具体经历打开话题，用回应让对话往前走。",
       "objective": "能练习开放问题、跟随追问、复述确认与适度自我表达。",
-      "minutes": "20—35 分钟",
-      "track": 0
+      "minutes": "随时可停",
+      "track": 0,
+      "experience": "topic-reflection-v1"
     },
     {
       "id": 8,
       "title": "差异、互惠与有分寸的交流",
       "subtitle": "尊重隐私与拒绝，连接不必变成资源交换。",
       "objective": "能处理术语差异、敏感问题、互惠和关系边界。",
-      "minutes": "20—35 分钟",
-      "track": 0
+      "minutes": "随时可停",
+      "track": 0,
+      "experience": "topic-reflection-v1"
     },
     {
       "id": 9,
       "title": "结束、跟进与可持续探索",
       "subtitle": "把一次交流留成温暖的连接，再回到自己的生活。",
       "objective": "能按时收尾、具体感谢、适度跟进，并制定有余地的探索计划。",
-      "minutes": "20—35 分钟",
-      "track": 0
+      "minutes": "随时可停",
+      "track": 0,
+      "experience": "topic-reflection-v1"
     }
   ],
   "legacyChapters": [
