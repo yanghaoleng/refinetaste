@@ -50,3 +50,5 @@ def install(dst):
     s = s[:i] + "    if exploration:\n        instruction=instruction.replace('每次简短回答，约80至180字','每次只用一两句，约30至70字')\n        instruction+=" + repr(EXPLORATION_CHAT) + "\n        question={key:question[key] for key in ('id','prompt','coachGuide') if key in question}\n    if question.get('archived'):instruction+='这是历史归档题，讨论的是心理学mattering，不是新版首章的重要性感受；不要把二者当同义概念。'\n" + s[i:]
     s = replace(s, "        emotion=result.get('emotion','neutral')", "        if exploration and (len(text.strip())>120 or text.count('？')+text.count('?')>1):raise ValueError()\n        emotion=result.get('emotion','neutral')")
     p.write_text(s)
+    import importlib.util
+    spec=importlib.util.spec_from_file_location('ruru_performance',HERE/'performance.py');perf=importlib.util.module_from_spec(spec);spec.loader.exec_module(perf);perf.install(dst)

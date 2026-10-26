@@ -25,7 +25,7 @@ test('independent academy identities replace the coach, portraits and icons with
   const home=fs.readFileSync(path.join(web,'index.html'),'utf8');
   assert.ok(home.includes('<title>'+cfg.name+'</title>'));
   assert.ok(home.includes('alt="'+cfg.character+'"'));
-  assert.match(home,/src="assets\/mascot\.png(?:\?v=[a-f0-9]{12})?"/);
+  assert.match(home,slug==='selfcare'?/src="assets\/mascot-[a-f0-9]{12}\.webp"/:/src="assets\/mascot\.png(?:\?v=[a-f0-9]{12})?"/);
   assert.ok(home.includes(cfg.coach));const app=fs.readFileSync(path.join(web,'app.js'),'utf8');assert.ok(app.includes(cfg.character));assert.doesNotMatch(app,/JOJO/);
   const generated=JSON.parse(fs.readFileSync(path.join(web,'course.json'),'utf8'));
   const source=JSON.parse(fs.readFileSync('academy/'+slug+'/course.json','utf8'));assert.deepEqual(generated.questions,source.questions);
@@ -36,10 +36,10 @@ test('independent academy identities replace the coach, portraits and icons with
   assert.notDeepEqual(fs.readFileSync(path.join(web,'assets/icons/happy-96.webp')),fs.readFileSync(path.join(web,'assets/icons/thinking-96.webp')));
   const css=fs.readFileSync(path.join(web,'course.css'),'utf8');
   const sprites=[...css.matchAll(/assets\/((?:wenwen|aying|xiaoman)-[a-z-]+-[a-f0-9]{12}\.webp)/g)].map(m=>m[1]);assert.equal(sprites.length,4);
-  for(const asset of sprites){assert.ok(asset.startsWith(cfg.identity+'-'));assert.ok(home.includes('assets/'+asset));assert.ok(app.includes('assets/'+asset));assert.ok(fs.existsSync(path.join(web,'assets',asset)))}
+  for(const asset of sprites){assert.ok(asset.startsWith(cfg.identity+'-'));if(slug!=='selfcare')assert.ok(home.includes('assets/'+asset));assert.ok((slug==='selfcare'?css:app).includes('assets/'+asset));assert.ok(fs.existsSync(path.join(web,'assets',asset)))}
   for(const text of [home,app,css])assert.doesNotMatch(text,/chick-(?:emotions|positive-emotions|cool-expressions|gaze)\.webp/);
-  assert.match(home,/href="course\.css\?v=[a-f0-9]{12}"/);assert.match(home,/src="app\.js\?v=[a-f0-9]{12}"/);
-  assert.match(home,/src="site-icon\.js\?v=[a-f0-9]{12}"/);assert.match(home,/src="assets\/mascot\.png\?v=[a-f0-9]{12}"/);assert.match(fs.readFileSync(path.join(web,'site-icon.js'),'utf8'),/\?v=[a-f0-9]{12}/);
+  assert.match(home,slug==='selfcare'?/href="ruru-shell-[a-f0-9]{12}\.css"/:/href="course\.css\?v=[a-f0-9]{12}"/);assert.match(home,/src="app\.js\?v=[a-f0-9]{12}"/);
+  if(slug!=='selfcare')assert.match(home,/src="site-icon\.js\?v=[a-f0-9]{12}"/);if(slug!=='selfcare')assert.match(home,/src="assets\/mascot\.png\?v=[a-f0-9]{12}"/);assert.match(fs.readFileSync(path.join(web,'site-icon.js'),'utf8'),/\?v=[a-f0-9]{12}/);
   const faceMap=JSON.parse(fs.readFileSync('academy/identity/'+cfg.identity+'-asset-map.json','utf8'));assert.equal(faceMap.cells.length,18);assert.ok(faceMap.cells.every(cell=>cell.circleCoverage>=.999));
  }
 });
