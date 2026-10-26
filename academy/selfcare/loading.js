@@ -21,7 +21,15 @@
  const baseNotes=renderNoteDetail;
  renderNoteDetail=function(index){const qid=notes[index]?.questionId,id=manifest.questions[qid]?.chapter,ticket=++noteTicket;if(id===undefined)return baseNotes(index);$('#notes-list').innerHTML='<p role="status">正在准备这条笔记…</p>';Promise.all([chapterData(id),tools()]).then(()=>{if(ticket===noteTicket&&!$('#notebook').hidden)baseNotes(index)}).catch(()=>{if(ticket!==noteTicket||$('#notebook').hidden)return;$('#notes-list').innerHTML='<p>这条笔记暂未加载，原内容仍保留。</p><button id="ruru-note-retry" class="secondary">重试</button>';$('#ruru-note-retry').onclick=()=>renderNoteDetail(index)})};
  // The custom RURU screens replace the map's action; give the same avatar a live anchor.
- const mapBefore=showMap;showMap=function(){mapBefore();if(screen==='map')window.RefineGuide?.map(0)};
+ const mapBefore=showMap;
+ showMap=function(){
+  const guide=window.RefineGuide,move=guide?.map;let destination=null;
+  // Keep the single avatar outside actions while all RURU decorators replace them.
+  // With reduced motion, the shared renderer otherwise lands in an action about to vanish.
+  guide?.hold();if(move)guide.map=index=>{destination=index};
+  try{mapBefore()}finally{if(move)guide.map=move}
+  if(screen==='map'&&destination!==null)move?.call(guide,destination);
+ };
  const expBefore=expRender;expRender=function(){expBefore();if(expActive())window.RefineGuide?.home()};
  const healthBefore=healthRender;healthRender=function(){healthBefore();if(healthActive())window.RefineGuide?.home()};
  const beginBefore=begin;begin=async function(...args){await beginBefore(...args);if(expActive()||healthActive())window.RefineGuide?.home()};
