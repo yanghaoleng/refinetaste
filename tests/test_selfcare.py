@@ -222,7 +222,9 @@ class SelfcareTests(unittest.TestCase):
         session=exp.validate_request(self.session_request(messages,mode='exploration_report'))
         def empty(payload,validate):return validate(dict(report=self.report_fixture()))
         with patch.dict(os.environ,SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=empty):
-            with self.assertRaisesRegex(ValueError,'ignored user material'):exp.respond(session,self.reviewer)
+            result=exp.respond(session,self.reviewer)
+        self.assertEqual(result['report']['origin'],'source_notes')
+        self.assertEqual(result['report']['sections']['clues'][0]['evidence'][0]['quote'],messages[0]['content'])
         captured=[]
         def grounded(payload,validate):
             record=json.loads(payload['messages'][1]['content'].split('\n',1)[1]);captured.append(record)
@@ -233,5 +235,15 @@ class SelfcareTests(unittest.TestCase):
         invitation=self.report_fixture('u1','我想给照顾家人的自己留点时间读小说，但先不行动。')
         invitation['sections']['directions']=[dict(text='是否愿意继续聊读小说？',status='explicit',evidence=[dict(messageId='u1',quote=messages[0]['content'])])]
         self.assertEqual(exp.clean_report(invitation,messages)['sections']['directions'][0]['status'],'tentative')
+
+    def test_invalid_model_report_has_labelled_source_only_fallback(self):
+        exp=self.app.exploration
+        messages=[dict(id='u',role='user',content='想休息，先不行动。'),dict(id='a',role='assistant',content='你肯定想转行。')]
+        session=exp.validate_request(self.session_request(messages,mode='exploration_report'))
+        with patch.dict(os.environ,SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=self.reviewer.ReviewUnavailable(kind='invalid_response')):result=exp.respond(session,self.reviewer)
+        self.assertEqual(result['report']['origin'],'source_notes');self.assertIn('暂未完成',result['reply'])
+        self.assertNotIn('转行',json.dumps(result['report'],ensure_ascii=False));self.assertEqual(result['report']['courses'],[])
+        with patch.dict(os.environ,SELFCARE_AI_MODEL='test'),patch.object(self.reviewer,'complete',side_effect=self.reviewer.ReviewUnavailable(kind='auth')):
+            with self.assertRaises(self.reviewer.ReviewUnavailable):exp.respond(session,self.reviewer)
 
 if __name__=='__main__':unittest.main()

@@ -123,6 +123,18 @@ def health_reference(session):
     else:return None
     return dict(reply=reply,emotion='neutral',choices=[],checkIn=None,source='reference',reference=source,basedOnRevision=session['revision'])
 
+def source_notes(session):
+    """An explicitly incomplete, source-only artifact when model formatting fails."""
+    users=[m for m in session['messages'] if m['role']=='user' and not m.get('supersededBy')]
+    report=dict(sections={key:[dict(text=UNEXPLORED[key],status='not_explored',evidence=[])] for key,_ in SECTIONS},courses=[],origin='source_notes')
+    if users:
+        report['sections']['clues']=[]
+        for message in users[-3:]:
+            quote=message['content'][:280]
+            proof=evidence([dict(messageId=message['id'],quote=quote)],session['messages'])
+            report['sections']['clues'].append(dict(text=('你点选了：' if message.get('kind')=='selection' else '你提到：')+quote,status='explicit',evidence=proof))
+    return dict(reply='AI深入整理暂未完成，先保留你的原话供核对，可以继续聊或重试。',emotion='neutral',report=report,basedOnRevision=session['revision'])
+
 def respond(session, reviewer):
     if session['mode']=='exploration_session' and any(m.get('kind')=='selection' for m in session['messages']) and re.search(r'人格类型|成就型人格|哪种人格',session['messages'][-1]['content']):
         return dict(reply='这些标签只是帮助开场的词，我们不会用它们给你分人格类型。可以从一次具体经历聊起，也可以先不聊。',emotion='neutral',choices=['说一次具体经历','先不聊这个'],checkIn=None,basedOnRevision=session['revision'])
@@ -144,7 +156,7 @@ def respond(session, reviewer):
         if not isinstance(result,dict):raise ValueError('invalid response')
         if reporting:
             report=clean_report(result.get('report'),session['messages'])
-            if users and not any(item['evidence'] for items in report['sections'].values() for item in items):raise ValueError('report ignored user material')
+            if users and not any(item['evidence'] for items in report['sections'].values() for item in items):return source_notes(session)
             return dict(reply='报告已整理，可以逐条核对。',emotion='thinking',report=report,basedOnRevision=session['revision'])
         reply=text(result.get('reply'),800)
         if session['mode']=='health_session' and re.search(r'没有.{0,4}关系|不用.{0,4}担心|只要.{0,30}(?:健康|没问题)|肯定健康|一定健康',reply):
@@ -160,4 +172,7 @@ def respond(session, reviewer):
         emotion=result.get('emotion')
         if emotion not in ('neutral','curious','empathetic','thinking','relieved','encouraging'):emotion='neutral'
         return dict(reply=reply,emotion=emotion,choices=choices,checkIn=check,basedOnRevision=session['revision'])
-    return reviewer.complete(payload,validate)
+    try:return reviewer.complete(payload,validate)
+    except reviewer.ReviewUnavailable as error:
+        if reporting and error.kind=='invalid_response':return source_notes(session)
+        raise

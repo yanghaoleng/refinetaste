@@ -26,3 +26,5 @@ test('copied report retains uncertainty labels and user evidence',()=>{
  const r=report();r.version=1;r.sections.clues=[{text:'可能需要一点自己的空间',status:'tentative',evidence:[{messageId:'u',quote:'想留一点时间'}]}];const text=core.exportReport(r);
  assert.match(text,/待核对的推测/);assert.match(text,/想留一点时间/);assert.match(text,/还没聊到/);
 });
+
+test('source-only fallback stays labelled in saved and copied reports',()=>{let s=core.create('s');const r=report();r.origin='source_notes';s=core.acceptReport(s,{basedOnRevision:0,report:r},'r');assert.equal(s.reports[0].origin,'source_notes');assert.match(core.exportReport(s.reports[0]),/AI深入整理暂未完成/);});
