@@ -66,7 +66,7 @@ def finish(course):
     course.questions.extend([{**q, 'archived': True} for q in legacy['questions']])
     course.chapter('先找到，你真正想认真对待的事', '重要性感受：从最近的生活聊起。', '从日常对话逐渐发现和理解自己的在意。', [])
     chapter = course.chapters[-1]
-    chapter.update(id=11, feedbackMode='exploration', experience='continuous-exploration-v1', subtitle='和小满聊聊，得到一份可修改的探索报告。', minutes='随时可停')
+    chapter.update(id=11, feedbackMode='exploration', experience='continuous-exploration-v1', subtitle='和 RURU 聊聊，得到一份可修改的探索报告。', minutes='随时可停')
 
     # The page shows only prompt. Depth belongs to the conversation, not the entrance.
     steps = [

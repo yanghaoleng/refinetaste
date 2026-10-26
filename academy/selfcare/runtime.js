@@ -30,6 +30,7 @@ showMap=function(){
  if(chapterScores[88]?.complete)action.innerHTML='<span class="exploration-status">已浏览</span>';
 };
 render=function(){
+ window.RuruConversation?.before();
  selfcareBase.render();const q=activeQuestion();
  if(!isExploration(q)&&q.followUps?.length){
   const anchor=$('#exercise .open-case');

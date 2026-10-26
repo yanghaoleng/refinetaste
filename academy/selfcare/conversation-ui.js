@@ -3,7 +3,7 @@
  const seen=new Map();let menu=null,layout=null;
  const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
  function closeMenu(focus=false){if(!menu)return;const old=menu;menu=null;old.trigger.setAttribute('aria-expanded','false');if(old.panel.hidePopover)try{old.panel.hidePopover()}catch{}else old.panel.hidden=true;if(focus&&old.trigger.isConnected)old.trigger.focus()}
- function before(){closeMenu();const dialog=document.getElementById('training'),exercise=document.getElementById('exercise');layout=dialog?{key:exercise?.dataset.ruruView,nearBottom:dialog.scrollHeight-dialog.scrollTop-dialog.clientHeight<240,scrollTop:dialog.scrollTop,hadMessages:!!exercise?.querySelector('[data-ruru-message]')}:null;const avatar=document.getElementById('coach-avatar');if(avatar?.closest('#exercise'))window.RefineGuide?.hold()}
+ function before(){closeMenu();document.querySelector('.training-top .ruru-tools')?.remove();const dialog=document.getElementById('training'),exercise=document.getElementById('exercise');layout=dialog?{key:exercise?.dataset.ruruView,nearBottom:dialog.scrollHeight-dialog.scrollTop-dialog.clientHeight<240,scrollTop:dialog.scrollTop,hadMessages:!!exercise?.querySelector('[data-ruru-message]')}:null;const avatar=document.getElementById('coach-avatar');if(avatar?.closest('#exercise'))window.RefineGuide?.hold()}
  function follow(){const latest=[...document.querySelectorAll('#exercise [data-ruru-message]')].at(-1);if(!latest)return false;let anchor=latest.querySelector('.coach-avatar-target');if(!anchor){anchor=document.createElement('span');anchor.className='coach-avatar-target';latest.prepend(anchor)}if(!window.RefineGuide?.follow)return false;window.RefineGuide.follow(anchor);return true}
  function after(key,messages){
   const prior=seen.get(key),fresh=prior?messages.filter(m=>!prior.has(m.id)):[];seen.set(key,new Set(messages.map(m=>m.id)));
@@ -24,6 +24,7 @@
  function tools(id,items){return `<div class="ruru-tools"><button id="${id}-tools-toggle" type="button" class="ruru-tools-toggle" aria-label="会谈菜单" aria-haspopup="menu" aria-expanded="false" aria-controls="${id}-tools-menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div id="${id}-tools-menu" class="ruru-tools-menu" role="menu" popover="auto">${items}</div></div>`}
  function bindMenu(id){
   const trigger=document.getElementById(id+'-tools-toggle'),panel=document.getElementById(id+'-tools-menu');if(!trigger||!panel)return;
+  document.querySelector('.training-top')?.append(trigger.closest('.ruru-tools'));
   const state={trigger,panel};if(!panel.showPopover){panel.hidden=true;panel.classList.add('ruru-menu-fallback')}
   panel.querySelectorAll('button').forEach(b=>b.setAttribute('role','menuitem'));
   function position(){const r=trigger.getBoundingClientRect(),width=Math.min(264,innerWidth-32),height=Math.min(panel.scrollHeight||240,innerHeight-32);panel.style.left=Math.max(16,Math.min(r.left,innerWidth-width-16))+'px';panel.style.top=Math.max(16,r.bottom+height+8<innerHeight?r.bottom+8:r.top-height-8)+'px'}
