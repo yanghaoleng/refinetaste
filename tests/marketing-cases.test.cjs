@@ -3,7 +3,7 @@ const course=JSON.parse(fs.readFileSync('dist/course.json','utf8')),questions=co
 vm.runInNewContext(fs.readFileSync('dist/marketing-cases.js','utf8'),ctx);const render=ctx.window.RefineMarketing.render;
 test('marketing is an ordered path with early service and a balanced set of case decisions and practice',()=>{
  assert.equal(questions.length,56);assert.deepEqual(course.chapters.filter(c=>c.track===2).map(c=>c.id),[8,9,10,11,12,13,14]);
- assert.match(course.chapters[9].title,/私域.*产品迭代/);
+ assert.match(course.chapters.find(c=>c.id===9).title,/私域.*产品迭代/);
  for(const ch of course.chapters.filter(c=>c.track===2)){const qs=questions.filter(q=>q.chapter===ch.id);assert.equal(qs.filter(q=>q.kind==='choice').length,4);assert.equal(qs.filter(q=>q.kind==='open').length,4)}
  const privateQs=questions.filter(q=>q.chapter===9);assert.match(privateQs.at(-1).title,/自愿转介绍/);assert.match(privateQs[0].why,/服务|首次|价值/);
 });
