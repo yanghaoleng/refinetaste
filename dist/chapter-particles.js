@@ -57,6 +57,13 @@
   }else if(kind===14){ // Measurement: a funnel and a small comparison.
    line([-.9,-.68],[.74,-.68],[.15,.06],[.15,.66],[-.16,.83],[-.16,.06],[-.9,-.68]);
    line([.39,.4],[.87,.4]);line([.39,.65],[.67,.65]);
+  }else if(kind===15){ // Object, operation and visible result.
+   for(const x of [-.78,.18])line([x,-.6],[x+.6,-.6],[x+.6,.6],[x,.6],[x,-.6]);
+   line([-.08,0],[.1,0]);line([0,-.1],[.1,0],[0,.1]);line([-.65,-.3],[-.35,-.3]);line([.3,.3],[.42,.42],[.66,.05]);
+  }else if(kind===16){ // Discoverable keyboard paths and accessible controls.
+   line([-.87,-.42],[.87,-.42],[.87,.52],[-.87,.52],[-.87,-.42]);
+   for(let row=0;row<2;row++)for(let col=0;col<5;col++){const x=-.7+col*.3,y=-.23+row*.27;line([x,y],[x+.18,y],[x+.18,y+.16],[x,y+.16],[x,y])}
+   line([-.44,.37],[.44,.37]);
   }else{ // A film strip: organizing a longer timeline.
    line([-.88,-.64],[.88,-.64],[.88,.64],[-.88,.64],[-.88,-.64]);line([-.88,-.4],[.88,-.4]);line([-.88,.4],[.88,.4]);
    for(let i=0;i<5;i++){const x=-.7+i*.35;line([x,-.61],[x,-.43]);line([x,.43],[x,.61])}

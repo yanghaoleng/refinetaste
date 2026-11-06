@@ -2,7 +2,7 @@ const test=require('node:test'),assert=require('node:assert/strict'),vm=require(
 function setup(){
  const runScope={window:{}};vm.runInNewContext(fs.readFileSync('dist/question-run.js','utf8'),runScope);
  const exercise={inert:false,busy:false,hasAttribute(){return this.busy}},saved=[],rendered=[],progress={16:{chatDraft:'保留这段尚未提交的想法',messages:[{role:'assistant',content:'原来的提问'}]}},variants={16:{contextKey:'alternate:10'}},answers={};let update,resolve,transitions=0;
- const ctx={Promise,screen:'lesson',current:16,chapter:3,selected:null,runOrder:[16,17,56],runPosition:0,runVariants:variants,sessionAnswers:answers,course:{questions:[{id:16,chapter:3}]},$:()=>exercise,window:{RefineRun:runScope.window.RefineRun},persist:(key,value)=>saved.push({key,value}),render(){rendered.push(ctx.current)},transition(fn){transitions++;exercise.busy=true;update=fn;return new Promise(r=>resolve=r)}};
+ const ctx={Promise,guardDraftSkip:()=>false,resetDraftSkip:()=>{},screen:'lesson',current:16,chapter:3,selected:null,runOrder:[16,17,56],runPosition:0,runVariants:variants,sessionAnswers:answers,course:{questions:[{id:16,chapter:3}]},$:()=>exercise,window:{RefineRun:runScope.window.RefineRun},persist:(key,value)=>saved.push({key,value}),render(){rendered.push(ctx.current)},transition(fn){transitions++;exercise.busy=true;update=fn;return new Promise(r=>resolve=r)}};
  vm.createContext(ctx);const source=fs.readFileSync('dist/app.js','utf8');vm.runInContext(source.slice(source.indexOf('function skipQuestion('),source.indexOf('function recordAnswer(')),ctx);
  return {ctx,exercise,saved,rendered,progress,variants,answers,get transitions(){return transitions},async finish(){update();exercise.busy=false;resolve();await Promise.resolve();await Promise.resolve()}};
 }

@@ -1,14 +1,14 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const source=fs.readFileSync('dist/app.js','utf8'),scope={esc:s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')};
-vm.createContext(scope);vm.runInContext(source.slice(source.indexOf('function questionText('),source.indexOf('function presentQuestion(')),scope);
+vm.createContext(scope);vm.runInContext(source.slice(source.indexOf('const glossaryDefinitions='),source.indexOf('function presentQuestion(')),scope);
 const course=JSON.parse(fs.readFileSync('dist/course.json','utf8'));
 test('every question and alternate merges all wording and emphasizes its final task once',()=>{
  for(const base of course.questions)for(const q of [base,...base.variants.map(v=>({...base,...v}))]){
-  const html=scope.questionText(q),plain=html.replaceAll('<strong>','').replaceAll('</strong>','');
+  const html=scope.questionText(q),plain=html.replaceAll('<strong>','').replaceAll('</strong>','').replace(/<button[^>]*>(.*?)<\/button>/g,'$1');
   assert.equal(plain,scope.esc(q.brief.trim()+(q.kind==='open'?' '+q.prompt.trim():'')));
   assert.equal((html.match(/<strong>/g)||[]).length,1);
   assert.ok(html.endsWith('</strong>'));
-  if(q.kind==='open')assert.ok(html.endsWith(`<strong>${scope.esc(q.prompt.trim())}</strong>`));
+  if(q.kind==='open')assert.ok(html.endsWith(`<strong>${scope.glossaryText(q.prompt.trim())}</strong>`));
  }
 });
 test('question text escapes markup and both quiz and notebook use the combined text',()=>{

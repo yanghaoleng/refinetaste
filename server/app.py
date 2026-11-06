@@ -572,6 +572,8 @@ class Handler(BaseHTTPRequestHandler):
             if not isinstance(answer,str) or not (1 if chat else 30)<=len(answer.strip())<=2000:raise ValueError()
             if not isinstance(request_id,str) or not UUID.fullmatch(request_id):raise ValueError()
         except ValueError:return self.reply(400,{'error':'请针对本题写下 30—2000 字的思路。'})
+        if question.get('contentRevision') and data.get('contentRevision')!=question['contentRevision']:
+            return self.reply(409,{'error':'这道题已更新，请先保留旧草稿，再刷新进入新版题目。'})
         tracking=data.get('tracking')
         if tracking is not None and not isinstance(tracking,dict):return self.reply(400,{'error':'invalid recording context'})
         if tracking:
@@ -668,6 +670,7 @@ class Handler(BaseHTTPRequestHandler):
                 asset='assets/icons/'+mood+'-'+suffix;files[BASE+'/'+asset]=asset
         for asset in ('manrope-counter-700.ttf','Manrope-OFL.txt'):
             files[BASE+'/assets/fonts/'+asset]='assets/fonts/'+asset
+        for asset in ('wenyuan.css','latin.woff2','han1.woff2','han2.woff2','han3.woff2','han4.woff2','LICENSE.md'):files[BASE+'/wenyuan-v1/'+asset]='wenyuan-v1/'+asset
         if path not in files:return self.reply(404,{'error':'not found'})
         file=ROOT/'dist'/files[path]
         try:raw=file.read_bytes()
@@ -676,7 +679,7 @@ class Handler(BaseHTTPRequestHandler):
         mime=mimetypes.guess_type(file)[0] or 'application/octet-stream'
         self.send_header('Content-Type',mime+('; charset=utf-8' if mime.startswith('text/') or mime in ('application/javascript','image/svg+xml') else ''))
         self.send_header('Content-Length',str(len(raw)))
-        self.send_header('Cache-Control','no-cache')
+        self.send_header('Cache-Control','public, max-age=31536000, immutable' if path.startswith(BASE+'/wenyuan-v1/') else 'no-cache')
         self.send_header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'")
         self.send_header('X-Content-Type-Options','nosniff')
         self.send_header('Referrer-Policy','same-origin')
