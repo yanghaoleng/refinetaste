@@ -6,7 +6,7 @@ from pathlib import Path
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from http.cookies import SimpleCookie
 from urllib.parse import urlparse, parse_qs
-import reviewer
+import reviewer, volc_asr
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = '/refinetaste'
@@ -30,6 +30,10 @@ UUID = re.compile(r'^[a-f0-9-]{36}$')
 lock = threading.Lock()
 sessions, attempts, collect_rates, review_rates = {}, {}, {}, {}
 review_slots = threading.BoundedSemaphore(50)
+voice_slots = threading.BoundedSemaphore(2)
+voice_rates = {}
+voice_daily = {}
+voice_uploads = {}
 
 @contextmanager
 def connect():
@@ -503,11 +507,48 @@ class Handler(BaseHTTPRequestHandler):
             if not isinstance(data,dict):raise ValueError()
             return data
         except (ValueError,json.JSONDecodeError):raise ValueError('invalid body')
+    def voice_request(self,key,now):
+        if self.headers.get('Content-Type','').split(';',1)[0].strip()!='audio/pcm':return self.reply(415,{'error':'音频格式不受支持。'})
+        try:
+            size=int(self.headers.get('Content-Length','0'));sequence=int(self.headers.get('X-Voice-Sequence','-1'))
+            upload=self.headers.get('X-Voice-Id','');final=self.headers.get('X-Voice-Final','')
+            if size<1 or size>96000 or size%2 or not UUID.fullmatch(upload) or sequence<0 or sequence>10 or final not in ('0','1'):raise ValueError()
+            pcm=self.rfile.read(size)
+            if len(pcm)!=size:raise ValueError()
+        except ValueError:return self.reply(400,{'error':'录音接收不完整，请重试。'})
+        with lock:
+            for ident,item in list(voice_uploads.items()):
+                if now-item['updated']>90:del voice_uploads[ident]
+            ident=(key,upload);item=voice_uploads.get(ident)
+            if sequence==0:
+                if item is not None or len(voice_uploads)>=16:return self.reply(429,{'error':'语音识别正忙，请稍后再试。'})
+                item={'data':bytearray(),'next':0,'updated':now};voice_uploads[ident]=item
+            if item is None or item['next']!=sequence or len(item['data'])+size>960000:
+                voice_uploads.pop(ident,None);return self.reply(400,{'error':'录音片段顺序错误，请重试。'})
+            item['data'].extend(pcm);item['next']+=1;item['updated']=now
+            if final=='0':return self.reply(200,{'ok':True})
+            pcm=bytes(item['data']);del voice_uploads[ident]
+            if len(pcm)<3200:return self.reply(400,{'error':'录音太短，请重新录制。'})
+            if len(voice_rates)>10000:voice_rates.clear()
+            count,until=voice_rates.get(key,(0,now+60))
+            if until<=now:count,until=0,now+60
+            if count>=6:return self.reply(429,{'error':'语音请求较多，请稍后再试。'})
+            day=datetime.fromtimestamp(now,ZONE).date().isoformat()
+            if voice_daily.get('day')!=day:voice_daily.clear();voice_daily.update(day=day,total=0,ips={})
+            if voice_daily['total']>=240 or voice_daily['ips'].get(key,0)>=100:return self.reply(429,{'error':'今天的语音识别次数已用完，请手动输入。'})
+            voice_rates[key]=(count+1,until);voice_daily['total']+=1;voice_daily['ips'][key]=voice_daily['ips'].get(key,0)+1
+        if not voice_slots.acquire(blocking=False):return self.reply(429,{'error':'语音识别正忙，请稍后再试。'})
+        try:
+            result=volc_asr.transcribe_pcm(pcm)
+            return self.reply(200,{'text':result[:4000]})
+        except Exception:
+            return self.reply(502,{'error':'语音识别暂时不可用，请稍后重试或手动输入。'})
+        finally:voice_slots.release()
     def do_POST(self):
         path=urlparse(self.path).path
         if self.headers.get('Origin') not in ORIGINS:
             return self.reply(403,{'error':'origin rejected'})
-        if path not in (BASE+'/api/login',BASE+'/api/logout',BASE+'/api/collect',BASE+'/api/review',BASE+'/api/conversation',BASE+'/api/journey',BASE+'/api/bookmarks',BASE+'/api/identity'):
+        if path not in (BASE+'/api/login',BASE+'/api/logout',BASE+'/api/collect',BASE+'/api/review',BASE+'/api/conversation',BASE+'/api/journey',BASE+'/api/bookmarks',BASE+'/api/identity',BASE+'/api/voice'):
             return self.reply(404,{'error':'not found'})
         key=digest(self.headers.get('X-Real-IP',self.client_address[0]))
         now=time.time()
@@ -515,6 +556,8 @@ class Handler(BaseHTTPRequestHandler):
             for mapping in (attempts,collect_rates,review_rates,sessions):
                 if len(mapping)>10000:
                     mapping.clear()
+        if path.endswith('/voice'):
+            return self.voice_request(key,now)
         if path.endswith('/identity'):
             try:
                 visitor=self.body().get('visitor')
@@ -650,6 +693,7 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(308);self.send_header('Location',path+'/');self.end_headers();return
         files={BASE+'/':'index.html',BASE+'/data/':'data/index.html',BASE+'/style.css':'style.css',BASE+'/app.js':'app.js',BASE+'/analytics.js':'analytics.js',BASE+'/data/admin.js':'data/admin.js',BASE+'/data/admin.css':'data/admin.css'}
         files[BASE+'/icons.svg']='icons.svg'
+        files[BASE+'/voice-input.js']='voice-input.js'
         files[BASE+'/other-fields.js']='other-fields.js'
         files[BASE+'/other-fields.css']='other-fields.css'
         for asset in ('pixel-motion.webp','pixel-studies.webp','pixel-ball.webp'):

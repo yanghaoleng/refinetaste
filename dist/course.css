@@ -465,3 +465,5 @@ body.privacy-open{overflow:hidden}
 .demo-focus{outline:2px solid #1d3e91;outline-offset:2px}
 
 .demo-banner-equal{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}.demo-banner-equal b{font-size:1rem}
+
+#voice-input{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--text);cursor:pointer}#voice-input svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}#voice-input[aria-pressed="true"]{color:#c43939;background:#c4393920}#voice-input:disabled{opacity:.5}.voice-status{text-align:center;font-size:11px;line-height:1.5;color:var(--muted);margin:8px auto 0;max-width:420px}
