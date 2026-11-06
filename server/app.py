@@ -29,7 +29,7 @@ NAMES = ['对比', '重复', '亲密', '对齐', '场景与调性', '信息层�
 UUID = re.compile(r'^[a-f0-9-]{36}$')
 lock = threading.Lock()
 sessions, attempts, collect_rates, review_rates = {}, {}, {}, {}
-review_slots = threading.BoundedSemaphore(4)
+review_slots = threading.BoundedSemaphore(50)
 
 @contextmanager
 def connect():
@@ -584,14 +584,14 @@ class Handler(BaseHTTPRequestHandler):
             count,until=review_rates.get(key,(0,now+60))
             if until<=now:count,until=0,now+60
             review_rates[key]=(count+1,until)
-        if count>=4:return self.reply(429,{'error':'点评提交较快，请一分钟后再试。'})
+        if count>=300:return self.reply(429,{'error':'点评提交较快，请一分钟后再试。'})
         if not review_slots.acquire(blocking=False):return self.reply(429,{'error':'点评正在排队，请稍后重试。'})
         reserved=False
         try:
             with connect() as db:
                 db.execute('BEGIN IMMEDIATE')
                 db.execute('DELETE FROM review_usage WHERE day<?',(day,))
-                if db.execute('SELECT COUNT(*) FROM review_usage WHERE day=? AND client=?',(day,key)).fetchone()[0]>=32 or db.execute('SELECT COUNT(*) FROM review_usage WHERE day=?',(day,)).fetchone()[0]>=300:
+                if db.execute('SELECT COUNT(*) FROM review_usage WHERE day=? AND client=?',(day,key)).fetchone()[0]>=5000 or db.execute('SELECT COUNT(*) FROM review_usage WHERE day=?',(day,)).fetchone()[0]>=5000:
                     return self.reply(429,{'error':'今日模型点评额度已用完。可以先保存思路、对照提示，明天继续。'})
                 try:db.execute('INSERT INTO review_usage VALUES(?,?,?,?)',(request_id,day,key,q))
                 except sqlite3.IntegrityError:return self.reply(409,{'error':'这次请求已经提交，请等待结果或重新发起点评。'})

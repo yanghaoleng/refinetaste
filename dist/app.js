@@ -88,6 +88,12 @@ $('#exit').onclick=()=>{if(screen==='map'){window.RefineGuide.hold();stopReview(
 $('#training').addEventListener('close',stopReview);
 function sources(q){return q.sources?.length?`<div class="case-source">参考阅读：${q.sources.map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ${icon('arrow-up-right')}</a>`).join('')}<span>练习画面为原创示意，并非原站截图或原作复刻。</span></div>`:''}
 function specimen(v){
+ if(v.kind==='form-process-placeholder'||v.kind==='form-process-labelled'){
+  const labelled=v.kind==='form-process-labelled';
+  const field=(name,value)=>`<div class="form-demo-field">${labelled?`<span class="form-demo-label">${name}</span>`:''}<span class="form-demo-input ${!value?'is-placeholder':''}">${value||('请输入'+name)}</span></div>`;
+  const frame=(name,phone,step)=>`<div class="form-demo-frame form-demo-frame-${step}">${field('姓名',name)}${field('手机号',phone)}<span class="form-demo-action">继续选择时间</span></div>`;
+  return `<div class="specimen form form-demo" aria-label="${labelled?'字段名称始终显示':'输入后占位说明消失'}，演示姓名和手机号从空白到填写完成"><div class="specimen-tag">原创教学案例</div><strong class="specimen-title">预约到店</strong><div class="form-demo-stage">${frame('','',0)}${frame('陈小林','',1)}${frame('陈小林','138 **** 2026',2)}</div></div>`;
+ }
  if(v.kind==='marketing')return window.RefineMarketing.render(v);
  if(v.kind==='character-study')return window.RefineCharacters.render(v);
  if(v.kind==='storyboard'||v.kind==='story-plan')return storySpecimen(v);
@@ -133,6 +139,7 @@ function render(){
  activateQuestionContext();screen='lesson';const q=activeQuestion(),ch=course.chapters[chapter];selected=questionAnswered()?checkpoint().choice??null:null;
  $('#coach-header').hidden=false;setCoachGaze(null);setCoachMood('curious');$('#exit').innerHTML=icon('arrow-left');$('#exit').setAttribute('aria-label','返回课程目录');updateRunProgress();
  $('#exercise').innerHTML=`<div class="lesson-stream"><section class="exercise-heading question-heading chat-message assistant" aria-label="JOJO 的提问"><div class="chat-bubble question-bubble"><h2 id="exercise-title" tabindex="-1">${questionText(q)}</h2></div></section>${window.RefineCharacters?.controls(q.visuals)||''}${q.kind==='choice'?`<div class="options" aria-label="JOJO 发来的两个设计方案">${q.labels.map((label,i)=>`<button class="option" data-option="${i}" aria-label="选项 ${i?'B':'A'}：${esc(label)}"><div class="option-design">${q.visuals?.length?specimen(q.visuals[i]):sampleForQuestion(q,i)}</div><div class="option-label"><span class="letter">${i?'B':'A'}</span></div></button>`).join('')}</div>`:`<div class="open-case ${q.visuals.length>1?'case-pair':''}" aria-label="JOJO 发来的设计案例">${q.visuals.map(specimen).join('')}</div>`}${q.visuals?.some(v=>['character-study','marketing'].includes(v.kind))?`<details class="character-reading"><summary>参考阅读与练习说明</summary>${sources(q)}</details>`:''}<span id="bookmark-status" class="sr-only" role="status"></span><div id="feedback-slot" aria-live="polite"></div>${runPosition<runOrder.length-1&&!Object.hasOwn(sessionAnswers,current)?`<div class="lesson-skip"><button id="skip-question" class="skip-question" type="button" aria-label="暂时跳过这道题，稍后继续" title="移到本轮最后，稍后继续">跳过</button></div>`:''}</div>`;
+ if(q.visuals?.some(v=>v.kind.startsWith('form-process-'))){const replay=document.createElement('button');replay.type='button';replay.className='form-demo-replay';replay.textContent='重播填写过程';replay.onclick=()=>{document.querySelectorAll('#exercise .form-demo-stage').forEach(stage=>{stage.classList.remove('is-replaying');void stage.offsetWidth;stage.classList.add('is-replaying')})};$('#exercise .options').after(replay);}
  presentQuestion(q,$('#exercise .question-heading'));if(q.kind==='choice'&&questionAnswered())restoreChoiceAnswer(q);const skip=$('#skip-question');if(skip)skip.onclick=skipQuestion;positionControls();focusTitle();window.RefineGuide.home();
 }
 function skipQuestion(){

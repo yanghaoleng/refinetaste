@@ -148,7 +148,7 @@ class CourseTests(unittest.TestCase):
    app.review_rates.clear()
    with app.connect() as db:
     client=app.digest('127.0.0.1');day=app.datetime.now(app.ZONE).date().isoformat()
-    db.executemany('INSERT INTO review_usage VALUES(?,?,?,?)',[(str(uuid.uuid4()),day,client,6) for _ in range(31)])
+    db.executemany('INSERT INTO review_usage VALUES(?,?,?,?)',[(str(uuid.uuid4()),day,client,6) for _ in range(4999)])
    with patch.object(reviewer,'configured',return_value=True),patch.object(reviewer,'review') as model:
     self.assertEqual(request()[0],429);model.assert_not_called()
   finally:server.shutdown();server.server_close();thread.join()
